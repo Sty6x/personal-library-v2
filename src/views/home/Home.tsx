@@ -45,8 +45,10 @@ function Home() {
         <div className="grid place-content-center max-w-full h-full bg-cover bg-gridWhite">
           <div className="flex-col gap-1 flex">
             <span className="">
-              <p className="text-3xl font-semibold">Personal Library.</p>
-              <h1 className="text-5xl font-bold ">
+              <p className="text-3xl font-semibold drop-shadow-text-shadow">
+                Personal Library.
+              </p>
+              <h1 className="text-5xl font-bold drop-shadow-text-shadow">
                 Recent books you've read.{" "}
               </h1>
             </span>

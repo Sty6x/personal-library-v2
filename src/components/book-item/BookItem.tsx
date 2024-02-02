@@ -18,7 +18,7 @@ const BookItem = ({
       style={{ backgroundColor: color }}
       className={`book-item grid place-content-center`}
     >
-      <div className="flex flex-col max-w-[30em] w-[max-content]">
+      <div className="flex flex-col max-w-[30em] w-[max-content] drop-shadow-text-shadow">
         {/* set these as children components */}
         <span className="text-lg">Last updated yesterday</span>
         <span className="text-5xl font-bold leading-10">{title}</span>

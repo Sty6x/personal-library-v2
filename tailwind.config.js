@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
+    dropShadow: {
+      "text-shadow": "1px 3px 1.4px rgb(0 0 0 / 0.2)",
+    },
     boxShadow: {
       "btn-hover": "0px 3px 4px 1px rgba(0,0,0,.24);",
     },
