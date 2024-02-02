@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
+    boxShadow: {
+      "btn-hover": "0px 3px 4px 1px rgba(0,0,0,.24);",
+    },
     fontFamily: {
       serif: ["Abhaya Libre", "serif"],
       "sans-serif": ["Be Vietnam Pro", "sans-serif"],

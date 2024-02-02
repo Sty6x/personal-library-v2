@@ -46,13 +46,15 @@ function Home() {
           <div className="flex-col gap-1 flex">
             <span className="">
               <p className="text-3xl font-semibold">Personal Library.</p>
-              <h1 className="text-5xl font-bold">Recent books you've read. </h1>
+              <h1 className="text-5xl font-bold ">
+                Recent books you've read.{" "}
+              </h1>
             </span>
-            <span className="flex gap-1 flex-col">
-              <button className="w-[max-content] text-lg font-semibold py-1 px-3 bg-primary-link rounded-sm hover:shadow-lg">
+            <span className="flex gap-2 flex-col">
+              <button className="flex content-center add-icon w-[max-content] text-xl font-regular py-1 px-3 bg-primary-link rounded-sm hover:shadow-btn-hover transition-shadow">
                 Add book
               </button>
-              <button className="w-[max-content] text-lg font-semibold py-1 px-3 rounded-sm">
+              <button className="flex content-center library-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-green-200 rounded-sm hover:shadow-btn-hover transition-shadow">
                 Open your library
               </button>
             </span>

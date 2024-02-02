@@ -14,3 +14,26 @@
 .bg-gridWhite {
   background-image: url("./assets/images/grid-white-bg.png");
 }
+
+button {
+  position: relative;
+}
+
+.add-icon::before,
+.library-icon::before {
+  content: "";
+  display: inline-block;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 20px;
+  margin-right: 0.5em;
+}
+
+.add-icon::before {
+  background-image: url("./assets/icons/add.svg");
+}
+
+.library-icon::before {
+  background-image: url("./assets/icons/library.svg");
+}
