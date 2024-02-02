@@ -3,5 +3,10 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Abhaya Libre", serif, ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+}
+
+.bg-gridWhite {
+  background-image: url("./assets/images/grid-white-bg.png");
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import BookItem from "../../components/book-item/BookItem";
 import { data } from "../../placeholderData.ts";
 import { t_book, t_library } from "../../types/t_library.ts";
+import bg from "../../assets/images/grid-white-bg.png";
 
 function Home() {
   const [recentBooks, setRecentBooks] = useState<Array<any> | []>([]);
@@ -42,8 +43,21 @@ function Home() {
         id="card-items-container"
         className="grid grid-rows-2 grid-cols-2 h-full"
       >
-        <div className="bg-transparent">
-          <div>Personal Library</div>
+        <div className="grid place-content-center max-w-full h-full bg-cover bg-gridWhite">
+          <div className="flex-col gap-2 flex">
+            <span className="">
+              <p className="text-2xl font-bold">Personal Library.</p>
+              <h1 className="text-4xl font-bold">Recent books you've read. </h1>
+            </span>
+            <span className="flex gap-1 flex-col">
+              <button className="w-[max-content] py-1 px-3 bg-primary-link rounded-sm hover:shadow-lg">
+                Add book
+              </button>
+              <button className="w-[max-content] py-1 px-3 rounded-sm">
+                Open your library
+              </button>
+            </span>
+          </div>
         </div>
         {recentBooks.length === 0 ? "Nothing here" : renderRecentBooks}
       </div>

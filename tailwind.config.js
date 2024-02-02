@@ -3,6 +3,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
+    fontFamily: {
+      serif: ["Abhaya Libre", "serif"],
+      "sans-serif": ["Be Vietnam Pro", "sans-serif"],
+    },
     colors: {
       transparent: "transparent",
       black: "#1d1d1d",
