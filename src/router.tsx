@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <Home />,
     children: [
       {
-        path: "/{pageNum}",
+        path: "/{bookID}/{pageNum}",
         element: <Home />,
       },
     ],

@@ -8,8 +8,8 @@ export default {
       black: "#1d1d1d",
       white: "#ffffff",
       primary: {
-        main: "#E2C7BF",
-        button: "#CD8D7A",
+        button: "#E2C7BF",
+        main: "#CD8D7A",
         link: "#DCB1A4",
       },
       accent: {
