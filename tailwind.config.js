@@ -21,8 +21,8 @@ export default {
           300: "#DBCC95",
         },
         green: {
-          100: "#B8E3CF",
-          200: "#EAECCC",
+          100: "#EAECCC",
+          200: "#B8E3CF",
           300: "#C3E2C2",
         },
       },

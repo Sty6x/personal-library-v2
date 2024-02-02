@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 :root {
+  --text-color: #1d1d1d;
+
   font-family: "Abhaya Libre", serif, ui-serif, Georgia, Cambria,
     "Times New Roman", Times, serif;
+
+  color: var(--text-color);
 }
 
 .bg-gridWhite {
