@@ -4,9 +4,7 @@ import { data } from "../../placeholderData.ts";
 import { t_book, t_library } from "../../types/t_library.ts";
 
 function Home() {
-  const [recentBooks, setRecentBooks] = useState<Array<any> | null>(
-    data as unknown as Array<any>
-  );
+  const [recentBooks, setRecentBooks] = useState<Array<any> | []>([]);
 
   function getRecentBooks(library: t_library) {
     const colors = ["#CD8D7A", "#C3E2C2", "#DBCC95"];
@@ -21,6 +19,7 @@ function Home() {
   const renderRecentBooks = recentBooks?.map((book: any) => {
     return (
       <BookItem
+        key={book.bookID}
         title={book.title}
         color={book.color}
         author={book.author}
@@ -46,7 +45,7 @@ function Home() {
         <div className="bg-transparent">
           <div>Personal Library</div>
         </div>
-        {renderRecentBooks}
+        {recentBooks.length === 0 ? "Nothing here" : renderRecentBooks}
       </div>
     </main>
   );
