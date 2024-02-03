@@ -2,7 +2,7 @@ export default function getItems<Type>(
   itemIDs: string | Array<string>,
   itemStore: Array<Type>,
   cb?: (items: Array<Type>) => Array<Type> | []
-): Array<Type> | Type {
+): Array<Type> {
   let items: Array<Type> = [];
   if (Array.isArray(itemIDs)) {
     for (let i = 0; i <= itemIDs.length; i++) {

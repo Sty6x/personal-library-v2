@@ -6,7 +6,7 @@ import { closestTo, closestIndexTo } from "date-fns";
 import getItems from "../../utils/getItems.ts";
 
 type t_recentBooks = {
-  bookID: string;
+  id: string;
   title: string;
   author: string;
   pageIDs: Array<string>;
@@ -21,35 +21,53 @@ function Home() {
 
   function getRecentBooks(library: t_library) {
     const colors = ["#CD8D7A", "#C3E2C2", "#EAECCC"];
-    const mappedBooks = library.books.map((book, i) => {
-      const pages = getItems<t_page>(book.pageIDs, data.pages, (items) => {
+    let recentPages: Array<t_page> = [];
+    const getPages = library.books.map((book, i) => {
+      const [page] = getItems<t_page>(book.pageIDs, data.pages, (items) => {
         const time = items.map((item) => item.lastUpdated);
         const pageIndex = closestIndexTo(new Date(), time);
         return [items[pageIndex as number]];
       });
-      console.log(pages);
-      return { ...book, color: colors[i] };
+      recentPages.push(page);
+      return page;
     });
+    const getNotes = recentPages.map((page) => {
+      const [note] = getItems<t_note>(page.noteIDs, data.notes, (items) => {
+        const time = items.map((item) => item.lastUpdated);
+        const noteIndex = closestIndexTo(new Date(), time);
+        return [items[noteIndex as number]];
+      });
+      return note;
+    });
+    const mapBooks: Array<t_recentBooks> = library.books.map((book, i) => {
+      return {
+        ...book,
+        color: colors[i],
+        page: getPages[i],
+        note: getNotes[i],
+      };
+    });
+    setRecentBooks([...mapBooks]);
   }
 
-  // const renderRecentBooks = recentBooks?.map((book: any) => {
-  //   return (
-  //     <BookItem
-  //       key={book.bookID}
-  //       title={book.title}
-  //       color={book.color}
-  //       author={book.author}
-  //       note={book.note[0]}
-  //     />
-  //   );
-  // });
+  const renderRecentBooks = recentBooks?.map((book: any) => {
+    return (
+      <BookItem
+        key={book.id}
+        title={book.title}
+        color={book.color}
+        author={book.author}
+        note={book.note[0]}
+      />
+    );
+  });
 
   useEffect(() => {
     getRecentBooks(data);
   }, []);
 
   useEffect(() => {
-    // console.log(recentBooks);
+    console.log(recentBooks);
   }, [recentBooks]);
 
   return (
@@ -78,7 +96,7 @@ function Home() {
             </span>
           </div>
         </div>
-        {/* {recentBooks.length === 0 ? "Nothing here" : renderRecentBooks} */}
+        {recentBooks.length === 0 ? "Nothing here" : renderRecentBooks}
       </div>
     </main>
   );

@@ -65,7 +65,7 @@ const pages: Array<t_page> = [
   {
     id: "page-5",
     pageNum: 1,
-    lastUpdated: "2024-02-02",
+    lastUpdated: "2024-02-01",
     dateAdded: "2024-01-20",
     bookID: "C",
     noteIDs: ["note-1", "note-3"],
@@ -73,7 +73,7 @@ const pages: Array<t_page> = [
   {
     id: "page-6",
     pageNum: 2,
-    lastUpdated: "2024-02-02",
+    lastUpdated: "2024-02-03",
     dateAdded: "2024-01-25",
     bookID: "C",
     noteIDs: ["note-6"],
