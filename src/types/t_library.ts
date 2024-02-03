@@ -18,6 +18,7 @@ export type t_page = {
 
 export type t_note = {
   bookID: string;
+  noteNum: number;
   pageID: string;
   id: string;
   contents: string;

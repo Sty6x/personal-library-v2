@@ -75,6 +75,7 @@ function Home() {
         color={book.color}
         author={book.author}
         note={book.note}
+        pageNum={book.page.pageNum}
       />
     );
   });
@@ -94,7 +95,7 @@ function Home() {
         className="grid grid-rows-2 grid-cols-2 h-full"
       >
         <div className="grid place-content-center max-w-full h-full bg-cover bg-gridWhite">
-          <div className="flex-col gap-1 flex">
+          <div className="flex-col gap-1 flex max-w-[50em]">
             <span className="">
               <p className="text-3xl font-semibold drop-shadow-text-shadow">
                 Personal Library.
