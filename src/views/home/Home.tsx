@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import BookItem from "../../components/book-item/BookItem";
 import { data } from "../../placeholderData.ts";
-import { t_book, t_library, t_note, t_page } from "../../types/t_library.ts";
-import { closestTo, closestIndexTo } from "date-fns";
-import getItems from "../../utils/getItems.ts";
+import { t_library, t_note, t_page } from "../../types/t_library.ts";
+import { closestIndexTo } from "date-fns";
+import getRelatedItems from "../../utils/getRelatedItems.ts";
 
 type t_recentBooks = {
   id: string;
@@ -22,29 +22,46 @@ function Home() {
   function getRecentBooks(library: t_library) {
     const colors = ["#CD8D7A", "#C3E2C2", "#EAECCC"];
     let recentPages: Array<t_page> = [];
-    const getPages = library.books.map((book, i) => {
-      const [page] = getItems<t_page>(book.pageIDs, data.pages, (items) => {
-        const time = items.map((item) => item.lastUpdated);
-        const pageIndex = closestIndexTo(new Date(), time);
-        return [items[pageIndex as number]];
-      });
+    const numberOfBooks = 3;
+
+    const filteredBooks = library.books.filter((_book, i) => i < numberOfBooks);
+
+    // grabs the filtered books' recently updated
+    // PAGE (SINGULAR)
+    const getRecentPages = filteredBooks.map((book, i) => {
+      const [page] = getRelatedItems<t_page>(
+        book.pageIDs,
+        data.pages,
+        (items) => {
+          const time = items.map((item) => item.lastUpdated);
+          const pageIndex = closestIndexTo(new Date(), time);
+          return [items[pageIndex as number]];
+        }
+      );
       recentPages.push(page);
       return page;
     });
-    const getNotes = recentPages.map((page) => {
-      const [note] = getItems<t_note>(page.noteIDs, data.notes, (items) => {
-        const time = items.map((item) => item.lastUpdated);
-        const noteIndex = closestIndexTo(new Date(), time);
-        return [items[noteIndex as number]];
-      });
+
+    // grabs the recently updated page's NOTE
+    const getRecentNotes = recentPages.map((page) => {
+      const [note] = getRelatedItems<t_note>(
+        page.noteIDs,
+        data.notes,
+        (items) => {
+          const time = items.map((item) => item.lastUpdated);
+          const noteIndex = closestIndexTo(new Date(), time);
+          return [items[noteIndex as number]];
+        }
+      );
       return note;
     });
-    const mapBooks: Array<t_recentBooks> = library.books.map((book, i) => {
+
+    const mapBooks: Array<t_recentBooks> = filteredBooks.map((book, i) => {
       return {
         ...book,
         color: colors[i],
-        page: getPages[i],
-        note: getNotes[i],
+        page: getRecentPages[i],
+        note: getRecentNotes[i],
       };
     });
     setRecentBooks([...mapBooks]);
@@ -57,7 +74,7 @@ function Home() {
         title={book.title}
         color={book.color}
         author={book.author}
-        note={book.note[0]}
+        note={book.note}
       />
     );
   });

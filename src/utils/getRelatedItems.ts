@@ -1,4 +1,4 @@
-export default function getItems<Type>(
+export default function getRelatedItems<Type>(
   itemIDs: string | Array<string>,
   itemStore: Array<Type>,
   cb?: (items: Array<Type>) => Array<Type> | []
