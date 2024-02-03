@@ -1,39 +1,87 @@
 import { useEffect, useState } from "react";
 import BookItem from "../../components/book-item/BookItem";
 import { data } from "../../placeholderData.ts";
-import { t_library } from "../../types/t_library.ts";
+import { t_book, t_library, t_note, t_page } from "../../types/t_library.ts";
+import { closestTo } from "date-fns";
+
+type t_recentBooks = {
+  bookID: string;
+  title: string;
+  author: string;
+  pageIDs: Array<string>;
+  dateAdded: string;
+  lastUpdated: string;
+  color: string;
+  note: t_note;
+  page: t_page;
+};
+
+type t_populatedBook = {
+  bookID: string;
+  title: string;
+  author: string;
+  pageIDs: Array<string>;
+  dateAdded: string;
+  lastUpdated: string;
+  note: Array<t_note>;
+  page: Array<t_page>;
+};
 
 function Home() {
-  const [recentBooks, setRecentBooks] = useState<Array<any> | []>([]);
+  const [recentBooks, setRecentBooks] = useState<Array<t_recentBooks> | []>([]);
+
+  function getItems<Type>(
+    itemStore: Array<Type>,
+    itemIDs?: string | Array<string>
+  ): Array<Type> {
+    let tmpArray: Array<Type> = [];
+    if (Array.isArray(itemIDs)) {
+      for (let i = 0; i <= itemIDs.length; i++) {
+        for (let j = 0; j < itemStore.length; j++) {
+          // item store
+          if (itemIDs[i] === itemStore[j].id) {
+            tmpArray.push(itemStore[j]);
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < itemStore.length; i++) {
+        // item store
+        if (itemIDs === itemStore[i].id) {
+          tmpArray.push(itemStore[i]);
+        }
+      }
+    }
+    return tmpArray;
+  }
 
   function getRecentBooks(library: t_library) {
     const colors = ["#CD8D7A", "#C3E2C2", "#EAECCC"];
     const mappedBooks = library.books.map((book, i) => {
-      const notes = data?.notes.filter((note) => note.bookID === book.bookID);
-      const pages = data?.pages.filter((page) => page.bookID === book.bookID);
-      return { ...book, notes, pages, color: colors[i] };
+      const pages = getItems<t_note>(data.notes, data.pages[0].noteIDs[0]);
+      console.log(pages);
+      return { ...book, color: colors[i] };
     });
-    setRecentBooks([...mappedBooks]);
   }
 
-  const renderRecentBooks = recentBooks?.map((book: any) => {
-    return (
-      <BookItem
-        key={book.bookID}
-        title={book.title}
-        color={book.color}
-        author={book.author}
-        note={book.notes[0]}
-      />
-    );
-  });
+  // const renderRecentBooks = recentBooks?.map((book: any) => {
+  //   return (
+  //     <BookItem
+  //       key={book.bookID}
+  //       title={book.title}
+  //       color={book.color}
+  //       author={book.author}
+  //       note={book.note[0]}
+  //     />
+  //   );
+  // });
 
   useEffect(() => {
     getRecentBooks(data);
   }, []);
 
   useEffect(() => {
-    console.log(recentBooks);
+    // console.log(recentBooks);
   }, [recentBooks]);
 
   return (
@@ -62,7 +110,7 @@ function Home() {
             </span>
           </div>
         </div>
-        {recentBooks.length === 0 ? "Nothing here" : renderRecentBooks}
+        {/* {recentBooks.length === 0 ? "Nothing here" : renderRecentBooks} */}
       </div>
     </main>
   );

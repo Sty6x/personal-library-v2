@@ -1,5 +1,5 @@
 export type t_book = {
-  bookID: string;
+  id: string;
   title: string;
   author: string;
   pageIDs: Array<string>;
@@ -9,7 +9,7 @@ export type t_book = {
 
 export type t_page = {
   pageNum: number;
-  pageID: string;
+  id: string;
   bookID: string;
   noteIDs: Array<string>;
   dateAdded: string;
@@ -19,7 +19,7 @@ export type t_page = {
 export type t_note = {
   bookID: string;
   pageID: string;
-  noteID: string;
+  id: string;
   contents: string;
   dateAdded: string;
   lastUpdated: string;
