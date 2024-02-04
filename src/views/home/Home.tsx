@@ -76,6 +76,7 @@ function Home() {
         color={book.color}
         motionKey={i}
         noteContents={book.note.contents}
+        link={book.page.id}
       >
         <span className="text-md min-[1930px]:text-[1rem] max-[1440px]:text-[.8rem] font-semi-bold">
           Last updated{" "}
@@ -87,8 +88,8 @@ function Home() {
         <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
           by {book.author}
         </span>
-        <span className="text-md min-[1930px]:text-[1rem]   max-[1440px]:text-[.8rem] font-semi-bold">
-          Page {book.pageNum} • Note #{book.note.noteNum}
+        <span className="text-md min-[1930px]:text-[1rem]  max-[1440px]:text-[.8rem] font-semi-bold">
+          Page {book.page.pageNum} • Note #{book.note.noteNum}
         </span>
       </BookItem>
     );
@@ -121,10 +122,9 @@ function Home() {
               <p
                 className="
               text-3xl
-              min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.8rem] max-[1280px]:leading-[1.4rem] 
+              min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.8rem]  
               font-semibold drop-shadow-text-shadow"
               >
-                {/* <span className="text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold"></span> */}
                 Personal Library.
               </p>
               <h1
@@ -136,10 +136,10 @@ function Home() {
               </h1>
             </span>
             <span className="flex gap-2 flex-col">
-              <button className="flex content-center add-icon w-[max-content] text-xl font-regular py-1 px-3 bg-primary-link rounded-sm hover:shadow-btn-hover transition-shadow">
+              <button className="flex content-center add-icon w-[max-content] text-xl font-regular py-1 px-3 bg-primary-link rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200">
                 Add book
               </button>
-              <button className="flex content-center library-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-green-200 rounded-sm hover:shadow-btn-hover transition-shadow">
+              <button className="flex content-center library-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-green-200 rounded-sm hover:shadow-btn-hover-active hover:transition-shadow shadow-btn-hover transition-shadow duration-200">
                 Open your library
               </button>
             </span>

@@ -6,11 +6,13 @@ const BookItem = ({
   motionKey,
   children,
   noteContents,
+  link,
 }: {
   color: string;
   motionKey: number;
   children: ReactNode;
   noteContents: string;
+  link: string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
@@ -43,7 +45,8 @@ const BookItem = ({
             {children}
           </motion.div>
         ) : (
-          <motion.div
+          <motion.a
+            href="#"
             className="
             hover:cursor-pointer
              hover:shadow-book-item-active
@@ -58,7 +61,9 @@ const BookItem = ({
             animate={{
               scale: 1,
               opacity: 1,
-              transition: { delay: 0.2 },
+              transition: {
+                delay: 0.2,
+              },
               display: "grid",
             }}
             exit={{
@@ -75,7 +80,7 @@ const BookItem = ({
                 </p>
               </div>
             </div>
-          </motion.div>
+          </motion.a>
         )}
       </AnimatePresence>
     </motion.div>
