@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import BookItem from "../../components/book-item/BookItem";
+import BookItem from "../../components/book-item/BookItem.tsx";
 import { data } from "../../placeholderData.ts";
 import { t_library, t_note, t_page } from "../../types/t_library.ts";
 import { closestIndexTo } from "date-fns";
 import getRelatedItems from "../../utils/getRelatedItems.ts";
+import { motion } from "framer-motion";
 
 type t_recentBooks = {
   id: string;
@@ -67,7 +68,7 @@ function Home() {
     setRecentBooks([...mapBooks]);
   }
 
-  const renderRecentBooks = recentBooks?.map((book: any) => {
+  const renderRecentBooks = recentBooks?.map((book: any, i: number) => {
     return (
       <BookItem
         key={book.id}
@@ -76,6 +77,7 @@ function Home() {
         author={book.author}
         note={book.note}
         pageNum={book.page.pageNum}
+        motionKey={i}
       />
     );
   });
@@ -90,11 +92,18 @@ function Home() {
 
   return (
     <main id="home-page" className="h-screen">
-      <div
+      <motion.div
         id="card-items-container"
         className="grid grid-rows-2 grid-cols-2 h-full"
+        key={"container"}
       >
-        <div className="grid place-content-center max-w-full h-full bg-cover bg-gridWhite">
+        <motion.div
+          variants={{
+            initial: { opacity: 0, scale: 0 },
+            animate: { opacity: 1, scale: 0.4 },
+          }}
+          className="grid place-content-center max-w-full h-full bg-cover bg-gridWhite"
+        >
           <div className="flex-col gap-1 flex max-w-[50em]">
             <span className="">
               <p className="text-3xl font-semibold drop-shadow-text-shadow">
@@ -113,9 +122,9 @@ function Home() {
               </button>
             </span>
           </div>
-        </div>
-        {recentBooks.length === 0 ? "Nothing here" : renderRecentBooks}
-      </div>
+        </motion.div>
+        {recentBooks?.length === 0 ? "Nothing here" : renderRecentBooks}
+      </motion.div>
     </main>
   );
 }

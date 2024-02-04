@@ -9,6 +9,7 @@ const BookItem = ({
   author,
   note,
   pageNum,
+  motionKey,
 }: {
   title: string;
   color: string;
@@ -16,14 +17,15 @@ const BookItem = ({
   date?: string;
   note: t_note;
   pageNum: number;
+  motionKey: number;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-
   return (
     // higher order composition
-    <div
+    <motion.div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      key={motionKey}
       style={{ backgroundColor: color }}
       className={`book-item grid place-content-center hover:cursor-pointer`}
     >
@@ -59,7 +61,7 @@ const BookItem = ({
           </motion.div>
         ) : (
           <motion.div
-            className="grid place-content-center drop-shadow-text-shadow min-h-[80%] min-w-[80%] w-[34em] h-[28em] bg-white rounded-md"
+            className="grid place-content-center shadow-book-item min-h-[80%] min-w-[80%] w-[34em] h-[28em] bg-white rounded-md"
             key="contents"
             initial={{ opacity: 0, scale: 0, display: "none" }}
             animate={{
@@ -78,7 +80,7 @@ const BookItem = ({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 

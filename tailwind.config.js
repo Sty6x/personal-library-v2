@@ -8,6 +8,7 @@ export default {
     },
     boxShadow: {
       "btn-hover": "0px 5px 4px 0px rgba(0,0,0,.24);",
+      "book-item": "1px 4px 6px 3px rgb(0 0 0 / 0.2)",
     },
     fontFamily: {
       serif: ["Abhaya Libre", "serif"],
