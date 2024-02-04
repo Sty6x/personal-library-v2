@@ -5,6 +5,7 @@ import { t_library, t_note, t_page } from "../../types/t_library.ts";
 import { closestIndexTo } from "date-fns";
 import getRelatedItems from "../../utils/getRelatedItems.ts";
 import { motion } from "framer-motion";
+import { formatDistance } from "date-fns";
 
 type t_recentBooks = {
   id: string;
@@ -72,13 +73,24 @@ function Home() {
     return (
       <BookItem
         key={book.id}
-        title={book.title}
         color={book.color}
-        author={book.author}
-        note={book.note}
-        pageNum={book.page.pageNum}
         motionKey={i}
-      />
+        noteContents={book.note.contents}
+      >
+        <span className="text-lg min-[1930px]:text-[1.2rem] font-semi-bold">
+          Last updated{" "}
+          {formatDistance(new Date(book.note.lastUpdated), new Date())} ago.
+        </span>
+        <span className="text-5xl min-[1930px]:text-[4rem] min-[1930px]:leading-[3.4rem] font-bold leading-10">
+          {book.title}
+        </span>
+        <span className="text-2xl min-[1930px]:text-[1.4rem] font-semibold ">
+          by {book.author}
+        </span>
+        <span className="text-lg min-[1930px]:text-[4rem] leading-3">
+          Page {book.pageNum} • Note #{book.note.noteNum}
+        </span>
+      </BookItem>
     );
   });
 

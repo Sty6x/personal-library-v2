@@ -1,23 +1,16 @@
-import { t_note } from "../../types/t_library";
-import { formatDistance } from "date-fns";
-import { AnimatePresence, motion, stagger } from "framer-motion";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ReactNode, useState } from "react";
 
 const BookItem = ({
-  title,
   color,
-  author,
-  note,
-  pageNum,
   motionKey,
+  children,
+  noteContents,
 }: {
-  title: string;
   color: string;
-  author: string;
-  date?: string;
-  note: t_note;
-  pageNum: number;
   motionKey: number;
+  children: ReactNode;
+  noteContents: string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
@@ -47,17 +40,7 @@ const BookItem = ({
             className="flex flex-col px-20  w-[max-content] drop-shadow-text-shadow"
             key={"book"}
           >
-            {/* set these as children components */}
-            <span className="text-lg font-semi-bold">
-              Last updated{" "}
-              {formatDistance(new Date(note.lastUpdated), new Date())} ago.
-            </span>
-            <span className="text-5xl font-bold leading-10">{title}</span>
-            <span className="text-2xl font-semibold ">by {author}</span>
-            <span className="text-lg leading-3">
-              Page {pageNum} • Note #{note.noteNum}
-            </span>
-            {/* set these as children components */}
+            {children}
           </motion.div>
         ) : (
           <motion.div
@@ -77,19 +60,9 @@ const BookItem = ({
             }}
           >
             <div className="flex flex-col gap-4">
-              <div className="flex flex-col">
-                <span className="text-lg font-semi-bold">
-                  Last updated{" "}
-                  {formatDistance(new Date(note.lastUpdated), new Date())} ago.
-                </span>
-                <span className="text-5xl font-bold leading-10">{title}</span>
-                <span className="text-2xl font-semibold ">by {author}</span>
-                <span className="text-lg leading-3">
-                  Page {pageNum} • Note #{note.noteNum}
-                </span>
-              </div>
+              <div className="flex flex-col">{children}</div>
               <div>
-                <p className="note-contents-preview">{note.contents}</p>
+                <p className="note-contents-preview">{noteContents}</p>
               </div>
             </div>
           </motion.div>
