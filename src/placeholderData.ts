@@ -115,7 +115,7 @@ const notes: Array<t_note> = [
     pageID: "page-3",
     lastUpdated: "2024-02-02",
     dateAdded: "2024-01-22",
-    contents: "Note about page 1 of Book B.",
+    contents: `“Women should be respected as well! Generally speaking, men are held in great esteem in all parts of the world, so why shouldn't women have their share? Soldiers and war heroes are honored and commemorated, explorers are granted immortal fame, martyrs are revered, but how many people look upon women too as soldiers?...Women, who struggle and suffer pain to ensure the continuation of the human race, make much tougher and more courageous soldiers than all those big-mouthed freedom-fighting heroes put together!”― Anne Frank, The Diary of a Young Girl"`,
   },
   {
     id: "note-5",
@@ -133,7 +133,8 @@ const notes: Array<t_note> = [
     pageID: "page-4",
     lastUpdated: "2024-02-02",
     dateAdded: "2024-01-28",
-    contents: "Note about page 2 of Book B.",
+    contents: `"“Now I will tell you the answer to my question. It is this. The Party seeks power entirely for its own sake. We are not interested in the good of others; we are interested solely in power, pure power. What pure power means you will understand presently. We are different from the oligarchies of the past in that we know what we are doing. All the others, even those who resembled ourselves, were cowards and hypocrites. The German Nazis and the Russian Communists came very close to us in their methods, but they never had the courage to recognize their own motives. They pretended, perhaps they even believed, that they had seized power unwillingly and for a limited time, and that just around the corner there lay a paradise where human beings would be free and equal. We are not like that. We know that no one ever seizes power with the intention of relinquishing it. Power is not a means; it is an end. One does not establish a dictatorship in order to safeguard a revolution; one makes the revolution in order to establish the dictatorship. The object of persecution is persecution. The object of torture is torture. The object of power is power. Now you begin to understand me.”
+    ― George Orwell, 1984"`,
   },
 
   {
@@ -152,7 +153,8 @@ const notes: Array<t_note> = [
     pageID: "page-5",
     lastUpdated: "2024-02-02",
     dateAdded: "2024-01-28",
-    contents: "Note about page 5 of Book C.",
+    contents:
+      "“The best remedy for those who are afraid, lonely or unhappy is to go outside, somewhere where they can be quite alone with the heavens, nature and God. Because only then does one feel that all is as it should be and that God wishes to see people happy, amidst the simple beauty of nature. As longs as this exists, and it certainly always will, I know that then there will always be comfort for every sorrow, whatever the circumstances may be. And I firmly believe that nature brings solace in all troubles.”― Anne Frank, The Diary of a Young Girl.",
   },
 
   {
