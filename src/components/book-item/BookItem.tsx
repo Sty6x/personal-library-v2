@@ -16,14 +16,14 @@ const BookItem = ({
   return (
     // higher order composition
     <motion.div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      // onMouseEnter={() => setIsHovered(true)}
+      // onMouseLeave={() => setIsHovered(false)}
       key={motionKey}
       style={{ backgroundColor: color }}
       className={`book-item flex justify-center items-center hover:cursor-pointer`}
     >
       <AnimatePresence custom="popLayout">
-        {!isHovered ? (
+        {isHovered ? (
           <motion.div
             initial={{ opacity: 0, scale: 0, display: "none" }}
             animate={{
@@ -37,14 +37,14 @@ const BookItem = ({
               scale: 0,
               transition: { duration: 0.2 },
             }}
-            className="flex flex-col px-20  w-[max-content] drop-shadow-text-shadow"
+            className="flex flex-col max-w-[70%] w-[max-content] drop-shadow-text-shadow"
             key={"book"}
           >
             {children}
           </motion.div>
         ) : (
           <motion.div
-            className="grid place-content-center gap-4 px-10 py-12 shadow-book-item min-w-[80%] min-h-[80%] max-h-[80%] max-w-[80%] w-[38em] h-[28em] bg-white rounded-md"
+            className="grid place-content-center gap-4 px-10 min-[1921px]:px-20 py-12 shadow-book-item min-w-[80%] min-h-[80%] max-h-[80%] max-w-[80%] w-[38em] h-[28em] bg-white rounded-md"
             key="contents"
             initial={{ opacity: 0, scale: 0, display: "none" }}
             animate={{
@@ -59,10 +59,12 @@ const BookItem = ({
               transition: { duration: 0.2 },
             }}
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
               <div className="flex flex-col">{children}</div>
               <div>
-                <p className="note-contents-preview">{noteContents}</p>
+                <p className=" max-[1280px]:text-[1rem] text-[1.2rem] note-contents-preview">
+                  {noteContents}
+                </p>
               </div>
             </div>
           </motion.div>

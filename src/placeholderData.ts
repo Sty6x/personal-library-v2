@@ -11,7 +11,7 @@ const books: Array<t_book> = [
   },
   {
     id: "B",
-    title: "Fantastic Stories",
+    title: "All Quiet on the Western Front",
     author: "Jane Smith",
     lastUpdated: "2024-02-02",
     dateAdded: "2024-01-15",

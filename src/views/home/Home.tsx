@@ -77,17 +77,17 @@ function Home() {
         motionKey={i}
         noteContents={book.note.contents}
       >
-        <span className="text-lg min-[1930px]:text-[1.2rem] font-semi-bold">
+        <span className="text-md min-[1930px]:text-[1rem] max-[1440px]:text-[.8rem] font-semi-bold">
           Last updated{" "}
           {formatDistance(new Date(book.note.lastUpdated), new Date())} ago.
         </span>
-        <span className="text-5xl min-[1930px]:text-[4rem] min-[1930px]:leading-[3.4rem] font-bold leading-10">
+        <span className="text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
           {book.title}
         </span>
-        <span className="text-2xl min-[1930px]:text-[1.4rem] font-semibold ">
+        <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
           by {book.author}
         </span>
-        <span className="text-lg min-[1930px]:text-[4rem] leading-3">
+        <span className="text-md min-[1930px]:text-[1rem]   max-[1440px]:text-[.8rem] font-semi-bold">
           Page {book.pageNum} • Note #{book.note.noteNum}
         </span>
       </BookItem>
@@ -114,14 +114,24 @@ function Home() {
             initial: { opacity: 0, scale: 0 },
             animate: { opacity: 1, scale: 0.4 },
           }}
-          className="grid place-content-center max-w-full h-full bg-cover bg-gridWhite"
+          className="grid place-content-center bg-cover bg-gridWhite"
         >
-          <div className="flex-col gap-1 flex max-w-[50em]">
+          <div className="flex-col gap-1 flex max-w-[max-content]">
             <span className="">
-              <p className="text-3xl font-semibold drop-shadow-text-shadow">
+              <p
+                className="
+              text-3xl
+              min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.8rem] max-[1280px]:leading-[1.4rem] 
+              font-semibold drop-shadow-text-shadow"
+              >
+                {/* <span className="text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold"></span> */}
                 Personal Library.
               </p>
-              <h1 className="text-5xl font-bold drop-shadow-text-shadow">
+              <h1
+                className="
+              text-5xl
+              min-[1930px]:text-[2.8rem] max-[1280px]:text-[2.8rem] max-[1280px]:leading-[2.4rem] font-bold drop-shadow-text-shadow"
+              >
                 Recent books you've read.{" "}
               </h1>
             </span>
