@@ -75,6 +75,7 @@ const BookItem = ({
             <div className="flex flex-col gap-4">
               <div className="flex flex-col">{children}</div>
               <div>
+                {/* give fixed width and height for note contents  */}
                 <p className=" max-[1280px]:text-[1rem] text-[1.2rem] note-contents-preview">
                   {noteContents}
                 </p>

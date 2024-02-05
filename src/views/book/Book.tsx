@@ -18,10 +18,10 @@ const Book = () => {
 
   useEffect(() => {
     if (Object.keys(params)[1] === "pageID") {
-      setRedirect(true);
+      setRedirect(false);
       return;
     }
-    setRedirect(false);
+    setRedirect(true);
   }, [params]);
 
   return (
@@ -29,7 +29,7 @@ const Book = () => {
       id="book-page"
       className="bg-gridWhite h-[100dvh] grid place-content-center"
     >
-      {!redirect ? (
+      {redirect ? (
         <section id="book-page-contents" className="grid place-items-center">
           <div className="max-w-[50em]">
             <div>
