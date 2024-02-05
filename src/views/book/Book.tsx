@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, Outlet, useLoaderData, useParams } from "react-router-dom";
 import { t_book } from "../../types/t_library";
 import { format, formatDistance } from "date-fns";
+import BookHeader from "../../components/BookHeader";
 
 interface t_currentBook extends t_book {
   numOfNotes: number;
@@ -38,16 +39,10 @@ const Book = () => {
                 {formatDistance(new Date(currentBook.lastUpdated), new Date())}{" "}
                 ago.
               </span>
-              <span className="">
-                <h1 className="text-6xl font-bold drop-shadow-text-shadow">
-                  {currentBook?.title}
-                </h1>
-              </span>
-              <span>
-                <p className="text-2xl font-semibold drop-shadow-text-shadow">
-                  by {currentBook?.author}
-                </p>
-              </span>
+              <BookHeader
+                title={currentBook.title}
+                author={currentBook.author}
+              />
               <span className="text-lg drop-shadow-text-shadow">
                 Pages Written {currentBook?.pageIDs.length} • Notes Added{" "}
                 {currentBook?.numOfNotes}
