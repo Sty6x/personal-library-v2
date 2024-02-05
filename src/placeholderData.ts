@@ -68,7 +68,7 @@ const pages: Array<t_page> = [
     lastUpdated: "2024-02-01",
     dateAdded: "2024-01-20",
     bookID: "C",
-    noteIDs: ["note-1", "note-3"],
+    noteIDs: ["note-1", "note-12"],
   },
   {
     id: "page-6",
@@ -147,7 +147,7 @@ const notes: Array<t_note> = [
     contents: "Another note about page 5 of Book C.",
   },
   {
-    id: "note-3",
+    id: "note-12",
     noteNum: 8,
     bookID: "C",
     pageID: "page-5",

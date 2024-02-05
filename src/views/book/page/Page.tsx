@@ -20,7 +20,6 @@ const Page = () => {
       page: currentPage,
       note: getPageNotes,
     };
-    setBook({ ...setCurrentBook });
   }
 
   useEffect(() => {
