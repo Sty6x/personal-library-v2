@@ -36,3 +36,10 @@ export interface t_currentBook extends t_book {
   note: Array<t_note>;
   page: t_page;
 }
+
+export type t_currentPage = {
+  bookTitle: string;
+  bookAuthor: string;
+  page: t_page;
+  notes: Array<t_note>;
+};

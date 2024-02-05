@@ -78,7 +78,12 @@ const Book = () => {
           </div>
         </section>
       ) : (
-        <Outlet />
+        <Outlet
+          context={{
+            bookTitle: currentBook.title,
+            bookAuthor: currentBook.author,
+          }}
+        />
       )}
     </main>
   );
