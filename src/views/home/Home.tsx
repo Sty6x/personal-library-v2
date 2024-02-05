@@ -69,31 +69,33 @@ function Home() {
     setRecentBooks([...mapBooks]);
   }
 
-  const renderRecentBooks = recentBooks?.map((book: any, i: number) => {
-    return (
-      <BookItem
-        key={book.id}
-        color={book.color}
-        motionKey={i}
-        noteContents={book.note.contents}
-        link={book.page.id}
-      >
-        <span className="text-md min-[1930px]:text-[1rem] max-[1440px]:text-[.8rem] font-semi-bold">
-          Last updated{" "}
-          {formatDistance(new Date(book.note.lastUpdated), new Date())} ago.
-        </span>
-        <span className="text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
-          {book.title}
-        </span>
-        <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
-          by {book.author}
-        </span>
-        <span className="text-md min-[1930px]:text-[1rem]  max-[1440px]:text-[.8rem] font-semi-bold">
-          Page {book.page.pageNum} • Note #{book.note.noteNum}
-        </span>
-      </BookItem>
-    );
-  });
+  const renderRecentBooks = recentBooks?.map(
+    (book: t_recentBooks, i: number) => {
+      return (
+        <BookItem
+          key={book.id}
+          color={book.color}
+          motionKey={i}
+          noteContents={book.note.contents}
+          link={`/${book.id}/${book.page.id}`}
+        >
+          <span className="text-md min-[1930px]:text-[1rem] max-[1440px]:text-[.8rem] font-semi-bold">
+            Last updated{" "}
+            {formatDistance(new Date(book.note.lastUpdated), new Date())} ago.
+          </span>
+          <span className="text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
+            {book.title}
+          </span>
+          <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
+            by {book.author}
+          </span>
+          <span className="text-md min-[1930px]:text-[1rem]  max-[1440px]:text-[.8rem] font-semi-bold">
+            Page {book.page.pageNum} • Note #{book.note.noteNum}
+          </span>
+        </BookItem>
+      );
+    }
+  );
 
   useEffect(() => {
     getRecentBooks(data);

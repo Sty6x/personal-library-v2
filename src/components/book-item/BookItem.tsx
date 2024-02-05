@@ -46,7 +46,7 @@ const BookItem = ({
           </motion.div>
         ) : (
           <motion.a
-            href="#"
+            href={link}
             className="
             hover:cursor-pointer
              hover:shadow-book-item-active
