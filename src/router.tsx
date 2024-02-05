@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     loader: bookLoader,
     children: [
       {
-        path: "/:bookID/:pageID",
+        path: ":pageID",
         element: <Page />,
       },
     ],

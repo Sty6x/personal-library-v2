@@ -10,15 +10,13 @@ const Page = () => {
 
   // set as loader
   function getBookData(storage: Array<t_book>) {
-    const [currentBook] = storage.filter((book) => book.id === bookID);
     const [currentPage] = data.pages.filter((page) => page.id === pageID);
 
     const getPageNotes = getRelatedItems<t_note>(
       currentPage.noteIDs,
       data.notes
     );
-    const setCurrentBook: t_currentBook = {
-      ...currentBook,
+    const setCurrentBook = {
       page: currentPage,
       note: getPageNotes,
     };
@@ -26,7 +24,7 @@ const Page = () => {
   }
 
   useEffect(() => {
-    getBookData(data.books);
+    // getBookData(data.books);
   }, []);
 
   useEffect(() => {
