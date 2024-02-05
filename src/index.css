@@ -13,6 +13,7 @@
 
 .bg-gridWhite {
   background-image: url("./assets/images/grid-white-bg.png");
+  max-width: 100%;
 }
 
 button {
@@ -20,7 +21,8 @@ button {
 }
 
 .add-icon::before,
-.library-icon::before {
+.library-icon::before,
+.read-icon::before {
   content: "";
   display: inline-block;
   background-position: center;
@@ -34,6 +36,9 @@ button {
   background-image: url("./assets/icons/add.svg");
 }
 
+.read-icon::before {
+  background-image: url("./assets/icons/read.svg");
+}
 .library-icon::before {
   background-image: url("./assets/icons/library.svg");
 }

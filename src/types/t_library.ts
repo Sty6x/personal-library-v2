@@ -31,3 +31,8 @@ export type t_library = {
   pages: Array<t_page>;
   notes: Array<t_note>;
 };
+
+export interface t_currentBook extends t_book {
+  note: Array<t_note>;
+  page: t_page;
+}

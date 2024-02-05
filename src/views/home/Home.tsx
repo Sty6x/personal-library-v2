@@ -106,7 +106,7 @@ function Home() {
   }, [recentBooks]);
 
   return (
-    <main id="home-page" className="h-screen">
+    <main id="home-page" className="h-[100dvh]">
       <motion.div
         id="card-items-container"
         className="grid grid-rows-2 grid-cols-2 h-full"

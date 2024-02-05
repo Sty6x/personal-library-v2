@@ -1,0 +1,67 @@
+import { useState } from "react";
+import { Link, Outlet, useLoaderData } from "react-router-dom";
+import { t_book } from "../../types/t_library";
+
+interface t_currentBook extends t_book {
+  numOfNotes: number;
+}
+
+const Book = () => {
+  const bookData = useLoaderData();
+  const [currentBook, setCurrentbook] = useState<t_currentBook | null>({
+    ...(bookData as t_currentBook),
+  });
+
+  return (
+    <main
+      id="book-page"
+      className="bg-gridWhite h-[100dvh] grid place-content-center"
+    >
+      <section id="book-page-contents" className="grid place-items-center">
+        <div className="max-w-[50em]">
+          <div>
+            <span className="text-lg">{currentBook?.lastUpdated}</span>
+            <span className="">
+              <h1 className="text-6xl font-bold drop-shadow-text-shadow">
+                {currentBook?.title}
+              </h1>
+            </span>
+            <span>
+              <p className="text-2xl font-semibold drop-shadow-text-shadow">
+                by {currentBook?.author}
+              </p>
+            </span>
+            <span className="text-lg drop-shadow-text-shadow">
+              Pages Written {currentBook?.pageIDs.length} • Notes Added{" "}
+              {currentBook?.numOfNotes}
+            </span>
+          </div>
+          <div className="max-w-[max-content] flex gap-3 flex-col mt-3">
+            <div className="">
+              <Link
+                to={"/#"}
+                className="before:h-[1em] before:w-[1em] before:mr-[.3em] read-icon  relative flex content-center bg-primary-link  items-center rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-5 py-2 text-3xl font-medium w-full"
+              >
+                Start Reading
+              </Link>
+            </div>
+
+            <span className="flex gap-4 items-center">
+              <Link
+                className="add-icon w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center bg-accent-green-200  rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-2 py-1 text-lg"
+                to={"/#"}
+              >
+                Add a page
+              </Link>
+              <Link to={"/library"} className="underline">
+                Go back to library
+              </Link>
+            </span>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+};
+
+export default Book;

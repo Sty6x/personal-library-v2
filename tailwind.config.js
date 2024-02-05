@@ -7,8 +7,8 @@ export default {
       "text-shadow": "1px 3px 1.4px rgb(0 0 0 / 0.2)",
     },
     boxShadow: {
-      "btn-hover-active": "1px 1px 3px 1px rgb(0 0 0 / 0.2)",
-      "btn-hover": "1px 3px 2px 1px rgb(0 0 0 / 0.1)",
+      "btn-hover-active": "0px 1px 2px 1px rgb(0 0 0 / 0.3)",
+      "btn-hover": "1px 2px 2px 2px rgb(0 0 0 / 0.2)",
       "book-item-active": "1px 4px 6px 3px rgb(0 0 0 / 0.3)",
       "book-item": "1px 6px 6px 6px rgb(0 0 0 / 0.1)",
     },
