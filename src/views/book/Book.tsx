@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, Outlet, useLoaderData } from "react-router-dom";
 import { t_book } from "../../types/t_library";
+import { format, formatDistance } from "date-fns";
 
 interface t_currentBook extends t_book {
   numOfNotes: number;
@@ -8,7 +9,7 @@ interface t_currentBook extends t_book {
 
 const Book = () => {
   const bookData = useLoaderData();
-  const [currentBook, setCurrentbook] = useState<t_currentBook | null>({
+  const [currentBook, setCurrentbook] = useState<t_currentBook>({
     ...(bookData as t_currentBook),
   });
 
@@ -20,7 +21,11 @@ const Book = () => {
       <section id="book-page-contents" className="grid place-items-center">
         <div className="max-w-[50em]">
           <div>
-            <span className="text-lg">{currentBook?.lastUpdated}</span>
+            <span className="text-lg">
+              Last updated{" "}
+              {formatDistance(new Date(currentBook.lastUpdated), new Date())}{" "}
+              ago.
+            </span>
             <span className="">
               <h1 className="text-6xl font-bold drop-shadow-text-shadow">
                 {currentBook?.title}
