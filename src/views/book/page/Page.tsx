@@ -7,6 +7,7 @@ import BookHeader from "../../../components/BookHeader";
 import { AnimatePresence } from "framer-motion";
 import Note from "../../../components/Notes";
 import { motion } from "framer-motion";
+import { uid } from "uid";
 
 type t_currentPage = {
   currentPage: t_page;
@@ -21,6 +22,23 @@ const Page = () => {
   }>();
   const { pageID, bookID } = useParams<any>();
   const [pageData, setPageData] = useState<t_currentPage | null>(null);
+
+  function addNote() {
+    const newID = uid(16);
+    const newNote: t_note = {
+      bookID: pageData?.currentPage.bookID as string,
+      pageID: pageData?.currentPage.id as string,
+      noteIndex: 0,
+      contents: `This is a new note. \nHere is my note ID: ${newID}`,
+      dateAdded: new Date().toString(),
+      lastUpdated: new Date().toString(),
+      id: newID,
+    };
+    setPageData(
+      (prev) =>
+        ({ ...prev, notes: [newNote, ...pageData.notes] } as t_currentPage)
+    );
+  }
 
   // set as loader
   function getPageData(storage: Array<t_page>) {
@@ -49,14 +67,7 @@ const Page = () => {
   }, [pageData]);
 
   const renderNotes = pageData?.notes.map((note) => {
-    return (
-      <Note
-        key={note.id}
-        contents={
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-        }
-      />
-    );
+    return <Note key={note.id} contents={note.contents} />;
   });
 
   // flex pushes the horizontal and vertical center of the component to the center
@@ -80,12 +91,15 @@ const Page = () => {
         </p>
         <div className="flex gap-4 mt-3">
           <motion.span whileHover={{ x: 5 }} className="  w-[max-content]">
-            <Link
+            <button
+              onClick={() => {
+                addNote();
+              }}
+              type="button"
               className="drop-shadow-text-shadow add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center font-semibold py-1 text-xl"
-              to={"/#"}
             >
               Add Note
-            </Link>
+            </button>
           </motion.span>
 
           <motion.span whileHover={{ x: 5 }} className=" w-[max-content]">
