@@ -13,6 +13,7 @@
 
 .bg-gridWhite {
   background-image: url("./assets/images/grid-white-bg.png");
+  background-repeat: repeat;
   max-width: 100%;
 }
 

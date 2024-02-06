@@ -111,9 +111,9 @@ const Page = () => {
   return (
     <div
       id="page"
-      className="w-[1440px] h-[90%] flex flex-col justify-start mx-16 overflow-hidden px-5"
+      className="w-[1440px] flex flex-col justify-start mx-16 px-5"
     >
-      <header className="sticky top-0 border-b-black border-b-2 border-solid bg-white bg-gridWhite py-6">
+      <header className="z-10 sticky top-0 border-b-black border-b-2 border-solid bg-white bg-gridWhite py-6">
         <Link to={"/library"} className="underline text-lg">
           Go back to library
         </Link>
@@ -127,7 +127,7 @@ const Page = () => {
           Page {pageData?.currentPage.pageNum}
         </p>
         <div className="flex gap-4 mt-3">
-          <motion.span whileHover={{ x: 5 }} className="  w-[max-content]">
+          <motion.span whileHover={{ x: 5 }} className="w-[max-content]">
             <button
               onClick={() => {
                 addNote();
@@ -155,7 +155,7 @@ const Page = () => {
           </motion.span>
         </div>
       </header>
-      <section className="min-w-[100%]  flex-1">
+      <section className="min-w-[100%] flex-1">
         <div
           id="notes-container"
           className=" justify-start overflow-y-auto overflow-x-hidden"

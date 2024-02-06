@@ -24,7 +24,7 @@ const Note = ({
       onDragStart={onDragStart}
       onDrop={onDrop}
       onDragOver={onDragOver}
-      className="cursor-pointer w-full note text-pretty mb-3 text-xl grid h-[max-content] border-solid border-b-black py-6 border-b-2"
+      className="z-0 cursor-pointer w-full note text-pretty mb-3 text-xl grid h-[max-content] border-solid border-b-black py-6 border-b-[1px]"
     >
       {contents}
     </motion.div>
