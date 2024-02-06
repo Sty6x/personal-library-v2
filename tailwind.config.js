@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {},
     dropShadow: {
-      "text-shadow": "1px 3px 1.4px rgb(0 0 0 / 0.2)",
+      "text-shadow": "2px 3px 1.4px rgb(0 0 0 / 0.3)",
     },
     boxShadow: {
       "btn-hover-active": "0px 1px 2px 1px rgb(0 0 0 / 0.3)",

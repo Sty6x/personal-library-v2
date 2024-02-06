@@ -53,7 +53,7 @@ const Page = () => {
       <Note
         key={note.id}
         contents={
-          " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         }
       />
     );
@@ -73,13 +73,15 @@ const Page = () => {
           title={pageData?.book.title as string}
           author={pageData?.book.author as string}
         />
-        <p className="text-xl">Page {pageData?.currentPage.pageNum}</p>
+        <p className="drop-shadow-text-shadow text-xl">
+          Page {pageData?.currentPage.pageNum}
+        </p>
         <motion.span
-          whileHover={{ x: 10 }}
-          className="flex gap-4 items-center mt-3"
+          whileHover={{ x: 5 }}
+          className="flex gap-4 items-center mt-3 w-[max-content]"
         >
           <Link
-            className="add-icon w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center font-semibold py-1 text-xl"
+            className="drop-shadow-text-shadow add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center font-semibold py-1 text-xl"
             to={"/#"}
           >
             Add Note
