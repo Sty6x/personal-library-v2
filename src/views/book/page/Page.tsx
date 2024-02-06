@@ -108,11 +108,10 @@ const Page = () => {
     );
   });
 
-  // flex pushes the horizontal and vertical center of the component to the center
   return (
     <div
       id="page"
-      className="max-w-[1440px] h-[90%] flex flex-col justify-start mx-16 overflow-hidden "
+      className="w-[1440px] h-[90%] flex flex-col justify-start mx-16 overflow-hidden px-5"
     >
       <header className="sticky top-0 border-b-black border-b-2 border-solid bg-white bg-gridWhite py-6">
         <Link to={"/library"} className="underline text-lg">
@@ -156,10 +155,10 @@ const Page = () => {
           </motion.span>
         </div>
       </header>
-      <section>
+      <section className="min-w-[100%]  flex-1">
         <div
           id="notes-container"
-          className="max-h-[50em] w-[90em] justify-start overflow-y-auto"
+          className=" justify-start overflow-y-auto overflow-x-hidden"
         >
           <AnimatePresence custom={"popLayout"}>{renderNotes}</AnimatePresence>
         </div>

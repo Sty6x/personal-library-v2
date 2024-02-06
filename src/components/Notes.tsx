@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 interface t_dragEvents {
   onDragStart: (e: React.DragEvent<HTMLDivElement>) => void;
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
@@ -13,16 +14,20 @@ const Note = ({
   dragEvents: t_dragEvents;
 }) => {
   return (
-    <div
+    <motion.div
+      whileHover={{
+        x: [0, 5, -5, 0],
+        transition: { repeat: Infinity, repeatType: "loop" },
+      }}
       id={id}
       draggable={true}
       onDragStart={onDragStart}
       onDrop={onDrop}
       onDragOver={onDragOver}
-      className="cursor-pointer w-full note text-pretty mb-3 text-2xl grid h-[max-content] border-solid border-b-black py-6 border-b-2"
+      className="cursor-pointer w-full note text-pretty mb-3 text-xl grid h-[max-content] border-solid border-b-black py-6 border-b-2"
     >
       {contents}
-    </div>
+    </motion.div>
   );
 };
 export default Note;
