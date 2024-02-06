@@ -1,6 +1,6 @@
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { t_note, t_page } from "../../../types/t_library";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { data } from "../../../placeholderData";
 import getRelatedItems from "../../../utils/getRelatedItems";
 import BookHeader from "../../../components/BookHeader";
@@ -22,6 +22,7 @@ const Page = () => {
   }>();
   const { pageID, bookID } = useParams<any>();
   const [pageData, setPageData] = useState<t_currentPage | null>(null);
+  const headerRef = useRef<HTMLElement>(null);
 
   function addNote() {
     const newID = uid(16);
@@ -34,10 +35,12 @@ const Page = () => {
       lastUpdated: new Date().toString(),
       id: newID,
     };
-    setPageData(
-      (prev) =>
-        ({ ...prev, notes: [newNote, ...pageData.notes] } as t_currentPage)
-    );
+    if (pageData) {
+      setPageData(
+        (prev) =>
+          ({ ...prev, notes: [newNote, ...pageData.notes] } as t_currentPage)
+      );
+    }
   }
 
   function onDragStart(e: React.DragEvent<HTMLDivElement>): void {
@@ -94,8 +97,13 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
-    console.log(pageData);
-  }, [pageData]);
+    window.addEventListener("scroll", (e) => {
+      console.log("scrolled");
+    });
+    return window.removeEventListener("scroll", () => {
+      console.log("throw");
+    });
+  }, []);
 
   const renderNotes = pageData?.notes.map((note) => {
     return (
@@ -111,7 +119,7 @@ const Page = () => {
   return (
     <div
       id="page"
-      className="w-[1440px] flex flex-col justify-start mx-16 px-5"
+      className="w-[80%] max-w-[1560px] flex flex-col justify-start mx-16 my-16"
     >
       <header className="z-10 sticky top-0 border-b-black border-b-2 border-solid bg-white bg-gridWhite py-6">
         <Link to={"/library"} className="underline text-lg">
@@ -146,20 +154,11 @@ const Page = () => {
             >
               Add Page
             </Link>
-            {/* <Link
-            to={"/library"}
-            className="add-icon w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center bg-accent-green-200  rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-4 py-1 text-lg"
-          >
-            Add Page
-          </Link> */}
           </motion.span>
         </div>
       </header>
-      <section className="min-w-[100%] flex-1">
-        <div
-          id="notes-container"
-          className=" justify-start overflow-y-auto overflow-x-hidden"
-        >
+      <section className="min-w-[100%] flex-1 overflow-hidden">
+        <div id="notes-container" className=" justify-start ">
           <AnimatePresence custom={"popLayout"}>{renderNotes}</AnimatePresence>
         </div>
       </section>
