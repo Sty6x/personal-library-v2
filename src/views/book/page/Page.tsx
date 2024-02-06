@@ -19,7 +19,7 @@ const Page = () => {
     bookTitle: string;
     bookAuthor: string;
   }>();
-  const { pageID } = useParams<any>();
+  const { pageID, bookID } = useParams<any>();
   const [pageData, setPageData] = useState<t_currentPage | null>(null);
 
   // set as loader
@@ -69,10 +69,12 @@ const Page = () => {
         <Link to={"/library"} className="underline text-lg">
           Go back to library
         </Link>
-        <BookHeader
-          title={pageData?.book.title as string}
-          author={pageData?.book.author as string}
-        />
+        <Link to={`/${bookID}`}>
+          <BookHeader
+            title={pageData?.book.title as string}
+            author={pageData?.book.author as string}
+          />
+        </Link>
         <p className="drop-shadow-text-shadow text-xl">
           Page {pageData?.currentPage.pageNum}
         </p>
