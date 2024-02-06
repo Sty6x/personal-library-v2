@@ -65,7 +65,7 @@ const Page = () => {
       id="page"
       className="max-w-[1440px] h-[90%] flex flex-col justify-start mx-16 overflow-hidden "
     >
-      <header className="sticky top-0 border-b-black border-b-2 shadow-header border-solid bg-white bg-gridWhite py-6">
+      <header className="sticky top-0 border-b-black border-b-2 border-solid bg-white bg-gridWhite py-6">
         <Link to={"/library"} className="underline text-lg">
           Go back to library
         </Link>
@@ -76,23 +76,31 @@ const Page = () => {
         <p className="drop-shadow-text-shadow text-xl">
           Page {pageData?.currentPage.pageNum}
         </p>
-        <motion.span
-          whileHover={{ x: 5 }}
-          className="flex gap-4 items-center mt-3 w-[max-content]"
-        >
-          <Link
-            className="drop-shadow-text-shadow add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center font-semibold py-1 text-xl"
-            to={"/#"}
-          >
-            Add Note
-          </Link>
-          {/* <Link
+        <div className="flex gap-4 mt-3">
+          <motion.span whileHover={{ x: 5 }} className="  w-[max-content]">
+            <Link
+              className="drop-shadow-text-shadow add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center font-semibold py-1 text-xl"
+              to={"/#"}
+            >
+              Add Note
+            </Link>
+          </motion.span>
+
+          <motion.span whileHover={{ x: 5 }} className=" w-[max-content]">
+            <Link
+              className="drop-shadow-text-shadow add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center font-semibold py-1 text-xl"
+              to={"/#"}
+            >
+              Add Page
+            </Link>
+            {/* <Link
             to={"/library"}
             className="add-icon w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center bg-accent-green-200  rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-4 py-1 text-lg"
           >
             Add Page
           </Link> */}
-        </motion.span>
+          </motion.span>
+        </div>
       </header>
       <section className="">
         <div
