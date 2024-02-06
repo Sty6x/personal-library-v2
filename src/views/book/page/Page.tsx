@@ -40,6 +40,37 @@ const Page = () => {
     );
   }
 
+  function onDragStart(e: React.DragEvent<HTMLDivElement>): void {
+    const target = e.currentTarget;
+    console.log(target.id);
+    e.dataTransfer.setData("text/plain", target.id);
+  }
+
+  function onDrop(e: React.DragEvent<HTMLDivElement>): void {
+    const transferedData = e.dataTransfer.getData("text/plain");
+    const target = e.currentTarget;
+    if (pageData) {
+      const [currentTarget, dropTarget]: Array<t_note> = pageData?.notes.filter(
+        (note) => note.id === transferedData || note.id === target.id
+      );
+      console.log({ draggedTarget: currentTarget, target: dropTarget });
+      const updateNotePosition: Array<t_note> = pageData?.notes.map((note) => {
+        if (dropTarget.id === note.id) {
+          return { ...currentTarget };
+        }
+        if (currentTarget.id === note.id) {
+          return { ...dropTarget };
+        }
+        return note;
+      });
+      setPageData(
+        (prev) => ({ ...prev, notes: [...updateNotePosition] } as t_currentPage)
+      );
+    }
+  }
+  function onDragOver(e: React.DragEvent<HTMLDivElement>): void {
+    e.preventDefault();
+  }
   // set as loader
   function getPageData(storage: Array<t_page>) {
     const [currentPage] = storage.filter((page) => page.id === pageID);
@@ -67,7 +98,14 @@ const Page = () => {
   }, [pageData]);
 
   const renderNotes = pageData?.notes.map((note) => {
-    return <Note key={note.id} contents={note.contents} />;
+    return (
+      <Note
+        dragEvents={{ onDragStart, onDrop, onDragOver }}
+        key={note.id}
+        id={note.id}
+        contents={note.contents}
+      />
+    );
   });
 
   // flex pushes the horizontal and vertical center of the component to the center
@@ -118,7 +156,7 @@ const Page = () => {
           </motion.span>
         </div>
       </header>
-      <section className="">
+      <section>
         <div
           id="notes-container"
           className="max-h-[50em] w-[90em] justify-start overflow-y-auto"
