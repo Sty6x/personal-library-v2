@@ -51,12 +51,16 @@ const Page = () => {
     console.log(pageData);
   }, [pageData]);
 
+  // flex pushes the horizontal and vertical center of the component to the center
   return (
     <div
       id="page"
-      className="max-w-[1440px] flex gap-6 flex-col justify-start w-[100%]"
+      className="max-w-[1440px] h-[90%] flex flex-col justify-start mx-16 overflow-hidden "
     >
-      <header>
+      <header className="sticky top-0 border-b-black border-b-4 shadow-header border-solid bg-white bg-gridWhite py-6">
+        <Link to={"/library"} className="underline text-lg">
+          Go back to library
+        </Link>
         <BookHeader
           title={pageData?.book.title as string}
           author={pageData?.book.author as string}
@@ -77,74 +81,12 @@ const Page = () => {
           </Link>
         </span>
       </header>
-      <section className="w-[80em] max-h-[80%]">
+      <section className="">
         <div
           id="notes-container"
-          className="h-[35em] justify-start overflow-y-auto"
+          className="max-h-[50em] w-[90em] justify-start overflow-y-auto"
         >
-          <AnimatePresence custom={"popLayout"}>
-            <div className="w-full note mb-3  text-2xl grid place-items-center h-[max-content] border-solid border-b-black py-6 border-b-2">
-              War's Brutality: "In the chaos of battle, we lost our humanity.
-              The brutality of war stripped away our illusions, leaving only the
-              stark reality of survival amidst destruction."
-            </div>
-            <div className="w-full note mb-3  text-2xl grid place-items-center h-[max-content] border-solid border-b-black py-6 border-b-2">
-              War's Brutality: "In the chaos of battle, we lost our humanity.
-              The brutality of war stripped away our illusions, leaving only the
-              stark reality of survival amidst destruction." War's Brutality:
-              "In the chaos of battle, we lost our humanity. The brutality of
-              war stripped away our illusions, leaving only the stark reality of
-              survival amidst destruction." War's Brutality: "In the chaos of
-              battle, we lost our humanity. The brutality of war stripped away
-              our illusions, leaving only the stark reality of survival amidst
-              destruction."
-            </div>
-
-            <div className="w-full note mb-3  text-2xl grid place-items-center h-[max-content] border-solid border-b-black py-6 border-b-2">
-              Loss of Innocence: "The frontlines were a graveyard for innocence.
-              Youthful dreams perished in the mud and blood, replaced by a grim
-              understanding of the harsh realities of warfare." Loss of Loss of
-              Innocence: "The frontlines were a graveyard for innocence.
-              Youthful dreams perished in the mud and blood, replaced by a grim
-              understanding of the harsh realities of warfare." Innocence: "The
-              frontlines were a graveyard for innocence. Youthful dreams
-              perished in the mud and blood, replaced by a grim understanding of
-              the harsh realities of warfare." Loss of Innocence: "The
-              frontlines were a graveyard for innocence. Youthful dreams
-              perished in the mud and blood, replaced by a grim understanding of
-              the harsh realities of warfare."
-            </div>
-
-            <div className="w-full note mb-3  text-2xl grid place-items-center h-[max-content] border-solid border-b-black py-6 border-b-2">
-              The Futility of War: "As the battles raged on, we questioned the
-              purpose of it all. The once glorified notions of heroism and honor
-              faded, giving way to the senseless and cyclical nature of
-              conflict." The Futility of War: "As the battles raged on, we
-              questioned the purpose of it all. The once glorified notions of
-              heroism and honor faded, giving way to the senseless and cyclical
-              nature of conflict." The Futility of War: "As the battles raged
-              on, we questioned the purpose of it all. The once glorified
-              notions of heroism and honor faded, giving way to the senseless
-              and cyclical nature of conflict." The Futility of War: "As the
-              battles raged on, we questioned the purpose of it all. The once
-              glorified notions of heroism and honor faded, giving way to the
-              senseless and cyclical nature of conflict." The Futility of War:
-              "As the battles raged on, we questioned the purpose of it all. The
-              once glorified notions of heroism and honor faded, giving way to
-              the senseless and cyclical nature of conflict."
-            </div>
-            <div className="w-full note mb-3  text-2xl grid place-items-center h-[max-content] border-solid border-b-black py-6 border-b-2">
-              Post-War Trauma: "Surviving the war was only the beginning. The
-              scars of battle haunted us long after the guns fell silent, a
-              constant reminder of the toll war exacts on the human soul."
-              Post-War Trauma: "Surviving the war was only the beginning. The
-              scars of battle haunted us long after the guns fell silent, a
-              constant reminder of the toll war exacts on the human soul."
-              Post-War Trauma: "Surviving the war was only the beginning. The
-              scars of battle haunted us long after the guns fell silent, a
-              constant reminder of the toll war exacts on the human soul."
-            </div>
-          </AnimatePresence>
+          <AnimatePresence custom={"popLayout"}></AnimatePresence>
         </div>
       </section>
     </div>

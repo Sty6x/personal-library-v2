@@ -28,7 +28,7 @@ const Book = () => {
   return (
     <main
       id="book-page"
-      className="bg-gridWhite h-[100dvh] grid place-content-center"
+      className="bg-gridWhite h-[100dvh] flex justify-center items-center"
     >
       {redirect ? (
         <section id="book-page-contents" className="grid place-items-center">
