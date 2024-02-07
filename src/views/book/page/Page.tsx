@@ -1,6 +1,11 @@
 import { useOutletContext, useParams } from "react-router-dom";
-import { t_note, t_page, t_currentPage } from "../../../types/t_library";
-import { useEffect, useRef, useState } from "react";
+import {
+  t_note,
+  t_page,
+  t_currentPage,
+  t_extendedNote,
+} from "../../../types/t_library";
+import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import { data } from "../../../placeholderData";
 import getRelatedItems from "../../../utils/getRelatedItems";
 import { AnimatePresence } from "framer-motion";
@@ -78,15 +83,19 @@ const Page = () => {
     const [currentPage] = storage.filter((page) => page.id === pageID);
     const getPageNotes = getRelatedItems<t_note>(
       currentPage.noteIDs,
-      data.notes
+      data.notes,
+      (notes) => {
+        return notes.map((note) => ({ ...note, isEditing: false }));
+      }
     );
+    console.log(getPageNotes);
     const currentPageData: t_currentPage = {
       book: {
         title: bookTitle,
         author: bookAuthor,
       },
       currentPage,
-      notes: getPageNotes,
+      notes: getPageNotes as Array<t_extendedNote>,
     };
     setPageData({ ...currentPageData });
   }
@@ -116,15 +125,40 @@ const Page = () => {
         key={note.id}
         id={note.id}
         contents={note.contents}
+        isEditing={note.isEditing}
       />
     );
   });
+
+  function isCurrentlyEditing(noteID: string) {
+    const [editingNote] = pageData?.notes.filter((note) => note.id === noteID);
+    return editingNote.isEditing ? true : false;
+  }
+
+  function triggerEditNote(noteID: string) {
+    const setEditingNote = pageData?.notes.map((note) => {
+      if (note.id === noteID) return { ...note, isEditing: true };
+      return { ...note, isEditing: false };
+    });
+    setPageData((prev) => ({
+      ...(prev as t_currentPage),
+      notes: [...(setEditingNote as Array<t_extendedNote>)],
+    }));
+  }
 
   return (
     <div
       id="page"
       className="w-[80%] max-w-[1440px] flex flex-col justify-start mx-16 my-16"
       ref={pageRef}
+      onClick={(e: any) => {
+        const target = e.target;
+        if (target.classList.contains("note")) {
+          if (!isCurrentlyEditing(target.id)) {
+            triggerEditNote(target.id);
+          }
+        }
+      }}
     >
       <PageHeader
         pageData={pageData as t_currentPage}

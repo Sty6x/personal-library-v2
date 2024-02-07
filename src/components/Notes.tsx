@@ -10,8 +10,10 @@ interface t_dragEvents {
 const Note = ({
   contents,
   id,
+  isEditing,
   dragEvents: { onDragStart, onDrop },
 }: {
+  isEditing: boolean;
   contents: string;
   id: string;
   dragEvents: t_dragEvents;
@@ -40,7 +42,7 @@ const Note = ({
 
   return (
     <div>
-      {true ? (
+      {isEditing ? (
         <ReactQuill
           theme="snow"
           value={editorState}

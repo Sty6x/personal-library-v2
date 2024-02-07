@@ -16,7 +16,7 @@ export type t_page = {
   lastUpdated: string;
 };
 
-export type t_note = {
+export interface t_note {
   bookID: string;
   noteIndex: number;
   pageID: string;
@@ -24,7 +24,7 @@ export type t_note = {
   contents: string;
   dateAdded: string;
   lastUpdated: string;
-};
+}
 
 export type t_library = {
   books: Array<t_book>;
@@ -37,8 +37,14 @@ export interface t_currentBook extends t_book {
   page: t_page;
 }
 
+export type t_noteEditing = {
+  isEditing: boolean;
+};
+
+export type t_extendedNote = t_note & t_noteEditing;
+
 export type t_currentPage = {
   currentPage: t_page;
   book: { title: string; author: string };
-  notes: Array<t_note>;
+  notes: Array<t_extendedNote>;
 };
