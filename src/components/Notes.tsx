@@ -34,7 +34,7 @@ const Note = ({
 
   return (
     <motion.div
-      whileTap={{ scale: 0.9 }}
+      whileTap={{ scale: 0.95 }}
       id={id}
       draggable={true}
       onDragStart={onDragStart}
@@ -43,7 +43,7 @@ const Note = ({
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
       onDragEnd={onDragLeave}
-      className="z-0 outline-[3px] cursor-pointer w-full note text-pretty mb-3 text-xl grid h-[max-content] border-solid border-b-black py-6 border-b-[1px]"
+      className="relative z-10 outline-[3px] cursor-pointer w-full note text-pretty mb-3 text-xl grid h-[max-content] border-solid border-b-note-separator py-4 border-b-[1px]"
     >
       {contents}
     </motion.div>

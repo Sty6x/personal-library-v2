@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 import { t_currentPage } from "../../types/t_library";
 
@@ -15,7 +15,7 @@ const PageHeader = ({
 
   return (
     <header
-      className={`z-10 sticky top-0 border-b-black border-b-2 border-solid bg-white bg-gridWhite py-6`}
+      className={`z-20 sticky top-0 border-b-black border-solid bg-white bg-gridWhite py-6`}
     >
       <Link to={"/library"} className="underline text-lg">
         Go back to library

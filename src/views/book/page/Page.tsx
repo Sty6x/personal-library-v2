@@ -45,14 +45,13 @@ const Page = () => {
   function onDrop(e: React.DragEvent<HTMLDivElement>): void {
     const transferedData = e.dataTransfer.getData("text/plain");
     const target = e.currentTarget;
-    const droppableTarget = e.target;
 
     if (target.classList.contains("droppable")) {
       target.classList.remove("droppable");
       target.classList.add("dropped");
       setTimeout(() => {
         target.classList.remove("dropped");
-      }, 1000);
+      }, 500);
     }
     if (pageData) {
       const [currentTarget, dropTarget]: Array<t_note> = pageData?.notes.filter(
@@ -124,7 +123,7 @@ const Page = () => {
   return (
     <div
       id="page"
-      className="w-[80%] max-w-[1560px] gap-4 flex flex-col justify-start mx-16 my-16"
+      className="w-[80%] max-w-[1440px] flex flex-col justify-start mx-16 my-16"
       ref={pageRef}
     >
       <PageHeader
@@ -133,7 +132,7 @@ const Page = () => {
         isScrolling={isScrolling}
       />
       <section className="min-w-[100%] flex-1 overflow-hidden">
-        <div id="notes-container" className=" justify-start px-4 py-2 ">
+        <div id="notes-container" className=" justify-start px-2 py-2 ">
           <AnimatePresence custom={"popLayout"}>{renderNotes}</AnimatePresence>
         </div>
       </section>

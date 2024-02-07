@@ -2,7 +2,11 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      borderColor: {
+        "note-separator": "#1d1d1d4c0",
+      },
+    },
     dropShadow: {
       "text-shadow": "2px 3px 1.4px rgb(0 0 0 / 0.3)",
     },
