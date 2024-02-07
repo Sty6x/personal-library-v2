@@ -54,3 +54,17 @@ button {
   -webkit-box-orient: vertical;
   color: var(--light-shade);
 }
+
+.droppable {
+  border: none;
+  outline: 3px solid var(--light-shade);
+  outline-style: dotted;
+  transition: all 150ms ease-in-out;
+}
+
+.dropped {
+  transition: all 150ms ease-in-out;
+  border: transparent;
+  outline: 3px solid red;
+  outline-style: dotted;
+}

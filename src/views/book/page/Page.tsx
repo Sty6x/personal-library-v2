@@ -39,13 +39,21 @@ const Page = () => {
 
   function onDragStart(e: React.DragEvent<HTMLDivElement>): void {
     const target = e.currentTarget;
-    console.log(target.id);
     e.dataTransfer.setData("text/plain", target.id);
   }
 
   function onDrop(e: React.DragEvent<HTMLDivElement>): void {
     const transferedData = e.dataTransfer.getData("text/plain");
     const target = e.currentTarget;
+    const droppableTarget = e.target;
+
+    if (target.classList.contains("droppable")) {
+      target.classList.remove("droppable");
+      target.classList.add("dropped");
+      setTimeout(() => {
+        target.classList.remove("dropped");
+      }, 1000);
+    }
     if (pageData) {
       const [currentTarget, dropTarget]: Array<t_note> = pageData?.notes.filter(
         (note) => note.id === transferedData || note.id === target.id
@@ -65,9 +73,7 @@ const Page = () => {
       );
     }
   }
-  function onDragOver(e: React.DragEvent<HTMLDivElement>): void {
-    e.preventDefault();
-  }
+
   // set as loader
   function getPageData(storage: Array<t_page>) {
     const [currentPage] = storage.filter((page) => page.id === pageID);
@@ -107,7 +113,7 @@ const Page = () => {
   const renderNotes = pageData?.notes.map((note) => {
     return (
       <Note
-        dragEvents={{ onDragStart, onDrop, onDragOver }}
+        dragEvents={{ onDragStart, onDrop }}
         key={note.id}
         id={note.id}
         contents={note.contents}
@@ -118,7 +124,7 @@ const Page = () => {
   return (
     <div
       id="page"
-      className="w-[80%] max-w-[1560px] flex flex-col justify-start mx-16 my-16"
+      className="w-[80%] max-w-[1560px] gap-4 flex flex-col justify-start mx-16 my-16"
       ref={pageRef}
     >
       <PageHeader
@@ -127,7 +133,7 @@ const Page = () => {
         isScrolling={isScrolling}
       />
       <section className="min-w-[100%] flex-1 overflow-hidden">
-        <div id="notes-container" className=" justify-start ">
+        <div id="notes-container" className=" justify-start px-4 py-2 ">
           <AnimatePresence custom={"popLayout"}>{renderNotes}</AnimatePresence>
         </div>
       </section>
