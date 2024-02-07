@@ -1,11 +1,10 @@
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import { t_note, t_page, t_currentPage } from "../../../types/t_library";
 import { useEffect, useRef, useState } from "react";
 import { data } from "../../../placeholderData";
 import getRelatedItems from "../../../utils/getRelatedItems";
 import { AnimatePresence } from "framer-motion";
 import Note from "../../../components/Notes";
-import { motion } from "framer-motion";
 import { uid } from "uid";
 import PageHeader from "../../../components/book-item/PageHeader";
 
@@ -88,9 +87,8 @@ const Page = () => {
   }
 
   function handleHeaderTransition(e: any) {
-    if (window.scrollY > 5) {
-      setIsScrolling(true);
-    } else if (window.scrollY < 5) {
+    setIsScrolling(true);
+    if (window.scrollY === 0) {
       setIsScrolling(false);
     }
   }
