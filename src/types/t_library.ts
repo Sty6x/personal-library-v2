@@ -38,8 +38,7 @@ export interface t_currentBook extends t_book {
 }
 
 export type t_currentPage = {
-  bookTitle: string;
-  bookAuthor: string;
-  page: t_page;
+  currentPage: t_page;
+  book: { title: string; author: string };
   notes: Array<t_note>;
 };
