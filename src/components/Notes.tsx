@@ -78,7 +78,7 @@ const Note = ({
           className="relative z-10 outline-[3px] cursor-pointer w-full note text-pretty mb-3 text-xl grid h-[max-content] border-solid border-b-note-separator py-4 border-b-[1px]"
         >
           <div className="flex flex-col">
-            <span className="flex ">
+            <span className="flex justify-between ">
               <span id="note-data">
                 <p className="font-semibold text-xl">Note #{note.noteIndex}</p>
                 <p className=" text-sm">
@@ -89,11 +89,11 @@ const Note = ({
               <motion.button
                 initial={{ scale: 0, opacity: 0 }}
                 animate={isHovered ? { scale: 1.4, opacity: 1 } : {}}
-                whileTap={{ scale: 0.95 }}
-                className="relative ml-auto edit-icon edit-btn 
+                whileTap={{ scale: 1 }}
+                className="edit-icon edit-btn self-start
             drop-shadow-text-shadow 
-            add-icon  before:mr-[.3em]
-            before:h-[20px] 
+            add-icon before:mr-[.3em]
+            before:h-[20px] box-border
             py-1"
                 id={`button-${id}`}
               />
