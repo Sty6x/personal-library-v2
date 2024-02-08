@@ -23,7 +23,8 @@ button {
 
 .add-icon::before,
 .library-icon::before,
-.read-icon::before {
+.read-icon::before,
+.edit-icon::before {
   content: "";
   display: inline-block;
   background-position: center;
@@ -42,6 +43,10 @@ button {
 }
 .library-icon::before {
   background-image: url("./assets/icons/library.svg");
+}
+
+.edit-icon::before {
+  background-image: url("./assets/icons/edit-icon.svg");
 }
 
 .note-contents-preview {

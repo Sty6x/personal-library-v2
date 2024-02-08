@@ -5,7 +5,13 @@ import {
   t_currentPage,
   t_extendedNote,
 } from "../../../types/t_library";
-import { MouseEventHandler, useEffect, useRef, useState } from "react";
+import {
+  KeyboardEventHandler,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { data } from "../../../placeholderData";
 import getRelatedItems from "../../../utils/getRelatedItems";
 import { AnimatePresence } from "framer-motion";
@@ -39,6 +45,16 @@ const Page = () => {
         (prev) =>
           ({ ...prev, notes: [newNote, ...pageData.notes] } as t_currentPage)
       );
+    }
+  }
+
+  function saveEdit(contents: string, noteID: string) {
+    if (pageData) {
+      const updatedNotes: t_extendedNote[] = pageData?.notes.map((note) => {
+        if (note.id !== noteID) return note;
+        return { ...note, contents: contents, isEditing: false };
+      });
+      setPageData({ ...pageData, notes: updatedNotes });
     }
   }
 
@@ -121,6 +137,7 @@ const Page = () => {
   const renderNotes = pageData?.notes.map((note) => {
     return (
       <Note
+        handleSave={saveEdit}
         dragEvents={{ onDragStart, onDrop }}
         key={note.id}
         id={note.id}
@@ -131,13 +148,24 @@ const Page = () => {
   });
 
   function isCurrentlyEditing(noteID: string) {
-    const [editingNote] = pageData?.notes.filter((note) => note.id === noteID);
+    const [editingNote]: any = pageData?.notes.filter(
+      (note) => note.id === noteID
+    );
     return editingNote.isEditing ? true : false;
   }
 
   function triggerEditNote(noteID: string) {
     const setEditingNote = pageData?.notes.map((note) => {
       if (note.id === noteID) return { ...note, isEditing: true };
+      return { ...note, isEditing: false };
+    });
+    setPageData((prev) => ({
+      ...(prev as t_currentPage),
+      notes: [...(setEditingNote as Array<t_extendedNote>)],
+    }));
+  }
+  function disableEditNote() {
+    const setEditingNote = pageData?.notes.map((note) => {
       return { ...note, isEditing: false };
     });
     setPageData((prev) => ({
@@ -153,10 +181,17 @@ const Page = () => {
       ref={pageRef}
       onClick={(e: any) => {
         const target = e.target;
-        if (target.classList.contains("note")) {
-          if (!isCurrentlyEditing(target.id)) {
-            triggerEditNote(target.id);
+        const targetID = target.id.slice(7);
+        if (target.classList.contains("edit-btn")) {
+          if (!isCurrentlyEditing(targetID)) {
+            triggerEditNote(targetID);
           }
+        }
+      }}
+      onKeyDown={(e: any) => {
+        if (e.key === "Escape") {
+          console.log("Escape");
+          disableEditNote();
         }
       }}
     >
