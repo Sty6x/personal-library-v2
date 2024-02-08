@@ -165,10 +165,15 @@ const Page = () => {
       notes: [...(setEditingNote as Array<t_extendedNote>)],
     }));
   }
-  function disableEditNote() {
-    const setEditingNote = pageData?.notes.map((note) => {
-      return { ...note, isEditing: false };
-    });
+  function disableEditNote(notes: Array<t_extendedNote>): void {
+    const checkIfEditing = notes.some((note) => note.isEditing === true);
+    console.log(checkIfEditing);
+    if (!checkIfEditing) return;
+    const setEditingNote = notes.map((note) => ({
+      ...note,
+      isEditing: false,
+    }));
+    console.log(setEditingNote);
     setPageData((prev) => ({
       ...(prev as t_currentPage),
       notes: [...(setEditingNote as Array<t_extendedNote>)],
@@ -178,8 +183,15 @@ const Page = () => {
   return (
     <div
       id="page"
-      className="w-[80%] max-w-[1440px] flex flex-col justify-start mx-16 my-16"
+      className="outline-none w-[80%] max-w-[1440px] flex flex-col justify-start mx-16 my-16"
       ref={pageRef}
+      tabIndex={0}
+      onKeyDown={(e: any) => {
+        console.log(e.key);
+        if (e.key === "Escape") {
+          disableEditNote(pageData ? pageData?.notes : []);
+        }
+      }}
       onClick={(e: any) => {
         const target = e.target;
         const targetID = target.id.slice(7);
@@ -187,12 +199,6 @@ const Page = () => {
           if (!isCurrentlyEditing(targetID)) {
             triggerEditNote(targetID);
           }
-        }
-      }}
-      onKeyDown={(e: any) => {
-        if (e.key === "Escape") {
-          console.log("Escape");
-          disableEditNote();
         }
       }}
     >
