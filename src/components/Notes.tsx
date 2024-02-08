@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useRef, useState } from "react";
+import { t_extendedNote } from "../types/t_library";
+import { formatDistance } from "date-fns";
 
 interface t_dragEvents {
   onDragStart: (e: React.DragEvent<HTMLDivElement>) => void;
@@ -12,9 +14,11 @@ const Note = ({
   id,
   isEditing,
   handleSave,
+  note,
   dragEvents: { onDragStart, onDrop },
 }: {
   isEditing: boolean;
+  note: t_extendedNote;
   contents: string;
   id: string;
   dragEvents: t_dragEvents;
@@ -73,22 +77,29 @@ const Note = ({
           }}
           className="relative z-10 outline-[3px] cursor-pointer w-full note text-pretty mb-3 text-xl grid h-[max-content] border-solid border-b-note-separator py-4 border-b-[1px]"
         >
-          <motion.span
-            initial={{ scale: 0, opacity: 0 }}
-            animate={isHovered ? { scale: 1.4, opacity: 1 } : {}}
-            whileTap={{ scale: 0.95 }}
-            className="absolute right-0 top-[-10px]"
-          >
-            <button
-              className="edit-icon edit-btn 
+          <div className="flex flex-col">
+            <span className="flex ">
+              <span id="note-data">
+                <p className="font-semibold text-xl">Note #{note.noteIndex}</p>
+                <p className=" text-sm">
+                  Updated{" "}
+                  {formatDistance(new Date(note.lastUpdated), new Date())} ago.
+                </p>
+              </span>
+              <motion.button
+                initial={{ scale: 0, opacity: 0 }}
+                animate={isHovered ? { scale: 1.4, opacity: 1 } : {}}
+                whileTap={{ scale: 0.95 }}
+                className="relative ml-auto edit-icon edit-btn 
             drop-shadow-text-shadow 
-            add-icon w-full before:mr-[.3em]
-            items-center before:h-[20px] 
-            flex content-center py-1"
-              id={`button-${id}`}
-            ></button>
-          </motion.span>
-          {contents}
+            add-icon  before:mr-[.3em]
+            before:h-[20px] 
+            py-1"
+                id={`button-${id}`}
+              />
+            </span>
+          </div>
+          <p>{contents}</p>
         </motion.div>
       )}
     </>

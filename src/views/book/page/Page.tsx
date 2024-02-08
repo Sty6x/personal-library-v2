@@ -141,6 +141,7 @@ const Page = () => {
         dragEvents={{ onDragStart, onDrop }}
         key={note.id}
         id={note.id}
+        note={note}
         contents={note.contents}
         isEditing={note.isEditing}
       />
