@@ -165,6 +165,7 @@ const Page = () => {
       notes: [...(setEditingNote as Array<t_extendedNote>)],
     }));
   }
+
   function disableEditNote(notes: Array<t_extendedNote>): void {
     const checkIfEditing = notes.some((note) => note.isEditing === true);
     console.log(checkIfEditing);
@@ -173,7 +174,6 @@ const Page = () => {
       ...note,
       isEditing: false,
     }));
-    console.log(setEditingNote);
     setPageData((prev) => ({
       ...(prev as t_currentPage),
       notes: [...(setEditingNote as Array<t_extendedNote>)],
@@ -187,7 +187,6 @@ const Page = () => {
       ref={pageRef}
       tabIndex={0}
       onKeyDown={(e: any) => {
-        console.log(e.key);
         if (e.key === "Escape") {
           disableEditNote(pageData ? pageData?.notes : []);
         }

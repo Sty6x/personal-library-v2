@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { t_extendedNote } from "../types/t_library";
 import { formatDistance } from "date-fns";
 
@@ -24,9 +24,11 @@ const Note = ({
   dragEvents: t_dragEvents;
   handleSave: (contents: string, noteID: string) => void;
 }) => {
-  const [editorState, setEditorState] = useState<string>(contents);
+  const [editorState, setEditorState] = useState<{
+    value: string;
+    text: string;
+  }>({ value: contents, text: contents });
   const [isHovered, setIsHovered] = useState(false);
-  const quillEditorRef = useRef(null);
 
   function onDragEnter(e: React.DragEvent<HTMLDivElement>): void {
     const dropTarget = e.currentTarget;
@@ -53,10 +55,16 @@ const Note = ({
       {isEditing ? (
         <>
           <ReactQuill
-            ref={(el) => (quillEditorRef.current = el as any)}
             theme="snow"
-            value={editorState}
-            onChange={setEditorState}
+            value={editorState.value}
+            onChange={(value, delta, source, editor) => {
+              setEditorState({ value, text: editor.getText() });
+            }}
+            onKeyDown={(e: KeyboardEvent) => {
+              if (e.key === "Enter") {
+                handleSave(editorState.text, id);
+              }
+            }}
           />
         </>
       ) : (
