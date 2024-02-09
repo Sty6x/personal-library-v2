@@ -56,22 +56,28 @@ const Note = ({
     <>
       {isEditing ? (
         <div className="relative">
-          <span className="absolute flex right-[20px] top-4 gap-4 ">
-            <button
-              className="hover:underline font-semibold"
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                handleSave(editorState.text, id);
-              }}
-            >
-              Done
-            </button>
-            <button className="hover:underline" onClick={handleEditNoteState}>
-              Cancel
-            </button>
+          <span className="absolute w-full px-4 top-1 flex justify-between ">
+            <p className="inline-block font-semibold text-xl">
+              Note #{note.noteIndex}
+            </p>
+            <span className="flex gap-4 ">
+              <button
+                className="hover:underline font-semibold"
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSave(editorState.text, id);
+                }}
+              >
+                Done
+              </button>
+              <button className="hover:underline" onClick={handleEditNoteState}>
+                Cancel
+              </button>
+            </span>
           </span>
           <ReactQuill
+            modules={{ toolbar: [] }}
             theme="snow"
             value={editorState.value}
             onChange={(value, delta, source, editor) => {
