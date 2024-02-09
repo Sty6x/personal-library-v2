@@ -11,7 +11,7 @@ export type t_page = {
   pageNum: number;
   id: string;
   bookID: string;
-  noteIDs: Array<string>;
+  noteIDs: Array<string> | [];
   dateAdded: string;
   lastUpdated: string;
 };

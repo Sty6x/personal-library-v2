@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLoaderData, useParams } from "react-router-dom";
-import { t_book } from "../../types/t_library";
+import { t_book, t_page } from "../../types/t_library";
 import { format, formatDistance } from "date-fns";
 import BookHeader from "../../components/BookHeader";
+import getRelatedItems from "../../utils/getRelatedItems";
+import { data } from "../../placeholderData";
+import { uid } from "uid";
 
 interface t_currentBook extends t_book {
   numOfNotes: number;
@@ -17,12 +20,32 @@ const Book = () => {
   });
   const [redirect, setRedirect] = useState(false);
 
+  function handlePageAdd(currentPageID: string | Array<string>) {
+    const getCurrentPage = getRelatedItems<t_page>(currentPageID, data.pages);
+    console.log(getCurrentPage);
+    console.log(getCurrentPage[getCurrentPage.length - 1]);
+    const creationDate = new Date().toString();
+    const newPage: t_page = {
+      bookID: params.bookID as string,
+      id: uid(16),
+      pageNum:
+        params.pageID !== undefined
+          ? getCurrentPage[0].pageNum + 1
+          : getCurrentPage[getCurrentPage.length - 1].pageNum + 1,
+      noteIDs: [],
+      lastUpdated: creationDate,
+      dateAdded: creationDate,
+    };
+    console.log(newPage);
+    // save to local storage
+  }
+
   useEffect(() => {
     if (Object.keys(params)[1] === "pageID") {
-      setRedirect(false);
+      setRedirect(true);
       return;
     }
-    setRedirect(true);
+    setRedirect(false);
   }, [params]);
 
   return (
@@ -30,7 +53,7 @@ const Book = () => {
       id="book-page"
       className={`bg-gridWhite min-h-[100dvh] flex justify-center`}
     >
-      {redirect ? (
+      {!redirect ? (
         <section id="book-page-contents" className="grid place-items-center">
           <div className="max-w-[60em]">
             <div>
@@ -59,12 +82,14 @@ const Book = () => {
               </div>
 
               <span className="flex gap-4 items-center">
-                <Link
+                <button
+                  onClick={(e) => {
+                    handlePageAdd(currentBook.pageIDs);
+                  }}
                   className="add-icon w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center bg-accent-green-200  rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-2 py-1 text-lg"
-                  to={"/#"}
                 >
                   Add a page
-                </Link>
+                </button>
                 <Link to={"/library"} className="underline">
                   Go back to library
                 </Link>
