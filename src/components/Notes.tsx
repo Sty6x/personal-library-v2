@@ -1,7 +1,7 @@
-import { motion, useReducedMotion } from "framer-motion";
-import ReactQuill, { Quill, ReactQuillProps } from "react-quill";
+import { motion } from "framer-motion";
+import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { t_extendedNote } from "../types/t_library";
 import { formatDistance } from "date-fns";
 
@@ -58,7 +58,7 @@ const Note = ({
         <div className="relative">
           <span className="absolute w-full px-4 top-1 flex justify-between ">
             <p className="inline-block font-semibold text-xl">
-              Note #{note.noteIndex}
+              Note #{note.noteNum}
             </p>
             <span className="flex gap-4 ">
               <button
@@ -106,7 +106,7 @@ const Note = ({
           <div className="flex flex-col">
             <span className="flex justify-between ">
               <span id="note-data">
-                <p className="font-semibold text-xl">Note #{note.noteIndex}</p>
+                <p className="font-semibold text-xl">Note #{note.noteNum}</p>
                 <p className=" text-sm">
                   Updated{" "}
                   {formatDistance(new Date(note.lastUpdated), new Date())} ago.

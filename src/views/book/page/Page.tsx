@@ -31,16 +31,16 @@ const Page = () => {
 
   function addNote() {
     const newID = uid(16);
-    const newNote: t_note = {
-      bookID: pageData?.currentPage.bookID as string,
-      pageID: pageData?.currentPage.id as string,
-      noteIndex: 0,
-      contents: `This is a new note. \nHere is my note ID: ${newID}`,
-      dateAdded: new Date().toString(),
-      lastUpdated: new Date().toString(),
-      id: newID,
-    };
     if (pageData) {
+      const newNote: t_note = {
+        bookID: pageData?.currentPage.bookID as string,
+        pageID: pageData?.currentPage.id as string,
+        noteNum: pageData?.notes.length + 1,
+        contents: `This is a new note. \nHere is my note ID: ${newID}`,
+        dateAdded: new Date().toString(),
+        lastUpdated: new Date().toString(),
+        id: newID,
+      };
       setPageData(
         (prev) =>
           ({ ...prev, notes: [newNote, ...pageData.notes] } as t_currentPage)
@@ -50,11 +50,21 @@ const Page = () => {
 
   function saveEdit(contents: string, noteID: string) {
     if (pageData) {
+      const updateDate = new Date().toString();
       const updatedNotes: t_extendedNote[] = pageData?.notes.map((note) => {
         if (note.id !== noteID) return note;
-        return { ...note, contents: contents, isEditing: false };
+        return {
+          ...note,
+          contents: contents,
+          isEditing: false,
+          lastUpdated: updateDate,
+        };
       });
-      setPageData({ ...pageData, notes: updatedNotes });
+      setPageData({
+        ...pageData,
+        currentPage: { ...pageData.currentPage, lastUpdated: updateDate },
+        notes: updatedNotes,
+      });
     }
   }
 
