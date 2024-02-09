@@ -125,7 +125,7 @@ const Note = ({
               />
             </span>
           </div>
-          <p>{contents}</p>
+          <p className="text-lg  font-extralight">{contents}</p>
         </motion.div>
       )}
     </>
