@@ -5,13 +5,7 @@ import {
   t_currentPage,
   t_extendedNote,
 } from "../../../types/t_library";
-import {
-  KeyboardEventHandler,
-  MouseEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import { data } from "../../../placeholderData";
 import getRelatedItems from "../../../utils/getRelatedItems";
 import { AnimatePresence } from "framer-motion";
@@ -20,9 +14,10 @@ import { uid } from "uid";
 import PageHeader from "../../../components/book-item/PageHeader";
 
 const Page = () => {
-  const { bookAuthor, bookTitle } = useOutletContext<{
+  const { bookAuthor, bookTitle, addPage } = useOutletContext<{
     bookTitle: string;
     bookAuthor: string;
+    addPage: (currentPageID: string | Array<string>) => void;
   }>();
   const { pageID, bookID } = useParams<any>();
   const [pageData, setPageData] = useState<t_currentPage | null>(null);

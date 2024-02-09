@@ -100,6 +100,7 @@ const Book = () => {
       ) : (
         <Outlet
           context={{
+            addPage: handlePageAdd,
             bookTitle: currentBook.title,
             bookAuthor: currentBook.author,
           }}

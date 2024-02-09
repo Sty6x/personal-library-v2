@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link, useParams } from "react-router-dom";
+import { Link, useOutletContext, useParams } from "react-router-dom";
 import { t_currentPage } from "../../types/t_library";
 
 const PageHeader = ({
@@ -13,6 +13,9 @@ const PageHeader = ({
 }) => {
   const { bookID } = useParams();
 
+  const { addPage } = useOutletContext<{
+    addPage: (currentPageID: string | Array<string>) => void;
+  }>();
   return (
     <header
       className={`z-20 sticky top-0 border-b-black border-solid bg-white bg-gridWhite py-6`}
@@ -64,14 +67,16 @@ const PageHeader = ({
         </motion.span>
 
         <motion.span whileHover={{ x: 5 }} className=" w-[max-content]">
-          <Link
+          <button
             className={`
             ${isScrolling ? "text-md" : "text-xl"}
             drop-shadow-text-shadow add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center py-1`}
-            to={"/#"}
+            onClick={() => {
+              addPage(pageData.currentPage.id);
+            }}
           >
             Add Page
-          </Link>
+          </button>
         </motion.span>
       </div>
     </header>
