@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import ReactQuill, { Quill } from "react-quill";
+import { motion, useReducedMotion } from "framer-motion";
+import ReactQuill, { Quill, ReactQuillProps } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect, useRef, useState } from "react";
 import { t_extendedNote } from "../types/t_library";
@@ -14,6 +14,7 @@ const Note = ({
   id,
   isEditing,
   handleSave,
+  handleEditNoteState,
   note,
   dragEvents: { onDragStart, onDrop },
 }: {
@@ -22,6 +23,7 @@ const Note = ({
   contents: string;
   id: string;
   dragEvents: t_dragEvents;
+  handleEditNoteState: () => void;
   handleSave: (contents: string, noteID: string) => void;
 }) => {
   const [editorState, setEditorState] = useState<{
@@ -53,20 +55,30 @@ const Note = ({
   return (
     <>
       {isEditing ? (
-        <>
+        <div className="relative">
+          <span className="absolute flex right-[20px] top-4 gap-4 ">
+            <button
+              className="hover:underline font-semibold"
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                handleSave(editorState.text, id);
+              }}
+            >
+              Done
+            </button>
+            <button className="hover:underline" onClick={handleEditNoteState}>
+              Cancel
+            </button>
+          </span>
           <ReactQuill
             theme="snow"
             value={editorState.value}
             onChange={(value, delta, source, editor) => {
               setEditorState({ value, text: editor.getText() });
             }}
-            onKeyDown={(e: KeyboardEvent) => {
-              if (e.key === "Enter") {
-                handleSave(editorState.text, id);
-              }
-            }}
           />
-        </>
+        </div>
       ) : (
         <motion.div
           id={id}

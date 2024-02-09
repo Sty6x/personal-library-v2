@@ -138,6 +138,7 @@ const Page = () => {
     return (
       <Note
         handleSave={saveEdit}
+        handleEditNoteState={disableEditNote}
         dragEvents={{ onDragStart, onDrop }}
         key={note.id}
         id={note.id}
@@ -166,11 +167,13 @@ const Page = () => {
     }));
   }
 
-  function disableEditNote(notes: Array<t_extendedNote>): void {
-    const checkIfEditing = notes.some((note) => note.isEditing === true);
+  function disableEditNote(): void {
+    const checkIfEditing = pageData?.notes.some(
+      (note) => note.isEditing === true
+    );
     console.log(checkIfEditing);
     if (!checkIfEditing) return;
-    const setEditingNote = notes.map((note) => ({
+    const setEditingNote = pageData?.notes.map((note) => ({
       ...note,
       isEditing: false,
     }));
@@ -187,9 +190,7 @@ const Page = () => {
       ref={pageRef}
       tabIndex={0}
       onKeyDown={(e: any) => {
-        if (e.key === "Escape") {
-          disableEditNote(pageData ? pageData?.notes : []);
-        }
+        if (e.key === "Escape") disableEditNote();
       }}
       onClick={(e: any) => {
         const target = e.target;

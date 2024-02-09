@@ -122,19 +122,10 @@ const notes: Array<t_note> = [
     id: "note-32",
     noteIndex: 5,
     bookID: "B",
-    pageID: "page-3",
+    pageID: "page-10",
     lastUpdated: "2024-02-02",
     dateAdded: "2024-01-22",
     contents: `“Women should be respected as well! Generally speaking, men are held in great esteem in all parts of the world, so why shouldn't women have their share? Soldiers and war heroes are honored and commemorated, explorers are granted immortal fame, martyrs are revered, but how many people look upon women too as soldiers?...Women, who struggle and suffer pain to ensure the continuation of the human race, make much tougher and more courageous soldiers than all those big-mouthed freedom-fighting heroes put together!”― Anne Frank, The Diary of a Young Girl"`,
-  },
-  {
-    id: "note-5",
-    noteIndex: 10,
-    bookID: "B",
-    pageID: "page-3",
-    lastUpdated: "2024-02-02",
-    dateAdded: "2024-01-23",
-    contents: "Another note about page 1 of Book B.",
   },
 
   {
