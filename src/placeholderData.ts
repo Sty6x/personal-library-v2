@@ -11,8 +11,8 @@ const books: Array<t_book> = [
   },
   {
     id: "B",
-    title: "All Quiet on the Western Front",
-    author: "Jane Smith",
+    title: "The Diary of a Young Girl",
+    author: "Anne Frank",
     lastUpdated: "2024-02-02",
     dateAdded: "2024-01-15",
     pageIDs: ["page-3", "page-4"],
@@ -20,8 +20,8 @@ const books: Array<t_book> = [
 
   {
     id: "C",
-    title: "Person",
-    author: "Arhuan loranbi",
+    title: "1984",
+    author: "George Orwell",
     lastUpdated: "2024-02-02",
     dateAdded: "2024-01-15",
     pageIDs: ["page-6", "page-5"],
@@ -181,3 +181,7 @@ const notes: Array<t_note> = [
 ];
 
 export const data: t_library = { books, pages, notes };
+
+// localStorage.setItem("books", JSON.stringify(books));
+// localStorage.setItem("pages", JSON.stringify(pages));
+// localStorage.setItem("notes", JSON.stringify(notes));

@@ -1,46 +1,49 @@
-function removeGlobalState() {
-  const convertLocalStorage = Object.entries(localStorage);
-  const filteredItems = convertLocalStorage.filter((item, i) => {
-    if (item[0] === "globalState") return;
-    return item;
-  });
-  return filteredItems;
-}
+import { t_library } from "../types/t_library";
 
-function parseLocalStorage(arr, keyValue) {
-  const parseItems = arr.map((item) => {
-    let parsedItem = { ...JSON.parse(item[keyValue]) };
-    return { ...parsedItem, lastUpdated: new Date(parsedItem.lastUpdated) };
-  });
-  return parseItems;
-}
+class LocalStorage {
+  private static instance: LocalStorage | null = null;
+  hello: string;
+  private constructor(hello: string) {
+    this.hello = hello;
+  }
 
-export function getLocalStorage() {
-  const library = parseLocalStorage(removeGlobalState(), 1);
-  return { localLibrary: library };
-}
+  static getInstance() {
+    if (LocalStorage.instance === null) {
+      LocalStorage.instance = new LocalStorage("Hello");
+    }
+    return LocalStorage.instance;
+  }
 
-export async function addItem(item) {
-  localStorage.setItem(item.id, JSON.stringify(item));
-}
+  private parseLocalStorage(arr: any) {
+    const [notes, pages, books] = arr.map((item: any) => {
+      return [...JSON.parse(item[1])];
+    });
+    return { notes, pages, books };
+  }
 
-export async function removeItem(item) {
-  localStorage.removeItem(item.id);
-}
+  getLocalStorage(): t_library {
+    const convertLocalStorage = Object.entries(localStorage);
+    const library = this.parseLocalStorage(convertLocalStorage);
+    return library;
+  }
 
-export async function updateItem(item) {
-  localStorage.setItem(item.id, JSON.stringify(item));
-}
+  removeItem(item: any) {
+    localStorage.removeItem(item.id);
+  }
+  addItem(item: any) {
+    localStorage.setItem(item.id, JSON.stringify(item));
+  }
 
-export function getGlobalState() {
-  const global = localStorage.getItem("globalState");
-  const parseState = JSON.parse(global);
-  return { ...parseState };
-}
+  updateItem(item: any) {
+    localStorage.setItem(item.id, JSON.stringify(item));
+  }
 
-export function localStorageItemExist(itemId) {
-  const convertLocalStorage = Object.entries(localStorage);
-  const getKeys = convertLocalStorage.map((item) => item[0]);
-  const checkKey = getKeys.find((item) => item === itemId);
-  return checkKey !== undefined ? true : false;
+  localStorageItemExist(itemId: string) {
+    const convertLocalStorage = Object.entries(localStorage);
+    const getKeys = convertLocalStorage.map((item) => item[0]);
+    const checkKey = getKeys.find((item) => item === itemId);
+    return checkKey !== undefined ? true : false;
+  }
 }
+const LibraryStorage = LocalStorage.getInstance();
+export default LibraryStorage;
