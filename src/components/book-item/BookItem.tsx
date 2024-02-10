@@ -25,7 +25,7 @@ const BookItem = ({
       className={`book-item flex justify-center items-center `}
     >
       <AnimatePresence custom="popLayout">
-        {isHovered ? (
+        {!isHovered ? (
           <motion.div
             initial={{ opacity: 0, scale: 0, display: "none" }}
             animate={{

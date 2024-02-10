@@ -6,6 +6,7 @@ import BookHeader from "../../components/BookHeader";
 import getRelatedItems from "../../utils/getRelatedItems";
 import { data } from "../../placeholderData";
 import { uid } from "uid";
+import LibraryStorage from "../../utils/localStorage";
 
 interface t_currentBook extends t_book {
   numOfNotes: number;
@@ -14,7 +15,6 @@ interface t_currentBook extends t_book {
 const Book = () => {
   const bookData = useLoaderData();
   const params = useParams();
-  console.log(params);
   const [currentBook, setCurrentbook] = useState<t_currentBook>({
     ...(bookData as t_currentBook),
   });
@@ -36,8 +36,7 @@ const Book = () => {
       lastUpdated: creationDate,
       dateAdded: creationDate,
     };
-    console.log(newPage);
-    // save to local storage
+    LibraryStorage.addPage(currentBook.id, newPage);
   }
 
   useEffect(() => {

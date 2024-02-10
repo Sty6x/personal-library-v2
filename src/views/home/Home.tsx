@@ -6,7 +6,7 @@ import { closestIndexTo } from "date-fns";
 import getRelatedItems from "../../utils/getRelatedItems.ts";
 import { motion } from "framer-motion";
 import { formatDistance } from "date-fns";
-import LibraryStorage, { getLocalStorage } from "../../utils/localStorage.ts";
+import LibraryStorage from "../../utils/localStorage.ts";
 
 type t_recentBooks = {
   id: string;
@@ -99,8 +99,7 @@ function Home() {
   );
 
   useEffect(() => {
-    console.log(LibraryStorage.getLocalStorage());
-    getRecentBooks(data);
+    getRecentBooks(LibraryStorage.getLocalStorage());
   }, []);
 
   useEffect(() => {
