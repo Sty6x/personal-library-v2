@@ -25,7 +25,7 @@ const BookItem = ({
       className={`book-item flex justify-center items-center `}
     >
       <AnimatePresence custom="popLayout">
-        {!isHovered ? (
+        {isHovered ? (
           <motion.div
             initial={{ opacity: 0, scale: 0, display: "none" }}
             animate={{
@@ -49,13 +49,13 @@ const BookItem = ({
             href={link}
             className="
             hover:cursor-pointer
-             hover:shadow-book-item-active
+            hover:shadow-book-item-active
             hover:transition-shadow
             transition-shadow
             hover:duration-200
             duration-200
             shadow-book-item
-            grid place-content-center gap-4 px-10 min-[1921px]:px-20 py-12  min-w-[80%] min-h-[80%] max-h-[80%] max-w-[80%] w-[38em] h-[28em] bg-white rounded-md"
+             gap-4 px-10 min-[1921px]:px-20 py-12  min-w-[80%] min-h-[80%] max-h-[80%] max-w-[80%] w-[38em] h-[28em] bg-white rounded-md"
             key="contents"
             initial={{ opacity: 0, scale: 0, display: "none" }}
             animate={{
