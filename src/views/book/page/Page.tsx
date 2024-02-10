@@ -12,6 +12,7 @@ import { AnimatePresence } from "framer-motion";
 import Note from "../../../components/Notes";
 import { uid } from "uid";
 import PageHeader from "../../../components/book-item/PageHeader";
+import LibraryStorage from "../../../utils/localStorage";
 
 const Page = () => {
   const { bookAuthor, bookTitle, addPage } = useOutletContext<{
@@ -40,6 +41,7 @@ const Page = () => {
         (prev) =>
           ({ ...prev, notes: [newNote, ...pageData.notes] } as t_currentPage)
       );
+      LibraryStorage.addNote(newNote);
     }
   }
 
@@ -104,7 +106,7 @@ const Page = () => {
     const [currentPage] = storage.filter((page) => page.id === pageID);
     const getPageNotes = getRelatedItems<t_note>(
       currentPage.noteIDs,
-      data.notes,
+      LibraryStorage.getLocalStorage().notes,
       (notes) => {
         return notes.map((note) => ({ ...note, isEditing: false }));
       }
@@ -129,7 +131,7 @@ const Page = () => {
   }
 
   useEffect(() => {
-    getPageData(data.pages);
+    getPageData(LibraryStorage.getLocalStorage().pages);
   }, []);
 
   useEffect(() => {

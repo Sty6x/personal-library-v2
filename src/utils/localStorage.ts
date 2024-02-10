@@ -34,36 +34,56 @@ class LocalStorage {
     return library;
   }
 
-  removeItem(item: any) {
+  remove(item: any) {
     localStorage.removeItem(item);
   }
+
+  save<Type>(key: string, newItem: t_book | t_note | t_page) {
+    const existingItems = this.parseItems<Type>(key);
+    localStorage.setItem(key, JSON.stringify([newItem, ...existingItems]));
+  }
+
   addPage(bookID: string, newPage: t_page) {
-    const parsedBooksArray = this.parseItems<t_book>("books" as string);
-    const parsedPagesArray = this.parseItems<t_page>("pages" as string);
-    const currentBook = parsedBooksArray.find((book) => book.id === bookID);
+    const { books, pages } = this.getLocalStorage();
+    const currentBook = books.find((book) => book.id === bookID);
     if (currentBook !== undefined) {
-      const filteredBooks = parsedBooksArray.filter(
-        (book) => book.id !== currentBook.id
-      );
-      currentBook.pageIDs.push(newPage.id);
-      parsedPagesArray.push(newPage);
+      const filteredBooks = books.filter((book) => {
+        if (book.id !== currentBook.id)
+          return { ...book, pageIDs: [...book.pageIDs, newPage.id] };
+      });
+      pages.push(newPage);
       localStorage.setItem(
         "books",
         JSON.stringify([currentBook, ...filteredBooks])
       );
-
-      localStorage.setItem("pages", JSON.stringify(parsedPagesArray));
+      localStorage.setItem("pages", JSON.stringify(pages));
     }
   }
 
-  addNote(bookID: string, newPage: t_page) {
-    const parsedBooksArray = this.parseItems<t_book>("books" as string);
-    const parsedPagesArray = this.parseItems<t_page>("pages" as string);
-    const currentBook = parsedBooksArray.find((book) => book.id === bookID);
+  addNote(newNote: t_note) {
+    const { notes, pages, books } = this.getLocalStorage();
+    const currentBook = books.find((book) => book.id === newNote.bookID);
+    const updatePage = pages.map((page) => {
+      if (page.id === newNote.pageID)
+        return {
+          ...page,
+          lastUpdated: newNote.lastUpdated,
+          noteIDs: [...page.noteIDs, newNote.id],
+        };
+      return page;
+    });
     if (currentBook !== undefined) {
-      const filterBooks = parsedBooksArray.filter((book) => book.id !== bookID);
-      currentBook.pageIDs.push(newPage.id);
-      parsedPagesArray.push(newPage);
+      const filteredBooks = books.filter((book) => book.id !== newNote.bookID);
+      notes.push(newNote);
+      localStorage.setItem("notes", JSON.stringify(notes));
+      localStorage.setItem("pages", JSON.stringify(updatePage));
+      localStorage.setItem(
+        "books",
+        JSON.stringify([
+          { ...currentBook, lastUpdated: newNote.lastUpdated },
+          ...filteredBooks,
+        ])
+      );
     }
   }
 

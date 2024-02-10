@@ -28,7 +28,6 @@ function Home() {
     const numberOfBooks = 3;
 
     const filteredBooks = library.books.filter((_book, i) => i < numberOfBooks);
-
     // grabs the filtered books' recently updated
     // PAGE (SINGULAR)
     const getRecentPages = filteredBooks.map((book, i) => {
