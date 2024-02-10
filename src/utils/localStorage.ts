@@ -1,7 +1,7 @@
 import { t_library, t_note, t_page, t_book } from "../types/t_library";
 
-class LocalStorage {
-  private static instance: LocalStorage | null = null;
+class Library {
+  private static instance: Library | null = null;
   hello: string;
   books: Array<t_book> | [];
   pages: Array<t_page> | [];
@@ -14,39 +14,30 @@ class LocalStorage {
     this.populateLibrary();
   }
   private populateLibrary() {
-    const { notes, books, pages } = this.getLocalStorage();
+    const { notes, books, pages } = this.getLibrary();
     this.books = books;
     this.notes = notes;
     this.pages = pages;
   }
 
   static getInstance() {
-    if (LocalStorage.instance === null) {
-      LocalStorage.instance = new LocalStorage("Hello");
+    if (Library.instance === null) {
+      Library.instance = new Library("Hello");
     }
-    return LocalStorage.instance;
+    return Library.instance;
   }
 
-  private parseLocalStorage(arr: any) {
+  private parseLibrary(arr: any) {
     const [notes, pages, books] = arr.map((item: any) => {
       return [...JSON.parse(item[1])];
     });
     return { notes, pages, books };
   }
 
-  private parseItems<Type>(key: string): Array<Type> {
-    const items = localStorage.getItem(key);
-    return JSON.parse(items as string);
-  }
-
-  private getLocalStorage(): t_library {
-    const convertLocalStorage = Object.entries(localStorage);
-    const library = this.parseLocalStorage(convertLocalStorage);
+  private getLibrary(): t_library {
+    const convertLibrary = Object.entries(Library);
+    const library = this.parseLibrary(convertLibrary);
     return library;
-  }
-
-  private remove(item: any) {
-    localStorage.removeItem(item);
   }
 
   private save(
@@ -103,13 +94,6 @@ class LocalStorage {
       this.update("books", currentBook);
     }
   }
-
-  localStorageItemExist(itemId: string) {
-    const convertLocalStorage = Object.entries(localStorage);
-    const getKeys = convertLocalStorage.map((item) => item[0]);
-    const checkKey = getKeys.find((item) => item === itemId);
-    return checkKey !== null ? true : false;
-  }
 }
-const LibraryStorage = LocalStorage.getInstance();
+const LibraryStorage = Library.getInstance();
 export default LibraryStorage;
