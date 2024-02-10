@@ -38,7 +38,7 @@ export interface t_currentBook extends t_book {
 }
 
 export type t_noteEditing = {
-  isEditing: boolean;
+  isEditing?: boolean;
 };
 
 export type t_extendedNote = t_note & t_noteEditing;

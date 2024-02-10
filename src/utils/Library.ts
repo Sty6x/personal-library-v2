@@ -35,7 +35,7 @@ class Library {
   }
 
   private getLibrary(): t_library {
-    const convertLibrary = Object.entries(Library);
+    const convertLibrary = Object.entries(localStorage);
     const library = this.parseLibrary(convertLibrary);
     return library;
   }
@@ -91,6 +91,21 @@ class Library {
       });
 
       this.save("notes", newNote);
+      this.update("books", currentBook);
+    }
+  }
+
+  updateNote(updatedNote: t_note) {
+    const currentPage = this.pages.find(
+      (page) => page.id === updatedNote.pageID
+    );
+    const currentBook = this.books.find(
+      (book) => book.id === updatedNote.bookID
+    );
+
+    if (currentPage !== undefined && currentBook !== undefined) {
+      this.update("pages", currentPage);
+      this.update("notes", updatedNote);
       this.update("books", currentBook);
     }
   }

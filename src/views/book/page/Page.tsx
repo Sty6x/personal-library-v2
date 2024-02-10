@@ -11,7 +11,7 @@ import { AnimatePresence } from "framer-motion";
 import Note from "../../../components/Notes";
 import { uid } from "uid";
 import PageHeader from "../../../components/book-item/PageHeader";
-import LibraryStorage from "../../../utils/localStorage";
+import LibraryStorage from "../../../utils/Library";
 
 const Page = () => {
   const { bookAuthor, bookTitle, addPage } = useOutletContext<{
@@ -47,20 +47,29 @@ const Page = () => {
   function saveEdit(contents: string, noteID: string) {
     if (pageData) {
       const updateDate = new Date().toString();
+      const currentNote = pageData.notes.find(
+        (note) => note.id === noteID
+      ) as t_extendedNote;
+
+      const currentUpdatedNote = {
+        ...currentNote,
+        contents,
+        lastUpdated: updateDate,
+      };
+
       const updatedNotes: t_extendedNote[] = pageData?.notes.map((note) => {
         if (note.id !== noteID) return note;
-        return {
-          ...note,
-          contents: contents,
-          isEditing: false,
-          lastUpdated: updateDate,
-        };
+        return currentUpdatedNote;
       });
+
       setPageData({
         ...pageData,
         currentPage: { ...pageData.currentPage, lastUpdated: updateDate },
         notes: updatedNotes,
       });
+
+      delete currentUpdatedNote["isEditing"];
+      LibraryStorage.updateNote(currentUpdatedNote);
     }
   }
 

@@ -6,7 +6,7 @@ import { closestIndexTo } from "date-fns";
 import getRelatedItems from "../../utils/getRelatedItems.ts";
 import { motion } from "framer-motion";
 import { formatDistance } from "date-fns";
-import LibraryStorage from "../../utils/localStorage.ts";
+import LibraryStorage from "../../utils/Library.ts";
 
 type t_recentBooks = {
   id: string;

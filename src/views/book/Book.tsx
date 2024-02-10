@@ -6,7 +6,7 @@ import BookHeader from "../../components/BookHeader";
 import getRelatedItems from "../../utils/getRelatedItems";
 import { data } from "../../placeholderData";
 import { uid } from "uid";
-import LibraryStorage from "../../utils/localStorage";
+import LibraryStorage from "../../utils/Library";
 
 interface t_currentBook extends t_book {
   numOfNotes: number;
