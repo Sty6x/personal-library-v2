@@ -54,7 +54,7 @@ class LocalStorage {
     newItem: t_book | t_note | t_page
   ) {
     const prependNewItem = [newItem, ...this[key]];
-    this[key] = prependNewItem !== null ? prependNewItem : ([] as any);
+    this[key] = prependNewItem !== null ? prependNewItem : (this[key] as any);
     localStorage.setItem(key, JSON.stringify(prependNewItem));
   }
 
@@ -73,7 +73,7 @@ class LocalStorage {
         }
         return item;
       });
-      this[key] = updateItems !== null ? updateItems : ([] as any);
+      this[key] = updateItems !== null ? updateItems : (this[key] as any);
       localStorage.setItem(key, JSON.stringify(updateItems));
     }
   }
