@@ -6,7 +6,6 @@ import {
   t_extendedNote,
 } from "../../../types/t_library";
 import { useEffect, useRef, useState } from "react";
-import { data } from "../../../placeholderData";
 import getRelatedItems from "../../../utils/getRelatedItems";
 import { AnimatePresence } from "framer-motion";
 import Note from "../../../components/Notes";
@@ -106,7 +105,7 @@ const Page = () => {
     const [currentPage] = storage.filter((page) => page.id === pageID);
     const getPageNotes = getRelatedItems<t_note>(
       currentPage.noteIDs,
-      LibraryStorage.getLocalStorage().notes,
+      LibraryStorage.notes,
       (notes) => {
         return notes.map((note) => ({ ...note, isEditing: false }));
       }
@@ -131,7 +130,7 @@ const Page = () => {
   }
 
   useEffect(() => {
-    getPageData(LibraryStorage.getLocalStorage().pages);
+    getPageData(LibraryStorage.pages);
   }, []);
 
   useEffect(() => {

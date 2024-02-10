@@ -23,6 +23,7 @@ function Home() {
   const [recentBooks, setRecentBooks] = useState<Array<t_recentBooks> | []>([]);
 
   function getRecentBooks(library: t_library) {
+    console.log(library);
     const colors = ["#CD8D7A", "#C3E2C2", "#EAECCC"];
     let recentPages: Array<t_page> = [];
     const numberOfBooks = 3;
@@ -98,7 +99,7 @@ function Home() {
   );
 
   useEffect(() => {
-    getRecentBooks(LibraryStorage.getLocalStorage());
+    getRecentBooks(LibraryStorage);
   }, []);
 
   useEffect(() => {

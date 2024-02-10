@@ -1,12 +1,23 @@
-import { json } from "react-router-dom";
 import { t_library, t_note, t_page, t_book } from "../types/t_library";
-import bookLoader from "./loader/bookLoader";
 
 class LocalStorage {
   private static instance: LocalStorage | null = null;
   hello: string;
+  books: Array<t_book> | [];
+  pages: Array<t_page> | [];
+  notes: Array<t_note> | [];
   private constructor(hello: string) {
     this.hello = hello;
+    this.books = [];
+    this.pages = [];
+    this.notes = [];
+    this.populateLibrary();
+  }
+  private populateLibrary() {
+    const { notes, books, pages } = this.getLocalStorage();
+    this.books = books;
+    this.notes = notes;
+    this.pages = pages;
   }
 
   static getInstance() {
@@ -28,74 +39,76 @@ class LocalStorage {
     return JSON.parse(items as string);
   }
 
-  getLocalStorage(): t_library {
+  private getLocalStorage(): t_library {
     const convertLocalStorage = Object.entries(localStorage);
     const library = this.parseLocalStorage(convertLocalStorage);
     return library;
   }
 
-  remove(item: any) {
+  private remove(item: any) {
     localStorage.removeItem(item);
   }
 
-  save<Type>(key: string, newItem: t_book | t_note | t_page) {
-    const existingItems = this.parseItems<Type>(key);
-    localStorage.setItem(key, JSON.stringify([newItem, ...existingItems]));
+  private save(
+    key: "books" | "notes" | "pages",
+    newItem: t_book | t_note | t_page
+  ) {
+    const prependNewItem = [newItem, ...this[key]];
+    this[key] = prependNewItem !== null ? prependNewItem : ([] as any);
+    localStorage.setItem(key, JSON.stringify(prependNewItem));
+  }
+
+  private update(
+    key: "books" | "notes" | "pages",
+    updatedItem: t_book | t_note | t_page
+  ) {
+    if (updatedItem !== null) {
+      const updateItems = this[key].map((item) => {
+        if (item.id === updatedItem?.id) {
+          return {
+            ...item,
+            ...updatedItem,
+            lastUpdated: new Date().toString(),
+          };
+        }
+        return item;
+      });
+      this[key] = updateItems !== null ? updateItems : ([] as any);
+      localStorage.setItem(key, JSON.stringify(updateItems));
+    }
   }
 
   addPage(bookID: string, newPage: t_page) {
-    const { books, pages } = this.getLocalStorage();
-    const currentBook = books.find((book) => book.id === bookID);
+    const currentBook = this.books.find((book) => book.id === bookID);
     if (currentBook !== undefined) {
-      const filteredBooks = books.filter((book) => {
-        if (book.id !== currentBook.id)
-          return { ...book, pageIDs: [...book.pageIDs, newPage.id] };
+      this.save("pages", newPage);
+      this.update("books", {
+        ...currentBook,
+        pageIDs: [...currentBook.pageIDs, newPage.id],
       });
-      pages.push(newPage);
-      localStorage.setItem(
-        "books",
-        JSON.stringify([currentBook, ...filteredBooks])
-      );
-      localStorage.setItem("pages", JSON.stringify(pages));
     }
   }
 
   addNote(newNote: t_note) {
-    const { notes, pages, books } = this.getLocalStorage();
-    const currentBook = books.find((book) => book.id === newNote.bookID);
-    const updatePage = pages.map((page) => {
-      if (page.id === newNote.pageID)
-        return {
-          ...page,
-          lastUpdated: newNote.lastUpdated,
-          noteIDs: [...page.noteIDs, newNote.id],
-        };
-      return page;
-    });
-    if (currentBook !== undefined) {
-      const filteredBooks = books.filter((book) => book.id !== newNote.bookID);
-      notes.push(newNote);
-      localStorage.setItem("notes", JSON.stringify(notes));
-      localStorage.setItem("pages", JSON.stringify(updatePage));
-      localStorage.setItem(
-        "books",
-        JSON.stringify([
-          { ...currentBook, lastUpdated: newNote.lastUpdated },
-          ...filteredBooks,
-        ])
-      );
-    }
-  }
+    const currentPage = this.pages.find((page) => page.id === newNote.pageID);
+    const currentBook = this.books.find((book) => book.id === newNote.bookID);
 
-  updateItem(item: any) {
-    localStorage.setItem(item, JSON.stringify(item));
+    if (currentPage !== undefined && currentBook !== undefined) {
+      this.update("pages", {
+        ...currentPage,
+        noteIDs: [...currentPage.noteIDs, newNote.id],
+      });
+
+      this.save("notes", newNote);
+      this.update("books", currentBook);
+    }
   }
 
   localStorageItemExist(itemId: string) {
     const convertLocalStorage = Object.entries(localStorage);
     const getKeys = convertLocalStorage.map((item) => item[0]);
     const checkKey = getKeys.find((item) => item === itemId);
-    return checkKey !== undefined ? true : false;
+    return checkKey !== null ? true : false;
   }
 }
 const LibraryStorage = LocalStorage.getInstance();
