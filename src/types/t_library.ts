@@ -19,6 +19,7 @@ export type t_page = {
 export interface t_note {
   bookID: string;
   noteNum: number;
+  index: number;
   pageID: string;
   id: string;
   contents: string;

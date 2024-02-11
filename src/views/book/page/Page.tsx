@@ -28,6 +28,7 @@ const Page = () => {
     const newID = uid(16);
     if (pageData) {
       const newNote: t_note = {
+        index: 0,
         bookID: pageData?.currentPage.bookID as string,
         pageID: pageData?.currentPage.id as string,
         noteNum: pageData?.notes.length + 1,
@@ -93,12 +94,17 @@ const Page = () => {
       const [currentTarget, dropTarget]: Array<t_note> = pageData?.notes.filter(
         (note) => note.id === transferedData || note.id === target.id
       );
-      console.log({ draggedTarget: currentTarget, target: dropTarget });
+
+      // when saving im rearranging the position of the objects in the notes array
+      // instead of changing their indexes
       const updateNotePosition: Array<t_note> = pageData?.notes.map((note) => {
         if (dropTarget.id === note.id) {
+          // matches the drop target Id and updates the drop target's data with the current target
+          LibraryStorage.updateNote({ ...currentTarget, id: dropTarget.id });
           return { ...currentTarget };
         }
         if (currentTarget.id === note.id) {
+          LibraryStorage.updateNote({ ...dropTarget, id: currentTarget.id });
           return { ...dropTarget };
         }
         return note;
@@ -149,7 +155,7 @@ const Page = () => {
     });
   }, []);
 
-  const renderNotes = pageData?.notes.map((note) => {
+  const renderNotes = pageData?.notes.map((note, i) => {
     return (
       <Note
         handleSave={saveEdit}

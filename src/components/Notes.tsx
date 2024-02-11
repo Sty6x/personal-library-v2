@@ -18,7 +18,7 @@ const Note = ({
   note,
   dragEvents: { onDragStart, onDrop },
 }: {
-  isEditing: boolean;
+  isEditing?: boolean;
   note: t_extendedNote;
   contents: string;
   id: string;
