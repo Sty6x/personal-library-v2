@@ -116,7 +116,7 @@ const Note = ({
                 <motion.button
                   initial={{ scale: 0, opacity: 0 }}
                   animate={isHovered ? { scale: 1.4, opacity: 1 } : {}}
-                  whileTap={{ scale: 1 }}
+                  whileHover={{ scale: 1 }}
                   className="edit-icon edit-btn self-start
             drop-shadow-text-shadow 
             add-icon before:mr-[.3em]
@@ -132,7 +132,7 @@ const Note = ({
                       ? { scale: 1.4, opacity: 1, transition: { delay: 0.1 } }
                       : {}
                   }
-                  whileTap={{ scale: 1 }}
+                  whileHover={{ scale: 1 }}
                   className="trash-icon trash-btn self-start
             drop-shadow-text-shadow 
             add-icon before:mr-[.3em]

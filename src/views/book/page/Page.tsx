@@ -45,6 +45,17 @@ const Page = () => {
     }
   }
 
+  function removeNote(noteID: string) {
+    if (pageData) {
+      const currentNote = pageData.notes.find((note) => note.id === noteID);
+      const filterNotes = pageData.notes.filter((note) => note.id !== noteID);
+      setPageData(
+        (prev) => ({ ...prev, notes: [...filterNotes] } as t_currentPage)
+      );
+      LibraryStorage.removeNote(currentNote as t_note);
+    }
+  }
+
   function saveEdit(contents: string, noteID: string) {
     if (pageData) {
       const updateDate = new Date().toString();
@@ -213,6 +224,7 @@ const Page = () => {
       onKeyDown={(e: any) => {
         if (e.key === "Escape") disableEditNote();
       }}
+      // event delegation for note edit and removal
       onClick={(e: any) => {
         const target = e.target;
         const targetID = target.id.slice(7);
@@ -220,6 +232,10 @@ const Page = () => {
           if (!isCurrentlyEditing(targetID)) {
             triggerEditNote(targetID);
           }
+        }
+
+        if (target.classList.contains("trash-btn")) {
+          removeNote(targetID);
         }
       }}
     >

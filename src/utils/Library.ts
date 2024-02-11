@@ -40,6 +40,15 @@ class Library {
     return library;
   }
 
+  private delete(
+    key: "books" | "notes" | "pages",
+    newItem: t_book | t_note | t_page
+  ) {
+    const filteredItems = this[key].filter((item) => item.id !== newItem.id);
+    this[key] = filteredItems !== null ? filteredItems : (this[key] as any);
+    localStorage.setItem(key, JSON.stringify(filteredItems));
+  }
+
   private save(
     key: "books" | "notes" | "pages",
     newItem: t_book | t_note | t_page
@@ -69,8 +78,8 @@ class Library {
     }
   }
 
-  addPage(bookID: string, newPage: t_page) {
-    const currentBook = this.books.find((book) => book.id === bookID);
+  addPage(newPage: t_page) {
+    const currentBook = this.books.find((book) => book.id === newPage.bookID);
     if (currentBook !== undefined) {
       this.save("pages", newPage);
       this.update("books", {
@@ -93,6 +102,23 @@ class Library {
       this.save("notes", newNote);
       this.update("books", currentBook);
     }
+  }
+  removeNote(note: t_note) {
+    const currentPage = this.pages.find(
+      (page) => page.id === note.pageID
+    ) as t_page;
+
+    const currentBook = this.books.find(
+      (book) => book.id === note.bookID
+    ) as t_book;
+
+    this.delete("notes", note);
+    this.update("pages", {
+      ...currentPage,
+      noteIDs: currentPage.noteIDs.filter((noteID) => noteID !== note.id),
+    });
+
+    this.update("books", currentBook);
   }
 
   updateNote(updatedNote: t_note) {

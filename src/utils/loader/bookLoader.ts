@@ -4,7 +4,9 @@ import getRelatedItems from "../getRelatedItems";
 import LibraryStorage from "../Library";
 
 export default async function bookLoader({ params }: any) {
-  const [currentBook] = data.books.filter((book) => book.id === params.bookID);
+  const [currentBook] = LibraryStorage.books.filter(
+    (book) => book.id === params.bookID
+  );
   const getPages = getRelatedItems<t_page>(
     currentBook.pageIDs,
     LibraryStorage.pages

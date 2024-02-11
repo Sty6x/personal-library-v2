@@ -20,13 +20,16 @@ const Book = () => {
   });
   const [redirect, setRedirect] = useState(false);
 
-  function handlePageAdd(currentPageID: string | Array<string>) {
-    const getCurrentPage = getRelatedItems<t_page>(currentPageID, data.pages);
+  function handlePageAdd() {
+    const getCurrentPage = getRelatedItems<t_page>(
+      currentBook.pageIDs,
+      LibraryStorage.pages
+    );
     console.log(getCurrentPage);
     console.log(getCurrentPage[getCurrentPage.length - 1]);
     const creationDate = new Date().toString();
     const newPage: t_page = {
-      bookID: params.bookID as string,
+      bookID: currentBook.id,
       id: uid(16),
       pageNum:
         params.pageID !== undefined
@@ -36,8 +39,14 @@ const Book = () => {
       lastUpdated: creationDate,
       dateAdded: creationDate,
     };
-    LibraryStorage.addPage(currentBook.id, newPage);
+    setCurrentbook(
+      (prev) =>
+        ({ ...prev, pageIDs: [...prev.pageIDs, newPage] } as t_currentBook)
+    );
+    LibraryStorage.addPage(newPage);
   }
+
+  useEffect(() => {}, [LibraryStorage.pages]);
 
   useEffect(() => {
     if (Object.keys(params)[1] === "pageID") {
@@ -83,7 +92,7 @@ const Book = () => {
               <span className="flex gap-4 items-center">
                 <button
                   onClick={(e) => {
-                    handlePageAdd(currentBook.pageIDs);
+                    handlePageAdd();
                   }}
                   className="add-icon w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center bg-accent-green-200  rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-2 py-1 text-lg"
                 >

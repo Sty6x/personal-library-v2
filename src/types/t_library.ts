@@ -47,5 +47,5 @@ export type t_extendedNote = t_note & t_noteEditing;
 export type t_currentPage = {
   currentPage: t_page;
   book: { title: string; author: string };
-  notes: Array<t_extendedNote>;
+  notes: Array<t_extendedNote> | [];
 };
