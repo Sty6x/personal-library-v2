@@ -24,7 +24,8 @@ button {
 .add-icon::before,
 .library-icon::before,
 .read-icon::before,
-.edit-icon::before {
+.edit-icon::before,
+.trash-icon::before {
   content: "";
   display: inline-block;
   background-position: center;
@@ -44,9 +45,11 @@ button {
 .library-icon::before {
   background-image: url("./assets/icons/library.svg");
 }
-
 .edit-icon::before {
   background-image: url("./assets/icons/edit-icon.svg");
+}
+.trash-icon::before {
+  background-image: url("./assets/icons/trash.svg");
 }
 
 .note-contents-preview {

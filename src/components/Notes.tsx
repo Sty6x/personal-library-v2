@@ -112,17 +112,35 @@ const Note = ({
                   {formatDistance(new Date(note.lastUpdated), new Date())} ago.
                 </p>
               </span>
-              <motion.button
-                initial={{ scale: 0, opacity: 0 }}
-                animate={isHovered ? { scale: 1.4, opacity: 1 } : {}}
-                whileTap={{ scale: 1 }}
-                className="edit-icon edit-btn self-start
+              <span className="flex gap-4">
+                <motion.button
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={isHovered ? { scale: 1.4, opacity: 1 } : {}}
+                  whileTap={{ scale: 1 }}
+                  className="edit-icon edit-btn self-start
             drop-shadow-text-shadow 
             add-icon before:mr-[.3em]
             before:h-[20px] box-border
             py-1"
-                id={`button-${id}`}
-              />
+                  id={`button-${id}`}
+                />
+
+                <motion.button
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={
+                    isHovered
+                      ? { scale: 1.4, opacity: 1, transition: { delay: 0.1 } }
+                      : {}
+                  }
+                  whileTap={{ scale: 1 }}
+                  className="trash-icon trash-btn self-start
+            drop-shadow-text-shadow 
+            add-icon before:mr-[.3em]
+            before:h-[20px] box-border
+            py-1"
+                  id={`button-${id}`}
+                />
+              </span>
             </span>
           </div>
           <p className="text-lg  font-extralight">{contents}</p>
