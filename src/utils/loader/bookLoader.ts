@@ -1,4 +1,3 @@
-import { data } from "../../placeholderData";
 import { t_page } from "../../types/t_library";
 import getRelatedItems from "../getRelatedItems";
 import LibraryStorage from "../Library";

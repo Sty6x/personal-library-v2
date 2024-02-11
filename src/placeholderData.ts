@@ -83,6 +83,7 @@ const pages: Array<t_page> = [
 const notes: Array<t_note> = [
   {
     id: "note-1",
+    index: 0,
     noteNum: 1,
     bookID: "A",
     pageID: "page-1",
@@ -92,6 +93,7 @@ const notes: Array<t_note> = [
   },
   {
     id: "note-2",
+    index: 0,
     noteNum: 2,
     bookID: "A",
     pageID: "page-1",
@@ -101,6 +103,7 @@ const notes: Array<t_note> = [
   },
   {
     id: "note-3",
+    index: 0,
     noteNum: 3,
     bookID: "A",
     pageID: "page-2",
@@ -110,6 +113,7 @@ const notes: Array<t_note> = [
   },
   {
     id: "note-4",
+    index: 0,
     noteNum: 5,
     bookID: "B",
     pageID: "page-3",
@@ -120,6 +124,7 @@ const notes: Array<t_note> = [
 
   {
     id: "note-32",
+    index: 0,
     noteNum: 5,
     bookID: "B",
     pageID: "page-10",
@@ -130,6 +135,7 @@ const notes: Array<t_note> = [
 
   {
     id: "note-22",
+    index: 0,
     noteNum: 1,
     bookID: "B",
     pageID: "page-3",
@@ -140,6 +146,7 @@ const notes: Array<t_note> = [
   },
   {
     id: "note-6",
+    index: 0,
     noteNum: 1,
     bookID: "B",
     pageID: "page-4",
@@ -151,6 +158,7 @@ const notes: Array<t_note> = [
 
   {
     id: "note-10",
+    index: 0,
     noteNum: 1,
     bookID: "C",
     pageID: "page-5",
@@ -160,6 +168,7 @@ const notes: Array<t_note> = [
   },
   {
     id: "note-12",
+    index: 0,
     noteNum: 8,
     bookID: "C",
     pageID: "page-5",
@@ -171,6 +180,7 @@ const notes: Array<t_note> = [
 
   {
     id: "note-6",
+    index: 0,
     noteNum: 8,
     bookID: "C",
     pageID: "page-6",

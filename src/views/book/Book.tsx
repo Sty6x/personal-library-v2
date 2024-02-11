@@ -21,12 +21,44 @@ const Book = () => {
   const [redirect, setRedirect] = useState(false);
 
   function handlePageAdd() {
+    const testPages = getRelatedItems<t_page>(
+      currentBook.pageIDs,
+      LibraryStorage.pages,
+      (pages) => {
+        let i: number, j: number;
+        let tmpArr: Array<t_page> = [...pages];
+        for (i = 0; i < pages.length - 1; i++) {
+          let minIndex: number = i;
+          for (j = i + 1; j < pages.length; j++) {
+            if (pages[j].pageNum < pages[i].pageNum) {
+              minIndex = j;
+              continue;
+            }
+          }
+          // if we have a new minimum index
+          if (minIndex !== i) {
+            const mapPages = tmpArr.map((page, pageI) => {
+              if (i === pageI) {
+                return { ...tmpArr[minIndex] };
+              } else if (minIndex === pageI) {
+                return { ...tmpArr[i] };
+              }
+              return page;
+            });
+            tmpArr = [...mapPages];
+          }
+        }
+        return tmpArr;
+      }
+    );
     const getCurrentPage = getRelatedItems<t_page>(
       currentBook.pageIDs,
       LibraryStorage.pages
     );
-    console.log(getCurrentPage);
-    console.log(getCurrentPage[getCurrentPage.length - 1]);
+    // relying on this does not sort the pages based from least to most
+
+    console.log({ test: testPages });
+    console.log({ getCurrentPage });
     const creationDate = new Date().toString();
     const newPage: t_page = {
       bookID: currentBook.id,
@@ -39,9 +71,10 @@ const Book = () => {
       lastUpdated: creationDate,
       dateAdded: creationDate,
     };
+    console.log(newPage);
     setCurrentbook(
       (prev) =>
-        ({ ...prev, pageIDs: [...prev.pageIDs, newPage] } as t_currentBook)
+        ({ ...prev, pageIDs: [...prev.pageIDs, newPage.id] } as t_currentBook)
     );
     LibraryStorage.addPage(newPage);
   }
