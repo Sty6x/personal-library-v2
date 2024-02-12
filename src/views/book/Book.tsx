@@ -98,7 +98,13 @@ const Book = () => {
     const filterCurrentPageID = currentBook.pageIDs.filter(
       (pageID) => pageID !== params.pageID
     );
-    navigate(`/${currentBook.id}/${getPages[currentPageIndex - 1].id}`);
+    navigate(
+      `/${currentBook.id}/${
+        getPages[currentPageIndex - 1] !== undefined
+          ? getPages[currentPageIndex - 1].id
+          : getPages[0].id
+      }`
+    );
     setCurrentbook((prev) => ({ ...prev, pageIDs: [...filterCurrentPageID] }));
     LibraryStorage.removePage(currentPage as t_page);
   }
