@@ -71,19 +71,22 @@ const Book = () => {
       id: uid(16),
       pageNum:
         params.pageID !== undefined
-          ? getCurrentPage[0].pageNum + 1
-          : getCurrentPage[getCurrentPage.length - 1].pageNum + 1,
+          ? getCurrentPage[0] !== undefined
+            ? getCurrentPage[0].pageNum + 1
+            : 1
+          : getCurrentPage[0] !== undefined
+          ? getCurrentPage[getCurrentPage.length - 1].pageNum + 1
+          : 1,
       noteIDs: [],
       lastUpdated: creationDate,
       dateAdded: creationDate,
     };
-    console.log(newPage);
+    navigate(`/${currentBook.id}/${newPage.id}`);
     setCurrentbook(
       (prev) =>
         ({ ...prev, pageIDs: [...prev.pageIDs, newPage.id] } as t_currentBook)
     );
     LibraryStorage.addPage(newPage);
-    navigate(`/${currentBook.id}/${newPage.id}`);
   }
 
   function handlePageDelete() {

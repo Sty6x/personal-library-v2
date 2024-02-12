@@ -14,15 +14,13 @@ import PageHeader from "../../../components/book-item/PageHeader";
 import LibraryStorage from "../../../utils/Library";
 import PageNavigator from "../../../components/PageNavigator";
 import Modal from "../../../components/Modal";
-interface DialogRef {
-  openDialog: () => void;
-  closeDialog: () => void;
-}
+
 const Page = () => {
-  const { bookAuthor, bookTitle, addPage } = useOutletContext<{
+  const { bookAuthor, bookTitle, addPage, removePage } = useOutletContext<{
     bookTitle: string;
     bookAuthor: string;
     addPage: () => void;
+    removePage: () => void;
   }>();
   const { pageID, bookID } = useParams<any>();
   const [pageData, setPageData] = useState<t_currentPage | null>(null);
@@ -243,11 +241,18 @@ const Page = () => {
         }
       }}
     >
-      <Modal
-        message="Opened"
-        isOpen={isModalOpen}
-        modalSetter={setIsModalOpen}
-      />
+      {pageData !== null && (
+        <Modal
+          isOpen={isModalOpen}
+          modalSetter={setIsModalOpen}
+          handleConfirmDelete={removePage}
+          data={{
+            num: pageData.currentPage.pageNum,
+            numberOfNotes: pageData.notes.length,
+            type: "Page",
+          }}
+        />
+      )}
       <PageHeader
         pageData={pageData as t_currentPage}
         handleOnAddNote={addNote}
