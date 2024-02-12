@@ -1,28 +1,31 @@
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { useEffect, useRef } from "react";
 
-interface DialogProps {
+type DialogProps = {
   message: string;
-}
-interface DialogRef {
-  openDialog: () => void;
-  closeDialog: () => void;
-}
-const Modal = forwardRef<DialogRef, DialogProps>(({ message }, ref) => {
+  isOpen: boolean;
+  modalSetter: React.Dispatch<React.SetStateAction<boolean>>;
+};
+const Modal = ({ message, modalSetter, isOpen }: DialogProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  useImperativeHandle(ref, () => ({
-    openDialog: () => {
-      if (dialogRef.current) {
-        dialogRef.current.showModal();
-      }
-    },
-    closeDialog: () => {
-      if (dialogRef.current) {
-        dialogRef.current.close();
-      }
-    },
-  }));
-  return <dialog ref={dialogRef}>{message}</dialog>;
-});
+  useEffect(() => {
+    if (isOpen) {
+      dialogRef.current?.showModal();
+      return;
+    }
+  }, [isOpen]);
+
+  return (
+    <dialog
+      onClose={() => {
+        console.log("closed");
+        modalSetter(false);
+      }}
+      ref={dialogRef}
+    >
+      {message}
+    </dialog>
+  );
+};
 
 export default Modal;

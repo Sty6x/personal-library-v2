@@ -27,8 +27,8 @@ const Page = () => {
   const { pageID, bookID } = useParams<any>();
   const [pageData, setPageData] = useState<t_currentPage | null>(null);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const pageRef = useRef<HTMLDivElement>(null);
-  const dialogRef = useRef<DialogRef>(null);
 
   function addNote() {
     const newID = uid(16);
@@ -229,7 +229,6 @@ const Page = () => {
       onKeyDown={(e: any) => {
         if (e.key === "Escape") disableEditNote();
       }}
-      // event delegation for note edit and removal
       onClick={(e: any) => {
         const target = e.target;
         const targetID = target.id.slice(7);
@@ -244,12 +243,18 @@ const Page = () => {
         }
       }}
     >
-      <Modal message="Opened" ref={dialogRef} />
+      <Modal
+        message="Opened"
+        isOpen={isModalOpen}
+        modalSetter={setIsModalOpen}
+      />
       <PageHeader
         pageData={pageData as t_currentPage}
         handleOnAddNote={addNote}
         handleOnAddPage={addPage}
-        handleRemovePageModal={dialogRef.current?.openDialog}
+        handleRemovePageModal={() => {
+          setIsModalOpen(true);
+        }}
         isScrolling={isScrolling}
       />
       <section className="min-w-[100%] flex-1 overflow-hidden">

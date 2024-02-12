@@ -17,9 +17,6 @@ const PageHeader = ({
 }) => {
   const { bookID } = useParams();
 
-  const { addPage, removePage } = useOutletContext<{
-    addPage: (currentPageID: string | Array<string>) => void;
-  }>();
   return (
     <header
       className={`z-20 sticky top-0 border-b-black border-solid bg-white bg-gridWhite py-6`}
@@ -87,7 +84,7 @@ const PageHeader = ({
           <button
             className={`
             ${isScrolling ? "text-md" : "text-xl"}
-            trash-icon trash-btn self-start box-border text-accent-danger font-bold
+            trash-icon self-start box-border text-accent-danger font-bold
             w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center py-1`}
             onClick={() => {
               handleRemovePageModal();
