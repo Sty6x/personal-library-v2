@@ -6,10 +6,12 @@ const PageHeader = ({
   isScrolling,
   pageData,
   handleOnAddNote,
+  handleOnAddPage,
 }: {
   isScrolling: boolean;
   pageData: t_currentPage;
   handleOnAddNote: () => void;
+  handleOnAddPage: () => void;
 }) => {
   const { bookID } = useParams();
 
@@ -72,7 +74,7 @@ const PageHeader = ({
             ${isScrolling ? "text-md" : "text-xl"}
             drop-shadow-text-shadow add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center py-1`}
             onClick={() => {
-              addPage(pageData.currentPage.id);
+              handleOnAddPage();
             }}
           >
             Add Page

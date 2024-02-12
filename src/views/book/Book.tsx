@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet, useLoaderData, useParams } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLoaderData,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { t_book, t_page } from "../../types/t_library";
 import { formatDistance } from "date-fns";
 import BookHeader from "../../components/BookHeader";
@@ -14,6 +20,7 @@ interface t_currentBook extends t_book {
 const Book = () => {
   const bookData = useLoaderData();
   const params = useParams();
+  const navigate = useNavigate();
   const [currentBook, setCurrentbook] = useState<t_currentBook>({
     ...(bookData as t_currentBook),
   });
@@ -76,9 +83,10 @@ const Book = () => {
         ({ ...prev, pageIDs: [...prev.pageIDs, newPage.id] } as t_currentBook)
     );
     LibraryStorage.addPage(newPage);
+    navigate(`/${currentBook.id}/${newPage.id}`);
   }
 
-  useEffect(() => {}, [LibraryStorage.pages]);
+  function handlePageDelete() {}
 
   useEffect(() => {
     if (Object.keys(params)[1] === "pageID") {

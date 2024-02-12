@@ -27,11 +27,11 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
               className="back-icon flex"
             />
           ) : (
-            <p>lol</p>
+            <span className="w-[20px] h-[auto]" />
           )}
         </>
         <div className="bg-[#ffffff] p-1 rounded" id="page-number">
-          <span>{pages[currentPage].pageNum}/120</span>
+          <span>{currentPageNum}/120</span>
         </div>
         <>
           {pages[currentPage + 1] !== undefined ? (
@@ -41,7 +41,7 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
               className="next-icon flex"
             />
           ) : (
-            <p>lol</p>
+            <span className="w-[20px] h-[auto]" />
           )}
         </>
       </div>

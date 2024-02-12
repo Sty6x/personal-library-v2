@@ -18,7 +18,7 @@ const Page = () => {
   const { bookAuthor, bookTitle, addPage } = useOutletContext<{
     bookTitle: string;
     bookAuthor: string;
-    addPage: (currentPageID: string | Array<string>) => void;
+    addPage: () => void;
   }>();
   const { pageID, bookID } = useParams<any>();
   const [pageData, setPageData] = useState<t_currentPage | null>(null);
@@ -157,7 +157,7 @@ const Page = () => {
 
   useEffect(() => {
     getPageData(LibraryStorage.pages);
-  }, []);
+  }, [pageID]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleHeaderTransition);
@@ -242,6 +242,7 @@ const Page = () => {
       <PageHeader
         pageData={pageData as t_currentPage}
         handleOnAddNote={addNote}
+        handleOnAddPage={addPage}
         isScrolling={isScrolling}
       />
       <section className="min-w-[100%] flex-1 overflow-hidden">
