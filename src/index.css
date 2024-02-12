@@ -25,6 +25,8 @@ button {
 .library-icon::before,
 .read-icon::before,
 .edit-icon::before,
+.back-icon::before,
+.next-icon::before,
 .trash-icon::before {
   content: "";
   display: inline-block;
@@ -52,6 +54,13 @@ button {
   background-image: url("./assets/icons/trash.svg");
 }
 
+.next-icon::before {
+  background-image: url("./assets/icons/right-arrow.svg");
+}
+
+.back-icon::before {
+  background-image: url("./assets/icons/left-arrow.svg");
+}
 .note-contents-preview {
   max-width: 100%;
   overflow: hidden;

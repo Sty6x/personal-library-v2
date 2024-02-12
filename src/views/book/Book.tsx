@@ -7,6 +7,7 @@ import getRelatedItems from "../../utils/getRelatedItems";
 import { data } from "../../placeholderData";
 import { uid } from "uid";
 import LibraryStorage from "../../utils/Library";
+import PageNavigator from "../../components/PageNavigator";
 
 interface t_currentBook extends t_book {
   numOfNotes: number;
@@ -92,7 +93,7 @@ const Book = () => {
   return (
     <main
       id="book-page"
-      className={`bg-gridWhite min-h-[100dvh] flex justify-center`}
+      className={`relative bg-gridWhite min-h-[100dvh] flex justify-center`}
     >
       {!redirect ? (
         <section id="book-page-contents" className="grid place-items-center">
@@ -139,13 +140,16 @@ const Book = () => {
           </div>
         </section>
       ) : (
-        <Outlet
-          context={{
-            addPage: handlePageAdd,
-            bookTitle: currentBook.title,
-            bookAuthor: currentBook.author,
-          }}
-        />
+        <>
+          <PageNavigator />
+          <Outlet
+            context={{
+              addPage: handlePageAdd,
+              bookTitle: currentBook.title,
+              bookAuthor: currentBook.author,
+            }}
+          />
+        </>
       )}
     </main>
   );

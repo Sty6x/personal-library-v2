@@ -101,7 +101,7 @@ const Note = ({
           onHoverEnd={() => {
             setIsHovered(false);
           }}
-          className="relative z-10 outline-[3px] cursor-pointer w-full note text-pretty mb-3 text-xl grid h-[max-content] border-solid border-b-note-separator py-4 border-b-[1px]"
+          className="relative outline-[3px] cursor-pointer w-full note text-pretty mb-3 text-xl grid h-[max-content] border-solid border-b-note-separator py-4 border-b-[1px]"
         >
           <div className="flex flex-col">
             <span className="flex justify-between ">
