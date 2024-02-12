@@ -12,6 +12,7 @@ import Note from "../../../components/Notes";
 import { uid } from "uid";
 import PageHeader from "../../../components/book-item/PageHeader";
 import LibraryStorage from "../../../utils/Library";
+import PageNavigator from "../../../components/PageNavigator";
 
 const Page = () => {
   const { bookAuthor, bookTitle, addPage } = useOutletContext<{
@@ -136,7 +137,6 @@ const Page = () => {
         return notes.map((note) => ({ ...note, isEditing: false }));
       }
     );
-    console.log(getPageNotes);
     const currentPageData: t_currentPage = {
       book: {
         title: bookTitle,
@@ -218,7 +218,7 @@ const Page = () => {
   return (
     <div
       id="page"
-      className="outline-none w-[80%] max-w-[1440px] flex flex-col justify-start mx-16 my-16"
+      className="relative outline-none w-[80%] max-w-[1440px] flex flex-col justify-start mx-16 my-16"
       ref={pageRef}
       tabIndex={0}
       onKeyDown={(e: any) => {
@@ -249,6 +249,7 @@ const Page = () => {
           <AnimatePresence custom={"popLayout"}>{renderNotes}</AnimatePresence>
         </div>
       </section>
+      <PageNavigator currentPageNum={pageData?.currentPage.pageNum as number} />
     </div>
   );
 };
