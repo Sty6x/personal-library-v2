@@ -86,7 +86,22 @@ const Book = () => {
     navigate(`/${currentBook.id}/${newPage.id}`);
   }
 
-  function handlePageDelete() {}
+  function handlePageDelete() {
+    const getPages = getRelatedItems<t_page>(
+      currentBook.pageIDs,
+      LibraryStorage.pages
+    );
+    const currentPage = getPages.find((page) => page.id === params.pageID);
+    const currentPageIndex = getPages.findIndex(
+      (page) => page.id === params.pageID
+    );
+    const filterCurrentPageID = currentBook.pageIDs.filter(
+      (pageID) => pageID !== params.pageID
+    );
+    navigate(`/${currentBook.id}/${getPages[currentPageIndex - 1].id}`);
+    setCurrentbook((prev) => ({ ...prev, pageIDs: [...filterCurrentPageID] }));
+    LibraryStorage.removePage(currentPage as t_page);
+  }
 
   useEffect(() => {
     if (Object.keys(params)[1] === "pageID") {
@@ -147,6 +162,13 @@ const Book = () => {
         </section>
       ) : (
         <>
+          <button
+            onClick={() => {
+              handlePageDelete();
+            }}
+          >
+            Delete Page{" "}
+          </button>
           <Outlet
             context={{
               addPage: handlePageAdd,

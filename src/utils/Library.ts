@@ -42,8 +42,10 @@ class Library {
 
   private delete(
     key: "books" | "notes" | "pages",
-    newItem: t_book | t_note | t_page
+    newItem: t_book | t_note | t_page,
+    cb?: (newItem: t_book | t_note | t_page) => void
   ) {
+    if (cb !== undefined) return cb(newItem);
     const filteredItems = this[key].filter((item) => item.id !== newItem.id);
     this[key] = filteredItems !== null ? filteredItems : (this[key] as any);
     localStorage.setItem(key, JSON.stringify(filteredItems));
@@ -85,6 +87,31 @@ class Library {
       this.update("books", {
         ...currentBook,
         pageIDs: [...currentBook.pageIDs, newPage.id],
+      });
+    }
+  }
+
+  // filter every note who's pageID matches the to be deleted page's ID
+  removePage(page: t_page) {
+    const currentBook = this.books.find((book) => book.id === page.bookID);
+    if (currentBook !== undefined) {
+      this.delete("pages", page);
+      this.update("books", {
+        ...currentBook,
+        pageIDs: [
+          ...currentBook.pageIDs.filter((pageID) => pageID !== page.id),
+        ],
+      });
+      this.delete("notes", page, (page) => {
+        const filterPageNotes = LibraryStorage.notes.filter(
+          (note) => note.pageID !== page.id
+        );
+
+        LibraryStorage.notes =
+          filterPageNotes !== null
+            ? filterPageNotes
+            : (LibraryStorage.notes as any);
+        localStorage.setItem("notes", JSON.stringify(filterPageNotes));
       });
     }
   }
