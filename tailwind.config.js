@@ -39,6 +39,7 @@ export default {
           200: "#B8E3CF",
           300: "#C3E2C2",
         },
+        danger: "#D75F3B",
       },
     },
   },

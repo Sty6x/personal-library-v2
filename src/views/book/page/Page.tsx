@@ -13,7 +13,11 @@ import { uid } from "uid";
 import PageHeader from "../../../components/book-item/PageHeader";
 import LibraryStorage from "../../../utils/Library";
 import PageNavigator from "../../../components/PageNavigator";
-
+import Modal from "../../../components/Modal";
+interface DialogRef {
+  openDialog: () => void;
+  closeDialog: () => void;
+}
 const Page = () => {
   const { bookAuthor, bookTitle, addPage } = useOutletContext<{
     bookTitle: string;
@@ -24,6 +28,7 @@ const Page = () => {
   const [pageData, setPageData] = useState<t_currentPage | null>(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const pageRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<DialogRef>(null);
 
   function addNote() {
     const newID = uid(16);
@@ -239,10 +244,12 @@ const Page = () => {
         }
       }}
     >
+      <Modal message="Opened" ref={dialogRef} />
       <PageHeader
         pageData={pageData as t_currentPage}
         handleOnAddNote={addNote}
         handleOnAddPage={addPage}
+        handleRemovePageModal={dialogRef.current?.openDialog}
         isScrolling={isScrolling}
       />
       <section className="min-w-[100%] flex-1 overflow-hidden">

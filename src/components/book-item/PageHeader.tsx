@@ -7,15 +7,17 @@ const PageHeader = ({
   pageData,
   handleOnAddNote,
   handleOnAddPage,
+  handleRemovePageModal,
 }: {
   isScrolling: boolean;
   pageData: t_currentPage;
   handleOnAddNote: () => void;
+  handleRemovePageModal: () => void;
   handleOnAddPage: () => void;
 }) => {
   const { bookID } = useParams();
 
-  const { addPage } = useOutletContext<{
+  const { addPage, removePage } = useOutletContext<{
     addPage: (currentPageID: string | Array<string>) => void;
   }>();
   return (
@@ -31,7 +33,7 @@ const PageHeader = ({
             <h1
               className={`
               ${isScrolling ? "text-4xl" : "text-7xl"}
-               font-bold drop-shadow-text-shadow`}
+               font-bold `}
             >
               {pageData?.book.title}
             </h1>
@@ -40,7 +42,7 @@ const PageHeader = ({
             <p
               className={`
               ${isScrolling ? "text-lg" : "text-2xl"}
-            font-semibold drop-shadow-text-shadow`}
+            font-semibold `}
             >
               by {pageData?.book.author}
             </p>
@@ -48,7 +50,7 @@ const PageHeader = ({
         </div>
       </Link>
       <p
-        className={`drop-shadow-text-shadow 
+        className={` 
               ${isScrolling ? "text-md" : "text-xl"}`}
       >
         Page {pageData?.currentPage.pageNum}
@@ -62,7 +64,7 @@ const PageHeader = ({
             type="button"
             className={`
             ${isScrolling ? "text-md" : "text-xl"}
-            drop-shadow-text-shadow add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center py-1 `}
+             add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center py-1 `}
           >
             Add Note
           </button>
@@ -72,12 +74,26 @@ const PageHeader = ({
           <button
             className={`
             ${isScrolling ? "text-md" : "text-xl"}
-            drop-shadow-text-shadow add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center py-1`}
+             add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center py-1`}
             onClick={() => {
               handleOnAddPage();
             }}
           >
             Add Page
+          </button>
+        </motion.span>
+
+        <motion.span whileHover={{ x: 5 }} className=" w-[max-content]">
+          <button
+            className={`
+            ${isScrolling ? "text-md" : "text-xl"}
+            trash-icon trash-btn self-start box-border text-accent-danger font-bold
+            w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center py-1`}
+            onClick={() => {
+              handleRemovePageModal();
+            }}
+          >
+            Delete Page
           </button>
         </motion.span>
       </div>

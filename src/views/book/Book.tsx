@@ -168,16 +168,10 @@ const Book = () => {
         </section>
       ) : (
         <>
-          <button
-            onClick={() => {
-              handlePageDelete();
-            }}
-          >
-            Delete Page{" "}
-          </button>
           <Outlet
             context={{
               addPage: handlePageAdd,
+              removePage: handlePageDelete,
               bookTitle: currentBook.title,
               bookAuthor: currentBook.author,
               bookPageIDs: currentBook.pageIDs,

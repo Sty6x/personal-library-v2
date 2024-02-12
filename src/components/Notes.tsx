@@ -135,7 +135,7 @@ const Note = ({
                   whileHover={{ scale: 1 }}
                   className="trash-icon trash-btn self-start
             drop-shadow-text-shadow 
-            add-icon before:mr-[.3em]
+            before:mr-[.3em]
             before:h-[20px] box-border
             py-1"
                   id={`button-${id}`}
