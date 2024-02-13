@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { t_book, t_currentPage, t_note, t_page } from "../types/t_library";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import LibraryStorage from "../utils/Library";
 
 type DialogProps = {
   handleConfirmDelete: () => void;

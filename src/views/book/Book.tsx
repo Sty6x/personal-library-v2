@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
   Link,
   Outlet,
@@ -81,12 +82,12 @@ const Book = () => {
       lastUpdated: creationDate,
       dateAdded: creationDate,
     };
-    navigate(`/${currentBook.id}/${newPage.id}`);
     setCurrentbook(
       (prev) =>
         ({ ...prev, pageIDs: [...prev.pageIDs, newPage.id] } as t_currentBook)
     );
     LibraryStorage.addPage(newPage);
+    navigate(`/${currentBook.id}/${newPage.id}`);
   }
 
   function handlePageDelete() {
@@ -95,21 +96,38 @@ const Book = () => {
       LibraryStorage.pages
     );
     const currentPage = getPages.find((page) => page.id === params.pageID);
-    const currentPageIndex = getPages.findIndex(
-      (page) => page.id === params.pageID
-    );
     const filterCurrentPageID = currentBook.pageIDs.filter(
       (pageID) => pageID !== params.pageID
     );
-    navigate(
-      `/${currentBook.id}/${
-        getPages[currentPageIndex - 1] !== undefined
-          ? getPages[currentPageIndex - 1].id
-          : getPages[0].id
-      }`
-    );
+
+    navigate(safePageRedirection());
     setCurrentbook((prev) => ({ ...prev, pageIDs: [...filterCurrentPageID] }));
     LibraryStorage.removePage(currentPage as t_page);
+  }
+  function safePageRedirection(): string {
+    const getPages = getRelatedItems<t_page>(
+      currentBook.pageIDs,
+      LibraryStorage.pages
+    );
+    const currentDeletedPageIndex = getPages.findIndex(
+      (page) => page.id === params.pageID
+    );
+    if (currentDeletedPageIndex > 0) {
+      return `/${currentBook.id}/${
+        currentBook.pageIDs[currentDeletedPageIndex - 1]
+      }`;
+    } else if (
+      currentDeletedPageIndex == 0 &&
+      currentBook.pageIDs.length - 1 > 0
+    ) {
+      return `/${currentBook.id}/${
+        currentBook.pageIDs[currentDeletedPageIndex + 1]
+      }`;
+    } else if (currentDeletedPageIndex == 0) {
+      return `/${currentBook.id}`;
+    } else {
+      return `/${currentBook.id}`;
+    }
   }
 
   useEffect(() => {
@@ -144,14 +162,22 @@ const Book = () => {
               </span>
             </div>
             <div className="max-w-[max-content] flex gap-3 flex-col mt-3">
-              <div className="">
+              <motion.div
+                whileTap={{
+                  x: currentBook.pageIDs.length === 0 ? [0, 5, -5, 0] : [],
+                }}
+              >
                 <Link
-                  to={`/${currentBook.id}/${currentBook.pageIDs[0]}`}
+                  to={`/${currentBook.id}/${
+                    currentBook.pageIDs.length === 0
+                      ? " "
+                      : currentBook.pageIDs[0]
+                  }`}
                   className="before:h-[1em] before:w-[1em] before:mr-[.3em] read-icon  relative flex content-center bg-primary-link  items-center rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-5 py-2 text-3xl font-medium w-full"
                 >
                   Start Reading
                 </Link>
-              </div>
+              </motion.div>
 
               <span className="flex gap-4 items-center">
                 <button
