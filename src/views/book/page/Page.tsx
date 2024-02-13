@@ -241,7 +241,7 @@ const Page = () => {
         }
       }}
     >
-      {pageData !== null && (
+      {pageData !== null && isModalOpen && (
         <Modal
           isOpen={isModalOpen}
           modalSetter={setIsModalOpen}

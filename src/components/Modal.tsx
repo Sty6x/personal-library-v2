@@ -21,7 +21,7 @@ const Modal = ({
   data: { num, contents, numberOfNotes, type },
 }: DialogProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const navigate = useNavigate();
+  const { pageID } = useParams();
 
   useEffect(() => {
     if (isOpen) {
@@ -52,7 +52,9 @@ const Modal = ({
       <div className="flex p-6">
         <div className="ml-auto">
           <button
-            onClick={() => modalSetter(false)}
+            onClick={() => {
+              modalSetter(false);
+            }}
             className="hover:underline "
           >
             Cancel
