@@ -28,56 +28,19 @@ const Book = () => {
   const [redirect, setRedirect] = useState(false);
 
   function handlePageAdd() {
-    const testPages = getRelatedItems<t_page>(
-      currentBook.pageIDs,
-      LibraryStorage.pages,
-      (pages) => {
-        let i: number, j: number;
-        let tmpArr: Array<t_page> = [...pages];
-        for (i = 0; i < pages.length - 1; i++) {
-          let minIndex: number = i;
-          for (j = i + 1; j < pages.length; j++) {
-            if (pages[j].pageNum < pages[i].pageNum) {
-              minIndex = j;
-              continue;
-            }
-          }
-          // if we have a new minimum index
-          if (minIndex !== i) {
-            const mapPages = tmpArr.map((page, pageI) => {
-              if (i === pageI) {
-                return { ...tmpArr[minIndex] };
-              } else if (minIndex === pageI) {
-                return { ...tmpArr[i] };
-              }
-              return page;
-            });
-            tmpArr = [...mapPages];
-          }
-        }
-        return tmpArr;
-      }
-    );
+    // on page add if we are at book component instead of a page component
+    // add a page to the last page in the book
+    // - grab the last pagein the book array
+
     const getCurrentPage = getRelatedItems<t_page>(
       currentBook.pageIDs,
       LibraryStorage.pages
     );
-    // relying on this does not sort the pages based from least to most
-
-    console.log({ test: testPages });
-    console.log({ getCurrentPage });
     const creationDate = new Date().toString();
     const newPage: t_page = {
       bookID: currentBook.id,
       id: uid(16),
-      pageNum:
-        params.pageID !== undefined
-          ? getCurrentPage[0] !== undefined
-            ? getCurrentPage[0].pageNum + 1
-            : 1
-          : getCurrentPage[0] !== undefined
-          ? getCurrentPage[getCurrentPage.length - 1].pageNum + 1
-          : 1,
+      pageNum: 0,
       noteIDs: [],
       lastUpdated: creationDate,
       dateAdded: creationDate,
@@ -188,7 +151,7 @@ const Book = () => {
                 >
                   Add a page
                 </button>
-                <Link to={"/library"} className="underline">
+                <Link to={"/ibrary"} className="underline">
                   Go back to library
                 </Link>
               </span>

@@ -11,7 +11,8 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
   const { pageID, bookID } = useParams();
 
   const pages = getRelatedItems<t_page>(bookPageIDs, LibraryStorage.pages);
-  const currentPage = pages.findIndex((page) => page.id === pageID);
+  const sortPagesByNum = pages.sort((a, b) => a.pageNum - b.pageNum);
+  const currentPage = sortPagesByNum.findIndex((page) => page.id === pageID);
 
   return (
     <div
@@ -20,9 +21,9 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
     >
       <div className="py-2 px-5 flex gap-4">
         <>
-          {pages[currentPage - 1] !== undefined ? (
+          {sortPagesByNum[currentPage - 1] !== undefined ? (
             <Link
-              to={`/${bookID}/${pages[currentPage - 1].id}`}
+              to={`/${bookID}/${sortPagesByNum[currentPage - 1].id}`}
               id="back"
               className="back-icon flex"
             />
@@ -31,10 +32,12 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
           )}
         </>
         <div className="bg-[#ffffff] p-1 rounded" id="page-number">
-          <span>{currentPageNum}/120</span>
+          <span>
+            {currentPageNum}/{pages.length}
+          </span>
         </div>
         <>
-          {pages[currentPage + 1] !== undefined ? (
+          {sortPagesByNum[currentPage + 1] !== undefined ? (
             <Link
               to={`/${bookID}/${pages[currentPage + 1].id}`}
               id="next"
