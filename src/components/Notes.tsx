@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import { t_extendedNote } from "../types/t_library";
 import { formatDistance } from "date-fns";
+import InputField from "./InputField";
 
 interface t_dragEvents {
   onDragStart: (e: React.DragEvent<HTMLDivElement>) => void;
@@ -26,10 +25,6 @@ const Note = ({
   handleEditNoteState: () => void;
   handleSave: (contents: string, noteID: string) => void;
 }) => {
-  const [editorState, setEditorState] = useState<{
-    value: string;
-    text: string;
-  }>({ value: contents, text: contents });
   const [isHovered, setIsHovered] = useState(false);
 
   function onDragEnter(e: React.DragEvent<HTMLDivElement>): void {
@@ -55,36 +50,13 @@ const Note = ({
   return (
     <>
       {isEditing ? (
-        <div className="relative">
-          <span className="absolute w-full px-4 top-1 flex justify-between ">
-            <p className="inline-block font-semibold text-xl">
-              Note #{note.noteNum}
-            </p>
-            <span className="flex gap-4 ">
-              <button
-                className="hover:underline font-semibold"
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleSave(editorState.text, id);
-                }}
-              >
-                Done
-              </button>
-              <button className="hover:underline" onClick={handleEditNoteState}>
-                Cancel
-              </button>
-            </span>
-          </span>
-          <ReactQuill
-            modules={{ toolbar: [] }}
-            theme="snow"
-            value={editorState.value}
-            onChange={(value, delta, source, editor) => {
-              setEditorState({ value, text: editor.getText() });
-            }}
-          />
-        </div>
+        <InputField
+          initialValue={contents}
+          handleSave={handleSave}
+          inputTitle={`Note #${note.noteNum}`}
+          handleEditNoteState={handleEditNoteState}
+          id={id}
+        />
       ) : (
         <motion.div
           id={id}

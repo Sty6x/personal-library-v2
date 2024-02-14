@@ -46,12 +46,15 @@ const PageHeader = ({
           </span>
         </div>
       </Link>
-      <p
-        className={` 
+      <div>
+        {/* on click is edit */}
+        <p
+          className={` 
               ${isScrolling ? "text-md" : "text-xl"}`}
-      >
-        Page {pageData?.currentPage.pageNum}
-      </p>
+        >
+          Page {pageData?.currentPage.pageNum}
+        </p>
+      </div>
       <div className={`flex gap-4 mt-3`}>
         <motion.span whileHover={{ x: 5 }} className="w-[max-content]">
           <button

@@ -77,6 +77,15 @@ const Book = () => {
     setCurrentbook((prev) => ({ ...prev, pageIDs: [...filterCurrentPageID] }));
     LibraryStorage.removePage(currentPage as t_page);
   }
+
+  function handlePageEdit() {
+    const getPages = getRelatedItems<t_page>(
+      currentBook.pageIDs,
+      LibraryStorage.pages
+    );
+    const currentPage = getPages.find((page) => page.id === params.pageID);
+  }
+
   function safePageRedirection(): string {
     const getPages = getRelatedItems<t_page>(
       currentBook.pageIDs,
