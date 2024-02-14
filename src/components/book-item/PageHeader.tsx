@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { t_currentPage } from "../../types/t_library";
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
+import { useState } from "react";
 
 const PageHeader = ({
   isScrolling,
@@ -65,7 +65,6 @@ const PageHeader = ({
                   className="hover:underline font-semibold"
                   type="button"
                   onClick={(e) => {
-                    e.preventDefault();
                     handleOnEditPage(pageNumberInput);
                     setIsPageEditing(false);
                   }}
@@ -74,6 +73,7 @@ const PageHeader = ({
                 </button>
                 <button
                   className="hover:underline"
+                  type="button"
                   onClick={() => {
                     setIsPageEditing(false);
                   }}
@@ -92,7 +92,7 @@ const PageHeader = ({
               </text>
               <input
                 type="number"
-                className={`w-[1em] appearance-none outline-none  focus-within:border-b border-b border-b-black
+                className={`w-[3em] appearance-none outline-none  focus-within:border-b border-b border-b-black
                 ${isScrolling ? "text-md" : "text-xl"}
                 `}
                 defaultValue={pageNumberInput}
@@ -103,7 +103,8 @@ const PageHeader = ({
             </div>
           </div>
         ) : (
-          <p
+          <motion.button
+            whileHover={{ x: 5 }}
             onClick={() => {
               setIsPageEditing(true);
             }}
@@ -111,7 +112,7 @@ const PageHeader = ({
               ${isScrolling ? "text-md" : "text-xl"} w-[fit-content]`}
           >
             Page {pageData?.currentPage.pageNum}
-          </p>
+          </motion.button>
         )}
       </>
       <div className={`flex gap-4 mt-3`}>
