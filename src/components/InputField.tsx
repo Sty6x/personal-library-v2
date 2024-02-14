@@ -6,13 +6,13 @@ const InputField = ({
   inputTitle,
   handleSave,
   id,
-  handleEditNoteState,
+  handleCancelNoteEdit,
   initialValue,
 }: {
   initialValue: string;
   inputTitle: string;
   handleSave: (initialValue: string, noteID: string) => void;
-  handleEditNoteState: () => void;
+  handleCancelNoteEdit: () => void;
   id: string;
 }) => {
   const [editorState, setEditorState] = useState<{
@@ -34,7 +34,7 @@ const InputField = ({
           >
             Done
           </button>
-          <button className="hover:underline" onClick={handleEditNoteState}>
+          <button className="hover:underline" onClick={handleCancelNoteEdit}>
             Cancel
           </button>
         </span>

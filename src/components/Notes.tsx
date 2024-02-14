@@ -13,7 +13,7 @@ const Note = ({
   id,
   isEditing,
   handleSave,
-  handleEditNoteState,
+  handleCancelNoteEdit,
   note,
   dragEvents: { onDragStart, onDrop },
 }: {
@@ -22,7 +22,7 @@ const Note = ({
   contents: string;
   id: string;
   dragEvents: t_dragEvents;
-  handleEditNoteState: () => void;
+  handleCancelNoteEdit: () => void;
   handleSave: (contents: string, noteID: string) => void;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -54,7 +54,7 @@ const Note = ({
           initialValue={contents}
           handleSave={handleSave}
           inputTitle={`Note #${note.noteNum}`}
-          handleEditNoteState={handleEditNoteState}
+          handleCancelNoteEdit={handleCancelNoteEdit}
           id={id}
         />
       ) : (

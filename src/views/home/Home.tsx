@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import BookItem from "../../components/book-item/BookItem.tsx";
-import { data } from "../../placeholderData.ts";
 import { t_book, t_library, t_note, t_page } from "../../types/t_library.ts";
-import { closestIndexTo } from "date-fns";
-import getRelatedItems from "../../utils/getRelatedItems.ts";
 import { motion } from "framer-motion";
 import { formatDistance } from "date-fns";
 import LibraryStorage from "../../utils/Library.ts";

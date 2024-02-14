@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { t_currentPage } from "../../types/t_library";
 import { useState } from "react";
 
@@ -64,7 +64,7 @@ const PageHeader = ({
                 <button
                   className="hover:underline font-semibold"
                   type="button"
-                  onClick={(e) => {
+                  onClick={() => {
                     handleOnEditPage(pageNumberInput);
                     setIsPageEditing(false);
                   }}

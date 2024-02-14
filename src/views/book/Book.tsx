@@ -155,14 +155,14 @@ const Book = () => {
 
               <span className="flex gap-4 items-center">
                 <button
-                  onClick={(e) => {
+                  onClick={() => {
                     handlePageAdd();
                   }}
                   className="add-icon w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center bg-accent-green-200  rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-2 py-1 text-lg"
                 >
                   Add a page
                 </button>
-                <Link to={"/ibrary"} className="underline">
+                <Link to={"/library"} className="underline">
                   Go back to library
                 </Link>
               </span>

@@ -22,7 +22,7 @@ const Page = () => {
     addPage: () => void;
     removePage: () => void;
   }>();
-  const { pageID, bookID } = useParams<any>();
+  const { pageID } = useParams<any>();
   const [pageData, setPageData] = useState<t_currentPage | null>(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,7 +60,7 @@ const Page = () => {
     }
   }
 
-  function saveEdit(contents: string, noteID: string) {
+  function editNote(contents: string, noteID: string) {
     if (pageData) {
       const updateDate = new Date().toString();
       const currentNote = pageData.notes.find(
@@ -166,7 +166,7 @@ const Page = () => {
     setPageData({ ...currentPageData });
   }
 
-  function handleHeaderTransition(e: any) {
+  function handleHeaderTransition() {
     setIsScrolling(true);
     if (window.scrollY === 0) {
       setIsScrolling(false);
@@ -184,11 +184,11 @@ const Page = () => {
     });
   }, []);
 
-  const renderNotes = pageData?.notes.map((note, i) => {
+  const renderNotes = pageData?.notes.map((note) => {
     return (
       <Note
-        handleSave={saveEdit}
-        handleEditNoteState={disableEditNote}
+        handleSave={editNote}
+        handleCancelNoteEdit={disableEditNote}
         dragEvents={{ onDragStart, onDrop }}
         key={note.id}
         id={note.id}
