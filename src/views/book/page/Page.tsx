@@ -89,7 +89,15 @@ const Page = () => {
     }
   }
 
-  function handlePageEdit() {}
+  function handlePageEdit(newPageNum: number) {
+    setPageData(
+      (prev) =>
+        ({
+          ...prev,
+          currentPage: { ...prev?.currentPage, pageNum: newPageNum },
+        } as t_currentPage)
+    );
+  }
 
   function onDragStart(e: React.DragEvent<HTMLDivElement>): void {
     const target = e.currentTarget;
@@ -259,6 +267,7 @@ const Page = () => {
         pageData={pageData as t_currentPage}
         handleOnAddNote={addNote}
         handleOnAddPage={addPage}
+        handleOnEditPage={handlePageEdit}
         handleRemovePageModal={() => {
           setIsModalOpen(true);
         }}

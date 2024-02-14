@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { t_currentPage } from "../../types/t_library";
-import { useState } from "react";
+import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
 
 const PageHeader = ({
   isScrolling,
   pageData,
   handleOnAddNote,
   handleOnAddPage,
+  handleOnEditPage,
   handleRemovePageModal,
 }: {
   isScrolling: boolean;
@@ -15,9 +16,13 @@ const PageHeader = ({
   handleOnAddNote: () => void;
   handleRemovePageModal: () => void;
   handleOnAddPage: () => void;
+  handleOnEditPage: (newPageNumber: number) => void;
 }) => {
   const { bookID } = useParams();
   const [isPageEditing, setIsPageEditing] = useState(false);
+  const [pageNumberInput, setPageNumberInput] = useState<number>(
+    pageData ? pageData.currentPage.pageNum : 0
+  );
 
   return (
     <header
@@ -61,6 +66,8 @@ const PageHeader = ({
                   type="button"
                   onClick={(e) => {
                     e.preventDefault();
+                    handleOnEditPage(pageNumberInput);
+                    setIsPageEditing(false);
                   }}
                 >
                   Done
@@ -88,7 +95,10 @@ const PageHeader = ({
                 className={`w-[1em] appearance-none outline-none  focus-within:border-b border-b border-b-black
                 ${isScrolling ? "text-md" : "text-xl"}
                 `}
-                value={pageData.currentPage.pageNum}
+                defaultValue={pageNumberInput}
+                onChange={(e) => {
+                  setPageNumberInput(Number(e.target.value));
+                }}
               />
             </div>
           </div>
