@@ -91,6 +91,16 @@ class Library {
     }
   }
 
+  updatePage(updatedPage: t_page) {
+    const currentBook = this.books.find(
+      (book) => book.id === updatedPage.bookID
+    );
+    if (currentBook !== undefined) {
+      this.update("pages", updatedPage);
+      this.update("books", currentBook);
+    }
+  }
+
   // filter every note who's pageID matches the to be deleted page's ID
   removePage(page: t_page) {
     const currentBook = this.books.find((book) => book.id === page.bookID);

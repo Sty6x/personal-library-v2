@@ -90,13 +90,18 @@ const Page = () => {
   }
 
   function handlePageEdit(newPageNum: number) {
+    const updateCurrentPage: t_page = {
+      ...(pageData?.currentPage as t_page),
+      pageNum: newPageNum,
+    };
     setPageData(
       (prev) =>
         ({
           ...prev,
-          currentPage: { ...prev?.currentPage, pageNum: newPageNum },
+          currentPage: { ...updateCurrentPage },
         } as t_currentPage)
     );
+    LibraryStorage.updatePage(updateCurrentPage);
   }
 
   function onDragStart(e: React.DragEvent<HTMLDivElement>): void {
