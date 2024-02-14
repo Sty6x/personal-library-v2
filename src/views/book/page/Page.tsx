@@ -89,6 +89,8 @@ const Page = () => {
     }
   }
 
+  function handlePageEdit() {}
+
   function onDragStart(e: React.DragEvent<HTMLDivElement>): void {
     const target = e.currentTarget;
     e.dataTransfer.setData("text/plain", target.id);

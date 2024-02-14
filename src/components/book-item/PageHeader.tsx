@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { t_currentPage } from "../../types/t_library";
+import { useState } from "react";
 
 const PageHeader = ({
   isScrolling,
@@ -16,6 +17,7 @@ const PageHeader = ({
   handleOnAddPage: () => void;
 }) => {
   const { bookID } = useParams();
+  const [isPageEditing, setIsPageEditing] = useState(false);
 
   return (
     <header
@@ -46,15 +48,62 @@ const PageHeader = ({
           </span>
         </div>
       </Link>
-      <div>
-        {/* on click is edit */}
-        <p
-          className={` 
-              ${isScrolling ? "text-md" : "text-xl"}`}
-        >
-          Page {pageData?.currentPage.pageNum}
-        </p>
-      </div>
+      <>
+        {isPageEditing ? (
+          <div
+            id="pageNumberEdit"
+            className="mt-4 flex flex-col gap-1 w-[fit-content]"
+          >
+            <div className="">
+              <span className="flex gap-4 ">
+                <button
+                  className="hover:underline font-semibold"
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  Done
+                </button>
+                <button
+                  className="hover:underline"
+                  onClick={() => {
+                    setIsPageEditing(false);
+                  }}
+                >
+                  Cancel
+                </button>
+              </span>
+            </div>
+            <div className="w-[fit-content] ">
+              <text
+                className={`
+                ${isScrolling ? "text-md" : "text-xl"}
+                `}
+              >
+                Page #
+              </text>
+              <input
+                type="number"
+                className={`w-[1em] appearance-none outline-none  focus-within:border-b border-b border-b-black
+                ${isScrolling ? "text-md" : "text-xl"}
+                `}
+                value={pageData.currentPage.pageNum}
+              />
+            </div>
+          </div>
+        ) : (
+          <p
+            onClick={() => {
+              setIsPageEditing(true);
+            }}
+            className={` 
+              ${isScrolling ? "text-md" : "text-xl"} w-[fit-content]`}
+          >
+            Page {pageData?.currentPage.pageNum}
+          </p>
+        )}
+      </>
       <div className={`flex gap-4 mt-3`}>
         <motion.span whileHover={{ x: 5 }} className="w-[max-content]">
           <button
