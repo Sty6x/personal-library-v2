@@ -28,19 +28,29 @@ const Book = () => {
   const [redirect, setRedirect] = useState(false);
 
   function handlePageAdd() {
-    // on page add if we are at book component instead of a page component
-    // add a page to the last page in the book
-    // - grab the last pagein the book array
-
-    const getCurrentPage = getRelatedItems<t_page>(
+    const sortedPages = getRelatedItems<t_page>(
       currentBook.pageIDs,
-      LibraryStorage.pages
+      LibraryStorage.pages,
+      (pages) => {
+        return pages.sort((a, b) => a.pageNum - b.pageNum);
+      }
     );
+
+    const getNewPageNum = (): number => {
+      if (params.pageID === undefined) {
+        return sortedPages[sortedPages.length - 1].pageNum + 1;
+      }
+      const currentPageIndex = sortedPages.findIndex(
+        (page) => page.id === params.pageID
+      );
+      return sortedPages[currentPageIndex].pageNum + 1;
+    };
+
     const creationDate = new Date().toString();
     const newPage: t_page = {
       bookID: currentBook.id,
       id: uid(16),
-      pageNum: 0,
+      pageNum: getNewPageNum(),
       noteIDs: [],
       lastUpdated: creationDate,
       dateAdded: creationDate,
