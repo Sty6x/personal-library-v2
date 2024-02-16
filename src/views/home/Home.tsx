@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import BookItem from "../../components/book-item/BookItem.tsx";
-import { t_book, t_library, t_note, t_page } from "../../types/t_library.ts";
+import {
+  t_book,
+  t_bookFormData,
+  t_library,
+  t_note,
+  t_page,
+} from "../../types/t_library.ts";
 import { motion } from "framer-motion";
 import { formatDistance } from "date-fns";
 import LibraryStorage from "../../utils/Library.ts";
 import BookForm from "../../components/modal/BookForm.tsx";
+import { uid } from "uid";
 
 type t_recentBooks = {
   id: string;
@@ -96,6 +103,18 @@ function Home() {
     }
   );
 
+  function addNewBook(bookData: t_bookFormData) {
+    const bookDate = new Date().toString();
+    const newBook: t_book = {
+      ...bookData,
+      id: uid(16),
+      lastUpdated: bookDate,
+      dateAdded: bookDate,
+      pageIDs: [],
+    };
+    LibraryStorage.addBook(newBook);
+  }
+
   useEffect(() => {
     getRecentBooks(LibraryStorage);
   }, []);
@@ -108,6 +127,7 @@ function Home() {
     <main id="home-page" className="h-[100dvh]">
       {isBookFormOpen && (
         <BookForm
+          submitHandler={addNewBook}
           isOpenedSetter={setIsBookFormOpen}
           isOpened={isBookFormOpen}
           type="Add"

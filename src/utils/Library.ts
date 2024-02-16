@@ -173,7 +173,9 @@ class Library {
     }
   }
 
-  addBook(newBook: t_book) {}
+  addBook(newBook: t_book) {
+    this.save("books", newBook);
+  }
 }
 const LibraryStorage = Library.getInstance();
 export default LibraryStorage;

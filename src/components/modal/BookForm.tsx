@@ -1,16 +1,19 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { t_bookFormData } from "../../types/t_library";
 
 type t_newBookForm = {
   isOpened: boolean;
   type: "Add" | "Edit";
   children?: React.ReactNode;
   isOpenedSetter: React.Dispatch<React.SetStateAction<boolean>>;
+  submitHandler: (bookData: t_bookFormData) => void;
 };
 const BookForm = ({
   isOpened,
   type,
   children,
   isOpenedSetter,
+  submitHandler,
 }: t_newBookForm) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -41,7 +44,11 @@ const BookForm = ({
             e.preventDefault();
             const form = e.currentTarget;
             const formData = new FormData(form as HTMLFormElement);
-            const entries = Object.fromEntries(formData.entries());
+            const entries = Object.fromEntries(
+              formData.entries()
+            ) as t_bookFormData;
+
+            submitHandler(entries);
             isOpenedSetter(false);
           }}
           className="px-6 py-2 flex flex-col gap-3"

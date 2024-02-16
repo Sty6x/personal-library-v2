@@ -5,6 +5,7 @@ export type t_book = {
   pageIDs: Array<string>;
   dateAdded: string;
   lastUpdated: string;
+  favorite?: "favorite" | "";
 };
 
 export type t_page = {
@@ -48,4 +49,10 @@ export type t_currentPage = {
   currentPage: t_page;
   book: { title: string; author: string };
   notes: Array<t_extendedNote> | [];
+};
+
+export type t_bookFormData = {
+  title: string;
+  author: string;
+  favorite?: "favorite" | "";
 };

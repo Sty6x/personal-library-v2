@@ -28,6 +28,8 @@ const Book = () => {
   });
   const [redirect, setRedirect] = useState(false);
 
+  const [isBookFormOpen, setIsBookFormOpen] = useState(false);
+
   function handlePageAdd() {
     const sortedPages = getRelatedItems<t_page>(
       currentBook.pageIDs,
@@ -118,7 +120,13 @@ const Book = () => {
       id="book-page"
       className={`bg-gridWhite min-h-[100dvh] flex justify-center`}
     >
-      <BookForm isOpened={true} type="Add" />
+      {isBookFormOpen && (
+        <BookForm
+          isOpened={isBookFormOpen}
+          isOpenedSetter={setIsBookFormOpen}
+          type="Edit"
+        />
+      )}
       {!redirect ? (
         <section id="book-page-contents" className="grid place-items-center">
           <div className="max-w-[60em]">
