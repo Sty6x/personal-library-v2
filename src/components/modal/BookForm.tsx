@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 type t_newBookForm = {
   isOpened: boolean;
@@ -23,7 +23,13 @@ const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
           <h1 className="text-2xl font-bold px-6 py-3">{type} Book</h1>
         </div>
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={(e: FormEvent) => {
+            e.preventDefault();
+
+            const form = e.currentTarget;
+            const formData = new FormData(form as HTMLFormElement);
+            const entries = Object.fromEntries(formData.entries());
+          }}
           className="px-6 py-2 flex flex-col gap-3"
         >
           <div className="book-form-inputs-container flex flex-col gap-1">
@@ -31,6 +37,7 @@ const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
               Title
             </label>
             <input
+              required
               type="text"
               name="title"
               id="title"
@@ -42,6 +49,7 @@ const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
               Author
             </label>
             <input
+              required
               type="text"
               name="author"
               id="author"
@@ -92,7 +100,10 @@ const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
           </div>
           <div className="flex ">
             <span className="py-3">
-              <button className="text-white font-semibold bg-primary-main rounded p-2">
+              <button
+                type="submit"
+                className="text-white font-semibold bg-primary-main rounded p-2"
+              >
                 Done
               </button>
               <button className="ml-3 hover:underline">Cancel</button>
