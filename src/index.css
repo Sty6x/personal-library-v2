@@ -61,6 +61,17 @@ button {
 .back-icon::before {
   background-image: url("./assets/icons/left-arrow.svg");
 }
+
+#edit-book-icon {
+  background-image: url("./assets/icons/edit-icon.svg");
+  display: inline-block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: auto;
+  width: 30px;
+}
+
 .note-contents-preview {
   max-width: 100%;
   overflow: hidden;

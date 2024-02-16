@@ -7,13 +7,14 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
-import { t_book, t_page } from "../../types/t_library";
+import { t_book, t_bookFormData, t_page } from "../../types/t_library";
 import { formatDistance } from "date-fns";
 import BookHeader from "../../components/BookHeader";
 import getRelatedItems from "../../utils/getRelatedItems";
 import { uid } from "uid";
 import LibraryStorage from "../../utils/Library";
 import BookForm from "../../components/modal/BookForm";
+import EditBookBtn from "../../components/EditBookBtn";
 
 interface t_currentBook extends t_book {
   numOfNotes: number;
@@ -120,15 +121,16 @@ const Book = () => {
   return (
     <main
       id="book-page"
-      className={`bg-gridWhite min-h-[100dvh] flex justify-center`}
+      className={`relative bg-gridWhite min-h-[100dvh] flex justify-center`}
     >
-      {/* {isBookFormOpen && (
+      <EditBookBtn />
+      {isBookFormOpen && (
         <BookForm
           isOpened={isBookFormOpen}
           isOpenedSetter={setIsBookFormOpen}
           type="Edit"
         />
-      )} */}
+      )}
       {!redirect ? (
         <section id="book-page-contents" className="grid place-items-center">
           <div className="max-w-[60em]">
