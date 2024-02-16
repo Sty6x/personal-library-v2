@@ -41,7 +41,9 @@ const Book = () => {
 
     const getNewPageNum = (): number => {
       if (params.pageID === undefined) {
-        return sortedPages[sortedPages.length - 1].pageNum + 1;
+        return sortedPages.length !== 0
+          ? sortedPages[sortedPages.length - 1].pageNum + 1
+          : 1;
       }
       const currentPageIndex = sortedPages.findIndex(
         (page) => page.id === params.pageID
@@ -120,13 +122,13 @@ const Book = () => {
       id="book-page"
       className={`bg-gridWhite min-h-[100dvh] flex justify-center`}
     >
-      {isBookFormOpen && (
+      {/* {isBookFormOpen && (
         <BookForm
           isOpened={isBookFormOpen}
           isOpenedSetter={setIsBookFormOpen}
           type="Edit"
         />
-      )}
+      )} */}
       {!redirect ? (
         <section id="book-page-contents" className="grid place-items-center">
           <div className="max-w-[60em]">
