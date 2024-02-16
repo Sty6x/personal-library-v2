@@ -4,6 +4,7 @@ import { t_book, t_library, t_note, t_page } from "../../types/t_library.ts";
 import { motion } from "framer-motion";
 import { formatDistance } from "date-fns";
 import LibraryStorage from "../../utils/Library.ts";
+import BookForm from "../../components/modal/BookForm.tsx";
 
 type t_recentBooks = {
   id: string;
@@ -33,6 +34,9 @@ function Home() {
         if (recentNotes.length === 0) {
           recentNotes.push(sortedByDateNotes[i]);
         } else {
+          // its going to keep pushing if some notes does not contain the same book id as the
+          // recent notes.
+          // else it will do nothing if it does and continue the loop
           const currentBookID = sortedByDateNotes[i].bookID;
           if (recentNotes.every((note) => note.bookID !== currentBookID)) {
             recentNotes.push(sortedByDateNotes[i]);
@@ -40,6 +44,16 @@ function Home() {
         }
       }
     }
+
+    console.log(recentNotes);
+    // grabbing the books and pages from the most recent notes
+    // Notes are important to get the recent books to be rendered on the home screen
+    // NOTE bookItems will not occupy all spaces if:
+    // if there are no notes that exist.
+    // if there are missing notes aka if we are not able to grab different books.
+    // if there are missing books or non-existing books.
+
+    // if the recentNotes length < 3
 
     const getRecentBooks: Array<t_recentBooks> = recentNotes.map((note, i) => {
       const book = LibraryStorage.books.find(
@@ -91,6 +105,7 @@ function Home() {
 
   return (
     <main id="home-page" className="h-[100dvh]">
+      <BookForm isOpened={true} type="Add" />
       <motion.div
         id="card-items-container"
         className="grid grid-rows-2 grid-cols-2 h-full"

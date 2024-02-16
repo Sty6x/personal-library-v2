@@ -25,6 +25,11 @@ export default {
       transparent: "transparent",
       black: "#1d1d1d",
       white: "#ffffff",
+      separator: {
+        100: "#d1d1d1",
+        200: "#9d9d9d",
+        300: "#1d1d1d",
+      },
       primary: {
         button: "#E2C7BF",
         main: "#CD8D7A",

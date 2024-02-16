@@ -12,7 +12,7 @@ type DialogProps = {
     type: "Note" | "Page" | "Book";
   };
 };
-const Modal = ({
+const PageEdit = ({
   handleConfirmDelete,
   modalSetter,
   isOpen,
@@ -73,4 +73,4 @@ const Modal = ({
   );
 };
 
-export default Modal;
+export default PageEdit;

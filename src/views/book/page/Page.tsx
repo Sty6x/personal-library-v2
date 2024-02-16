@@ -13,7 +13,7 @@ import { uid } from "uid";
 import PageHeader from "../../../components/book-item/PageHeader";
 import LibraryStorage from "../../../utils/Library";
 import PageNavigator from "../../../components/PageNavigator";
-import Modal from "../../../components/Modal";
+import PageEdit from "../../../components/modal/PageEdit";
 
 const Page = () => {
   const { bookAuthor, bookTitle, addPage, removePage } = useOutletContext<{
@@ -257,7 +257,7 @@ const Page = () => {
       }}
     >
       {pageData !== null && isModalOpen && (
-        <Modal
+        <PageEdit
           isOpen={isModalOpen}
           modalSetter={setIsModalOpen}
           handleConfirmDelete={removePage}

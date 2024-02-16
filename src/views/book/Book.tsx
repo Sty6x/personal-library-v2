@@ -13,6 +13,7 @@ import BookHeader from "../../components/BookHeader";
 import getRelatedItems from "../../utils/getRelatedItems";
 import { uid } from "uid";
 import LibraryStorage from "../../utils/Library";
+import BookForm from "../../components/modal/BookForm";
 
 interface t_currentBook extends t_book {
   numOfNotes: number;
@@ -117,6 +118,7 @@ const Book = () => {
       id="book-page"
       className={`bg-gridWhite min-h-[100dvh] flex justify-center`}
     >
+      <BookForm isOpened={true} type="Add" />
       {!redirect ? (
         <section id="book-page-contents" className="grid place-items-center">
           <div className="max-w-[60em]">
