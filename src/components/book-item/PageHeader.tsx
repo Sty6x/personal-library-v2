@@ -21,7 +21,7 @@ const PageHeader = ({
   const { bookID } = useParams();
   const [isPageEditing, setIsPageEditing] = useState(false);
   const [pageNumberInput, setPageNumberInput] = useState<number>(
-    pageData ? pageData.currentPage.pageNum : 0
+    pageData.currentPage.pageNum
   );
 
   return (
@@ -83,16 +83,16 @@ const PageHeader = ({
               </span>
             </div>
             <div className="w-[fit-content] ">
-              <text
+              <span
                 className={`
                 ${isScrolling ? "text-md" : "text-xl"}
                 `}
               >
-                Page #
-              </text>
+                Page{" "}
+              </span>
               <input
                 type="number"
-                className={`w-[3em] appearance-none outline-none  focus-within:border-b border-b border-b-black
+                className={`w-[2em] appearance-none outline-none  focus-within:border-b border-b border-b-black
                 ${isScrolling ? "text-md" : "text-xl"}
                 `}
                 defaultValue={pageNumberInput}

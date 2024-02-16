@@ -19,7 +19,6 @@ const PageEdit = ({
   data: { num, contents, numberOfNotes, type },
 }: DialogProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const { pageID } = useParams();
 
   useEffect(() => {
     if (isOpen) {

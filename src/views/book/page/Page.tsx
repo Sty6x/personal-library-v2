@@ -268,16 +268,18 @@ const Page = () => {
           }}
         />
       )}
-      <PageHeader
-        pageData={pageData as t_currentPage}
-        handleOnAddNote={addNote}
-        handleOnAddPage={addPage}
-        handleOnEditPage={handlePageEdit}
-        handleRemovePageModal={() => {
-          setIsModalOpen(true);
-        }}
-        isScrolling={isScrolling}
-      />
+      {pageData && (
+        <PageHeader
+          pageData={pageData as t_currentPage}
+          handleOnAddNote={addNote}
+          handleOnAddPage={addPage}
+          handleOnEditPage={handlePageEdit}
+          handleRemovePageModal={() => {
+            setIsModalOpen(true);
+          }}
+          isScrolling={isScrolling}
+        />
+      )}
       <section className="min-w-[100%] flex-1 overflow-hidden">
         <div id="notes-container" className=" justify-start px-2 py-2 ">
           <AnimatePresence custom={"popLayout"}>{renderNotes}</AnimatePresence>
