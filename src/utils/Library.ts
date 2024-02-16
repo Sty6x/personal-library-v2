@@ -176,6 +176,10 @@ class Library {
   addBook(newBook: t_book) {
     this.save("books", newBook);
   }
+
+  updateBook(updatedBook: t_book) {
+    this.update("books", updatedBook);
+  }
 }
 const LibraryStorage = Library.getInstance();
 export default LibraryStorage;

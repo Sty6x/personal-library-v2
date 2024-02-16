@@ -270,6 +270,8 @@ const Page = () => {
       )}
       {pageData && (
         <PageHeader
+          bookTitle={bookTitle}
+          bookAuthor={bookAuthor}
           pageData={pageData as t_currentPage}
           handleOnAddNote={addNote}
           handleOnAddPage={addPage}

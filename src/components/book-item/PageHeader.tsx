@@ -10,9 +10,14 @@ const PageHeader = ({
   handleOnAddPage,
   handleOnEditPage,
   handleRemovePageModal,
+  bookAuthor,
+  bookTitle,
 }: {
   isScrolling: boolean;
   pageData: t_currentPage;
+
+  bookAuthor: string;
+  bookTitle: string;
   handleOnAddNote: () => void;
   handleRemovePageModal: () => void;
   handleOnAddPage: () => void;
@@ -39,7 +44,7 @@ const PageHeader = ({
               ${isScrolling ? "text-4xl" : "text-7xl"}
                font-bold `}
             >
-              {pageData?.book.title}
+              {bookTitle}
             </h1>
           </span>
           <span>
@@ -48,7 +53,7 @@ const PageHeader = ({
               ${isScrolling ? "text-lg" : "text-2xl"}
             font-semibold `}
             >
-              by {pageData?.book.author}
+              by {bookAuthor}
             </p>
           </span>
         </div>

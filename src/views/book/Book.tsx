@@ -110,8 +110,14 @@ const Book = () => {
     }
   }
 
-  function handlePageEdit(updatedBook: t_bookFormData) {
-    console.log(updatedBook);
+  function handlePageEdit(updatedBookData: t_bookFormData) {
+    const updatedBook: t_book = {
+      ...currentBook,
+      ...updatedBookData,
+    };
+    setCurrentbook({ ...(updatedBook as t_currentBook) });
+
+    LibraryStorage.updateBook(updatedBook);
   }
 
   useEffect(() => {
