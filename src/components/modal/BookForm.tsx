@@ -4,16 +4,30 @@ type t_newBookForm = {
   isOpened: boolean;
   type: "Add" | "Edit";
   children?: React.ReactNode;
+  isOpenedSetter: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
+const BookForm = ({
+  isOpened,
+  type,
+  children,
+  isOpenedSetter,
+}: t_newBookForm) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [isFavorite, setIsFavorite] = useState(false);
   useEffect(() => {
-    dialogRef.current?.showModal();
-  }, []);
+    if (isOpened) {
+      dialogRef.current?.showModal();
+      return;
+    }
+
+    dialogRef.current?.close();
+  }, [isOpened]);
 
   return (
     <dialog
+      onClose={() => {
+        isOpenedSetter(false);
+      }}
       ref={dialogRef}
       id=" book-modal"
       className="flex rounded-md shadow-btn-hover items-center"
@@ -25,10 +39,10 @@ const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
         <form
           onSubmit={(e: FormEvent) => {
             e.preventDefault();
-
             const form = e.currentTarget;
             const formData = new FormData(form as HTMLFormElement);
             const entries = Object.fromEntries(formData.entries());
+            isOpenedSetter(false);
           }}
           className="px-6 py-2 flex flex-col gap-3"
         >
@@ -106,7 +120,16 @@ const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
               >
                 Done
               </button>
-              <button className="ml-3 hover:underline">Cancel</button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  isOpenedSetter(false);
+                }}
+                className="ml-3 hover:underline"
+              >
+                Cancel
+              </button>
             </span>
           </div>
         </form>

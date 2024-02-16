@@ -19,6 +19,7 @@ type t_recentBooks = {
 };
 function Home() {
   const [recentBooks, setRecentBooks] = useState<Array<t_recentBooks> | []>([]);
+  const [isBookFormOpen, setIsBookFormOpen] = useState(false);
 
   function getRecentBooks(library: t_library) {
     // grabs only the recently add or updated notes
@@ -105,7 +106,13 @@ function Home() {
 
   return (
     <main id="home-page" className="h-[100dvh]">
-      <BookForm isOpened={true} type="Add" />
+      {isBookFormOpen && (
+        <BookForm
+          isOpenedSetter={setIsBookFormOpen}
+          isOpened={isBookFormOpen}
+          type="Add"
+        />
+      )}
       <motion.div
         id="card-items-container"
         className="grid grid-rows-2 grid-cols-2 h-full"
@@ -137,7 +144,10 @@ function Home() {
               </h1>
             </span>
             <span className="flex gap-2 flex-col">
-              <button className="flex content-center add-icon w-[max-content] text-xl font-regular py-1 px-3 bg-primary-link rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200">
+              <button
+                onClick={() => setIsBookFormOpen(true)}
+                className="flex content-center add-icon w-[max-content] text-xl font-regular py-1 px-3 bg-primary-link rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
+              >
                 Add book
               </button>
               <button className="flex content-center library-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-green-200 rounded-sm hover:shadow-btn-hover-active hover:transition-shadow shadow-btn-hover transition-shadow duration-200">
