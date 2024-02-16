@@ -51,22 +51,35 @@ const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
 
           <div className="book-form-inputs-container items-center flex gap-2">
             <label
+              onClick={(e) => {
+                const currentTarget = e.currentTarget;
+                setIsFavorite(!isFavorite ? true : false);
+                if (isFavorite) {
+                  currentTarget.classList.replace(
+                    "checked-favorite",
+                    "unchecked-favorite"
+                  );
+                  return;
+                }
+                currentTarget.classList.replace(
+                  "unchecked-favorite",
+                  "checked-favorite"
+                );
+              }}
               id="favorite-label"
-              className="text-md w-[3em] h-[1.4em] bg-primary-main "
+              className="unchecked-favorite text-md w-[3em] h-[1.4em] "
               htmlFor="favorite"
             />
             <input
               onChange={(e) => {
                 const currentTarget = e.currentTarget;
-                console.log("checnged");
                 if (isFavorite) {
                   currentTarget.value = "favorite";
+                  console.log(currentTarget.value);
                   return;
                 }
                 currentTarget.value = "";
-              }}
-              onClick={() => {
-                setIsFavorite(isFavorite ? false : true);
+                console.log(currentTarget.value);
               }}
               type="checkbox"
               name="favorite"
