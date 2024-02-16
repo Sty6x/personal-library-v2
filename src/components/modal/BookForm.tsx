@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type t_newBookForm = {
   isOpened: boolean;
@@ -7,6 +7,7 @@ type t_newBookForm = {
 };
 const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const [isFavorite, setIsFavorite] = useState(false);
   useEffect(() => {
     dialogRef.current?.showModal();
   }, []);
@@ -49,10 +50,27 @@ const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
           </div>
 
           <div className="book-form-inputs-container items-center flex gap-2">
+            <label
+              id="favorite-label"
+              className="text-md w-[3em] h-[1.4em] bg-primary-main "
+              htmlFor="favorite"
+            />
             <input
-              type="button"
+              onChange={(e) => {
+                const currentTarget = e.currentTarget;
+                console.log("checnged");
+                if (isFavorite) {
+                  currentTarget.value = "favorite";
+                  return;
+                }
+                currentTarget.value = "";
+              }}
+              onClick={() => {
+                setIsFavorite(isFavorite ? false : true);
+              }}
+              type="checkbox"
               name="favorite"
-              id="favorite-button-form"
+              id="favorite"
               className="rounded w-[min-content] px-2 py-1 outline-none border-separator-100 border border-solid"
             />
             <label className="text-md" htmlFor="favorite">

@@ -101,3 +101,28 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+#favorite-label {
+  border: #d9d9d9 1px solid;
+  border-radius: 500px;
+  position: relative;
+}
+
+#favorite-label::before {
+  position: absolute;
+  border-radius: 50%;
+  content: "";
+  display: inline-block;
+  left: 60%;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 75%;
+  width: 35%;
+  background-color: whitesmoke;
+}
