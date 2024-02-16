@@ -15,15 +15,15 @@ const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
     <dialog
       ref={dialogRef}
       id=" book-modal"
-      className="flex rounded shadow-btn-hover items-center"
+      className="flex rounded-md shadow-btn-hover items-center"
     >
-      <div className="h-[max-content] w-[450px] ">
+      <div className="h-[max-content] w-[400px] ">
         <div className="">
-          <h1 className="text-2xl font-bold px-6 py-4">{type} Book</h1>
+          <h1 className="text-2xl font-bold px-6 py-3">{type} Book</h1>
         </div>
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="px-6 pb-2 flex flex-col gap-3"
+          className="px-6 py-2 flex flex-col gap-3"
         >
           <div className="book-form-inputs-container flex flex-col gap-1">
             <label className="text-md block text-lg" htmlFor="title">
@@ -33,7 +33,7 @@ const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
               type="text"
               name="title"
               id="title"
-              className="rounded w-full px-2 py-2 outline-none border-separator-100 border border-solid"
+              className="rounded w-full px-2 py-1 outline-none border-separator-100 border border-solid"
             />
           </div>
           <div className="book-form-inputs-container flex flex-col gap-1">
@@ -44,7 +44,7 @@ const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
               type="text"
               name="author"
               id="author"
-              className="rounded w-full px-2 py-2 outline-none border-separator-100 border border-solid"
+              className="rounded w-full px-2 py-1 outline-none border-separator-100 border border-solid"
             />
           </div>
 
@@ -53,7 +53,7 @@ const BookForm = ({ isOpened, type, children }: t_newBookForm) => {
               type="button"
               name="favorite"
               id="favorite-button-form"
-              className="rounded w-[min-content] px-2 py-2 outline-none border-separator-100 border border-solid"
+              className="rounded w-[min-content] px-2 py-1 outline-none border-separator-100 border border-solid"
             />
             <label className="text-md" htmlFor="favorite">
               Add to favorites
