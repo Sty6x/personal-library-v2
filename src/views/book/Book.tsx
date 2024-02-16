@@ -110,6 +110,10 @@ const Book = () => {
     }
   }
 
+  function handlePageEdit(updatedBook: t_bookFormData) {
+    console.log(updatedBook);
+  }
+
   useEffect(() => {
     if (Object.keys(params)[1] === "pageID") {
       setRedirect(true);
@@ -123,12 +127,14 @@ const Book = () => {
       id="book-page"
       className={`relative bg-gridWhite min-h-[100dvh] flex justify-center`}
     >
-      <EditBookBtn />
+      <EditBookBtn openBookForm={setIsBookFormOpen} />
       {isBookFormOpen && (
         <BookForm
+          submitHandler={handlePageEdit}
           isOpened={isBookFormOpen}
           isOpenedSetter={setIsBookFormOpen}
           type="Edit"
+          editCurrentBook={currentBook}
         />
       )}
       {!redirect ? (

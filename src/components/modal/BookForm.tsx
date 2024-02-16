@@ -4,19 +4,25 @@ import { t_bookFormData } from "../../types/t_library";
 type t_newBookForm = {
   isOpened: boolean;
   type: "Add" | "Edit";
-  children?: React.ReactNode;
   isOpenedSetter: React.Dispatch<React.SetStateAction<boolean>>;
   submitHandler: (bookData: t_bookFormData) => void;
+  editCurrentBook?: t_bookFormData;
 };
 const BookForm = ({
   isOpened,
   type,
-  children,
   isOpenedSetter,
   submitHandler,
+  editCurrentBook,
 }: t_newBookForm) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(
+    editCurrentBook
+      ? editCurrentBook.favorite === "favorite"
+        ? true
+        : false
+      : false
+  );
   useEffect(() => {
     if (isOpened) {
       dialogRef.current?.showModal();
@@ -48,7 +54,10 @@ const BookForm = ({
               formData.entries()
             ) as t_bookFormData;
 
-            submitHandler(entries);
+            submitHandler({
+              ...entries,
+              favorite: isFavorite ? "favorite" : "",
+            });
             isOpenedSetter(false);
           }}
           className="px-6 py-2 flex flex-col gap-3"
@@ -58,6 +67,7 @@ const BookForm = ({
               Title
             </label>
             <input
+              defaultValue={editCurrentBook?.title}
               required
               type="text"
               name="title"
@@ -70,6 +80,7 @@ const BookForm = ({
               Author
             </label>
             <input
+              defaultValue={editCurrentBook?.author}
               required
               type="text"
               name="author"
@@ -96,20 +107,19 @@ const BookForm = ({
                 );
               }}
               id="favorite-label"
-              className="unchecked-favorite text-md w-[3em] h-[1.4em] "
+              className={`${
+                editCurrentBook
+                  ? editCurrentBook.favorite !== "favorite"
+                    ? "unchecked-favorite"
+                    : "checked-favorite"
+                  : "unchecked-favorite"
+              } text-md w-[3em] h-[1.4em] `}
               htmlFor="favorite"
             />
             <input
-              onChange={(e) => {
-                const currentTarget = e.currentTarget;
-                if (isFavorite) {
-                  currentTarget.value = "favorite";
-                  console.log(currentTarget.value);
-                  return;
-                }
-                currentTarget.value = "";
-                console.log(currentTarget.value);
-              }}
+              defaultValue={
+                editCurrentBook?.favorite !== undefined ? "favorite" : ""
+              }
               type="checkbox"
               name="favorite"
               id="favorite"
