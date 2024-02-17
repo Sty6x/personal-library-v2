@@ -29,6 +29,9 @@ class Library {
 
   private parseLibrary(arr: any) {
     if (localStorage.length === 0) {
+      localStorage.setItem("books", JSON.stringify([]));
+      localStorage.setItem("pages", JSON.stringify([]));
+      localStorage.setItem("notes", JSON.stringify([]));
       return {
         notes: [],
         pages: [],
