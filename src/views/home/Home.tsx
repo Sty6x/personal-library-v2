@@ -116,7 +116,8 @@ function Home() {
   }
 
   useEffect(() => {
-    getRecentBooks(LibraryStorage);
+    console.log(LibraryStorage);
+    LibraryStorage.books.length > 0 && getRecentBooks(LibraryStorage);
   }, []);
 
   useEffect(() => {
@@ -135,7 +136,7 @@ function Home() {
       )}
       <motion.div
         id="card-items-container"
-        className="grid grid-rows-2 grid-cols-2 h-full"
+        className="grid grid-rows-2 grid-cols-2 h-full max-w-full"
         key={"container"}
       >
         <motion.div
@@ -176,7 +177,7 @@ function Home() {
             </span>
           </div>
         </motion.div>
-        {recentBooks?.length === 0 ? "Nothing here" : renderRecentBooks}
+        {recentBooks?.length === 0 ? null : renderRecentBooks}
       </motion.div>
     </main>
   );
