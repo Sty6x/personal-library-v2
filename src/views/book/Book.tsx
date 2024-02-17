@@ -118,7 +118,6 @@ const Book = () => {
       ...updatedBookData,
     };
     setCurrentbook({ ...(updatedBook as t_currentBook) });
-
     LibraryStorage.updateBook(updatedBook);
   }
 
@@ -129,11 +128,16 @@ const Book = () => {
       favorite: setFavorite,
     }));
     LibraryStorage.updateBook({ ...currentBook, favorite: setFavorite });
+    setIsFavorite((prev) => (prev ? false : true));
   }
-
   useEffect(() => {
-    handleFavorite();
-  }, [isFavorite]);
+    if (currentBook.favorite === "favorite") {
+      setIsFavorite(true);
+      return;
+    } else if (currentBook.favorite === "") {
+      setIsFavorite(false);
+    }
+  }, [currentBook]);
 
   useEffect(() => {
     if (Object.keys(params)[1] === "pageID") {
@@ -194,11 +198,7 @@ const Book = () => {
                     Start Reading
                   </Link>
                 </motion.div>
-                <motion.button
-                  whileHover={{ scale: 0.9 }}
-                  whileTap={{ scale: 0.7 }}
-                  onClick={() => setIsFavorite((prev) => (prev ? false : true))}
-                  type="button"
+                <span
                   className={`${isFavorite ? "favorite" : ""}`}
                   id="favorite-button"
                 />
