@@ -194,7 +194,9 @@ const Book = () => {
                     Start Reading
                   </Link>
                 </motion.div>
-                <button
+                <motion.button
+                  whileHover={{ scale: 0.9 }}
+                  whileTap={{ scale: 0.7 }}
                   onClick={() => setIsFavorite((prev) => (prev ? false : true))}
                   type="button"
                   className={`${isFavorite ? "favorite" : ""}`}
