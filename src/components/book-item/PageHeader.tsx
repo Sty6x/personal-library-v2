@@ -31,12 +31,12 @@ const PageHeader = ({
 
   return (
     <header
-      className={`z-20 sticky top-0 border-b-black border-solid bg-white bg-gridWhite py-6`}
+      className={`flex flex-col z-20 sticky top-0 border-b-black border-solid bg-white bg-gridWhite py-6`}
     >
-      <Link to={"/library"} className="underline text-lg">
+      <Link to={"/library"} className="underline text-lg w-fit">
         Go back to library
       </Link>
-      <Link to={`/${bookID}`}>
+      <Link to={`/${bookID}`} className="inline-block w-fit">
         <div className="w-[fit-content]">
           <span>
             <h1
