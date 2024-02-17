@@ -42,10 +42,9 @@ class Library {
 
   private delete(
     key: "books" | "notes" | "pages",
-    newItem: t_book | t_note | t_page,
-    cb?: (newItem: t_book | t_note | t_page) => void
+    newItem: t_book | t_note | t_page | (() => void)
   ) {
-    if (cb !== undefined) return cb(newItem);
+    if (typeof newItem === "function") return newItem();
     const filteredItems = this[key].filter((item) => item.id !== newItem.id);
     this[key] = filteredItems !== null ? filteredItems : (this[key] as any);
     localStorage.setItem(key, JSON.stringify(filteredItems));
@@ -112,7 +111,7 @@ class Library {
           ...currentBook.pageIDs.filter((pageID) => pageID !== page.id),
         ],
       });
-      this.delete("notes", page, (page) => {
+      this.delete("notes", () => {
         const filterPageNotes = LibraryStorage.notes.filter(
           (note) => note.pageID !== page.id
         );
@@ -179,6 +178,22 @@ class Library {
 
   updateBook(updatedBook: t_book) {
     this.update("books", updatedBook);
+  }
+
+  deleteBook(currentBook: t_book) {
+    this.delete("notes", () => {
+      const filteredNotes = this.notes.filter(
+        (note) => note.bookID !== currentBook.id
+      );
+      this["notes"] = [...filteredNotes];
+    });
+    this.delete("pages", () => {
+      const filteredNotes = this.pages.filter(
+        (page) => page.bookID !== currentBook.id
+      );
+      this["pages"] = [...filteredNotes];
+    });
+    this.delete("books", currentBook);
   }
 }
 const LibraryStorage = Library.getInstance();

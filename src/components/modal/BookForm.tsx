@@ -7,6 +7,7 @@ type t_newBookForm = {
   isOpenedSetter: React.Dispatch<React.SetStateAction<boolean>>;
   submitHandler: (bookData: t_bookFormData) => void;
   editCurrentBook?: t_bookFormData;
+  deleteHandler?: () => void;
 };
 const BookForm = ({
   isOpened,
@@ -14,6 +15,7 @@ const BookForm = ({
   isOpenedSetter,
   submitHandler,
   editCurrentBook,
+  deleteHandler,
 }: t_newBookForm) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [isFavorite, setIsFavorite] = useState(
@@ -148,6 +150,15 @@ const BookForm = ({
                 Cancel
               </button>
             </span>
+            {type === "Edit" && (
+              <button
+                onClick={() => deleteHandler !== undefined && deleteHandler()}
+                type="button"
+                className="ml-auto hover:underline text-accent-danger font-bold"
+              >
+                Remove Book
+              </button>
+            )}
           </div>
         </form>
       </div>

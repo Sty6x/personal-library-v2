@@ -112,7 +112,12 @@ const Book = () => {
     }
   }
 
-  function handlePageEdit(updatedBookData: t_bookFormData) {
+  function handleBookDelete() {
+    navigate("/");
+    LibraryStorage.deleteBook(currentBook);
+  }
+
+  function handleBookEdit(updatedBookData: t_bookFormData) {
     const updatedBook: t_book = {
       ...currentBook,
       ...updatedBookData,
@@ -155,11 +160,12 @@ const Book = () => {
       <EditBookBtn openBookForm={setIsBookFormOpen} />
       {isBookFormOpen && (
         <BookForm
-          submitHandler={handlePageEdit}
+          submitHandler={handleBookEdit}
           isOpened={isBookFormOpen}
           isOpenedSetter={setIsBookFormOpen}
           type="Edit"
           editCurrentBook={currentBook}
+          deleteHandler={handleBookDelete}
         />
       )}
       {!redirect ? (
