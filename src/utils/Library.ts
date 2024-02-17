@@ -28,10 +28,21 @@ class Library {
   }
 
   private parseLibrary(arr: any) {
+    if (localStorage.length === 0) {
+      return {
+        notes: [],
+        pages: [],
+        books: [],
+      };
+    }
     const [notes, pages, books] = arr.map((item: any) => {
       return [...JSON.parse(item[1])];
     });
-    return { notes, pages, books };
+    return {
+      notes,
+      pages,
+      books,
+    };
   }
 
   private getLibrary(): t_library {
@@ -186,12 +197,14 @@ class Library {
         (note) => note.bookID !== currentBook.id
       );
       this["notes"] = [...filteredNotes];
+      localStorage.setItem("notes", JSON.stringify(filteredNotes));
     });
     this.delete("pages", () => {
-      const filteredNotes = this.pages.filter(
+      const filteredPages = this.pages.filter(
         (page) => page.bookID !== currentBook.id
       );
-      this["pages"] = [...filteredNotes];
+      this["pages"] = [...filteredPages];
+      localStorage.setItem("pages", JSON.stringify(filteredPages));
     });
     this.delete("books", currentBook);
   }

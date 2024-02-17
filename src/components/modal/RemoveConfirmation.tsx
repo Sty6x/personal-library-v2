@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
 
 type DialogProps = {
   handleConfirmDelete: () => void;
@@ -12,7 +11,7 @@ type DialogProps = {
     type: "Note" | "Page" | "Book";
   };
 };
-const PageEdit = ({
+const RemoveConfirmation = ({
   handleConfirmDelete,
   modalSetter,
   isOpen,
@@ -58,7 +57,6 @@ const PageEdit = ({
           </button>
           <button
             onClick={() => {
-              // navigate back to the previous if it exists and if not go forward but if neither go back to the book
               modalSetter(false);
               handleConfirmDelete();
             }}
@@ -72,4 +70,4 @@ const PageEdit = ({
   );
 };
 
-export default PageEdit;
+export default RemoveConfirmation;
