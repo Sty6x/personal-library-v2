@@ -8,11 +8,13 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+    errorElement: <p>Gago</p>,
   },
 
   {
     path: "/library",
     element: <Home />,
+    errorElement: <p>Gago</p>,
   },
 
   {
@@ -25,6 +27,7 @@ const router = createBrowserRouter([
         element: <Page />,
       },
     ],
+    errorElement: <p>Gago</p>,
   },
 ]);
 
