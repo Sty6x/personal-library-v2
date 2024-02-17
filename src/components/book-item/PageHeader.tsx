@@ -36,7 +36,7 @@ const PageHeader = ({
       <Link to={"/library"} className="underline text-lg w-fit">
         Go back to library
       </Link>
-      <Link to={`/${bookID}`} className="inline-block w-fit">
+      <Link to={`/${bookID}`} className="inline-block w-fit hover:underline">
         <div className="w-[fit-content]">
           <span>
             <h1

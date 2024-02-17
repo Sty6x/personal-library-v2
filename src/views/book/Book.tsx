@@ -28,8 +28,10 @@ const Book = () => {
     ...(bookData as t_currentBook),
   });
   const [redirect, setRedirect] = useState(false);
-
   const [isBookFormOpen, setIsBookFormOpen] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(
+    currentBook.favorite === "favorite" ? true : false
+  );
 
   function handlePageAdd() {
     const sortedPages = getRelatedItems<t_page>(
@@ -120,6 +122,19 @@ const Book = () => {
     LibraryStorage.updateBook(updatedBook);
   }
 
+  function handleFavorite() {
+    const setFavorite = isFavorite ? "favorite" : "";
+    setCurrentbook((prev) => ({
+      ...prev,
+      favorite: setFavorite,
+    }));
+    LibraryStorage.updateBook({ ...currentBook, favorite: setFavorite });
+  }
+
+  useEffect(() => {
+    handleFavorite();
+  }, [isFavorite]);
+
   useEffect(() => {
     if (Object.keys(params)[1] === "pageID") {
       setRedirect(true);
@@ -162,22 +177,30 @@ const Book = () => {
               </span>
             </div>
             <div className="max-w-[max-content] flex gap-3 flex-col mt-3">
-              <motion.div
-                whileTap={{
-                  x: currentBook.pageIDs.length === 0 ? [0, 5, -5, 0] : [],
-                }}
-              >
-                <Link
-                  to={`/${currentBook.id}/${
-                    currentBook.pageIDs.length === 0
-                      ? " "
-                      : currentBook.pageIDs[0]
-                  }`}
-                  className="before:h-[1em] before:w-[1em] before:mr-[.3em] read-icon  relative flex content-center bg-primary-link  items-center rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-5 py-2 text-3xl font-medium w-full"
+              <div className="flex items-center gap-4">
+                <motion.div
+                  whileTap={{
+                    x: currentBook.pageIDs.length === 0 ? [0, 5, -5, 0] : [],
+                  }}
                 >
-                  Start Reading
-                </Link>
-              </motion.div>
+                  <Link
+                    to={`/${currentBook.id}/${
+                      currentBook.pageIDs.length === 0
+                        ? " "
+                        : currentBook.pageIDs[0]
+                    }`}
+                    className="before:h-[1em] before:w-[1em] before:mr-[.3em] read-icon  relative flex content-center bg-primary-link  items-center rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-5 py-2 text-3xl font-medium w-full"
+                  >
+                    Start Reading
+                  </Link>
+                </motion.div>
+                <button
+                  onClick={() => setIsFavorite((prev) => (prev ? false : true))}
+                  type="button"
+                  className={`${isFavorite ? "favorite" : ""}`}
+                  id="favorite-button"
+                />
+              </div>
 
               <span className="flex gap-4 items-center">
                 <button

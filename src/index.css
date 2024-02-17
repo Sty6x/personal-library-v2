@@ -153,3 +153,17 @@ input[type="checkbox"] {
   border: none;
   background-color: #cd8d7a;
 }
+
+#favorite-button {
+  background-image: url("./assets/icons/favorite-icon-alt.svg");
+  display: inline-block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 30px;
+  width: 30px;
+}
+
+#favorite-button.favorite {
+  background-image: url("./assets/icons/favorite-icon.svg");
+}
