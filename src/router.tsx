@@ -3,18 +3,19 @@ import Home from "./views/home/Home";
 import Page from "./views/book/page/Page";
 import Book from "./views/book/Book";
 import bookLoader from "./utils/loader/bookLoader";
+import ErrorPage from "./components/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-    errorElement: <p>Gago</p>,
+    errorElement: <ErrorPage />,
   },
 
   {
     path: "/library",
     element: <Home />,
-    errorElement: <p>Gago</p>,
+    errorElement: <ErrorPage />,
   },
 
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
         element: <Page />,
       },
     ],
-    errorElement: <p>Gago</p>,
+    errorElement: <ErrorPage />,
   },
 ]);
 

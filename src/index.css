@@ -11,6 +11,10 @@
   color: var(--text-color);
 }
 
+#err-back {
+  margin-inline: auto;
+}
+
 .bg-gridWhite {
   background-image: url("./assets/images/grid-white-bg.png");
   background-repeat: repeat;

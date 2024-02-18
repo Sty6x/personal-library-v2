@@ -116,7 +116,6 @@ function Home() {
   }
 
   useEffect(() => {
-    console.log(LibraryStorage);
     LibraryStorage.books.length > 0 && getRecentBooks(LibraryStorage);
   }, []);
 
