@@ -12,6 +12,7 @@ import { formatDistance } from "date-fns";
 import LibraryStorage from "../../utils/Library.ts";
 import BookForm from "../../components/modal/BookForm.tsx";
 import { uid } from "uid";
+import { Link } from "react-router-dom";
 
 type t_recentBooks = {
   id: string;
@@ -170,9 +171,12 @@ function Home() {
               >
                 Add book
               </button>
-              <button className="flex content-center library-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-green-200 rounded-sm hover:shadow-btn-hover-active hover:transition-shadow shadow-btn-hover transition-shadow duration-200">
+              <Link
+                to={"/library"}
+                className="flex content-center library-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-green-200 rounded-sm hover:shadow-btn-hover-active hover:transition-shadow shadow-btn-hover transition-shadow duration-200"
+              >
                 Open your library
-              </button>
+              </Link>
             </span>
           </div>
         </motion.div>

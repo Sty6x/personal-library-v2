@@ -4,6 +4,7 @@ import Page from "./views/book/page/Page";
 import Book from "./views/book/Book";
 import bookLoader from "./utils/loader/bookLoader";
 import ErrorPage from "./components/ErrorPage";
+import Library from "./views/library/Library";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
 
   {
     path: "/library",
-    element: <Home />,
+    element: <Library />,
     errorElement: <ErrorPage />,
   },
 
