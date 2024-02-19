@@ -12,8 +12,8 @@ const BookItem = ({
   animate?: boolean;
   color: string;
   motionKey: number;
-  children: ReactNode;
-  noteContents: string;
+  children?: ReactNode;
+  noteContents?: string;
   link: string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
