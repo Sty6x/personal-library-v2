@@ -7,7 +7,9 @@ const BookItem = ({
   children,
   noteContents,
   link,
+  animate = false,
 }: {
+  animate?: boolean;
   color: string;
   motionKey: number;
   children: ReactNode;
@@ -18,7 +20,7 @@ const BookItem = ({
   return (
     // higher order composition
     <motion.div
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => setIsHovered(animate ? true : false)}
       onMouseLeave={() => setIsHovered(false)}
       key={motionKey}
       style={{ backgroundColor: color }}

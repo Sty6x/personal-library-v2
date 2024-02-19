@@ -80,6 +80,7 @@ function Home() {
     (book: t_recentBooks, i: number) => {
       return (
         <BookItem
+          animate={true}
           key={book.id}
           color={book.color}
           motionKey={i}
