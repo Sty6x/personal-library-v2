@@ -10,7 +10,7 @@ import getRelatedItems from "../../../utils/getRelatedItems";
 import { AnimatePresence } from "framer-motion";
 import Note from "../../../components/Notes";
 import { uid } from "uid";
-import PageHeader from "../../../components/book-item/PageHeader";
+import PageHeader from "../../../components/PageHeader";
 import LibraryStorage from "../../../utils/Library";
 import PageNavigator from "../../../components/PageNavigator";
 import RemoveConfirmation from "../../../components/modal/RemoveConfirmation";

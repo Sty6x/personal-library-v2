@@ -4,15 +4,32 @@ import BookItemList from "../../components/BookItemList";
 import { t_book } from "../../types/t_library";
 import { useState } from "react";
 import BookItem from "../../components/book-item/BookItem";
-import { formatDistance } from "date-fns/formatDistance";
 const Library = () => {
   const books: Array<t_book> = useLoaderData() as Array<t_book>;
   const [bookList, setBookList] = useState<Array<t_book>>([...books]);
 
+  const colors = [
+    "#CD8D7A",
+    "#C3E2C2",
+    "#EAECCC",
+    "#BFA68D",
+    "#A4C4A3",
+    "#D9E4D1",
+    "#D4BE9B",
+    "#A4AEA0",
+    "#BEBFAE",
+    "#D1D8D3",
+  ];
+
   const renderBookItems = bookList.map((book, i) => {
     return (
-      <BookItem key={book.id} color={"red"} motionKey={i} link={`/${book.id}`}>
-        <span className="text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
+      <BookItem
+        key={book.id}
+        color={colors[Math.floor(Math.random() * colors.length)]}
+        motionKey={i}
+        link={`/${book.id}`}
+      >
+        <span className="max-w-[250px] leading-6 text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
           {book.title}
         </span>
         <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">

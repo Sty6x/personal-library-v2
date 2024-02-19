@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import BookItemContents from "./BookItemContents";
 
 const BookItem = ({
@@ -20,19 +20,17 @@ const BookItem = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
-    // higher order composition
     <>
       {!animate ? (
         <Link
           className="flex items-center justify-center cursor-pointer  rounded-sm shadow-btn-hover transition-shadow hover:transition-shadow hover:shadow-btn-hover-active"
           style={{ backgroundColor: color }}
-          to={`${!animate ? link : "#"}`}
+          to={link}
         >
           <BookItemContents>{children}</BookItemContents>
         </Link>
       ) : (
         <motion.div
-          // onClick={() => !animate && navigate(link)}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           key={motionKey}
