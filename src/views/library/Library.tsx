@@ -142,7 +142,7 @@ const Library = () => {
         </header>
         <section id="book-item-list-container" className="flex flex-col gap-16">
           <BookItemList
-            link="/recent-books"
+            link="recent-books"
             linkName="Recent Books"
             bookItems={renderRecentBooks}
             headerTitle="

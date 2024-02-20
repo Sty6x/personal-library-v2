@@ -23,7 +23,7 @@ const BookItem = ({
     <>
       {!animate ? (
         <Link
-          className="flex items-center justify-center cursor-pointer  rounded-sm shadow-btn-hover transition-shadow hover:transition-shadow hover:shadow-btn-hover-active"
+          className="flex items-center h-[350px] justify-center cursor-pointer rounded-sm shadow-btn-hover transition-shadow hover:transition-shadow hover:shadow-btn-hover-active"
           style={{ backgroundColor: color }}
           to={link}
         >

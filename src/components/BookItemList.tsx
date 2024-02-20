@@ -15,7 +15,7 @@ const BookItemList = ({
   link,
 }: t_BookItemList) => {
   return (
-    <div>
+    <section>
       <div id="book-list-header" className="flex mb-4">
         <h3 className="text-3xl text-gray-200">{headerTitle}</h3>
         {addLink && (
@@ -30,7 +30,7 @@ const BookItemList = ({
       <div className="grid grid-cols-2 auto-rows-[minmax(250px,1fr)] gap-4">
         {bookItems}
       </div>
-    </div>
+    </section>
   );
 };
 
