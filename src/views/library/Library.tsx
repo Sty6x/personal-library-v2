@@ -10,17 +10,38 @@ import { uid } from "uid";
 import Sidebar from "../../components/Sidebar";
 
 const colors = [
-  "#CD8D7A",
-  "#C3E2C2",
-  "#EAECCC",
-  "#BFA68D",
-  "#A4C4A3",
-  "#D9E4D1",
-  "#D4BE9B",
-  "#A4AEA0",
-  "#BEBFAE",
-  "#D1D8D3",
+  "#ECE1C4", // Similar to original
+  "#E8E3C3", // Similar to original
+  "#E3E2C2", // Similar to original
+  "#E0E3C4", // Similar to original
+  "#DCE2C4", // Similar to original
+  "#D9E2C4", // Similar to original
+  "#C1E5E3", // More blue hue
+  "#C1DAE5", // More blue hue
+  "#C1CCE5", // More blue hue
+  "#C1BEE5", // More blue hue
+  "#E3C1C1", // More red hue
+  "#E5C1C1", // More red hue
+  "#E5C1CF", // More red hue
+  "#E5C1E0", // More red hue
 ];
+
+const BookItemContents = ({ book }: { book: t_book }) => {
+  return (
+    <>
+      <span className="max-w-[400px] leading-7 text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
+        {book.title}
+      </span>
+      <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
+        by {book.author}
+      </span>
+      <span className="text-md min-[1930px]:text-[1rem]  max-[1440px]:text-[.8rem] font-semi-bold">
+        Pages {book.pageIDs.length} • Notes {3}
+      </span>
+    </>
+  );
+};
+
 const Library = () => {
   const books: Array<t_book> = useLoaderData() as Array<t_book>;
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -60,15 +81,7 @@ const Library = () => {
         motionKey={i}
         link={`/${book.id}`}
       >
-        <span className="max-w-[400px] leading-7 text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
-          {book.title}
-        </span>
-        <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
-          by {book.author}
-        </span>
-        <span className="text-md min-[1930px]:text-[1rem]  max-[1440px]:text-[.8rem] font-semi-bold">
-          Pages {book.pageIDs.length} • Notes {3}
-        </span>
+        <BookItemContents book={book} />
       </BookItem>
     );
   });
@@ -81,15 +94,7 @@ const Library = () => {
         motionKey={i}
         link={`/${book.id}`}
       >
-        <span className="max-w-[400px] leading-7 text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
-          {book.title}
-        </span>
-        <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
-          by {book.author}
-        </span>
-        <span className="text-md min-[1930px]:text-[1rem]  max-[1440px]:text-[.8rem] font-semi-bold">
-          Pages {book.pageIDs.length} • Notes {3}
-        </span>
+        <BookItemContents book={book} />
       </BookItem>
     );
   });
