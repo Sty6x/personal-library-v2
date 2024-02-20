@@ -60,6 +60,14 @@ const App = () => {
     LibraryStorage.addBook(newBook);
   }
 
+  function getFavorites(): t_book[] {
+    const favorites: Array<t_book> = LibraryStorage.books.filter(
+      (book) => book.favorite === "favorite"
+    );
+    console.log(favorites);
+    return favorites;
+  }
+
   function getRecentBooks(): t_book[] {
     const [first, second]: Array<t_book> = LibraryStorage.books.sort(
       (a, b) =>
@@ -67,6 +75,7 @@ const App = () => {
     );
     return [first, second];
   }
+
   function getNotRecentBooks(): t_book[] {
     const filter = bookList.filter(
       (book) =>
@@ -74,31 +83,21 @@ const App = () => {
     );
     return filter;
   }
-  const renderAllBooks = getNotRecentBooks().map((book, i) => {
-    return (
-      <BookItem
-        key={book.id}
-        color={colors[Math.floor(Math.random() * colors.length)]}
-        motionKey={i}
-        link={`/${book.id}`}
-      >
-        <BookItemContents book={book} />
-      </BookItem>
-    );
-  });
 
-  const renderRecentBooks = getRecentBooks().map((book, i) => {
-    return (
-      <BookItem
-        key={book.id}
-        color={colors[Math.floor(Math.random() * colors.length)]}
-        motionKey={i}
-        link={`/${book.id}`}
-      >
-        <BookItemContents book={book} />
-      </BookItem>
-    );
-  });
+  function bookRenderer(books: () => Array<t_book>) {
+    return books().map((book, i) => {
+      return (
+        <BookItem
+          key={book.id}
+          color={colors[Math.floor(Math.random() * colors.length)]}
+          motionKey={i}
+          link={`/${book.id}`}
+        >
+          <BookItemContents book={book} />
+        </BookItem>
+      );
+    });
+  }
 
   useEffect(() => {
     console.log(location.pathname === "/app");
@@ -154,7 +153,13 @@ const App = () => {
           </div>
         </header>
         <Outlet
-          context={{ renderItems: { renderAllBooks, renderRecentBooks } }}
+          context={{
+            renderItems: {
+              renderNotRecent: bookRenderer(getNotRecentBooks),
+              renderRecentBooks: bookRenderer(getRecentBooks),
+              renderFavoriteBooks: bookRenderer(getFavorites),
+            },
+          }}
         />
       </div>
     </main>

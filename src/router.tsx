@@ -5,8 +5,9 @@ import Book from "./views/book/Book";
 import bookLoader from "./utils/loader/bookLoader";
 import ErrorPage from "./components/ErrorPage";
 import App from "./views/app/App";
-import libraryLoader from "./utils/loader/libraryLoader";
+import appLoader from "./utils/loader/appLoader";
 import Library from "./views/app/Library";
+import Favorites from "./views/app/Favorites";
 
 const router = createBrowserRouter([
   {
@@ -18,27 +19,24 @@ const router = createBrowserRouter([
   {
     path: "/app",
     element: <App />,
-    loader: libraryLoader,
+    loader: appLoader,
     errorElement: <ErrorPage />,
     children: [
       {
         path: "library",
         element: <Library />,
-        loader: libraryLoader,
         errorElement: <ErrorPage />,
       },
 
       {
         path: "favorites",
-        element: <App />,
-        loader: libraryLoader,
+        element: <Favorites />,
         errorElement: <ErrorPage />,
       },
 
       {
         path: "recent",
         element: <App />,
-        loader: libraryLoader,
         errorElement: <ErrorPage />,
       },
     ],

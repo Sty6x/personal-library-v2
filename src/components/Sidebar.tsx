@@ -13,15 +13,15 @@ const Sidebar = () => {
           </Link>
         </div>
         <NavLink
-          to={""}
+          to={"/app/library"}
           className="nav-icon inline-block logo py-4 h-[50px] bg-gray-100 rounded"
         />
-        <Link
-          to={""}
+        <NavLink
+          to={"/app/favorites"}
           className="nav-icon inline-block logo py-4 h-[50px] bg-gray-100 rounded"
         />
-        <Link
-          to={""}
+        <NavLink
+          to={"/app/recents"}
           className="nav-icon inline-block logo py-4 h-[50px] bg-gray-100 rounded"
         />
       </nav>
