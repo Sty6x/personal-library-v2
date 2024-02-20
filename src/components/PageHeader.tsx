@@ -33,7 +33,7 @@ const PageHeader = ({
     <header
       className={`flex flex-col z-20 sticky top-0 border-b-black border-solid bg-white bg-gridWhite py-6`}
     >
-      <Link to={"/library"} className="underline text-lg w-fit">
+      <Link to={"/app/library"} className="underline text-lg w-fit">
         Go back to library
       </Link>
       <Link to={`/${bookID}`} className="inline-block w-fit hover:underline">
