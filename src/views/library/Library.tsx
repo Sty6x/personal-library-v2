@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import libImage from "../../assets/images/libimage.png";
 import BookItemList from "../../components/BookItemList";
 import { t_book, t_bookFormData } from "../../types/t_library";
@@ -46,7 +46,7 @@ const Library = () => {
         motionKey={i}
         link={`/${book.id}`}
       >
-        <span className="max-w-[250px] leading-7 text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
+        <span className="max-w-[400px] leading-7 text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
           {book.title}
         </span>
         <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
@@ -70,17 +70,16 @@ const Library = () => {
         />
       )}
       <Sidebar />
-      <div className="relative outline-none w-[80%] max-w-[1440px] flex flex-col justify-start mx-16 my-16">
+      <div className="relative outline-none w-full max-w-[1440px] flex flex-col justify-start mx-16 my-5">
         <header className="py-4">
           <div id="library-header-contents" className="flex items-center">
             <span className=" inline-block">
-              <h2 className="text-4xl">Hello, Welcome back!</h2>
-              <h1 className="text-2xl font-bold">Your Library</h1>
-              <div className="items-center flex border-gray-100 border-2 border-solid rounded px-2 py-1">
+              <h2 className="text-6xl">Library</h2>
+              <div className="mt-4 items-center flex border-gray-100 border-2 border-solid rounded px-2 py-1">
                 <span id="search-bar" className="items-center flex">
                   <label id="search-label" htmlFor="search" />
                   <input
-                    className="p-3 outline-none"
+                    className="py-2 px-3 outline-none w-[300px] max-w-[400px]"
                     type="search"
                     name="search"
                     id="search"
@@ -106,7 +105,19 @@ const Library = () => {
             </span>
           </div>
         </header>
-        <BookItemList>{renderBookItems}</BookItemList>
+        <BookItemList bookItems={renderBookItems}>
+          <div id="book-list-header" className="flex mb-4">
+            <h3 className="text-3xl text-gray-200">
+              Here are the recent books you've read.
+            </h3>
+            <Link
+              to={"/recent-books"}
+              className="flex items-center ml-auto py-1 px-4 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
+            >
+              Recent Books
+            </Link>
+          </div>
+        </BookItemList>
       </div>
     </main>
   );
