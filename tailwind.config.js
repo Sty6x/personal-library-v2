@@ -17,6 +17,7 @@ export default {
       "book-item": "1px 6px 6px 6px rgb(0 0 0 / 0.1)",
       header: "0px 5px 3px -1px rgb(0 0 0 / 0.2)",
       sb: "2px 0px 3px 1px #1d1d1d20",
+      "focus-border": "0px 0px 10px 1px #CCD7EC",
     },
     fontFamily: {
       serif: ["Abhaya Libre", "serif"],
@@ -44,6 +45,7 @@ export default {
         three: "#436850",
       },
       pallete: {
+        test: "#CCD7EC",
         danger: "#D75F3B",
       },
     },

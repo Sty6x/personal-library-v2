@@ -132,7 +132,13 @@ const App = () => {
           <div id="library-header-contents" className="flex items-center">
             <span className=" inline-block">
               <h2 className="text-6xl">Library</h2>
-              <div className="mt-4 items-center flex border-gray-100 border-2 border-solid rounded px-2 py-1">
+              <div
+                className={`mt-4 items-center flex ${
+                  isSearchFocused
+                    ? "border-pallete-test shadow-focus-border"
+                    : "border-gray-100"
+                } transition-all duration-150 ease-in-out border-2 border-solid rounded px-2 py-1`}
+              >
                 <span id="search-bar" className="items-center flex">
                   <label id="search-label" htmlFor="search" />
                   <input
