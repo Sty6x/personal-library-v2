@@ -81,7 +81,7 @@ const App = () => {
   }
 
   function getFavorites(): t_book[] {
-    const favorites: Array<t_book> = LibraryStorage.books.filter(
+    const favorites: Array<t_book> = bookList.filter(
       (book) => book.favorite === "favorite"
     );
     console.log(favorites);
@@ -89,7 +89,7 @@ const App = () => {
   }
 
   function getRecentBooks(): t_book[] {
-    const [first, second]: Array<t_book> = LibraryStorage.books.sort(
+    const [first, second]: Array<t_book> = bookList.sort(
       (a, b) =>
         (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
     );
