@@ -74,8 +74,26 @@ const Library = () => {
         <header className="py-4">
           <div id="library-header-contents" className="flex items-center">
             <span className=" inline-block">
-              <h2 className="text-6xl">Hello, Welcome back!</h2>
-              <h1 className="text-5xl font-bold">Your Library</h1>
+              <h2 className="text-4xl">Hello, Welcome back!</h2>
+              <h1 className="text-2xl font-bold">Your Library</h1>
+              <div className="items-center flex border-gray-100 border-2 border-solid rounded px-2 py-1">
+                <span id="search-bar" className="items-center flex">
+                  <label id="search-label" htmlFor="search" />
+                  <input
+                    className="p-3 outline-none"
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="Search you books..."
+                  />
+                </span>
+                <button
+                  className="ml-auto py-2 px-5 font-semibold bg-primary-main text-white rounded-sm"
+                  type="button"
+                >
+                  Search
+                </button>
+              </div>
               <button
                 onClick={() => setIsModalOpened(true)}
                 className="mt-4 flex items-center add-icon w-[max-content] text-xl font-regular py-1 px-4 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
