@@ -17,7 +17,7 @@ const BookItemList = ({
   return (
     <section>
       <div id="book-list-header" className="flex mb-4">
-        <h3 className="text-3xl text-gray-200">{headerTitle}</h3>
+        <h3 className="text-3xl text-black">{headerTitle}</h3>
         {addLink && (
           <Link
             to={`/${link}`}

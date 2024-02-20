@@ -32,7 +32,7 @@ function Home() {
   function getRecentBooks(library: t_library) {
     // grabs only the recently add or updated notes
 
-    const colors = ["#CD8D7A", "#C3E2C2", "#EAECCC"];
+    const colors = ["#E3C1C1", "#E0E3C4", "#C1E5E3"];
     const sortedByDateNotes: Array<t_note> = library.notes.sort(
       (a, b) =>
         (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
