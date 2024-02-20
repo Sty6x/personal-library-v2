@@ -222,7 +222,7 @@ const Book = () => {
                 >
                   Add a page
                 </button>
-                <Link to={"/library"} className="underline">
+                <Link to={"/app/library"} className="underline">
                   Go back to library
                 </Link>
               </span>

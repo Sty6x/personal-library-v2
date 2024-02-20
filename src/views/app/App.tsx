@@ -101,7 +101,8 @@ const App = () => {
 
   useEffect(() => {
     console.log(location.pathname === "/app");
-    if (location.pathname === "/app") navigate("/app/library");
+    if (location.pathname === "/app" || location.pathname === "/app/")
+      navigate("/app/library");
   }, []);
   return (
     <main

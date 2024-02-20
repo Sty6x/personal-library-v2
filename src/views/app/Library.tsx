@@ -4,12 +4,12 @@ import { t_appItems } from "../../types/context";
 
 const Library = () => {
   const {
-    renderItems: { renderAllBooks, renderRecentBooks },
+    renderItems: { renderNotRecent, renderRecentBooks },
   } = useOutletContext<t_appItems<React.ReactNode>>();
   return (
     <section id="library-page" className="flex flex-col gap-16">
       <BookItemList
-        link="recent-books"
+        link="app/recent-books"
         linkName="Recent Books"
         bookItems={renderRecentBooks}
         headerTitle="
@@ -18,7 +18,7 @@ const Library = () => {
 
       <BookItemList
         addLink={false}
-        bookItems={renderAllBooks}
+        bookItems={renderNotRecent}
         headerTitle="Explore more of your books."
       />
     </section>
