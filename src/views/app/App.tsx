@@ -1,13 +1,14 @@
-import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
+import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
 import libImage from "../../assets/images/libimage.png";
-import BookItemList from "../../components/BookItemList";
+import { AnimatePresence, motion } from "framer-motion";
 import { t_book, t_bookFormData } from "../../types/t_library";
-import { useEffect, useState } from "react";
+import { KeyboardEvent, useEffect, useState } from "react";
 import BookItem from "../../components/book-item/BookItem";
 import BookForm from "../../components/modal/BookForm";
 import LibraryStorage from "../../utils/Library";
 import { uid } from "uid";
 import Sidebar from "../../components/Sidebar";
+import BookItemList from "../../components/BookItemList";
 
 const colors = [
   "#ECE1C4", // Similar to original
@@ -46,6 +47,7 @@ const App = () => {
   const books: Array<t_book> = useLoaderData() as Array<t_book>;
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [bookList, setBookList] = useState<Array<t_book>>([...books]);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const navigate = useNavigate();
 
   function addNewBook(bookData: t_bookFormData) {
@@ -108,6 +110,13 @@ const App = () => {
     <main
       id="library-page"
       className="relative min-h-[100dvh] bg-gridWhite flex "
+      onClick={(e: any) => {
+        const target = e.target;
+        if (target.id !== "search") setIsSearchFocused(false);
+      }}
+      onKeyDown={(e: KeyboardEvent) => {
+        if (e.key === "Escape") setIsSearchFocused(false);
+      }}
     >
       {isModalOpened && (
         <BookForm
@@ -127,6 +136,7 @@ const App = () => {
                 <span id="search-bar" className="items-center flex">
                   <label id="search-label" htmlFor="search" />
                   <input
+                    onFocus={() => setIsSearchFocused(true)}
                     className="py-2 px-3 outline-none w-[300px] max-w-[400px]"
                     type="search"
                     name="search"
@@ -153,15 +163,41 @@ const App = () => {
             </span>
           </div>
         </header>
-        <Outlet
-          context={{
-            renderItems: {
-              renderNotRecent: bookRenderer(getNotRecentBooks),
-              renderRecentBooks: bookRenderer(getRecentBooks),
-              renderFavoriteBooks: bookRenderer(getFavorites),
-            },
-          }}
-        />
+        <div>
+          <AnimatePresence>
+            {isSearchFocused ? (
+              <motion.div
+                key={"searched-items"}
+                initial={{ y: 0, opacity: 0 }}
+                animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
+                exit={{ y: 10, opacity: 0, transition: { duration: 0.2 } }}
+              >
+                <BookItemList
+                  bookItems={bookRenderer(() => bookList)}
+                  headerTitle="Search Query"
+                  addLink={false}
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key={"outlet-items"}
+                initial={{ y: 0, opacity: 0 }}
+                animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
+                exit={{ y: 10, opacity: 0, transition: { duration: 0.2 } }}
+              >
+                <Outlet
+                  context={{
+                    renderItems: {
+                      renderNotRecent: bookRenderer(getNotRecentBooks),
+                      renderRecentBooks: bookRenderer(getRecentBooks),
+                      renderFavoriteBooks: bookRenderer(getFavorites),
+                    },
+                  }}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </main>
   );
