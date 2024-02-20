@@ -95,7 +95,10 @@ const Library = () => {
   });
 
   return (
-    <main id="library-page" className="min-h-[100dvh] bg-gridWhite flex ">
+    <main
+      id="library-page"
+      className="relative min-h-[100dvh] bg-gridWhite flex "
+    >
       {isModalOpened && (
         <BookForm
           type="Add"
