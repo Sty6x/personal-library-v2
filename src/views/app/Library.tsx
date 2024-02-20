@@ -10,7 +10,7 @@ const Library = () => {
     <section id="library-page" className="flex flex-col gap-16">
       <BookItemList
         link="app/recent"
-        linkName="Recent Books"
+        linkName="Go to recent books"
         bookItems={renderRecentBooks}
         headerTitle="
       Here are the recent books you've read."

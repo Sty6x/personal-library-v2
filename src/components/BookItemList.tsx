@@ -21,7 +21,7 @@ const BookItemList = ({
         {addLink && (
           <Link
             to={`/${link}`}
-            className="flex items-center ml-auto py-1 px-4 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
+            className="flex items-center ml-auto py-1 px-4 font-bold bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
           >
             {linkName}
           </Link>

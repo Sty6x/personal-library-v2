@@ -2,7 +2,7 @@ import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
 import libImage from "../../assets/images/libimage.png";
 import { AnimatePresence, motion } from "framer-motion";
 import { t_book, t_bookFormData } from "../../types/t_library";
-import { KeyboardEvent, useEffect, useState } from "react";
+import { KeyboardEvent, useEffect, useRef, useState } from "react";
 import BookItem from "../../components/book-item/BookItem";
 import BookForm from "../../components/modal/BookForm";
 import LibraryStorage from "../../utils/Library";
@@ -47,8 +47,10 @@ const App = () => {
   const books: Array<t_book> = useLoaderData() as Array<t_book>;
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [bookList, setBookList] = useState<Array<t_book>>([...books]);
+  const [queriedBookList, setQueriedBookList] = useState<Array<t_book>>([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const navigate = useNavigate();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   function addNewBook(bookData: t_bookFormData) {
     const bookDate = new Date().toString();
@@ -60,6 +62,22 @@ const App = () => {
       pageIDs: [],
     };
     LibraryStorage.addBook(newBook);
+  }
+
+  // simple Search query for looking up a single category,
+  // TITLE
+  // filter through the books that contains the title when user presses enter or search button
+  // on out of focus
+
+  // advanced recursively check each data set and return the items
+  // that contains the queried string, title, author
+
+  function handleBookSearch(input: string) {
+    if (input === "") return setQueriedBookList([]);
+    const filterBooks = bookList.filter((book) =>
+      book.title.toLowerCase().includes(input.toLowerCase())
+    );
+    setQueriedBookList([...filterBooks]);
   }
 
   function getFavorites(): t_book[] {
@@ -102,6 +120,16 @@ const App = () => {
   }
 
   useEffect(() => {
+    setQueriedBookList([]);
+  }, [isSearchFocused]);
+
+  useEffect(() => {
+    if (inputRef.current && inputRef.current.value === "") {
+      setIsSearchFocused(false);
+    }
+  }, []);
+
+  useEffect(() => {
     console.log(location.pathname === "/app");
     if (location.pathname === "/app" || location.pathname === "/app/")
       navigate("/app/library");
@@ -139,20 +167,31 @@ const App = () => {
                     : "border-gray-100"
                 } transition-all duration-150 ease-in-out border-2 border-solid rounded px-2 py-1`}
               >
-                <span id="search-bar" className="items-center flex">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleBookSearch(
+                      inputRef.current ? inputRef.current.value : " "
+                    );
+                  }}
+                  id="search-bar"
+                  className="items-center flex"
+                >
                   <label id="search-label" htmlFor="search" />
                   <input
+                    ref={inputRef}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="py-2 px-3 outline-none w-[300px] max-w-[400px]"
+                    className="py-2 px-3 placeholder:font-bold placeholder:text-gray-200 font-bold text-md outline-none w-[300px] max-w-[400px]"
                     type="search"
                     name="search"
                     id="search"
-                    placeholder="Search you books..."
+                    placeholder="Search book titles..."
+                    autoComplete="off"
                   />
-                </span>
+                </form>
                 <button
+                  id="submit"
                   className="ml-auto py-2 px-5 font-semibold bg-primary-main text-white rounded-sm  "
-                  type="button"
                 >
                   Search
                 </button>
@@ -179,8 +218,10 @@ const App = () => {
                 exit={{ y: 10, opacity: 0, transition: { duration: 0.2 } }}
               >
                 <BookItemList
-                  bookItems={bookRenderer(() => bookList)}
-                  headerTitle="Search Query"
+                  bookItems={bookRenderer(() => queriedBookList)}
+                  headerTitle={`Search results for: ${
+                    inputRef.current ? inputRef.current.value : " "
+                  }`}
                   addLink={false}
                 />
               </motion.div>

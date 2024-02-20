@@ -47,6 +47,7 @@ export default {
       pallete: {
         test: "#CCD7EC",
         danger: "#D75F3B",
+        orange: "#ECCCCE",
       },
     },
   },

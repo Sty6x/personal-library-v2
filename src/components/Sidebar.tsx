@@ -6,7 +6,7 @@ const Sidebar = () => {
       id="library-sidebar"
       className="min-h-[100dvh] relative box-border w-[6em] bg-white shadow-sb flex flex-col items-center py-8"
     >
-      <nav className="flex fixed box-border flex-col gap-4 mt-4">
+      <nav className="flex fixed box-border flex-col gap-4 mt-1">
         <div className=" border-b-separator-200 border-b border-solid pb-4">
           <Link to={"/"} className="inline-block text-lg font-bold" id="logo">
             Re:Read
