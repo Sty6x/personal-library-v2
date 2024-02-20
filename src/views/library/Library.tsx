@@ -38,7 +38,42 @@ const Library = () => {
     LibraryStorage.addBook(newBook);
   }
 
-  const renderBookItems = bookList.map((book, i) => {
+  function getRecentBooks(): t_book[] {
+    const [first, second]: Array<t_book> = LibraryStorage.books.sort(
+      (a, b) =>
+        (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
+    );
+    return [first, second];
+  }
+  function getNotRecentBooks(): t_book[] {
+    const filter = bookList.filter(
+      (book) =>
+        book.id !== getRecentBooks()[0].id && book.id !== getRecentBooks()[1].id
+    );
+    return filter;
+  }
+  const renderAllBooks = getNotRecentBooks().map((book, i) => {
+    return (
+      <BookItem
+        key={book.id}
+        color={colors[Math.floor(Math.random() * colors.length)]}
+        motionKey={i}
+        link={`/${book.id}`}
+      >
+        <span className="max-w-[400px] leading-7 text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
+          {book.title}
+        </span>
+        <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
+          by {book.author}
+        </span>
+        <span className="text-md min-[1930px]:text-[1rem]  max-[1440px]:text-[.8rem] font-semi-bold">
+          Pages {book.pageIDs.length} • Notes {3}
+        </span>
+      </BookItem>
+    );
+  });
+
+  const renderRecentBooks = getRecentBooks().map((book, i) => {
     return (
       <BookItem
         key={book.id}
@@ -87,7 +122,7 @@ const Library = () => {
                   />
                 </span>
                 <button
-                  className="ml-auto py-2 px-5 font-semibold bg-primary-main text-white rounded-sm"
+                  className="ml-auto py-2 px-5 font-semibold bg-primary-main text-white rounded-sm  "
                   type="button"
                 >
                   Search
@@ -105,19 +140,21 @@ const Library = () => {
             </span>
           </div>
         </header>
-        <BookItemList bookItems={renderBookItems}>
-          <div id="book-list-header" className="flex mb-4">
-            <h3 className="text-3xl text-gray-200">
-              Here are the recent books you've read.
-            </h3>
-            <Link
-              to={"/recent-books"}
-              className="flex items-center ml-auto py-1 px-4 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
-            >
-              Recent Books
-            </Link>
-          </div>
-        </BookItemList>
+        <section id="book-item-list-container" className="flex flex-col gap-16">
+          <BookItemList
+            link="/recent-books"
+            linkName="Recent Books"
+            bookItems={renderRecentBooks}
+            headerTitle="
+              Here are the recent books you've read."
+          />
+
+          <BookItemList
+            addLink={false}
+            bookItems={renderAllBooks}
+            headerTitle="Explore more of your books."
+          />
+        </section>
       </div>
     </main>
   );

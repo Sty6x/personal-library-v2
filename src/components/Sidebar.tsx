@@ -7,9 +7,9 @@ const Sidebar = () => {
       className="min-h-[100dvh] w-[5em] box bg-white shadow-sb flex flex-col items-center py-8"
     >
       <div className=" border-b-separator-200 border-b border-solid pb-4">
-        <span className="inline-block  text-lg font-bold" id="logo">
+        <Link to={"/"} className="inline-block  text-lg font-bold" id="logo">
           Re:Read
-        </span>
+        </Link>
       </div>
       <nav className="flex flex-col gap-4 mt-4 ">
         <NavLink
