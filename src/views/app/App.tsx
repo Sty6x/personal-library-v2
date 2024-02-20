@@ -1,8 +1,8 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
 import libImage from "../../assets/images/libimage.png";
 import BookItemList from "../../components/BookItemList";
 import { t_book, t_bookFormData } from "../../types/t_library";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BookItem from "../../components/book-item/BookItem";
 import BookForm from "../../components/modal/BookForm";
 import LibraryStorage from "../../utils/Library";
@@ -42,10 +42,11 @@ const BookItemContents = ({ book }: { book: t_book }) => {
   );
 };
 
-const Library = () => {
+const App = () => {
   const books: Array<t_book> = useLoaderData() as Array<t_book>;
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [bookList, setBookList] = useState<Array<t_book>>([...books]);
+  const navigate = useNavigate();
 
   function addNewBook(bookData: t_bookFormData) {
     const bookDate = new Date().toString();
@@ -99,6 +100,10 @@ const Library = () => {
     );
   });
 
+  useEffect(() => {
+    console.log(location.pathname === "/app");
+    if (location.pathname === "/app") navigate("/app/library");
+  }, []);
   return (
     <main
       id="library-page"
@@ -148,24 +153,12 @@ const Library = () => {
             </span>
           </div>
         </header>
-        <section id="book-item-list-container" className="flex flex-col gap-16">
-          <BookItemList
-            link="recent-books"
-            linkName="Recent Books"
-            bookItems={renderRecentBooks}
-            headerTitle="
-              Here are the recent books you've read."
-          />
-
-          <BookItemList
-            addLink={false}
-            bookItems={renderAllBooks}
-            headerTitle="Explore more of your books."
-          />
-        </section>
+        <Outlet
+          context={{ renderItems: { renderAllBooks, renderRecentBooks } }}
+        />
       </div>
     </main>
   );
 };
 
-export default Library;
+export default App;
