@@ -7,6 +7,7 @@ import BookItem from "../../components/book-item/BookItem";
 import BookForm from "../../components/modal/BookForm";
 import LibraryStorage from "../../utils/Library";
 import { uid } from "uid";
+import Sidebar from "../../components/Sidebar";
 
 const colors = [
   "#CD8D7A",
@@ -59,10 +60,7 @@ const Library = () => {
   });
 
   return (
-    <main
-      id="library-page"
-      className="min-h-[100dvh] bg-gridWhite flex justify-center"
-    >
+    <main id="library-page" className="min-h-[100dvh] bg-gridWhite flex ">
       {isModalOpened && (
         <BookForm
           type="Add"
@@ -71,6 +69,7 @@ const Library = () => {
           submitHandler={addNewBook}
         />
       )}
+      <Sidebar />
       <div className="relative outline-none w-[80%] max-w-[1440px] flex flex-col justify-start mx-16 my-16">
         <header className="py-4">
           <div id="library-header-contents" className="flex items-center">
