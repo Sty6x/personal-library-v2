@@ -5,7 +5,7 @@ type DialogProps = {
   isOpen: boolean;
   modalSetter: React.Dispatch<React.SetStateAction<boolean>>;
   data: {
-    num: number;
+    num?: number;
     contents?: string;
     numberOfNotes?: number;
     type: "Note" | "Page" | "Book";
@@ -39,8 +39,10 @@ const RemoveConfirmation = ({
       <div className="px-6 pt-6">
         <div className="mb-1">
           <div className=" font-bold text-xl">
-            You're about to <span className="text-accent-danger">delete</span>{" "}
-            {type} #{num}
+            You're about to <span className="text-pallete-danger">delete</span>{" "}
+            <span className="text-accent-three">
+              {num !== undefined ? `${type} #${num}` : contents}
+            </span>
           </div>
           <div className="text-sm">This action cannot be undone.</div>
         </div>
@@ -60,7 +62,7 @@ const RemoveConfirmation = ({
               modalSetter(false);
               handleConfirmDelete();
             }}
-            className="font-bold hover:underline text-white px-3 py-2 bg-accent-danger rounded-sm ml-3"
+            className="font-bold hover:underline text-white px-3 py-2 bg-pallete-danger rounded-sm ml-3"
           >
             Confirm
           </button>{" "}

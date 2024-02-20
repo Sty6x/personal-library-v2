@@ -160,6 +160,7 @@ const Book = () => {
       <EditBookBtn openBookForm={setIsBookFormOpen} />
       {isBookFormOpen && (
         <BookForm
+          bookTitle={currentBook.title}
           submitHandler={handleBookEdit}
           isOpened={isBookFormOpen}
           isOpenedSetter={setIsBookFormOpen}
