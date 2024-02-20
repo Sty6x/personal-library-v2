@@ -199,7 +199,9 @@ const Book = () => {
                         ? " "
                         : currentBook.pageIDs[0]
                     }`}
-                    className="before:h-[1em] before:w-[1em] before:mr-[.3em] read-icon  relative flex content-center bg-primary-link  items-center rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-5 py-2 text-3xl font-medium w-full"
+                    className="before:h-[1em] before:w-[1.2em] before:mr-[.6em] read-icon relative flex content-center bg-accent-three text-white
+                     items-center rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 
+                     px-5 py-2 text-3xl font-medium w-full"
                   >
                     Start Reading
                   </Link>
@@ -215,7 +217,8 @@ const Book = () => {
                   onClick={() => {
                     handlePageAdd();
                   }}
-                  className="add-icon w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center bg-accent-green-200  rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-2 py-1 text-lg"
+                  className="add-icon-black w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center bg-accent-one 
+                  rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-2 py-1 text-lg"
                 >
                   Add a page
                 </button>

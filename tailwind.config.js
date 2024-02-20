@@ -31,19 +31,18 @@ export default {
         300: "#1d1d1d",
       },
       primary: {
-        button: "#E2C7BF",
-        main: "#CD8D7A",
-        link: "#DCB1A4",
+        main: "#12372A",
+      },
+      gray: {
+        100: "#D3D3D3",
+        200: "#838383",
       },
       accent: {
-        yellow: {
-          300: "#DBCC95",
-        },
-        green: {
-          100: "#EAECCC",
-          200: "#B8E3CF",
-          300: "#C3E2C2",
-        },
+        one: "#FBFADA",
+        two: "#ADBC9F",
+        three: "#436850",
+      },
+      pallete: {
         danger: "#D75F3B",
       },
     },

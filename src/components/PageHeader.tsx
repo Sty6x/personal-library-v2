@@ -97,7 +97,7 @@ const PageHeader = ({
               </span>
               <input
                 type="number"
-                className={`w-[2em] appearance-none outline-none  focus-within:border-b border-b border-b-black
+                className={`w-[2em] appearance-none outline-none focus-within:border-b border-b border-b-black
                 ${isScrolling ? "text-md" : "text-xl"}
                 `}
                 defaultValue={pageNumberInput}
@@ -129,7 +129,10 @@ const PageHeader = ({
             type="button"
             className={`
             ${isScrolling ? "text-md" : "text-xl"}
-             add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center py-1 `}
+             add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center 
+            py-1 px-3 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow
+            transition-shadow duration-20
+             `}
           >
             Add Note
           </button>
@@ -139,7 +142,10 @@ const PageHeader = ({
           <button
             className={`
             ${isScrolling ? "text-md" : "text-xl"}
-             add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center py-1`}
+             add-icon-black w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center
+            py-1 px-3 bg-accent-one text-black rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow
+            transition-shadow duration-20
+             `}
             onClick={() => {
               handleOnAddPage();
             }}

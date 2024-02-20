@@ -25,6 +25,7 @@ button {
   position: relative;
 }
 
+.add-icon-black::before,
 .add-icon::before,
 .library-icon::before,
 .read-icon::before,
@@ -43,6 +44,10 @@ button {
 
 .add-icon::before {
   background-image: url("./assets/icons/add.svg");
+}
+
+.add-icon-black::before {
+  background-image: url("./assets/icons/add-black.svg");
 }
 
 .read-icon::before {
