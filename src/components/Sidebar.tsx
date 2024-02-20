@@ -21,7 +21,7 @@ const Sidebar = () => {
           className="nav-icon inline-block logo py-4 h-[50px] bg-gray-100 rounded"
         />
         <NavLink
-          to={"/app/recents"}
+          to={"/app/recent"}
           className="nav-icon inline-block logo py-4 h-[50px] bg-gray-100 rounded"
         />
       </nav>

@@ -8,6 +8,7 @@ import App from "./views/app/App";
 import appLoader from "./utils/loader/appLoader";
 import Library from "./views/app/Library";
 import Favorites from "./views/app/Favorites";
+import Recent from "./views/app/Recent";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
 
       {
         path: "recent",
-        element: <App />,
+        element: <Recent />,
         errorElement: <ErrorPage />,
       },
     ],

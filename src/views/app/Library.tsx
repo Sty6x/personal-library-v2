@@ -9,7 +9,7 @@ const Library = () => {
   return (
     <section id="library-page" className="flex flex-col gap-16">
       <BookItemList
-        link="app/recent-books"
+        link="app/recent"
         linkName="Recent Books"
         bookItems={renderRecentBooks}
         headerTitle="
