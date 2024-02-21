@@ -154,14 +154,14 @@ function Home() {
                 className="
               text-3xl
               min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.8rem]  
-              font-semibold drop-shadow-text-shadow"
+              font-semibold"
               >
                 Personal Library.
               </p>
               <h1
                 className="
               text-5xl
-              min-[1930px]:text-[2.8rem] max-[1280px]:text-[2.8rem] max-[1280px]:leading-[2.4rem] font-bold drop-shadow-text-shadow"
+              min-[1930px]:text-[2.8rem] max-[1280px]:text-[2.8rem] max-[1280px]:leading-[2.4rem] font-bold"
               >
                 Recent books you've read.{" "}
               </h1>

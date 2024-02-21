@@ -81,7 +81,7 @@ const BookItem = ({
             hover:duration-200
             duration-200
             shadow-book-item
-             gap-4 px-10 min-[1921px]:px-20 py-6  min-w-[80%] min-h-[80%] max-h-[80%] max-w-[80%] w-[38em] h-[28em] bg-white rounded-md"
+            gap-4 px-10 min-[1921px]:px-20 py-8  min-w-[80%] min-h-[80%] max-h-[80%] max-w-[80%] w-[38em] h-[28em] bg-white rounded-md"
                 key="contents"
                 initial={{ opacity: 0, scale: 0, display: "none" }}
                 animate={{
@@ -98,23 +98,12 @@ const BookItem = ({
                   transition: { duration: 0.2 },
                 }}
               >
-                <div className="grid place-content-center gap-2">
+                <div className="flex flex-col gap-2">
                   <div className="flex flex-col">{children}</div>
                   <div>
                     {/* give fixed width and height for note contents  */}
                     <p className=" max-[1280px]:text-[1rem] text-[1rem] note-contents-preview">
-                      {/* {noteContents} */}
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book. It has survived not only five
-                      centuries, but also the leap into electronic typesetting,
-                      remaining essentially unchanged. It was popularised in the
-                      1960s with the release of Letraset sheets containing Lorem
-                      Ipsum passages, and more recently with desktop publishing
-                      software like Aldus PageMaker including versions of Lorem
-                      Ipsum.
+                      "{noteContents}"
                     </p>
                   </div>
                 </div>

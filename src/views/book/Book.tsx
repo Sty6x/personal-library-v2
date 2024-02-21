@@ -173,7 +173,7 @@ const Book = () => {
                 title={currentBook.title}
                 author={currentBook.author}
               />
-              <span className="text-lg drop-shadow-text-shadow">
+              <span className="text-lg ">
                 Pages Written {currentBook?.pageIDs.length} • Notes Added{" "}
                 {currentBook?.numOfNotes}
               </span>
