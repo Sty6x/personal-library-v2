@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 
 type t_BookItemList = {
-  bookItems: React.ReactNode;
+  bookItems: React.ReactNode[];
   headerTitle: string;
   addLink?: boolean;
   link?: string;
   linkName?: string;
+  onEmptyText?: string;
 };
 const BookItemList = ({
   bookItems,
@@ -13,11 +14,13 @@ const BookItemList = ({
   addLink = true,
   linkName,
   link,
+  onEmptyText,
 }: t_BookItemList) => {
   return (
     <section>
       <div id="book-list-header" className="flex mb-4">
         <h3 className="text-3xl text-black">{headerTitle}</h3>
+
         {addLink && (
           <Link
             to={`/${link}`}
@@ -28,7 +31,7 @@ const BookItemList = ({
         )}
       </div>
       <div className="grid grid-cols-2 auto-rows-[minmax(250px,1fr)] gap-4">
-        {bookItems}
+        {bookItems && bookItems.length > 0 ? bookItems : onEmptyText}
       </div>
     </section>
   );

@@ -12,6 +12,7 @@ const Favorites = () => {
         addLink={false}
         headerTitle="Your favorite books."
         bookItems={renderFavoriteBooks}
+        onEmptyText="You dont have any favorite books."
       />
     </section>
   );

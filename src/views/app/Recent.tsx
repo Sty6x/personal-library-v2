@@ -12,6 +12,7 @@ const Recent = () => {
         addLink={false}
         headerTitle="Your recently read books."
         bookItems={renderRecentBooks}
+        onEmptyText="Looks like you library is empty :("
       />
     </section>
   );

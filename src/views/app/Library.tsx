@@ -14,13 +14,17 @@ const Library = () => {
         bookItems={renderRecentBooks}
         headerTitle="
       Here are the recent books you've read."
+        onEmptyText="Looks like your library is empty :("
       />
 
-      <BookItemList
-        addLink={false}
-        bookItems={renderNotRecent}
-        headerTitle="Explore more of your books."
-      />
+      {renderNotRecent.length > 0 ? (
+        <BookItemList
+          addLink={false}
+          bookItems={renderNotRecent}
+          headerTitle="Explore more of your books."
+          onEmptyText="Add more books."
+        />
+      ) : null}
     </section>
   );
 };

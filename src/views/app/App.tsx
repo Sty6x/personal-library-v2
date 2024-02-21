@@ -62,6 +62,7 @@ const App = () => {
       pageIDs: [],
     };
     LibraryStorage.addBook(newBook);
+    setBookList((prev) => [...prev, newBook]);
   }
 
   // simple Search query for looking up a single category,
@@ -89,6 +90,7 @@ const App = () => {
   }
 
   function getRecentBooks(): t_book[] {
+    if (bookList.length < 2) return [bookList[0]];
     const [first, second]: Array<t_book> = bookList.sort(
       (a, b) =>
         (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
@@ -97,6 +99,7 @@ const App = () => {
   }
 
   function getNotRecentBooks(): t_book[] {
+    if (bookList.length < 2) return [];
     const filter = bookList.filter(
       (book) =>
         book.id !== getRecentBooks()[0].id && book.id !== getRecentBooks()[1].id
@@ -232,15 +235,19 @@ const App = () => {
                 animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
                 exit={{ y: 10, opacity: 0, transition: { duration: 0.2 } }}
               >
-                <Outlet
-                  context={{
-                    renderItems: {
-                      renderNotRecent: bookRenderer(getNotRecentBooks),
-                      renderRecentBooks: bookRenderer(getRecentBooks),
-                      renderFavoriteBooks: bookRenderer(getFavorites),
-                    },
-                  }}
-                />
+                {bookList.length > 0 ? (
+                  <Outlet
+                    context={{
+                      renderItems: {
+                        renderNotRecent: bookRenderer(getNotRecentBooks),
+                        renderRecentBooks: bookRenderer(getRecentBooks),
+                        renderFavoriteBooks: bookRenderer(getFavorites),
+                      },
+                    }}
+                  />
+                ) : (
+                  <p>Looks like your library is empty {":("}</p>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
