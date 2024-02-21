@@ -12,7 +12,7 @@ import { formatDistance } from "date-fns";
 import LibraryStorage from "../../utils/Library.ts";
 import BookForm from "../../components/modal/BookForm.tsx";
 import { uid } from "uid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BookItemContents from "../../components/book-item/BookItemContents.tsx";
 import PlaceholderBookItem from "../../components/PlaceholderBookItem.tsx";
 
@@ -34,7 +34,7 @@ const placeHolderData: Array<{ quote: string; color: string; author: string }> =
       quote:
         "“It’s difficult in times like these: ideals, dreams and cherished hopes rise within us, only to be crushed by grim reality. It’s a wonder I haven’t abandoned all my ideals, they seem so absurd and impractical. Yet I cling to them because I still believe, in spite of everything, that people are truly good at heart.“",
       author: " Anne frank, The Diary of a Young Girl",
-      color: "#9FBCB3",
+      color: "#A3BC9F",
     },
 
     {
@@ -48,7 +48,7 @@ const placeHolderData: Array<{ quote: string; color: string; author: string }> =
       quote:
         "“The way in which a man accepts his fate and all the suffering it entails, the way in which he takes up his cross, gives him ample opportunity—even under the most difficult circumstances—to add a deeper meaning to his life. It may remain brave, dignified and unselfish. Or in the bitter fight for self-preservation he may forget his human dignity and become no more than an animal.”",
       author: "Viktor Frankl, Man's Search For Meaning",
-      color: "#ECE7CC",
+      color: "#9FB5BC",
     },
   ];
 
@@ -57,9 +57,10 @@ function Home() {
     Array<t_recentBooks | undefined> | []
   >([]);
   const [isBookFormOpen, setIsBookFormOpen] = useState(false);
+  const navigate = useNavigate();
 
   function getRecentBooks(library: t_library) {
-    const colors = ["#E3C1C1", "#E0E3C4", "#C1E5E3"];
+    const colors = ["#ECE7CC", "#E0E3C4", "#C1E5E3"];
     const sortedByDateBooks: Array<t_book> = library.books.sort(
       (a, b) =>
         (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
@@ -140,6 +141,7 @@ function Home() {
       ...prev,
       { ...newBook, color: "pink", note: undefined, page: undefined },
     ]);
+    navigate(`/${newBook.id}`);
   }
 
   useEffect(() => {

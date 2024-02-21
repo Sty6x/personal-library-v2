@@ -9,11 +9,13 @@ const PlaceholderBookItem = ({
 }) => {
   return (
     <div
-      className={`grid place-content-center max-w-fit px-10 text-black text-xl `}
+      className={` flex justify-center items-center   text-black text-xl `}
       style={{ background: color }}
     >
-      {quote}
-      <span className="ml-auto mt-4 font-bold">-{author}</span>
+      <div className="max-w-[70%] font-semibold">
+        {quote}
+        <span className="block text-right mt-4 font-bold">-{author}</span>
+      </div>
     </div>
   );
 };
