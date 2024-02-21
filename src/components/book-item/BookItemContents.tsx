@@ -20,7 +20,7 @@ const BookItemContents = ({
       </span>
       <span className="my-1">
         <div className="text-3xl w-full leading-[1.8rem] font-bold">
-          <h1 className=" text-pretty max-w-[300px]">{book.title}</h1>
+          <h1 className=" ">{book.title}</h1>
         </div>
         <span className="text-md font-semibold">by {book.author}</span>
       </span>

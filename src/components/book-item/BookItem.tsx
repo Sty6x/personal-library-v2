@@ -17,7 +17,7 @@ const BookItemContentsLayout = ({ children }: { children: ReactNode }) => {
         scale: 0,
         transition: { duration: 0.2 },
       }}
-      className="flex flex-col max-w-[70%] w-[max-content] drop-shadow-text-shadow"
+      className="flex flex-col max-w-[70%] w-[350px] "
     >
       {children}
     </motion.div>
