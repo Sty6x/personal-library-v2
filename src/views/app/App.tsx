@@ -9,6 +9,7 @@ import LibraryStorage from "../../utils/Library";
 import { uid } from "uid";
 import Sidebar from "../../components/Sidebar";
 import BookItemList from "../../components/BookItemList";
+import BookItemContents from "../../components/book-item/BookItemContents";
 
 const colors = [
   "#ECE1C4", // Similar to original
@@ -26,22 +27,6 @@ const colors = [
   "#E5C1CF", // More red hue
   "#E5C1E0", // More red hue
 ];
-
-const BookItemContents = ({ book }: { book: t_book }) => {
-  return (
-    <>
-      <span className="max-w-[400px] leading-7 text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
-        {book.title}
-      </span>
-      <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
-        by {book.author}
-      </span>
-      <span className="text-md min-[1930px]:text-[1rem]  max-[1440px]:text-[.8rem] font-semi-bold">
-        Pages {book.pageIDs.length} • Notes {3}
-      </span>
-    </>
-  );
-};
 
 const App = () => {
   const books: Array<t_book> = useLoaderData() as Array<t_book>;

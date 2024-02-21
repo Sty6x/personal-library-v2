@@ -14,6 +14,7 @@ import BookForm from "../../components/modal/BookForm.tsx";
 import { uid } from "uid";
 import { Link } from "react-router-dom";
 import BookItemContents from "../../components/book-item/BookItemContents.tsx";
+import PlaceholderBookItem from "../../components/PlaceholderBookItem.tsx";
 
 type t_recentBooks = {
   id: string;
@@ -23,11 +24,13 @@ type t_recentBooks = {
   dateAdded: string;
   lastUpdated: string;
   color: string;
-  note: t_note;
-  page: t_page;
+  note: t_note | undefined;
+  page: t_page | undefined;
 };
 function Home() {
-  const [recentBooks, setRecentBooks] = useState<Array<t_recentBooks> | []>([]);
+  const [recentBooks, setRecentBooks] = useState<
+    Array<t_recentBooks | undefined> | []
+  >([]);
   const [isBookFormOpen, setIsBookFormOpen] = useState(false);
 
   function getRecentBooks(library: t_library) {
@@ -37,62 +40,61 @@ function Home() {
         (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
     );
     let recentBooks: Array<t_book> = [];
-    for (let i = 0; i < sortedByDateBooks.length; i++) {
-      if (recentBooks.length <= 3) {
-        recentBooks.push(sortedByDateBooks[i]);
-      }
+    for (let i = 0; i < 3; i++) {
+      recentBooks.push(sortedByDateBooks[i]);
     }
 
-    const getRecentBooks: Array<t_recentBooks> = recentBooks.map((book, i) => {
-      const note = library.notes.find(
-        (note) =>
-          note.bookID === book.id && note.lastUpdated === book.lastUpdated
-      );
+    const getRecentBooks: Array<t_recentBooks | undefined> = recentBooks.map(
+      (book, i) => {
+        if (book === undefined) return undefined;
+        const note = library.notes.find(
+          (note) =>
+            note.bookID === book.id && note.lastUpdated === book.lastUpdated
+        );
 
-      const page = library.pages.find((page) => page.id === note?.pageID);
-      console.log({ ...book, note, page });
-      return { ...book, note, page, color: colors[i] };
-    });
+        const page = library.pages.find((page) => page.id === note?.pageID);
+        console.log({ ...book, note, page });
+        return { ...book, note, page, color: colors[i] };
+      }
+    );
+    console.log(recentBooks);
     setRecentBooks([...getRecentBooks]);
   }
 
   const renderRecentBooks = recentBooks?.map(
-    (book: t_recentBooks, i: number) => {
+    (book: t_recentBooks | undefined, i: number) => {
       return (
         <>
-          {book.note !== undefined ? (
-            <BookItem
-              animate={true}
-              key={book.id}
-              color={book.color}
-              motionKey={i}
-              noteContents={book.note.contents}
-              link={`/${book.id}/${book.page.id}`}
-            >
-              <span className="text-md min-[1930px]:text-[1rem] max-[1440px]:text-[.8rem] font-semi-bold">
-                Last updated{" "}
-                {formatDistance(new Date(book.note.lastUpdated), new Date())}{" "}
-                ago.
-              </span>
-              <span className="text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
-                {book.title}
-              </span>
-              <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
-                by {book.author}
-              </span>
-              <span className="text-md min-[1930px]:text-[1rem]  max-[1440px]:text-[.8rem] font-semi-bold">
-                Page {book.page.pageNum} • Note #{book.note.noteNum}
-              </span>
-            </BookItem>
+          {book ? (
+            <>
+              {book.note && book.page ? (
+                <BookItem
+                  animate={true}
+                  key={book.id}
+                  color={book.color}
+                  motionKey={i}
+                  noteContents={book.note.contents}
+                  link={`/${book.id}/${book.page.id}`}
+                >
+                  <BookItemContents
+                    book={book}
+                    recentNote={book.note}
+                    recentPage={book.page}
+                  />
+                </BookItem>
+              ) : (
+                <BookItem
+                  key={book.id}
+                  color={book.color}
+                  motionKey={i}
+                  link={`/${book.id}`}
+                >
+                  <BookItemContents book={book} />
+                </BookItem>
+              )}
+            </>
           ) : (
-            <BookItem
-              key={book.id}
-              color={book.color}
-              motionKey={i}
-              link={`/${book.id}`}
-            >
-              <BookItemContents book={book} />
-            </BookItem>
+            <PlaceholderBookItem text={"Higher tonight"} color="wheat" />
           )}
         </>
       );
@@ -109,10 +111,15 @@ function Home() {
       pageIDs: [],
     };
     LibraryStorage.addBook(newBook);
+
+    setRecentBooks((prev) => [
+      ...prev,
+      { ...newBook, color: "pink", note: undefined, page: undefined },
+    ]);
   }
 
   useEffect(() => {
-    LibraryStorage.books.length > 0 && getRecentBooks(LibraryStorage);
+    getRecentBooks(LibraryStorage);
   }, []);
 
   useEffect(() => {
@@ -175,7 +182,7 @@ function Home() {
             </span>
           </div>
         </motion.div>
-        {recentBooks?.length === 0 ? null : renderRecentBooks}
+        {recentBooks?.length > 0 && renderRecentBooks}
       </motion.div>
     </main>
   );
