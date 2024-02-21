@@ -13,6 +13,7 @@ import LibraryStorage from "../../utils/Library.ts";
 import BookForm from "../../components/modal/BookForm.tsx";
 import { uid } from "uid";
 import { Link } from "react-router-dom";
+import BookItemContents from "../../components/book-item/BookItemContents.tsx";
 
 type t_recentBooks = {
   id: string;
@@ -30,48 +31,27 @@ function Home() {
   const [isBookFormOpen, setIsBookFormOpen] = useState(false);
 
   function getRecentBooks(library: t_library) {
-    // grabs only the recently add or updated notes
-
     const colors = ["#E3C1C1", "#E0E3C4", "#C1E5E3"];
-    const sortedByDateNotes: Array<t_note> = library.notes.sort(
+    const sortedByDateBooks: Array<t_book> = library.books.sort(
       (a, b) =>
         (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
     );
-    let recentNotes: Array<t_note> = [];
-    for (let i = 0; i < sortedByDateNotes.length; i++) {
-      if (recentNotes.length < 3) {
-        if (recentNotes.length === 0) {
-          recentNotes.push(sortedByDateNotes[i]);
-        } else {
-          // its going to keep pushing if some notes does not contain the same book id as the
-          // recent notes.
-          // else it will do nothing if it does and continue the loop
-          const currentBookID = sortedByDateNotes[i].bookID;
-          if (recentNotes.every((note) => note.bookID !== currentBookID)) {
-            recentNotes.push(sortedByDateNotes[i]);
-          }
-        }
+    let recentBooks: Array<t_book> = [];
+    for (let i = 0; i < sortedByDateBooks.length; i++) {
+      if (recentBooks.length <= 3) {
+        recentBooks.push(sortedByDateBooks[i]);
       }
     }
 
-    console.log(recentNotes);
-    // grabbing the books and pages from the most recent notes
-    // Notes are important to get the recent books to be rendered on the home screen
-    // NOTE bookItems will not occupy all spaces if:
-    // if there are no notes that exist.
-    // if there are missing notes aka if we are not able to grab different books.
-    // if there are missing books or non-existing books.
+    const getRecentBooks: Array<t_recentBooks> = recentBooks.map((book, i) => {
+      const note = library.notes.find(
+        (note) =>
+          note.bookID === book.id && note.lastUpdated === book.lastUpdated
+      );
 
-    // if the recentNotes length < 3
-
-    const getRecentBooks: Array<t_recentBooks> = recentNotes.map((note, i) => {
-      const book = LibraryStorage.books.find(
-        (book) => book.id === note.bookID
-      ) as t_book;
-      const page = LibraryStorage.pages.find(
-        (page) => page.id === note.pageID
-      ) as t_page;
-      return { ...book, color: colors[i], note, page };
+      const page = library.pages.find((page) => page.id === note?.pageID);
+      console.log({ ...book, note, page });
+      return { ...book, note, page, color: colors[i] };
     });
     setRecentBooks([...getRecentBooks]);
   }
@@ -79,28 +59,42 @@ function Home() {
   const renderRecentBooks = recentBooks?.map(
     (book: t_recentBooks, i: number) => {
       return (
-        <BookItem
-          animate={true}
-          key={book.id}
-          color={book.color}
-          motionKey={i}
-          noteContents={book.note.contents}
-          link={`/${book.id}/${book.page.id}`}
-        >
-          <span className="text-md min-[1930px]:text-[1rem] max-[1440px]:text-[.8rem] font-semi-bold">
-            Last updated{" "}
-            {formatDistance(new Date(book.note.lastUpdated), new Date())} ago.
-          </span>
-          <span className="text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
-            {book.title}
-          </span>
-          <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
-            by {book.author}
-          </span>
-          <span className="text-md min-[1930px]:text-[1rem]  max-[1440px]:text-[.8rem] font-semi-bold">
-            Page {book.page.pageNum} • Note #{book.note.noteNum}
-          </span>
-        </BookItem>
+        <>
+          {book.note !== undefined ? (
+            <BookItem
+              animate={true}
+              key={book.id}
+              color={book.color}
+              motionKey={i}
+              noteContents={book.note.contents}
+              link={`/${book.id}/${book.page.id}`}
+            >
+              <span className="text-md min-[1930px]:text-[1rem] max-[1440px]:text-[.8rem] font-semi-bold">
+                Last updated{" "}
+                {formatDistance(new Date(book.note.lastUpdated), new Date())}{" "}
+                ago.
+              </span>
+              <span className="text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
+                {book.title}
+              </span>
+              <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
+                by {book.author}
+              </span>
+              <span className="text-md min-[1930px]:text-[1rem]  max-[1440px]:text-[.8rem] font-semi-bold">
+                Page {book.page.pageNum} • Note #{book.note.noteNum}
+              </span>
+            </BookItem>
+          ) : (
+            <BookItem
+              key={book.id}
+              color={book.color}
+              motionKey={i}
+              link={`/${book.id}`}
+            >
+              <BookItemContents book={book} />
+            </BookItem>
+          )}
+        </>
       );
     }
   );
