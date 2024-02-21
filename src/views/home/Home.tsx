@@ -28,7 +28,29 @@ type t_recentBooks = {
   page: t_page | undefined;
 };
 
-const placeHolderData = [{ text: "" }];
+const placeHolderData: Array<{ quote: string; color: string; author: string }> =
+  [
+    {
+      quote:
+        "“It’s difficult in times like these: ideals, dreams and cherished hopes rise within us, only to be crushed by grim reality. It’s a wonder I haven’t abandoned all my ideals, they seem so absurd and impractical. Yet I cling to them because I still believe, in spite of everything, that people are truly good at heart.“",
+      author: " Anne frank, The Diary of a Young Girl",
+      color: "#9FBCB3",
+    },
+
+    {
+      quote:
+        "“If some people are so hungry for a feeling of importance that they actually go insane to get it, imagine what miracle you and I can achieve by giving people honest appreciation this side of insanity“",
+      author: "Daniel Carnegie, How to Win Friends and Influence People",
+      color: "#ECCCCC",
+    },
+
+    {
+      quote:
+        "“The way in which a man accepts his fate and all the suffering it entails, the way in which he takes up his cross, gives him ample opportunity—even under the most difficult circumstances—to add a deeper meaning to his life. It may remain brave, dignified and unselfish. Or in the bitter fight for self-preservation he may forget his human dignity and become no more than an animal.”",
+      author: "Viktor Frankl, Man's Search For Meaning",
+      color: "#ECE7CC",
+    },
+  ];
 
 function Home() {
   const [recentBooks, setRecentBooks] = useState<
@@ -96,11 +118,7 @@ function Home() {
               )}
             </>
           ) : (
-            <PlaceholderBookItem
-              key={uid(16)}
-              text={"Higher tonight"}
-              color="wheat"
-            />
+            <PlaceholderBookItem key={uid(16)} data={placeHolderData[i]} />
           )}
         </>
       );
