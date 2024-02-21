@@ -1,24 +1,18 @@
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
-const BookItemContents = ({ children }: { children: ReactNode }) => {
+import { t_book, t_currentBook } from "../../types/t_library";
+
+const BookItemContents = ({ book }: { book: t_book | t_currentBook }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0, display: "none" }}
-      animate={{
-        opacity: 1,
-        scale: 1,
-        display: "flex",
-        transition: { delay: 0.2 },
-      }}
-      exit={{
-        opacity: 0,
-        scale: 0,
-        transition: { duration: 0.2 },
-      }}
-      className="flex flex-col max-w-[70%] w-[max-content] drop-shadow-text-shadow"
-    >
-      {children}
-    </motion.div>
+    <>
+      <span className="max-w-[400px] leading-7 text-3xl min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.4rem] max-[1280px]:leading-[1.4rem] font-bold">
+        {book.title}
+      </span>
+      <span className="text-md min-[1930px]:text-[1.4rem] max-[1440px]:text-[1rem] font-semibold">
+        by {book.author}
+      </span>
+      <span className="text-md min-[1930px]:text-[1rem]  max-[1440px]:text-[.8rem] font-semi-bold">
+        Pages {book.pageIDs.length} • Notes {3}
+      </span>
+    </>
   );
 };
 export default BookItemContents;

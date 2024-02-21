@@ -1,7 +1,28 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode, useState } from "react";
 import { Link } from "react-router-dom";
-import BookItemContents from "./BookItemContents";
+
+const BookItemContentsLayout = ({ children }: { children: ReactNode }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0, display: "none" }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+        display: "flex",
+        transition: { delay: 0.2 },
+      }}
+      exit={{
+        opacity: 0,
+        scale: 0,
+        transition: { duration: 0.2 },
+      }}
+      className="flex flex-col max-w-[70%] w-[max-content] drop-shadow-text-shadow"
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 const BookItem = ({
   color,
@@ -21,15 +42,19 @@ const BookItem = ({
   const [isHovered, setIsHovered] = useState(false);
   return (
     <>
+      {/* NOTICE NOTICE  */}
+      {/*  This section renders the book contents only */}
       {!animate ? (
         <Link
-          className="flex items-center h-[350px] justify-center cursor-pointer rounded-sm shadow-btn-hover transition-shadow hover:transition-shadow hover:shadow-btn-hover-active"
+          className="flex items-center justify-center cursor-pointer rounded-sm shadow-btn-hover transition-shadow hover:transition-shadow hover:shadow-btn-hover-active"
           style={{ backgroundColor: color }}
           to={link}
         >
-          <BookItemContents>{children}</BookItemContents>
+          <BookItemContentsLayout>{children}</BookItemContentsLayout>
         </Link>
       ) : (
+        // {/* NOTICE NOTICE */}
+        // {/*  This section renders the notes contents if a note exists */}
         <motion.div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -42,7 +67,9 @@ const BookItem = ({
         >
           <AnimatePresence custom="popLayout">
             {!isHovered ? (
-              <BookItemContents key={"book"}>{children}</BookItemContents>
+              <BookItemContentsLayout key={"book"}>
+                {children}
+              </BookItemContentsLayout>
             ) : (
               <motion.a
                 href={link}
