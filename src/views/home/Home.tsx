@@ -27,6 +27,9 @@ type t_recentBooks = {
   note: t_note | undefined;
   page: t_page | undefined;
 };
+
+const placeHolderData = [{ text: "" }];
+
 function Home() {
   const [recentBooks, setRecentBooks] = useState<
     Array<t_recentBooks | undefined> | []
@@ -53,11 +56,9 @@ function Home() {
         );
 
         const page = library.pages.find((page) => page.id === note?.pageID);
-        console.log({ ...book, note, page });
         return { ...book, note, page, color: colors[i] };
       }
     );
-    console.log(recentBooks);
     setRecentBooks([...getRecentBooks]);
   }
 
@@ -77,6 +78,7 @@ function Home() {
                   link={`/${book.id}/${book.page.id}`}
                 >
                   <BookItemContents
+                    key={book.id}
                     book={book}
                     recentNote={book.note}
                     recentPage={book.page}
@@ -94,7 +96,11 @@ function Home() {
               )}
             </>
           ) : (
-            <PlaceholderBookItem text={"Higher tonight"} color="wheat" />
+            <PlaceholderBookItem
+              key={uid(16)}
+              text={"Higher tonight"}
+              color="wheat"
+            />
           )}
         </>
       );
@@ -134,6 +140,7 @@ function Home() {
           isOpenedSetter={setIsBookFormOpen}
           isOpened={isBookFormOpen}
           type="Add"
+          key={"bookform"}
         />
       )}
       <motion.div
@@ -142,13 +149,14 @@ function Home() {
         key={"container"}
       >
         <motion.div
+          key={"home-item"}
           variants={{
             initial: { opacity: 0, scale: 0 },
             animate: { opacity: 1, scale: 0.4 },
           }}
           className="grid place-content-center bg-cover bg-gridWhite"
         >
-          <div className="flex-col gap-1 flex max-w-[max-content]">
+          <div className="text-black flex-col gap-2 flex max-w-[max-content]">
             <span className="">
               <p
                 className="
@@ -156,29 +164,30 @@ function Home() {
               min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.8rem]  
               font-semibold"
               >
-                Personal Library.
+                Welcome to Re:Read
               </p>
               <h1
                 className="
-              text-5xl
-              min-[1930px]:text-[2.8rem] max-[1280px]:text-[2.8rem] max-[1280px]:leading-[2.4rem] font-bold"
+              text-[2.6rem] max-w-[13em] text-pretty font-bold"
               >
-                Recent books you've read.{" "}
+                {LibraryStorage.books.length === 0
+                  ? "Looks like you don't have any books yet."
+                  : "Recent books you've read."}
               </h1>
             </span>
-            <span className="flex gap-2 flex-col">
-              <button
-                onClick={() => setIsBookFormOpen(true)}
-                className="flex content-center add-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
-              >
-                Add book
-              </button>
+            <span className=" flex gap-2 ">
               <Link
                 to={"/app/library"}
                 className="flex content-center library-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-one bg-accent-green-200 rounded-sm hover:shadow-btn-hover-active hover:transition-shadow shadow-btn-hover transition-shadow duration-200"
               >
                 Open your library
               </Link>
+              <button
+                onClick={() => setIsBookFormOpen(true)}
+                className="flex content-center add-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
+              >
+                Add book
+              </button>
             </span>
           </div>
         </motion.div>
