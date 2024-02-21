@@ -2,7 +2,6 @@ import { Link, useOutletContext, useParams } from "react-router-dom";
 import getRelatedItems from "../utils/getRelatedItems";
 import { t_page } from "../types/t_library";
 import LibraryStorage from "../utils/Library";
-import { useEffect, useState } from "react";
 
 const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
   const { bookPageIDs } = useOutletContext<{

@@ -1,6 +1,7 @@
-export default function getRelatedItems<Type>(
+export default function getRelatedItems<Type extends { id: string }>(
   itemIDs: string | Array<string>,
   itemStore: Array<Type>,
+
   cb?: (items: Array<Type>) => Array<Type> | []
 ): Array<Type> {
   let items: Array<Type> = [];
