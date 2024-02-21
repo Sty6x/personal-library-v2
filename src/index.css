@@ -86,8 +86,8 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 7; /* number of lines to show */
-  line-clamp: 7;
+  -webkit-line-clamp: 6; /* number of lines to show */
+  line-clamp: 6;
   -webkit-box-orient: vertical;
   color: var(--light-shade);
 }

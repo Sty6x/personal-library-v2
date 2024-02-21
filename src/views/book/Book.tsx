@@ -162,7 +162,7 @@ const Book = () => {
       )}
       {!redirect ? (
         <section id="book-page-contents" className="grid place-items-center">
-          <div className="max-w-[60em]">
+          <div className="max-w-[40em]">
             <div>
               <span className="text-lg">
                 Last updated{" "}
