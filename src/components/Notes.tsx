@@ -5,8 +5,8 @@ import { formatDistance } from "date-fns";
 import InputField from "./InputField";
 
 interface t_dragEvents {
-  onDragStart: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragStart: (e: any) => void;
+  onDrop: (e: any) => void;
 }
 const Note = ({
   contents,
@@ -43,6 +43,14 @@ const Note = ({
     }
   }
 
+  function onDragEnd(e: any): void {
+    const dropTarget = e.currentTarget;
+    if (dropTarget.classList.contains("droppable")) {
+      dropTarget.classList.remove("droppable");
+      return;
+    }
+  }
+
   function onDragOver(e: React.DragEvent<HTMLDivElement>): void {
     e.preventDefault();
   }
@@ -66,7 +74,7 @@ const Note = ({
           onDragOver={onDragOver}
           onDragEnter={onDragEnter}
           onDragLeave={onDragLeave}
-          onDragEnd={onDragLeave}
+          onDragEnd={onDragEnd}
           onHoverStart={() => {
             setIsHovered(true);
           }}

@@ -126,15 +126,6 @@ const Book = () => {
     LibraryStorage.updateBook(updatedBook);
   }
 
-  function handleFavorite() {
-    const setFavorite = isFavorite ? "favorite" : "";
-    setCurrentbook((prev) => ({
-      ...prev,
-      favorite: setFavorite,
-    }));
-    LibraryStorage.updateBook({ ...currentBook, favorite: setFavorite });
-    setIsFavorite((prev) => (prev ? false : true));
-  }
   useEffect(() => {
     if (currentBook.favorite === "favorite") {
       setIsFavorite(true);

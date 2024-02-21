@@ -104,7 +104,7 @@ const Page = () => {
     LibraryStorage.updatePage(updateCurrentPage);
   }
 
-  function onDragStart(e: React.DragEvent<HTMLDivElement>): void {
+  function onDragStart(e: any): void {
     const target = e.currentTarget;
     e.dataTransfer.setData("text/plain", target.id);
   }
