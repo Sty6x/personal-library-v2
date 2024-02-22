@@ -135,11 +135,18 @@ const Page = () => {
       const updateNotePosition: Array<t_note> = pageData?.notes.map((note) => {
         if (dropTarget.id === note.id) {
           // matches the drop target Id and updates the drop target's data with the current target
-          LibraryStorage.updateNote({ ...currentTarget, id: dropTarget.id });
+          // swapped the drop targets contents with the current target
+          LibraryStorage.updateNote({
+            ...currentTarget,
+            index: dropTarget.index,
+          });
           return { ...currentTarget };
         }
         if (currentTarget.id === note.id) {
-          LibraryStorage.updateNote({ ...dropTarget, id: currentTarget.id });
+          LibraryStorage.updateNote({
+            ...dropTarget,
+            index: currentTarget.index,
+          });
           return { ...dropTarget };
         }
         return note;
@@ -166,7 +173,9 @@ const Page = () => {
         author: bookAuthor,
       },
       currentPage,
-      notes: getPageNotes as Array<t_extendedNote>,
+      notes: getPageNotes.sort(
+        (a, b) => a.index - b.index
+      ) as Array<t_extendedNote>,
     };
     setPageData({ ...currentPageData });
   }
