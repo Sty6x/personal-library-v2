@@ -81,7 +81,11 @@ const BookItem = ({
             hover:duration-200
             duration-200
             shadow-book-item
-            gap-4 px-10 min-[1921px]:px-20 py-8  min-w-[80%] min-h-[80%] max-h-[80%] max-w-[80%] w-[38em] h-[28em] bg-white rounded-md"
+            gap-4 py-6 px-8
+            min-w-[80%] min-h-[60%] max-h-[70%] max-w-[80%] 
+            w-[38em] h-[28em] bg-white rounded-md
+            box-content
+            "
                 key="contents"
                 initial={{ opacity: 0, scale: 0, display: "none" }}
                 animate={{
@@ -100,7 +104,7 @@ const BookItem = ({
               >
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-col">{children}</div>
-                  <div className=" place-content-center h-full bg-black rounded p-4">
+                  <div className=" place-content-center h-full bg-black rounded p-3">
                     <p className=" max-[1280px]:text-[1rem] text-white text-pretty note-contents-preview">
                       {noteContents}
                     </p>
