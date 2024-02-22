@@ -27,7 +27,7 @@ const Note = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  function onDragEnter(e: React.DragEvent<HTMLDivElement>): void {
+  function onDragEnter(e: any): void {
     const dropTarget = e.target;
     if (!dropTarget.classList.contains("droppable")) {
       dropTarget.classList.add("droppable");
@@ -35,7 +35,7 @@ const Note = ({
     }
   }
 
-  function onDragLeave(e: React.DragEvent<HTMLDivElement>): void {
+  function onDragLeave(e: any): void {
     const dropTarget = e.target;
     if (dropTarget.classList.contains("droppable")) {
       dropTarget.classList.remove("droppable");

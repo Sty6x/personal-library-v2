@@ -109,15 +109,16 @@ const Page = () => {
     e.dataTransfer.setData("text/plain", target.id);
   }
 
-  function onDrop(e: React.DragEvent<HTMLDivElement>): void {
+  function onDrop(e: any): void {
     const transferedData = e.dataTransfer.getData("text/plain");
     const target = e.currentTarget;
+    const classChangeTarget = e.target;
 
-    if (target.classList.contains("droppable")) {
-      target.classList.remove("droppable");
-      target.classList.add("dropped");
+    if (classChangeTarget.classList.contains("droppable")) {
+      classChangeTarget.classList.remove("droppable");
+      classChangeTarget.classList.add("dropped");
       setTimeout(() => {
-        target.classList.remove("dropped");
+        classChangeTarget.classList.remove("dropped");
       }, 500);
     }
     if (pageData) {
