@@ -28,6 +28,7 @@ type t_recentBooks = {
   page: t_page | undefined;
 };
 
+const colors = ["#A3BC9F", "#ECCCCC", "#9FB5BC"];
 const placeHolderData: Array<{ quote: string; color: string; author: string }> =
   [
     {
@@ -60,7 +61,6 @@ function Home() {
   const navigate = useNavigate();
 
   function getRecentBooks(library: t_library) {
-    const colors = ["#ECE7CC", "#E0E3C4", "#C1E5E3"];
     const sortedByDateBooks: Array<t_book> = library.books.sort(
       (a, b) =>
         (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
