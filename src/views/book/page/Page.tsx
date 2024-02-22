@@ -32,7 +32,7 @@ const Page = () => {
     const newID = uid(16);
     if (pageData) {
       const newNote: t_note = {
-        index: 0,
+        index: pageData.notes.length === 0 ? 0 : pageData.notes.length,
         bookID: pageData?.currentPage.bookID as string,
         pageID: pageData?.currentPage.id as string,
         noteNum: pageData?.notes.length + 1,
@@ -121,9 +121,13 @@ const Page = () => {
         classChangeTarget.classList.remove("dropped");
       }, 500);
     }
+    updateNotePosition(transferedData, target.id);
+  }
+
+  function updateNotePosition(transferedData: string, id: string) {
     if (pageData) {
       const [currentTarget, dropTarget]: Array<t_note> = pageData?.notes.filter(
-        (note) => note.id === transferedData || note.id === target.id
+        (note) => note.id === transferedData || note.id === id
       );
 
       // when saving im rearranging the position of the objects in the notes array
@@ -188,6 +192,7 @@ const Page = () => {
   const renderNotes = pageData?.notes.map((note) => {
     return (
       <Note
+        index={note.index}
         handleSave={editNote}
         handleCancelNoteEdit={disableEditNote}
         dragEvents={{ onDragStart, onDrop }}

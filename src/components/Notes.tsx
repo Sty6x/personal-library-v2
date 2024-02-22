@@ -9,6 +9,7 @@ interface t_dragEvents {
   onDrop: (e: any) => void;
 }
 const Note = ({
+  index,
   contents,
   id,
   isEditing,
@@ -17,6 +18,7 @@ const Note = ({
   note,
   dragEvents: { onDragStart, onDrop },
 }: {
+  index: number;
   isEditing?: boolean;
   note: t_extendedNote;
   contents: string;
@@ -67,6 +69,7 @@ const Note = ({
         />
       ) : (
         <motion.div
+          data-position={index}
           id={id}
           draggable={true}
           onDragStart={onDragStart}
