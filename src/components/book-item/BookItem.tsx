@@ -100,10 +100,9 @@ const BookItem = ({
               >
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-col">{children}</div>
-                  <div>
-                    {/* give fixed width and height for note contents  */}
-                    <p className=" max-[1280px]:text-[1rem] text-[1rem] note-contents-preview">
-                      "{noteContents}"
+                  <div className=" place-content-center h-full bg-black rounded p-4">
+                    <p className=" max-[1280px]:text-[1rem] text-white text-pretty note-contents-preview">
+                      {noteContents}
                     </p>
                   </div>
                 </div>
