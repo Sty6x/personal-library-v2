@@ -50,8 +50,8 @@ const BookItem = ({
             hide ? "hidden" : ""
           } flex items-center justify-center cursor-pointer
           shadow-btn-hover transition-shadow hover:transition-shadow 
-          z-0
           hover:shadow-btn-hover-active
+          max-sm:h-[200px]
           `}
           style={{ backgroundColor: color }}
           to={link}

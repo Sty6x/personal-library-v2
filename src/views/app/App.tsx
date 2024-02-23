@@ -153,10 +153,10 @@ const App = () => {
         />
       )}
       <Sidebar />
-      <div className="relative outline-none w-full max-w-[1440px] flex flex-col justify-start mx-16 my-5">
+      <div className="relative outline-none w-full max-w-[1440px] flex flex-col justify-start mx-16 max-lg:mx-10 my-5">
         <header className="py-4">
           <div id="library-header-contents" className="flex items-center">
-            <span className=" inline-block">
+            <span className=" inline-block max-[850px]:min-w-full ">
               <h2 className="text-6xl">Library</h2>
               <div
                 className={`mt-4 items-center flex ${
@@ -179,7 +179,7 @@ const App = () => {
                   <input
                     ref={inputRef}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="py-2 px-3 placeholder:font-bold placeholder:text-gray-200 font-bold text-md outline-none w-[300px] max-w-[400px]"
+                    className="py-2 px-3 placeholder:font-bold placeholder:text-gray-200 font-bold text-md outline-none max-lg:w-[200px] max-[850px]:min-w-full w-[300px] max-w-[400px]"
                     type="search"
                     name="search"
                     id="search"
@@ -201,7 +201,7 @@ const App = () => {
                 Add Book
               </button>
             </span>
-            <span className="inline-block ml-auto">
+            <span className="inline-block ml-auto max-[850px]:hidden">
               <img id="library-image" alt="library" src={libImage} />
             </span>
           </div>
