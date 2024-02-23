@@ -178,35 +178,35 @@ function Home() {
           }}
           className="items grid place-content-center max-lg:min-h-[100dvh] bg-cover bg-gridWhite"
         >
-          <div className="text-black flex-col gap-2 flex max-w-[max-content] max-lg:mx-10">
+          <div className="text-black flex-col gap-2 flex max-w-[max-content] max-lg:mx-10 max-sm:mx-2">
             <span className="">
               <p
                 className="
               text-3xl
-              max-sm:text-[1.5rem]
+              max-sm:text-[1.4rem]
               font-semibold"
               >
                 Welcome to Re:Read
               </p>
               <h1
                 className="
-              text-[2.6rem] max-sm:text-[2rem] max-w-[13em] text-pretty font-bold"
+              text-[2.6rem] max-sm:text-[1.8rem] max-w-[13em] text-pretty font-bold"
               >
                 {LibraryStorage.books.length === 0
                   ? "Looks like you don't have any books yet."
                   : "Recent books you've read."}
               </h1>
             </span>
-            <span className="mt-2 flex gap-2 ">
+            <span className="mt flex gap-2 ">
               <Link
                 to={"/app/library"}
-                className="flex content-center library-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-one bg-accent-green-200 rounded-sm hover:shadow-btn-hover-active hover:transition-shadow shadow-btn-hover transition-shadow duration-200"
+                className="max-md:text-lg max-sm:text-sm flex items-center library-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-one bg-accent-green-200 rounded-sm hover:shadow-btn-hover-active hover:transition-shadow shadow-btn-hover transition-shadow duration-200"
               >
                 Open your library
               </Link>
               <button
                 onClick={() => setIsBookFormOpen(true)}
-                className="flex content-center add-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
+                className="max-md:text-lg max-sm:text-sm flex  items-center add-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
               >
                 Add book
               </button>
