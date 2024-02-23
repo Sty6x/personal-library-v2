@@ -93,6 +93,7 @@ function Home() {
             <>
               {book.note && book.page ? (
                 <BookItem
+                  hide={true}
                   animate={true}
                   key={book.id}
                   color={book.color}
@@ -109,6 +110,7 @@ function Home() {
                 </BookItem>
               ) : (
                 <BookItem
+                  hide={true}
                   key={book.id}
                   color={book.color}
                   motionKey={i}
@@ -165,7 +167,7 @@ function Home() {
       )}
       <motion.div
         id="card-items-container"
-        className="grid grid-rows-2 grid-cols-2 h-full max-w-full"
+        className="grid grid-rows-2 grid-cols-2 max-lg:block h-full max-w-full"
         key={"container"}
       >
         <motion.div
@@ -174,28 +176,28 @@ function Home() {
             initial: { opacity: 0, scale: 0 },
             animate: { opacity: 1, scale: 0.4 },
           }}
-          className="grid place-content-center bg-cover bg-gridWhite"
+          className="items grid place-content-center max-lg:min-h-[100dvh] bg-cover bg-gridWhite"
         >
-          <div className="text-black flex-col gap-2 flex max-w-[max-content]">
+          <div className="text-black flex-col gap-2 flex max-w-[max-content] max-lg:mx-10">
             <span className="">
               <p
                 className="
               text-3xl
-              min-[1930px]:text-[2.5rem] max-[1280px]:text-[1.8rem]  
+              max-sm:text-[1.5rem]
               font-semibold"
               >
                 Welcome to Re:Read
               </p>
               <h1
                 className="
-              text-[2.6rem] max-w-[13em] text-pretty font-bold"
+              text-[2.6rem] max-sm:text-[2rem] max-w-[13em] text-pretty font-bold"
               >
                 {LibraryStorage.books.length === 0
                   ? "Looks like you don't have any books yet."
                   : "Recent books you've read."}
               </h1>
             </span>
-            <span className=" flex gap-2 ">
+            <span className="mt-2 flex gap-2 ">
               <Link
                 to={"/app/library"}
                 className="flex content-center library-icon w-[max-content] text-xl font-regular py-1 px-3 bg-accent-one bg-accent-green-200 rounded-sm hover:shadow-btn-hover-active hover:transition-shadow shadow-btn-hover transition-shadow duration-200"

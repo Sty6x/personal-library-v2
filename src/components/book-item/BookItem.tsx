@@ -31,6 +31,7 @@ const BookItem = ({
   noteContents,
   link,
   animate = false,
+  hide = false,
 }: {
   animate?: boolean;
   color: string;
@@ -38,35 +39,34 @@ const BookItem = ({
   children?: ReactNode;
   noteContents?: string;
   link: string;
+  hide?: boolean;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <>
-      {/* NOTICE NOTICE  */}
-      {/*  This section renders the book contents only */}
       {!animate ? (
         <Link
-          className="flex items-center justify-center cursor-pointer
+          className={`${
+            hide ? "hidden" : ""
+          } flex items-center justify-center cursor-pointer
           shadow-btn-hover transition-shadow hover:transition-shadow 
           z-0
           hover:shadow-btn-hover-active
-          "
+          `}
           style={{ backgroundColor: color }}
           to={link}
         >
           <BookItemContentsLayout>{children}</BookItemContentsLayout>
         </Link>
       ) : (
-        // {/* NOTICE NOTICE */}
-        // {/*  This section renders the notes contents if a note exists */}
         <motion.div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           key={motionKey}
           style={{ backgroundColor: color }}
-          className={`book-item h-full flex justify-center items-center  ${
+          className={`max-lg:hidden  book-item h-full flex justify-center items-center  ${
             !animate &&
-            "cursor-pointer  rounded-sm shadow-btn-hover transition-shadow hover:transition-shadow hover:shadow-btn-hover-active"
+            "cursor-pointer rounded-sm shadow-btn-hover transition-shadow hover:transition-shadow hover:shadow-btn-hover-active"
           }`}
         >
           <AnimatePresence custom="popLayout">

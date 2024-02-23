@@ -9,7 +9,7 @@ const PlaceholderBookItem = ({
 }) => {
   return (
     <div
-      className={` flex justify-center items-center  `}
+      className={`max-lg:hidden flex justify-center h-full items-center items`}
       style={{ background: color }}
     >
       {/* bg-black text-white */}
