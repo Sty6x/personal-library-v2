@@ -46,7 +46,11 @@ const BookItem = ({
       {/*  This section renders the book contents only */}
       {!animate ? (
         <Link
-          className="flex items-center justify-center cursor-pointer rounded-sm shadow-btn-hover transition-shadow hover:transition-shadow hover:shadow-btn-hover-active"
+          className="flex items-center justify-center cursor-pointer
+          shadow-btn-hover transition-shadow hover:transition-shadow 
+          z-0
+          hover:shadow-btn-hover-active
+          "
           style={{ backgroundColor: color }}
           to={link}
         >

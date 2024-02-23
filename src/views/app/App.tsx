@@ -12,20 +12,30 @@ import BookItemList from "../../components/BookItemList";
 import BookItemContents from "../../components/book-item/BookItemContents";
 
 const colors = [
-  "#ECE1C4", // Similar to original
-  "#E8E3C3", // Similar to original
-  "#E3E2C2", // Similar to original
-  "#E0E3C4", // Similar to original
-  "#DCE2C4", // Similar to original
-  "#D9E2C4", // Similar to original
-  "#C1E5E3", // More blue hue
-  "#C1DAE5", // More blue hue
-  "#C1CCE5", // More blue hue
-  "#C1BEE5", // More blue hue
-  "#E3C1C1", // More red hue
-  "#E5C1C1", // More red hue
-  "#E5C1CF", // More red hue
-  "#E5C1E0", // More red hue
+  "#ECE1C4",
+  "#E8E3C3",
+  "#E3E2C2",
+  "#E0E3C4",
+  "#DCE2C4",
+  "#D9E2C4",
+  "#C1E5E3",
+  "#C1DAE5",
+  "#C1CCE5",
+  "#C1BEE5",
+  "#E3C1C1",
+  "#E5C1C1",
+  "#E5C1CF",
+  "#E5C1E0",
+  "#D6D1A5",
+  "#D2CD9F",
+  "#CCCBA0",
+  "#C9CCA2",
+  "#C5CAA2",
+  "#C1C9A3",
+  "#A9CDCB",
+  "#A9C2CD",
+  "#A9B4CD",
+  "#A9A6CD",
 ];
 
 const App = () => {
