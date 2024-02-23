@@ -209,7 +209,7 @@ const Book = () => {
                   onClick={() => {
                     handlePageAdd();
                   }}
-                  className="max-[320px]:text-sm max-sm:text-md add-icon-black w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center bg-accent-one 
+                  className="max-[320px]:text-sm max-sm:text-base add-icon-black w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center bg-accent-one 
                   rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-2 py-1 text-lg"
                 >
                   Add a page

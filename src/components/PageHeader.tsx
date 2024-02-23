@@ -41,6 +41,7 @@ const PageHeader = ({
           <span>
             <h1
               className={`
+              text-pretty max-sm:text-4xl max-md:text-5xl max-[320px]:text-3xl 
               ${isScrolling ? "text-4xl" : "text-7xl"}
                font-bold `}
             >
@@ -51,6 +52,7 @@ const PageHeader = ({
             <p
               className={`
               ${isScrolling ? "text-lg" : "text-2xl"}
+text-2xl max-md:text-lg max-[320px]:text-base 
             font-semibold `}
             >
               by {bookAuthor}
@@ -129,6 +131,7 @@ const PageHeader = ({
             type="button"
             className={`
             ${isScrolling ? "text-md" : "text-xl"}
+            max-md:text-base max-sm:text-sm max-[350px]:text-
              add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center 
             py-1 px-3 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow
             transition-shadow duration-20
@@ -142,7 +145,8 @@ const PageHeader = ({
           <button
             className={`
             ${isScrolling ? "text-md" : "text-xl"}
-             add-icon-black w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center
+            max-md:text-base max-sm:text-sm  
+            add-icon-black w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center
             py-1 px-3 bg-accent-one text-black rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow
             transition-shadow duration-20
              `}
@@ -158,6 +162,7 @@ const PageHeader = ({
           <button
             className={`
             ${isScrolling ? "text-md" : "text-xl"}
+            max-md:text-base max-sm:text-sm
             trash-icon self-start box-border text-accent-danger font-bold
             w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center py-1`}
             onClick={() => {

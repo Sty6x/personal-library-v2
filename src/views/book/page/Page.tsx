@@ -251,7 +251,7 @@ const Page = () => {
   return (
     <div
       id="page"
-      className="relative outline-none w-[80%] max-w-[1440px] flex flex-col justify-start mx-16 my-16"
+      className="relative outline-none w-[80%] max-md:w-[90%] max-w-[1440px] flex flex-col justify-start max-sm:mx-0 mx-16 my-16"
       ref={pageRef}
       tabIndex={0}
       onKeyDown={(e: any) => {
