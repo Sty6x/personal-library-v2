@@ -162,9 +162,9 @@ const Book = () => {
       )}
       {!redirect ? (
         <section id="book-page-contents" className="grid place-items-center">
-          <div className="max-w-[40em]">
+          <div className="max-w-[40em] mx-10 max-md:mx-4">
             <div>
-              <span className="text-lg">
+              <span className="text-lg max-md:text-sm">
                 Last updated{" "}
                 {formatDistance(new Date(currentBook.lastUpdated), new Date())}{" "}
                 ago.
@@ -193,7 +193,7 @@ const Book = () => {
                     }`}
                     className="before:h-[1em] before:w-[1.2em] before:mr-[.6em] read-icon relative flex content-center bg-accent-three text-white
                      items-center rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 
-                     px-5 py-2 text-3xl font-medium w-full"
+                     px-5 py-2 max-sm:text-xl text-3xl font-medium w-full"
                   >
                     Start Reading
                   </Link>
@@ -204,17 +204,17 @@ const Book = () => {
                 />
               </div>
 
-              <span className="flex gap-4 items-center">
+              <span className="flex gap-4 items-center ">
                 <button
                   onClick={() => {
                     handlePageAdd();
                   }}
-                  className="add-icon-black w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center bg-accent-one 
+                  className="max-[320px]:text-sm max-sm:text-md add-icon-black w-[max-content] before:mr-[.3em] items-center before:h-[20px] relative flex content-center bg-accent-one 
                   rounded-sm shadow-btn-hover hover:shadow-btn-hover-active transition-shadow hover:transition-shadow duration-200 px-2 py-1 text-lg"
                 >
                   Add a page
                 </button>
-                <Link to={"/app/library"} className="underline">
+                <Link to={"/app/library"} className="underline max-sm:text-sm">
                   Go back to library
                 </Link>
               </span>
