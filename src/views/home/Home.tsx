@@ -58,6 +58,7 @@ function Home() {
     Array<t_recentBooks | undefined> | []
   >([]);
   const [isBookFormOpen, setIsBookFormOpen] = useState(false);
+  const [isSmallScreen, setSmallScreen] = useState(false);
   const navigate = useNavigate();
 
   function getRecentBooks(library: t_library) {
@@ -93,7 +94,7 @@ function Home() {
             <>
               {book.note && book.page ? (
                 <BookItem
-                  hide={true}
+                  hide={isSmallScreen}
                   animate={true}
                   key={book.id}
                   color={book.color}
@@ -110,7 +111,7 @@ function Home() {
                 </BookItem>
               ) : (
                 <BookItem
-                  hide={true}
+                  hide={isSmallScreen}
                   key={book.id}
                   color={book.color}
                   motionKey={i}
@@ -151,8 +152,14 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    console.log(recentBooks);
-  }, [recentBooks]);
+    window.addEventListener("resize", (e) => {
+      if (innerWidth <= 1024) {
+        setSmallScreen(true);
+        return;
+      }
+      setSmallScreen(false);
+    });
+  }, []);
 
   return (
     <main id="home-page" className="h-[100dvh]">
