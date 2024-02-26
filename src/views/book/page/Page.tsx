@@ -299,7 +299,15 @@ const Page = () => {
       )}
       <section className="min-w-[100%] flex-1 overflow-hidden">
         <div id="notes-container" className=" justify-start px-2 py-2 ">
-          <AnimatePresence custom={"popLayout"}>{renderNotes}</AnimatePresence>
+          {renderNotes?.length === 0 ? (
+            <p className=" text-gray-200 font-semibold ">
+              Add a note to get started.
+            </p>
+          ) : (
+            <AnimatePresence custom={"popLayout"}>
+              {renderNotes}
+            </AnimatePresence>
+          )}
         </div>
       </section>
       <PageNavigator currentPageNum={pageData?.currentPage.pageNum as number} />
