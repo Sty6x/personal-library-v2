@@ -190,17 +190,17 @@ function Home() {
               <p
                 className="
               text-3xl
-              max-sm:text-[1.4rem]
+              max-sm:text-[1.2rem]
               font-semibold"
               >
                 Welcome to Re:Read
               </p>
               <h1
                 className="
-              text-[2.6rem] max-sm:text-[1.8rem] max-w-[13em] text-pretty font-bold"
+              text-[2.6rem] max-sm:text-[1.5rem] max-w-[13em] text-pretty font-bold"
               >
                 {LibraryStorage.books.length === 0
-                  ? "Looks like you don't have any books yet."
+                  ? "Your Library is empty."
                   : "Recent books you've read."}
               </h1>
             </span>
