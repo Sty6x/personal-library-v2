@@ -17,11 +17,11 @@ const BookItemList = ({
   link,
   onEmptyText,
 }: t_BookItemList) => {
-  const [removeText, setRemoveText] = useState(false);
+  const [removeText, setRemoveText] = useState(innerWidth < 500 ? true : false);
 
   useEffect(() => {
     window.addEventListener("resize", (e) => {
-      if (innerWidth < 650) return setRemoveText(true);
+      if (innerWidth < 500) return setRemoveText(true);
       setRemoveText(false);
     });
   }, []);
@@ -36,9 +36,11 @@ const BookItemList = ({
         {addLink && (
           <Link
             to={`/${link}`}
-            className="max-[850px]:text-sm max-sm:text-[.8rem] flex items-center ml-auto py-1 px-4 font-bold bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
+            className={`${
+              removeText && "hidden"
+            } max-[850px]:text-sm max-sm:text-[.8rem] flex items-center ml-auto py-1 px-4 font-bold bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200`}
           >
-            {!removeText ? linkName : "More"}
+            {linkName}
           </Link>
         )}
       </div>

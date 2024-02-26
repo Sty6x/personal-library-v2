@@ -4,25 +4,34 @@ const Sidebar = () => {
   return (
     <div
       id="library-sidebar"
-      className="min-h-[100dvh] relative box-border w-[6em] bg-white shadow-sb flex flex-col items-center py-8"
+      className="min-h-[100dvh] max-sm:min-h-[fit-content] max-sm:flex-row z-50
+      max-sm:w-full max-sm:sticky top-0 relative box-border w-[7em] 
+      bg-white shadow-sb flex flex-col items-center py-8
+      max-sm:py-2 max-sm:px-4
+      "
     >
-      <nav className="flex fixed box-border flex-col gap-4 mt-1 items-center">
-        <div className=" border-b-separator-200 border-b border-solid pb-4">
-          <Link to={"/"} className="inline-block text-lg font-bold" id="logo">
-            Re:Read
+      <nav className="flex fixed max-sm:static box-border max-sm:flex-row flex-col gap-4 mt-1 items-center">
+        <div className=" border-b-separator-200 border-b border-solid max-sm:border-none max-sm:pb-0 pb-4">
+          <Link
+            to={"/"}
+            className="inline-block text-lg font-bold max-sm:text-center max-sm:leading-5"
+            id="logo"
+          >
+            <span className="max-sm:block">Re:</span>
+            Read
           </Link>
         </div>
         <NavLink
           to={"/app/library"}
-          className="nav-icon inline-block logo py-4 h-[50px] w-[50px] bg-gray-100 rounded"
+          className="nav-icon inline-block logo py-4 size-[50px] max-sm:size-[35px] bg-gray-100 rounded"
         />
         <NavLink
           to={"/app/favorites"}
-          className="nav-icon inline-block logo py-4 h-[50px] w-[50px] bg-gray-100 rounded"
+          className="nav-icon inline-block logo py-4 size-[50px] max-sm:size-[35px]  bg-gray-100 rounded"
         />
         <NavLink
           to={"/app/recent"}
-          className="nav-icon inline-block logo py-4 h-[50px] w-[50px] bg-gray-100 rounded"
+          className="nav-icon inline-block logo py-4 size-[50px] max-sm:size-[35px] bg-gray-100 rounded"
         />
       </nav>
     </div>

@@ -135,7 +135,7 @@ const App = () => {
   return (
     <main
       id="library-page"
-      className="relative min-h-[100dvh] bg-gridWhite flex "
+      className="relative min-h-[100dvh] bg-gridWhite flex max-sm:flex-col"
       onClick={(e: any) => {
         const target = e.target;
         if (target.id !== "search") setIsSearchFocused(false);
@@ -153,10 +153,10 @@ const App = () => {
         />
       )}
       <Sidebar />
-      <div className="relative outline-none w-full max-w-[1440px] flex flex-col justify-start mx-16 max-lg:mx-10 my-5">
+      <div className="max-sm:flex-1 max-sm:mx-6 max-sm:w-[inherit] max-sm:mt-2 relative outline-none w-full max-w-[1440px] flex flex-col justify-start mx-16 max-lg:mx-10 my-5">
         <header className="py-4">
           <div id="library-header-contents" className="flex items-center">
-            <span className=" inline-block max-[850px]:min-w-full ">
+            <span className=" inline-block max-[850px]:w-full ">
               <h2 className="text-6xl">Library</h2>
               <div
                 className={`mt-4 items-center flex ${
@@ -196,7 +196,7 @@ const App = () => {
               </div>
               <button
                 onClick={() => setIsModalOpened(true)}
-                className="mt-4 flex items-center add-icon w-[max-content] text-xl font-regular py-1 px-4 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
+                className="max-md:text-base mt-4 flex items-center add-icon w-[max-content] text-xl font-regular py-1 px-4 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
               >
                 Add Book
               </button>
