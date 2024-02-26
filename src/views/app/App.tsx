@@ -153,11 +153,11 @@ const App = () => {
         />
       )}
       <Sidebar />
-      <div className="max-sm:flex-1 max-sm:mx-6 max-sm:w-[inherit] max-sm:mt-2 relative outline-none w-full max-w-[1440px] flex flex-col justify-start mx-16 max-lg:mx-10 my-5">
+      <div className="max-sm:flex-1 max-sm:mx-6 max-[400px]:mx-4 max-sm:w-[inherit] max-sm:mt-2 relative outline-none w-full max-w-[1440px] flex flex-col justify-start mx-16 max-lg:mx-10  my-5">
         <header className="py-4">
           <div id="library-header-contents" className="flex items-center">
             <span className=" inline-block max-[850px]:w-full ">
-              <h2 className="text-6xl">Library</h2>
+              <h2 className="text-5xl max-[350px]:text-5xl ">Your Library</h2>
               <div
                 className={`mt-4 items-center flex ${
                   isSearchFocused
@@ -179,7 +179,7 @@ const App = () => {
                   <input
                     ref={inputRef}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="py-2 px-3 placeholder:font-bold placeholder:text-gray-200 font-bold text-md outline-none max-lg:w-[200px] max-[850px]:min-w-full w-[300px] max-w-[400px]"
+                    className="py-2 px-3 placeholder:font-bold placeholder:text-gray-200 font-bold text-md outline-none max-sm:w-full max-[850px]:min-w-full w-[300px] max-w-[400px]"
                     type="search"
                     name="search"
                     id="search"
@@ -189,7 +189,7 @@ const App = () => {
                 </form>
                 <button
                   id="submit"
-                  className="ml-auto py-2 px-5 font-semibold bg-primary-main text-white rounded-sm  "
+                  className="ml-auto py-2 px-5 font-semibold bg-primary-main text-white rounded-sm max-sm:text-sm "
                 >
                   Search
                 </button>

@@ -11,10 +11,10 @@ const Sidebar = () => {
       "
     >
       <nav className="flex fixed max-sm:static box-border max-sm:flex-row flex-col gap-4 mt-1 items-center">
-        <div className=" border-b-separator-200 border-b border-solid max-sm:border-none max-sm:pb-0 pb-4">
+        <div className=" border-b-separator-200 border-b border-solid max-sm:border-r max-sm:border-b-0 max-sm:pr-4  max-sm:pb-0 pb-4">
           <Link
             to={"/"}
-            className="inline-block text-lg font-bold max-sm:text-center max-sm:leading-5"
+            className="hover:underline inline-block text-xl font-bold max-sm:text-center max-sm:leading-5"
             id="logo"
           >
             <span className="max-sm:block">Re:</span>

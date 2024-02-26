@@ -26,7 +26,7 @@ const BookItemContents = ({
           by {book.author}
         </span>
       </span>
-      <span className="text-sm font-semi-bold max-md:text-[.8rem] max-md:leading-5">
+      <span className="text-sm font-semi-bold max-md:text-[.8rem] max-[300px]:text-[.7rem]  max-md:leading-5">
         {recentNote && recentPage
           ? `Page #${recentPage?.pageNum} • Note #${recentNote?.noteNum}`
           : `Pages written ${book.pageIDs.length} • Notes created ${

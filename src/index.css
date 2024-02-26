@@ -196,27 +196,29 @@ img#library-image {
 }
 
 nav {
-  a {
+  & > a {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 20px 20px;
     transition: all 150ms ease-in;
   }
-
-  a.active {
+  & > :not(:first-child):hover {
+    background-color: #43685080;
+  }
+  & > a.active {
     transition: all 150ms ease-in;
-    background-color: #436850;
+    background-color: #436850 !important;
   }
 
-  :nth-child(2) {
+  & > :nth-child(2) {
     background-image: url("./assets/icons/lib.svg");
   }
 
-  :nth-child(3) {
+  & > :nth-child(3) {
     background-image: url("./assets/icons/favorites.svg");
   }
 
-  :nth-child(4) {
+  & > :nth-child(4) {
     background-image: url("./assets/icons/recent.svg");
   }
 }
