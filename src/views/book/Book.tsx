@@ -162,8 +162,8 @@ const Book = () => {
       )}
       {!redirect ? (
         <section id="book-page-contents" className="grid place-items-center">
-          <div className="max-w-[40em] mx-10 max-md:mx-4">
-            <div>
+          <div className=" mx-10 max-md:mx-4 ">
+            <div className="">
               <span className="text-lg max-md:text-sm">
                 Last updated{" "}
                 {formatDistance(new Date(currentBook.lastUpdated), new Date())}{" "}

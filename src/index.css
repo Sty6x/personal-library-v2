@@ -72,8 +72,6 @@ button {
 }
 
 #edit-book-icon {
-  background-image: url("./assets/icons/edit-icon.svg");
-  display: inline-block;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
