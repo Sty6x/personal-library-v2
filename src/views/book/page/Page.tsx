@@ -46,6 +46,7 @@ const Page = () => {
           ({ ...prev, notes: [...pageData.notes, newNote] } as t_currentPage)
       );
       LibraryStorage.addNote(newNote);
+      window.scrollTo(0, 1000000);
     }
   }
 
