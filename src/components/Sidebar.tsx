@@ -6,7 +6,7 @@ const Sidebar = () => {
       id="library-sidebar"
       className="min-h-[100dvh] max-sm:min-h-[fit-content] max-sm:flex-row z-50
       max-sm:w-full max-sm:sticky top-0 relative box-border w-[7em] 
-      bg-white shadow-sb flex flex-col items-center py-8
+      bg-white shadow-sb flex flex-col items-center py-4
       max-sm:py-2 max-sm:px-4
       "
     >
@@ -17,8 +17,12 @@ const Sidebar = () => {
             className="hover:underline inline-block text-xl font-bold max-sm:text-center max-sm:leading-5"
             id="logo"
           >
-            <span className="max-sm:block">Re:</span>
-            Read
+            <span className="flex flex-col justify-center max-sm:w-[30px]">
+              <div className="max-sm:hidden">
+                <span className="max-sm:block">Re:</span>
+                <span className="max-sm:block">Read</span>
+              </div>
+            </span>
           </Link>
         </div>
         <NavLink
