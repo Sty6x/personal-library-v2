@@ -86,7 +86,7 @@ const BookItem = ({
             duration-200
             shadow-book-item
             gap-4 py-6 px-8
-            min-w-[200px] min-h-[250px] max-w-[500px] 
+            min-w-[200px] min-h-[250px] max-w-[500px] w-full
             bg-white rounded-md
             box-content
             "
