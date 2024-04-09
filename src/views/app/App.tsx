@@ -163,7 +163,7 @@ const App = () => {
                   isSearchFocused
                     ? "border-pallete-test shadow-focus-border"
                     : "border-gray-100"
-                } transition-all duration-150 ease-in-out border-2 border-solid rounded px-2 py-1`}
+                } transition-all duration-150 ease-in-out border-2 border-solid rounded px-2 py-1 bg-white`}
               >
                 <form
                   onSubmit={(e) => {
@@ -179,7 +179,7 @@ const App = () => {
                   <input
                     ref={inputRef}
                     onFocus={() => setIsSearchFocused(true)}
-                    className="py-2 px-3 placeholder:font-bold placeholder:text-gray-200 font-bold text-md outline-none max-sm:w-full max-[850px]:min-w-full w-[300px] max-w-[400px]"
+                    className="py-2 max-[500px]:w-full px-3 placeholder:font-bold placeholder:text-gray-200 font-bold text-md outline-none min-[500px]:min-w-[300px] bg-transparent"
                     type="search"
                     name="search"
                     id="search"
