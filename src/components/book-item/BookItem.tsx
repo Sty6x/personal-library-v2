@@ -108,7 +108,7 @@ const BookItem = ({
               >
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-col">{children}</div>
-                  <div className=" place-content-center h-full bg-black rounded p-3">
+                  <div className=" h-full bg-black rounded p-3">
                     <p className=" max-[1280px]:text-[1rem] text-white text-pretty note-contents-preview">
                       {noteContents}
                     </p>
