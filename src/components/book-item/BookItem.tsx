@@ -64,7 +64,7 @@ const BookItem = ({
           onMouseLeave={() => setIsHovered(false)}
           key={motionKey}
           style={{ backgroundColor: color }}
-          className={`max-lg:hidden px-10 book-item h-full flex justify-center items-center  ${
+          className={`max-lg:hidden px-10 book-item flex justify-center items-center  ${
             !animate &&
             "cursor-pointer rounded-sm shadow-btn-hover transition-shadow hover:transition-shadow hover:shadow-btn-hover-active"
           }`}
@@ -87,6 +87,9 @@ const BookItem = ({
             shadow-book-item
             gap-4 py-6 px-8
             min-w-[200px] min-h-[250px] max-w-[500px] w-full
+            max-[1200px]:min-h-[230px]
+            max-[1200px]:px-6
+            max-[1200px]:py-4
             bg-white rounded-md
             box-content
             "
@@ -109,7 +112,7 @@ const BookItem = ({
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-col">{children}</div>
                   <div className=" h-full bg-black rounded p-3">
-                    <p className=" max-[1280px]:text-[1rem] text-white text-pretty note-contents-preview">
+                    <p className="max-[1200px]:text-[.8rem] max-[1200px]:leading-4 max-[1280px]:line-clamp-5  max-[1280px]:text-[1rem] text-white text-pretty note-contents-preview">
                       {noteContents}
                     </p>
                   </div>
