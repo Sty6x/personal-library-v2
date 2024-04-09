@@ -43,9 +43,10 @@ const Page = () => {
       };
       setPageData(
         (prev) =>
-          ({ ...prev, notes: [newNote, ...pageData.notes] } as t_currentPage)
+          ({ ...prev, notes: [...pageData.notes, newNote] } as t_currentPage)
       );
       LibraryStorage.addNote(newNote);
+      window.scrollTo(0, 1000000);
     }
   }
 
@@ -139,15 +140,17 @@ const Page = () => {
           LibraryStorage.updateNote({
             ...currentTarget,
             index: dropTarget.index,
+            noteNum: dropTarget.noteNum,
           });
-          return { ...currentTarget };
+          return { ...currentTarget, noteNum: dropTarget.noteNum };
         }
         if (currentTarget.id === note.id) {
           LibraryStorage.updateNote({
             ...dropTarget,
             index: currentTarget.index,
+            noteNum: currentTarget.noteNum,
           });
-          return { ...dropTarget };
+          return { ...dropTarget, noteNum: currentTarget.noteNum };
         }
         return note;
       });
@@ -174,7 +177,7 @@ const Page = () => {
       },
       currentPage,
       notes: getPageNotes.sort(
-        (a, b) => a.index - b.index
+        (a, b) => a.noteNum - b.noteNum
       ) as Array<t_extendedNote>,
     };
     setPageData({ ...currentPageData });

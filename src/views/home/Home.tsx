@@ -64,7 +64,7 @@ function Home() {
   function getRecentBooks(library: t_library) {
     const sortedByDateBooks: Array<t_book> = library.books.sort(
       (a, b) =>
-        (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
+        (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any),
     );
     let recentBooks: Array<t_book> = [];
     for (let i = 0; i < 3; i++) {
@@ -76,12 +76,12 @@ function Home() {
         if (book === undefined) return undefined;
         const note = library.notes.find(
           (note) =>
-            note.bookID === book.id && note.lastUpdated === book.lastUpdated
+            note.bookID === book.id && note.lastUpdated === book.lastUpdated,
         );
 
         const page = library.pages.find((page) => page.id === note?.pageID);
         return { ...book, note, page, color: colors[i] };
-      }
+      },
     );
     setRecentBooks([...getRecentBooks]);
   }
@@ -126,7 +126,7 @@ function Home() {
           )}
         </>
       );
-    }
+    },
   );
 
   function addNewBook(bookData: t_bookFormData) {
@@ -174,7 +174,7 @@ function Home() {
       )}
       <motion.div
         id="card-items-container"
-        className="grid grid-rows-2 grid-cols-2 max-lg:block h-full max-w-full"
+        className={`grid grid-rows-2 grid-cols-2 max-lg:block h-full max-w-full ${isSmallScreen && "bg-gridWhite"}`}
         key={"container"}
       >
         <motion.div
@@ -183,17 +183,17 @@ function Home() {
             initial: { opacity: 0, scale: 0 },
             animate: { opacity: 1, scale: 0.4 },
           }}
-          className="items grid place-content-center max-lg:min-h-[100dvh] bg-cover bg-gridWhite"
+          className={`items grid place-content-center max-lg:min-h-[100dvh] bg-cover ${!isSmallScreen && "bg-gridWhite"} `}
         >
           <div className="text-black flex-col gap-2 flex max-w-[max-content] max-lg:mx-10 max-sm:mx-2">
             <span className="">
               <p
                 className="
               text-3xl
-              max-sm:text-[1.2rem]
-              font-semibold"
+              max-sm:text-[1.3rem]
+              font-semibold flex items-center gap-3  max-sm:leading-5 max-sm:gap-2"
               >
-                Welcome to Re:Read
+                Welcome to Re:Read <span id="home-logo" />
               </p>
               <h1
                 className="
