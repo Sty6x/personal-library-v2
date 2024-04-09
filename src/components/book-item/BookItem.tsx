@@ -42,16 +42,19 @@ const BookItem = ({
   hide?: boolean;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  console.log(location.pathname)
   return (
     <>
+
+      {/* NOTICE HERE */}
+      {/* Used in Menu */}
+
       {!animate ? (
         <Link
           className={`${
             hide ? "hidden" : ""
           } flex items-center justify-center cursor-pointer
-          shadow-btn-hover transition-shadow hover:transition-shadow 
-          hover:shadow-btn-hover-active
-          max-sm:h-[200px]
+          ${location.pathname === "/app/library" && ` shadow-btn-hover transition-shadow hover:transition-shadow hover:shadow-btn-hover-active max-sm:h-[200px]`}
           `}
           style={{ backgroundColor: color }}
           to={link}
