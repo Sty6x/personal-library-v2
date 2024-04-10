@@ -16,7 +16,7 @@ const BookItemContents = ({
   const [numOfNotes, setNumOfNotes] = useState(0);
   function getNumOfNotes(): number {
     const filterNotes = LibraryStorage.notes.filter(
-      (note) => note.bookID === book.id,
+      (note) => note.bookID === book.id
     );
     return filterNotes.length;
   }
@@ -31,7 +31,7 @@ const BookItemContents = ({
       </span>
       <span className="my-1 max-md:my-0">
         <div className="text-[1.7rem] max-lg:text-2xl lg:text-[1.4rem] max-lg:leading-6 max-md:text-[1.2rem] max-md:leading-5 w-full leading-[1.4rem] font-bold">
-          <h1 className=" ">{book.title}</h1>
+          <h1 className="line-clamp-2">{book.title}</h1>
         </div>
         <span className="text-md font-semibold max-md:text-sm max-md:leading-5">
           by {book.author}

@@ -7,7 +7,7 @@ const EditBookBtn = ({
     <button
       onClick={() => openBookForm((prev) => (prev ? false : true))}
       id="edit-book-btn"
-      className="fixed right-[8%] top-10 max-sm:top-[2%] rounded-full p-1 box-border
+      className="fixed right-[3%] top-8 max-sm:top-[2%] rounded-full p-1 box-border
       bg-accent-one font-semibold shadow-btn-hover transition-shadow hover:transition-shadow z-[30]
         hover:shadow-btn-hover-active"
     >
