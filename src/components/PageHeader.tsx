@@ -15,7 +15,6 @@ const PageHeader = ({
 }: {
   isScrolling: boolean;
   pageData: t_currentPage;
-
   bookAuthor: string;
   bookTitle: string;
   handleOnAddNote: () => void;
@@ -31,7 +30,8 @@ const PageHeader = ({
 
   return (
     <header
-      className={`flex flex-col z-20 sticky top-0 border-b-black border-solid bg-transparent py-6`}
+      className={`flex flex-col z-20  top-0 border-b-gray-100 border-solid
+      ${isScrolling ? " fixed px-[120px] w-full left-[0%] bg-white border-b-[2px]" : "bg-transparent"} py-6`}
     >
       <Link to={"/app/library"} className="underline text-lg w-fit">
         Go back to library
