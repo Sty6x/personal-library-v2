@@ -3,6 +3,7 @@ import {
   t_note,
   t_page,
   t_currentPage,
+  t_book,
   t_extendedNote,
 } from "../../../types/t_library";
 import { useEffect, useRef, useState } from "react";
@@ -163,7 +164,6 @@ const Page = () => {
 
   // set as loader
   function getPageData(storage: Array<t_page>) {
-    console.log(storage);
     const [currentPage] = storage.filter((page) => page.id === pageID);
     if (currentPage === undefined) {
       return;

@@ -33,18 +33,19 @@ class Library {
       localStorage.setItem("pages", JSON.stringify([]));
       localStorage.setItem("notes", JSON.stringify([]));
       return {
-        notes: [],
-        pages: [],
         books: [],
+        pages: [],
+        notes: [],
       };
     }
-    const [notes, pages, books] = arr.map((item: any) => {
+
+    const [pages, notes, books] = arr.map((item: any) => {
       return [...JSON.parse(item[1])];
     });
     return {
-      notes,
-      pages,
       books,
+      pages,
+      notes,
     };
   }
 
@@ -56,7 +57,7 @@ class Library {
 
   private delete(
     key: "books" | "notes" | "pages",
-    newItem: t_book | t_note | t_page | (() => void)
+    newItem: t_book | t_note | t_page | (() => void),
   ) {
     if (typeof newItem === "function") return newItem();
     const filteredItems = this[key].filter((item) => item.id !== newItem.id);
@@ -66,7 +67,7 @@ class Library {
 
   private save(
     key: "books" | "notes" | "pages",
-    newItem: t_book | t_note | t_page
+    newItem: t_book | t_note | t_page,
   ) {
     const prependNewItem = [newItem, ...this[key]];
     this[key] = prependNewItem !== null ? prependNewItem : (this[key] as any);
@@ -75,7 +76,7 @@ class Library {
 
   private update(
     key: "books" | "notes" | "pages",
-    updatedItem: t_book | t_note | t_page
+    updatedItem: t_book | t_note | t_page,
   ) {
     if (updatedItem !== null) {
       const updateItems = this[key].map((item) => {
@@ -106,7 +107,7 @@ class Library {
 
   updatePage(updatedPage: t_page) {
     const currentBook = this.books.find(
-      (book) => book.id === updatedPage.bookID
+      (book) => book.id === updatedPage.bookID,
     );
     if (currentBook !== undefined) {
       this.update("pages", updatedPage);
@@ -127,7 +128,7 @@ class Library {
       });
       this.delete("notes", () => {
         const filterPageNotes = LibraryStorage.notes.filter(
-          (note) => note.pageID !== page.id
+          (note) => note.pageID !== page.id,
         );
 
         LibraryStorage.notes =
@@ -155,11 +156,11 @@ class Library {
   }
   removeNote(note: t_note) {
     const currentPage = this.pages.find(
-      (page) => page.id === note.pageID
+      (page) => page.id === note.pageID,
     ) as t_page;
 
     const currentBook = this.books.find(
-      (book) => book.id === note.bookID
+      (book) => book.id === note.bookID,
     ) as t_book;
 
     this.delete("notes", note);
@@ -173,10 +174,10 @@ class Library {
 
   updateNote(updatedNote: t_note) {
     const currentPage = this.pages.find(
-      (page) => page.id === updatedNote.pageID
+      (page) => page.id === updatedNote.pageID,
     );
     const currentBook = this.books.find(
-      (book) => book.id === updatedNote.bookID
+      (book) => book.id === updatedNote.bookID,
     );
 
     if (currentPage !== undefined && currentBook !== undefined) {
@@ -197,14 +198,14 @@ class Library {
   deleteBook(currentBook: t_book) {
     this.delete("notes", () => {
       const filteredNotes = this.notes.filter(
-        (note) => note.bookID !== currentBook.id
+        (note) => note.bookID !== currentBook.id,
       );
       this["notes"] = [...filteredNotes];
       localStorage.setItem("notes", JSON.stringify(filteredNotes));
     });
     this.delete("pages", () => {
       const filteredPages = this.pages.filter(
-        (page) => page.bookID !== currentBook.id
+        (page) => page.bookID !== currentBook.id,
       );
       this["pages"] = [...filteredPages];
       localStorage.setItem("pages", JSON.stringify(filteredPages));
