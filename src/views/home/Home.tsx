@@ -154,9 +154,11 @@ function Home() {
   useEffect(() => {
     window.addEventListener("resize", (e) => {
       if (innerWidth <= 1024) {
+        console.log("Hide");
         setSmallScreen(true);
         return;
       }
+      console.log("Show");
       setSmallScreen(false);
     });
   }, []);
@@ -174,7 +176,9 @@ function Home() {
       )}
       <motion.div
         id="card-items-container"
-        className={`grid grid-rows-2 grid-cols-2 max-lg:block h-full max-w-full ${isSmallScreen && "bg-gridWhite"}`}
+        className={`grid grid-rows-2 grid-cols-2 max-lg:block h-full max-w-full ${
+          isSmallScreen && "bg-gridWhite"
+        }`}
         key={"container"}
       >
         <motion.div
@@ -183,7 +187,9 @@ function Home() {
             initial: { opacity: 0, scale: 0 },
             animate: { opacity: 1, scale: 0.4 },
           }}
-          className={`items grid place-content-center max-lg:min-h-[100dvh] bg-cover ${!isSmallScreen && "bg-gridWhite"} `}
+          className={`items grid place-content-center max-lg:min-h-[100dvh] bg-cover 
+${!isSmallScreen && "bg-gridWhite"} 
+`}
         >
           <div className="text-black flex-col gap-2 flex max-w-[max-content] max-lg:mx-10 max-sm:mx-2">
             <span className="">
@@ -201,7 +207,9 @@ function Home() {
               >
                 {LibraryStorage.books.length === 0
                   ? "Your Library is empty."
-                  : "Recent books you've read."}
+                  : isSmallScreen
+                    ? "Another day for another page."
+                    : "Recent books you've read."}
               </h1>
             </span>
             <span className="mt flex gap-2 ">
