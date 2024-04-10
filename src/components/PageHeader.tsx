@@ -25,13 +25,17 @@ const PageHeader = ({
   const { bookID } = useParams();
   const [isPageEditing, setIsPageEditing] = useState(false);
   const [pageNumberInput, setPageNumberInput] = useState<number>(
-    pageData.currentPage.pageNum,
+    pageData.currentPage.pageNum
   );
 
   return (
     <header
       className={`flex flex-col z-20  top-0 border-b-gray-100 border-solid
-      ${isScrolling ? "fixed px-[10%] max-[1280px]: w-full left-[0%] bg-white border-b-[2px]" : "bg-transparent"} py-6`}
+      ${
+        isScrolling
+          ? "fixed px-[10%] max-[1280px]: w-full left-[0%] bg-white border-b-[2px]"
+          : "bg-transparent"
+      } py-6`}
     >
       <Link to={"/app/library"} className="underline text-lg w-fit">
         Go back to library
@@ -41,6 +45,7 @@ const PageHeader = ({
           <span>
             <h1
               className={`
+              line-clamp-3
               ${isScrolling ? "text-3xl" : "text-7xl"} font-bold 
               text-pretty max-sm:text-4xl max-md:text-5xl max-[320px]:text-3xl`}
             >
@@ -51,7 +56,9 @@ const PageHeader = ({
             <span>
               <p
                 className={`
-              ${isScrolling ? "text-lg" : "text-2xl"} text-2xl max-md:text-lg max-[320px]:text-base 
+              ${
+                isScrolling ? "text-lg" : "text-2xl"
+              } text-2xl max-md:text-lg max-[320px]:text-base 
             font-semibold `}
               >
                 by {bookAuthor}

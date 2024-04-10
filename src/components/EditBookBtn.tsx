@@ -7,16 +7,15 @@ const EditBookBtn = ({
     <button
       onClick={() => openBookForm((prev) => (prev ? false : true))}
       id="edit-book-btn"
-      className="fixed right-[11%] top-10 max-sm:top-[2%] rounded-md px-3 py-2 box-border
+      className="fixed right-[8%] top-10 max-sm:top-[2%] rounded-full p-1 box-border
       bg-accent-one font-semibold shadow-btn-hover transition-shadow hover:transition-shadow z-[30]
         hover:shadow-btn-hover-active"
     >
       <div className="flex gap-1 items-center">
         <span
           id="edit-book-icon"
-          className="edit-icon grid place-items-center max-sm:w-[20px]"
-        ></span>
-        <span className="text-lg max-sm:text-sm">Edit Book</span>
+          className="edit-icon flex place-items-center  justify-center"
+        />
       </div>
     </button>
   );
