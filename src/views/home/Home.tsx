@@ -147,19 +147,24 @@ function Home() {
     navigate(`/${newBook.id}`);
   }
 
+  function handleSmallScreenSizeCheck(): void {
+    if (innerWidth <= 1024) {
+      console.log("Hide");
+      setSmallScreen(true);
+      return;
+    }
+    console.log("Show");
+    setSmallScreen(false);
+  }
+
   useEffect(() => {
     getRecentBooks(LibraryStorage);
   }, []);
 
   useEffect(() => {
-    window.addEventListener("resize", (e) => {
-      if (innerWidth <= 1024) {
-        console.log("Hide");
-        setSmallScreen(true);
-        return;
-      }
-      console.log("Show");
-      setSmallScreen(false);
+    handleSmallScreenSizeCheck();
+    window.addEventListener("resize", () => {
+      handleSmallScreenSizeCheck();
     });
   }, []);
 
