@@ -26,12 +26,12 @@ const PageHeader = ({
   const { bookID } = useParams();
   const [isPageEditing, setIsPageEditing] = useState(false);
   const [pageNumberInput, setPageNumberInput] = useState<number>(
-    pageData.currentPage.pageNum
+    pageData.currentPage.pageNum,
   );
 
   return (
     <header
-      className={`flex flex-col z-20 sticky top-0 border-b-black border-solid bg-white bg-gridWhite py-6`}
+      className={`flex flex-col z-20 sticky top-0 border-b-black border-solid bg-transparent py-6`}
     >
       <Link to={"/app/library"} className="underline text-lg w-fit">
         Go back to library
