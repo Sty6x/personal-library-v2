@@ -211,7 +211,9 @@ ${!isSmallScreen && "bg-gridWhite"}
               text-[2.6rem] max-sm:text-[1.5rem] max-w-[13em] text-pretty font-bold"
               >
                 {LibraryStorage.books.length === 0
-                  ? "Your Library is empty."
+                  ? isSmallScreen
+                    ? "Another day for another page."
+                    : "Your Library is empty."
                   : isSmallScreen
                     ? "Another day for another page."
                     : "Recent books you've read."}
