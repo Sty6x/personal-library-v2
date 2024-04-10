@@ -1,4 +1,9 @@
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from "react-router-dom";
 import getRelatedItems from "../utils/getRelatedItems";
 import { t_page } from "../types/t_library";
 import LibraryStorage from "../utils/Library";
@@ -17,8 +22,23 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
   const [pageSearch, setPageSearch] = useState<number>(
     sortPagesByNum[currentPage].pageNum,
   );
+  const navigate = useNavigate();
 
-  function handlePageIndexSearch() {}
+  function handlePageIndexSearch(): void {
+    const getSearchedPage = pages.find(
+      (page) => page.pageNum === Number(pageSearch),
+    );
+    console.log(getSearchedPage);
+    if (getSearchedPage !== undefined) {
+      navigate(`/${bookID}/${getSearchedPage.id}`, { relative: "path" });
+      return;
+    }
+    console.log("Page not found.");
+  }
+
+  useEffect(() => {
+    setPageSearch(sortPagesByNum[currentPage].pageNum);
+  }, [location.pathname]);
 
   useEffect(() => {
     console.log(pageSearch);
@@ -46,40 +66,31 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
               className="back-icon items-center flex"
             />
           ) : (
-            <span className="w-[20px] h-[auto]" />
+            <span className="w-[25px] h-[auto]" />
           )}
         </>
         <div
-          className="bg-[#ffffff] px-4 py-2 rounded-sm max-w-full"
+          className="bg-[#ffffff] px-2 py-1 rounded-sm max-w-full"
           id="page-number"
         >
-          {isPageInputClicked ? (
-            <input
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  console.log("search");
-                }
-
-                if (e.key === "Escape") {
-                  e.currentTarget.blur();
-                  console.log("Removed focus");
-                }
-              }}
-              onChange={(e) =>
-                setPageSearch(e.currentTarget.value as unknown as number)
+          <input
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handlePageIndexSearch();
               }
-              value={pageSearch}
-              type="number"
-              max={20}
-              autoFocus={isPageInputClicked}
-              className="w-[50px] text-center appearance-none outline-none"
-            />
-          ) : (
-            <button className="w-[50px] text-center " id="page-nav-button">
-              {" "}
-              {currentPageNum}
-            </button>
-          )}
+
+              if (e.key === "Escape") {
+                e.currentTarget.blur();
+                console.log("Removed focus");
+              }
+            }}
+            onChange={(e) => setPageSearch(Number(e.currentTarget.value))}
+            value={pageSearch}
+            type="number"
+            max={20}
+            autoFocus={isPageInputClicked}
+            className="w-[50px] text-center appearance-none outline-none"
+          />
         </div>
         <>
           {sortPagesByNum[currentPage + 1] !== undefined ? (
@@ -89,7 +100,7 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
               className="next-icon items-center flex"
             />
           ) : (
-            <span className="w-[20px] h-[auto]" />
+            <span className="w-[25px] h-[auto]" />
           )}
         </>
       </div>
