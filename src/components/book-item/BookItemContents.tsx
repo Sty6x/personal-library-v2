@@ -1,18 +1,20 @@
 import { formatDistance } from "date-fns/formatDistance";
-import { t_book, t_currentBook, t_note, t_page } from "../../types/t_library";
-import getRelatedItems from "../../utils/getRelatedItems";
+import { t_note, t_page } from "../../types/t_library";
 import LibraryStorage from "../../utils/Library";
 import { useEffect, useState } from "react";
 
-const BookItemContents = ({
-  book,
-  recentNote,
-  recentPage,
-}: {
-  book: t_book | t_currentBook;
-  recentNote?: t_note;
-  recentPage?: t_page;
-}) => {
+type t_recentBooks = {
+  id: string;
+  title: string;
+  author: string;
+  pageIDs: Array<string>;
+  dateAdded: string;
+  lastUpdated: string;
+  color: string;
+  note: t_note | undefined;
+  page: t_page | undefined;
+};
+const BookItemContents = ({ book }: { book: t_recentBooks }) => {
   const [numOfNotes, setNumOfNotes] = useState(0);
   function getNumOfNotes(): number {
     const filterNotes = LibraryStorage.notes.filter(
@@ -38,8 +40,8 @@ const BookItemContents = ({
         </span>
       </span>
       <span className="text-sm font-semi-bold max-md:text-[.8rem] max-[300px]:text-[.7rem]  max-md:leading-5">
-        {recentNote && recentPage
-          ? `Page #${recentPage?.pageNum} • Note #${recentNote?.noteNum}`
+        {book.note && book.page
+          ? `Page #${book.page?.pageNum} • Note #${book.note.noteNum}`
           : `Pages written ${book.pageIDs.length} • Notes created ${numOfNotes}`}
       </span>
     </>

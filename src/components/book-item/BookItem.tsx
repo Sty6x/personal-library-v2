@@ -102,12 +102,12 @@ const BookItem = ({
         <Link
           className={`${hide ? "hidden" : ""}
           flex items-center justify-center cursor-pointer
-          ${
-            location.pathname === "/app/library" &&
-            ` shadow-btn-hover transition-shadow hover:transition-shadow hover:shadow-btn-hover-active max-sm:h-[200px]`
-          }
+          ${location.pathname === "/app/*" && ` max-sm:h-[200px]`}
           `}
-          style={{ backgroundColor: color }}
+          style={{
+            backgroundColor: `${location.pathname !== "/app/*" ? color : ""}
+            `,
+          }}
           to={link}
         >
           <BookItemContentsLayout>{children}</BookItemContentsLayout>

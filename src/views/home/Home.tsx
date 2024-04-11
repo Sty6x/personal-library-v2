@@ -8,7 +8,6 @@ import {
   t_page,
 } from "../../types/t_library.ts";
 import { motion } from "framer-motion";
-import { formatDistance } from "date-fns";
 import LibraryStorage from "../../utils/Library.ts";
 import BookForm from "../../components/modal/BookForm.tsx";
 import { uid } from "uid";
@@ -64,7 +63,7 @@ function Home() {
   function getRecentBooks(library: t_library) {
     const sortedByDateBooks: Array<t_book> = library.books.sort(
       (a, b) =>
-        (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any),
+        (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
     );
     let recentBooks: Array<t_book> = [];
     for (let i = 0; i < 3; i++) {
@@ -76,12 +75,12 @@ function Home() {
         if (book === undefined) return undefined;
         const note = library.notes.find(
           (note) =>
-            note.bookID === book.id && note.lastUpdated === book.lastUpdated,
+            note.bookID === book.id && note.lastUpdated === book.lastUpdated
         );
 
         const page = library.pages.find((page) => page.id === note?.pageID);
         return { ...book, note, page, color: colors[i] };
-      },
+      }
     );
     setRecentBooks([...getRecentBooks]);
   }
@@ -102,12 +101,7 @@ function Home() {
                   noteContents={book.note.contents}
                   link={`/${book.id}/${book.page.id}`}
                 >
-                  <BookItemContents
-                    key={book.id}
-                    book={book}
-                    recentNote={book.note}
-                    recentPage={book.page}
-                  />
+                  <BookItemContents key={book.id} book={book} />
                 </BookItem>
               ) : (
                 <BookItem
@@ -126,7 +120,7 @@ function Home() {
           )}
         </>
       );
-    },
+    }
   );
 
   function addNewBook(bookData: t_bookFormData) {
@@ -215,8 +209,8 @@ ${!isSmallScreen && "bg-gridWhite"}
                     ? "Another day for another page."
                     : "Your Library is empty."
                   : isSmallScreen
-                    ? "Another day for another page."
-                    : "Recent books you've read."}
+                  ? "Another day for another page."
+                  : "Recent books you've read."}
               </h1>
             </span>
             <span className="mt flex gap-2 ">
