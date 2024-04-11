@@ -51,19 +51,17 @@ const AppBookItem = ({
     <>
       {book.notes.length !== 0 ? (
         <AppBookLayout favorite={book.favorite} link={link} color={color}>
-          <div className="grid place-content-center rounded-full bg-[#1d1d1d10] p-2 size-14 mb-2 box-border">
-            <div className="grid place-content-center rounded-full bg-[#1d1d1d10] p-2 size-10 ">
-              <span className="font-bold text-2xl">{book.title[0]}</span>
-            </div>
+          <div className="grid place-content-center rounded-full bg-[#43685030] p-2 size-14 mb-2 box-border">
+            <span className="font-bold text-2xl">{book.title[0]}</span>
           </div>
           <div className="max-w-[30em] min-w-[10em] w-[20em] flex flex-col gap-2">
             <span>
-              <h2 className=" font-bold leading-[1] text-xl text-ellipsis overflow-hidden text-nowrap ">
+              <h2 className=" font-bold leading-[1] text-2xl text-ellipsis overflow-hidden text-nowrap ">
                 {book.title}
               </h2>
               <span className="text-sm font-semibold"> by {book.author}</span>
             </span>
-            <p className=" line-clamp-2 text-pretty">
+            <p className=" line-clamp-3 box-border ">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
               modi perferendis. Perferendis totam exercitationem voluptatibus
               libero dolor in placeat necessitatibus vitae non atque, voluptatum
@@ -74,13 +72,11 @@ const AppBookItem = ({
       ) : (
         <AppBookLayout favorite={book.favorite} link={link} color={color}>
           <div className="max-w-[30em] min-w-[10em] w-[20em] flex flex-col ">
-            <div className="grid place-content-center rounded-full bg-[#1d1d1d20] p-2 size-14 mb-2 box-border">
-              <div className="grid place-content-center  rounded-full bg-[#1d1d1d10] p-2 size-10 ">
-                <span className="font-bold text-2xl">{book.title[0]}</span>
-              </div>
+            <div className="grid place-content-center rounded-full bg-[#43685030] p-2 size-14 mb-2 box-border">
+              <span className="font-bold text-2xl">{book.title[0]}</span>
             </div>
             <span>
-              <h2 className=" font-bold leading-[1] text-xl text-ellipsis overflow-hidden text-nowrap ">
+              <h2 className=" font-bold leading-[1] text-2xl text-ellipsis overflow-hidden text-nowrap ">
                 {book.title}
               </h2>
               <span className="text-sm font-semibold"> by {book.author}</span>
