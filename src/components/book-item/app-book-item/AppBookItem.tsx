@@ -17,17 +17,21 @@ const AppBookLayout = ({
   children,
   link,
   color,
+  favorite,
 }: {
   children: React.ReactNode;
   link: string;
   color: string;
+  favorite: string;
 }) => {
   return (
     <Link
       to={link}
       style={{ borderColor: color, background: color }}
-      className={` border-[2px] px-4 rounded-lg hover:drop-shadow-md hover:transition transition ease-in drop-shadow-sm
-      bg-white border-solid app-book-item flex justify-center items-center`}
+      className={`${
+        favorite !== "" ? "favorite-book" : ""
+      } app-book-item border-[2px] px-4 rounded-lg hover:drop-shadow-md hover:transition transition ease-in drop-shadow-sm
+      bg-white border-solid flex justify-center items-center`}
     >
       {children}
     </Link>
@@ -46,7 +50,7 @@ const AppBookItem = ({
   return (
     <>
       {book.notes.length !== 0 ? (
-        <AppBookLayout link={link} color={color}>
+        <AppBookLayout favorite={book.favorite} link={link} color={color}>
           <div className="max-w-[30em] min-w-[10em] w-[20em] flex flex-col gap-2">
             <span>
               <h2 className=" font-bold leading-[1] text-xl text-ellipsis overflow-hidden text-nowrap ">
@@ -55,7 +59,7 @@ const AppBookItem = ({
 
               <span className="text-sm font-semibold"> by {book.author}</span>
             </span>
-            <p className=" line-clamp-5 ">
+            <p className=" line-clamp-5 text-pretty">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
               modi perferendis. Perferendis totam exercitationem voluptatibus
               libero dolor in placeat necessitatibus vitae non atque, voluptatum
@@ -64,7 +68,7 @@ const AppBookItem = ({
           </div>
         </AppBookLayout>
       ) : (
-        <AppBookLayout link={link} color={color}>
+        <AppBookLayout favorite={book.favorite} link={link} color={color}>
           <div className="max-w-[30em] min-w-[10em] w-[20em] flex flex-col gap-2">
             <span>
               <h2 className=" font-bold leading-[1] text-xl text-ellipsis overflow-hidden text-nowrap ">
@@ -72,12 +76,6 @@ const AppBookItem = ({
               </h2>
               <span className="text-sm font-semibold"> by {book.author}</span>
             </span>
-            <p className=" line-clamp-5">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-              modi perferendis. Perferendis totam exercitationem voluptatibus
-              libero dolor in placeat necessitatibus vitae non atque, voluptatum
-              beatae quod, deleniti mollitia nam alias?
-            </p>
           </div>
         </AppBookLayout>
       )}

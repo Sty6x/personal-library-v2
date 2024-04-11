@@ -5,7 +5,7 @@ export type t_book = {
   pageIDs: Array<string>;
   dateAdded: string;
   lastUpdated: string;
-  favorite?: "favorite" | "";
+  favorite: "favorite" | "";
 };
 
 export type t_page = {

@@ -245,3 +245,39 @@ nav {
     background-image: url("./assets/icons/recent.svg");
   }
 }
+
+.app-book-item {
+  position: relative;
+  &::after {
+    top: 5%;
+    right: 6%;
+    content: "";
+    position: absolute;
+    /* background-image: url("./assets/icons/favorite-icon.svg"); */
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: #d75f3b;
+  }
+}
+
+.app-book-item.favorite-book {
+  position: relative;
+  &::after {
+    -webkit-mask-image: url("./assets/icons/favorite-icon.svg");
+    mask-image: url("./assets/icons/favorite-icon.svg");
+  }
+}
+
+.app-book-item {
+  position: relative;
+  &::after {
+    width: 30px;
+    height: 30px;
+    -webkit-mask-image: url("./assets/icons/favorite-icon-alt.svg");
+    mask-image: url("./assets/icons/favorite-icon-alt.svg");
+  }
+}
