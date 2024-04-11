@@ -7,14 +7,9 @@ export default {
         "note-separator": "#1d1d1d4c0",
       },
     },
-    dropShadow: {
-      "text-shadow": "2px 3px 1.4px rgb(0 0 0 / 0.3)",
-    },
     boxShadow: {
       "btn-hover": "0px 1px 1px 1px rgb(0 0 0 / 0.3)",
       "btn-hover-active": "0px 2px 3px 2px rgb(0 0 0 / 0.2)",
-      "book-item-active": "1px 4px 6px 3px rgb(0 0 0 / 0.3)",
-      "book-item": "2px 2px 6px 4px rgb(0 0 0 / 0.1)",
       header: "0px 5px 3px -1px rgb(0 0 0 / 0.2)",
       sb: "2px 0px 3px 1px #1d1d1d20",
       "focus-border": "0px 0px 10px 1px #CCD7EC",

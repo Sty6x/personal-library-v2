@@ -44,7 +44,7 @@ const BookItemList = ({
           </Link>
         )}
       </div>
-      <div className="grid grid-cols-2 max-sm:flex flex-col auto-rows-[minmax(250px,1fr)] gap-4">
+      <div className="grid grid-cols-3 max-sm:flex flex-col auto-rows-[minmax(200px,1fr)] gap-4">
         {bookItems && bookItems.length > 0 ? bookItems : onEmptyText}
       </div>
     </section>

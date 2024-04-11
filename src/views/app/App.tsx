@@ -93,16 +93,16 @@ const App = () => {
   }
 
   function getRecentBooks(): t_appBook[] {
-    if (bookList.length < 2) return [bookList[0]];
-    const [first, second]: Array<t_appBook> = bookList.sort(
+    if (bookList.length < 3) return [bookList[0]];
+    const [first, second, third]: Array<t_appBook> = bookList.sort(
       (a, b) =>
         (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
     );
-    return [first, second];
+    return [first, second, third];
   }
 
   function getNotRecentBooks(): t_appBook[] {
-    if (bookList.length < 2) return [];
+    if (bookList.length < 1) return [];
     const filter = bookList.filter(
       (book) =>
         book.id !== getRecentBooks()[0].id && book.id !== getRecentBooks()[1].id

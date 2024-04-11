@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { t_book, t_note, t_page } from "../../../types/t_library";
 
@@ -13,57 +13,73 @@ interface t_appBook extends t_recentBooks {
   notes: Array<t_note> | [];
 }
 
+const AppBookLayout = ({
+  children,
+  link,
+  color,
+}: {
+  children: React.ReactNode;
+  link: string;
+  color: string;
+}) => {
+  return (
+    <Link
+      to={link}
+      style={{ borderColor: color }}
+      className={`max-lg:hidden border-[2px] rounded-lg hover:drop-shadow-md hover:transition transition ease-in drop-shadow-sm
+      bg-white border-solid app-book-item flex justify-center items-center`}
+    >
+      {children}
+    </Link>
+  );
+};
+
 const AppBookItem = ({
   color,
   link,
-  animate = false,
   book,
 }: {
-  animate?: boolean;
   book: t_appBook;
   color: string;
-  motionKey: number;
   link: string;
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
   return (
     <>
       {book.notes.length !== 0 ? (
-        <Link
-          to={link}
-          style={{ backgroundColor: color }}
-          className={`max-lg:hidden app-book-item flex justify-center items-center  ${
-            !animate && "cursor-pointer"
-          }`}
-        >
-          <div className="max-w-[30em] flex flex-col gap-2">
-            <h2 className=" font-bold leading-[1] text-xl">{book.title}</h2>
-            <p>
+        <AppBookLayout link={link} color={color}>
+          <div className="max-w-[30em] w-[20em] flex flex-col gap-2">
+            <span>
+              <h2 className=" font-bold leading-[1] text-xl text-ellipsis overflow-hidden text-nowrap ">
+                {book.title}
+              </h2>
+
+              <span className="text-sm font-semibold"> by {book.author}</span>
+            </span>
+            <p className="">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
               modi perferendis. Perferendis totam exercitationem voluptatibus
               libero dolor in placeat necessitatibus vitae non atque, voluptatum
               beatae quod, deleniti mollitia nam alias?
             </p>
           </div>
-        </Link>
+        </AppBookLayout>
       ) : (
-        <Link
-          to={link}
-          style={{ backgroundColor: color }}
-          className={`max-lg:hidden app-book-item flex justify-center items-center  ${
-            !animate && "cursor-pointer"
-          }`}
-        >
-          <div className="max-w-[30em] flex flex-col gap-2">
-            <h2 className=" font-bold leading-[1] text-xl">{book.title}</h2>
-            <p>
+        <AppBookLayout link={link} color={color}>
+          <div className="max-w-[30em] w-[20em] flex flex-col gap-2">
+            <span>
+              <h2 className=" font-bold leading-[1] text-xl text-ellipsis overflow-hidden text-nowrap ">
+                {book.title}
+              </h2>
+              <span className="text-sm font-semibold"> by {book.author}</span>
+            </span>
+            <p className="">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
               modi perferendis. Perferendis totam exercitationem voluptatibus
               libero dolor in placeat necessitatibus vitae non atque, voluptatum
               beatae quod, deleniti mollitia nam alias?
             </p>
           </div>
-        </Link>
+        </AppBookLayout>
       )}
     </>
   );
