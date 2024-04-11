@@ -194,9 +194,9 @@ input[type="checkbox"] {
   display: inline-block;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   height: 3em;
-  width: 30px;
+  width: 40px;
 }
 
 #favorite-button.favorite {

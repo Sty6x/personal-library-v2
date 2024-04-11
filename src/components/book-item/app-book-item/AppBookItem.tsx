@@ -25,8 +25,8 @@ const AppBookLayout = ({
   return (
     <Link
       to={link}
-      style={{ borderColor: color }}
-      className={`max-lg:hidden border-[2px] rounded-lg hover:drop-shadow-md hover:transition transition ease-in drop-shadow-sm
+      style={{ borderColor: color, background: color }}
+      className={` border-[2px] px-4 rounded-lg hover:drop-shadow-md hover:transition transition ease-in drop-shadow-sm
       bg-white border-solid app-book-item flex justify-center items-center`}
     >
       {children}
@@ -47,7 +47,7 @@ const AppBookItem = ({
     <>
       {book.notes.length !== 0 ? (
         <AppBookLayout link={link} color={color}>
-          <div className="max-w-[30em] w-[20em] flex flex-col gap-2">
+          <div className="max-w-[30em] min-w-[10em] w-[20em] flex flex-col gap-2">
             <span>
               <h2 className=" font-bold leading-[1] text-xl text-ellipsis overflow-hidden text-nowrap ">
                 {book.title}
@@ -55,7 +55,7 @@ const AppBookItem = ({
 
               <span className="text-sm font-semibold"> by {book.author}</span>
             </span>
-            <p className="">
+            <p className=" line-clamp-5 ">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
               modi perferendis. Perferendis totam exercitationem voluptatibus
               libero dolor in placeat necessitatibus vitae non atque, voluptatum
@@ -65,14 +65,14 @@ const AppBookItem = ({
         </AppBookLayout>
       ) : (
         <AppBookLayout link={link} color={color}>
-          <div className="max-w-[30em] w-[20em] flex flex-col gap-2">
+          <div className="max-w-[30em] min-w-[10em] w-[20em] flex flex-col gap-2">
             <span>
               <h2 className=" font-bold leading-[1] text-xl text-ellipsis overflow-hidden text-nowrap ">
                 {book.title}
               </h2>
               <span className="text-sm font-semibold"> by {book.author}</span>
             </span>
-            <p className="">
+            <p className=" line-clamp-5">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
               modi perferendis. Perferendis totam exercitationem voluptatibus
               libero dolor in placeat necessitatibus vitae non atque, voluptatum
