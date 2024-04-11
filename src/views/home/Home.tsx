@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import BookItem from "../../components/book-item/BookItem.tsx";
+import HomeBookItem from "../../components/book-item/home-book-item/HomeBookItem.tsx";
 import {
   t_book,
   t_bookFormData,
@@ -12,8 +12,8 @@ import LibraryStorage from "../../utils/Library.ts";
 import BookForm from "../../components/modal/BookForm.tsx";
 import { uid } from "uid";
 import { Link, useNavigate } from "react-router-dom";
-import BookItemContents from "../../components/book-item/BookItemContents.tsx";
-import PlaceholderBookItem from "../../components/PlaceholderBookItem.tsx";
+import BookItemContents from "../../components/book-item/home-book-item/BookItemContents.tsx";
+import PlaceholderBookItem from "../../components/book-item/home-book-item/PlaceholderBookItem.tsx";
 
 type t_recentBooks = {
   id: string;
@@ -92,7 +92,7 @@ function Home() {
           {book ? (
             <>
               {book.note && book.page ? (
-                <BookItem
+                <HomeBookItem
                   hide={isSmallScreen}
                   animate={true}
                   key={book.id}
@@ -102,9 +102,9 @@ function Home() {
                   link={`/${book.id}/${book.page.id}`}
                 >
                   <BookItemContents key={book.id} book={book} />
-                </BookItem>
+                </HomeBookItem>
               ) : (
-                <BookItem
+                <HomeBookItem
                   hide={isSmallScreen}
                   key={book.id}
                   color={book.color}
@@ -112,7 +112,7 @@ function Home() {
                   link={`/${book.id}`}
                 >
                   <BookItemContents book={book} />
-                </BookItem>
+                </HomeBookItem>
               )}
             </>
           ) : (

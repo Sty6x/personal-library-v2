@@ -1,6 +1,6 @@
 import { formatDistance } from "date-fns/formatDistance";
-import { t_note, t_page } from "../../types/t_library";
-import LibraryStorage from "../../utils/Library";
+import { t_note, t_page } from "../../../types/t_library";
+import LibraryStorage from "../../../utils/Library";
 import { useEffect, useState } from "react";
 
 type t_recentBooks = {

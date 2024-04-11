@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 const BookItemContentsLayout = ({ children }: { children: ReactNode }) => {
   return (
@@ -67,7 +66,9 @@ const NotePreview = ({
         <div className="flex flex-col">{children}</div>
         <div className=" h-full bg-black rounded p-3">
           <p className="max-[1200px]:text-[.8rem] max-[1200px]:leading-4 max-[1280px]:line-clamp-5  max-[1280px]:text-[1rem] text-white text-pretty note-contents-preview">
-            {noteContents}
+            {!noteContents
+              ? "This is what your note would look like."
+              : noteContents}
           </p>
         </div>
       </div>
@@ -75,7 +76,7 @@ const NotePreview = ({
   );
 };
 
-const BookItem = ({
+const HomeBookItem = ({
   color,
   motionKey,
   children,
@@ -94,68 +95,29 @@ const BookItem = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <>
-      {/* NOTICE HERE */}
-      {/* Used in Menu */}
-
-      {!animate ? (
-        <Link
-          className={`${
-            hide ? "hidden" : ""
-          } flex items-center justify-center cursor-pointer max-sm:h-[200px] 
-           ${
-             location.pathname.startsWith("/app/")
-               ? "border-[2px] rounded-md shadow-book-item bg-white border-solid"
-               : ""
-           } 
-          `}
-          // I dont really get it
-          style={{
-            borderColor: `${color}`,
-            backgroundColor: `${
-              !location.pathname.startsWith("/app/") ? color : ""
-            }
-            `,
-          }}
-          to={link}
-        >
-          <BookItemContentsLayout>{children}</BookItemContentsLayout>
-          {location.pathname.startsWith("/app/") && (
-            <div>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta
-              minus vel accusamus incidunt quasi nobis optio voluptatem?
-              Exercitationem ratione quasi, sint incidunt ipsam perferendis nemo
-              veniam iste, unde officia necessitatibus!
-            </div>
-          )}
-        </Link>
-      ) : (
-        <motion.div
-          onMouseEnter={() => {
-            console.log("Entered");
-            setIsHovered(true);
-          }}
-          onMouseLeave={() => setIsHovered(false)}
-          key={motionKey}
-          style={{ backgroundColor: color }}
-          className={`max-lg:hidden px-10 book-item flex justify-center items-center  ${
-            !animate &&
-            "cursor-pointer rounded-sm shadow-btn-hover transition-shadow hover:transition-shadow hover:shadow-btn-hover-active"
-          }`}
-        >
-          <AnimatePresence custom="popLayout">
-            {!isHovered ? (
-              <BookItemContentsLayout key={"book"}>
-                {children}
-              </BookItemContentsLayout>
-            ) : (
-              <NotePreview deps={{ children, noteContents, link }} />
-            )}
-          </AnimatePresence>
-        </motion.div>
-      )}
-    </>
+    <motion.div
+      onMouseEnter={() => {
+        console.log("Entered");
+        setIsHovered(true);
+      }}
+      onMouseLeave={() => setIsHovered(false)}
+      key={motionKey}
+      style={{ backgroundColor: color }}
+      className={`max-lg:hidden px-10 book-item flex justify-center items-center  ${
+        !animate && "cursor-pointer"
+      }`}
+    >
+      <AnimatePresence custom="popLayout">
+        {!isHovered ? (
+          <BookItemContentsLayout key={"book"}>
+            {children}
+          </BookItemContentsLayout>
+        ) : (
+          <NotePreview deps={{ children, noteContents, link }} />
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
-export default BookItem;
+export default HomeBookItem;

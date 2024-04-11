@@ -3,13 +3,13 @@ import libImage from "../../assets/images/libimage.png";
 import { AnimatePresence, motion } from "framer-motion";
 import { t_page, t_note, t_book, t_bookFormData } from "../../types/t_library";
 import { KeyboardEvent, useEffect, useRef, useState } from "react";
-import BookItem from "../../components/book-item/BookItem";
+import BookItem from "../../components/book-item/home-book-item/HomeBookItem";
 import BookForm from "../../components/modal/BookForm";
 import LibraryStorage from "../../utils/Library";
 import { uid } from "uid";
 import Sidebar from "../../components/Sidebar";
 import BookItemList from "../../components/BookItemList";
-import BookItemContents from "../../components/book-item/BookItemContents";
+import BookItemContents from "../../components/book-item/home-book-item/BookItemContents";
 
 type t_recentBooks = {
   id: string;
