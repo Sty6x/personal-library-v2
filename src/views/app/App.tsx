@@ -80,7 +80,6 @@ const App = () => {
     const favorites: Array<t_book> = bookList.filter(
       (book) => book.favorite === "favorite"
     );
-    console.log(favorites);
     return favorites;
   }
 
@@ -128,7 +127,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log(location.pathname === "/app");
     if (location.pathname === "/app" || location.pathname === "/app/")
       navigate("/app/library");
   }, []);

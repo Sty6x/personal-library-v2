@@ -100,12 +100,17 @@ const BookItem = ({
 
       {!animate ? (
         <Link
-          className={`${hide ? "hidden" : ""}
-          flex items-center justify-center cursor-pointer
-          ${location.pathname === "/app/*" && ` max-sm:h-[200px]`}
+          className={`${
+            hide ? "hidden" : ""
+          } flex items-center justify-center cursor-pointer max-sm:h-[200px] 
+           border-[2px] rounded-md shadow-book-item bg-white border-solid 
           `}
+          // I dont really get it
           style={{
-            backgroundColor: `${location.pathname !== "/app/*" ? color : ""}
+            borderColor: `${color}`,
+            backgroundColor: `${
+              !location.pathname.startsWith("/app/") ? color : ""
+            }
             `,
           }}
           to={link}
