@@ -61,7 +61,6 @@ const AppBookItem = ({
               <h2 className=" font-bold leading-[1] text-xl text-ellipsis overflow-hidden text-nowrap ">
                 {book.title}
               </h2>
-
               <span className="text-sm font-semibold"> by {book.author}</span>
             </span>
             <p className=" line-clamp-2 text-pretty">

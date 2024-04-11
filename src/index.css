@@ -246,14 +246,13 @@ nav {
   }
 }
 
-.app-book-item {
+/* .app-book-item {
   position: relative;
   &::after {
     top: 5%;
     right: 6%;
     content: "";
     position: absolute;
-    /* background-image: url("./assets/icons/favorite-icon.svg"); */
     display: inline-block;
     width: 35px;
     height: 35px;
@@ -262,17 +261,28 @@ nav {
     background-size: cover;
     background-color: #d75f3b;
   }
-}
+} */
 
 .app-book-item.favorite-book {
   position: relative;
   &::after {
+    top: -5%;
+    right: 6%;
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: #d75f3b;
     -webkit-mask-image: url("./assets/icons/favorite-icon.svg");
     mask-image: url("./assets/icons/favorite-icon.svg");
   }
 }
 
-.app-book-item {
+/* .app-book-item {
   position: relative;
   &::after {
     width: 30px;
@@ -280,4 +290,4 @@ nav {
     -webkit-mask-image: url("./assets/icons/favorite-icon-alt.svg");
     mask-image: url("./assets/icons/favorite-icon-alt.svg");
   }
-}
+} */
