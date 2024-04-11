@@ -9,19 +9,16 @@ import LibraryStorage from "../../utils/Library";
 import { uid } from "uid";
 import Sidebar from "../../components/Sidebar";
 import BookItemList from "../../components/BookItemList";
-import BookItemContents from "../../components/book-item/app-book-item/BookItemContents";
 
-type t_recentBooks = {
-  id: string;
-  title: string;
-  author: string;
-  pageIDs: Array<string>;
-  dateAdded: string;
-  lastUpdated: string;
+interface t_recentBooks extends t_book {
   color: string;
   note: t_note | undefined;
   page: t_page | undefined;
-};
+}
+
+interface t_appBook extends t_recentBooks {
+  notes: Array<t_note> | [];
+}
 
 const colors = [
   "#ECE1C4",
@@ -51,10 +48,10 @@ const colors = [
 ];
 
 const App = () => {
-  const books: Array<t_book> = useLoaderData() as Array<t_book>;
+  const books: Array<t_appBook> = useLoaderData() as Array<t_appBook>;
   const [isModalOpened, setIsModalOpened] = useState(false);
-  const [bookList, setBookList] = useState<Array<t_book>>([...books]);
-  const [queriedBookList, setQueriedBookList] = useState<Array<t_book>>([]);
+  const [bookList, setBookList] = useState<Array<t_appBook>>([...books]);
+  const [queriedBookList, setQueriedBookList] = useState<Array<t_appBook>>([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -69,7 +66,7 @@ const App = () => {
       pageIDs: [],
     };
     LibraryStorage.addBook(newBook);
-    setBookList((prev) => [...prev, newBook]);
+    setBookList((prev) => [...prev, newBook as t_appBook]);
   }
 
   // simple Search query for looking up a single category,
@@ -88,23 +85,23 @@ const App = () => {
     setQueriedBookList([...filterBooks]);
   }
 
-  function getFavorites(): t_book[] {
-    const favorites: Array<t_book> = bookList.filter(
+  function getFavorites(): t_appBook[] {
+    const favorites: Array<t_appBook> = bookList.filter(
       (book) => book.favorite === "favorite"
     );
     return favorites;
   }
 
-  function getRecentBooks(): t_book[] {
+  function getRecentBooks(): t_appBook[] {
     if (bookList.length < 2) return [bookList[0]];
-    const [first, second]: Array<t_book> = bookList.sort(
+    const [first, second]: Array<t_appBook> = bookList.sort(
       (a, b) =>
         (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
     );
     return [first, second];
   }
 
-  function getNotRecentBooks(): t_book[] {
+  function getNotRecentBooks(): t_appBook[] {
     if (bookList.length < 2) return [];
     const filter = bookList.filter(
       (book) =>
@@ -113,7 +110,7 @@ const App = () => {
     return filter;
   }
 
-  function bookRenderer(books: () => Array<t_book>) {
+  function bookRenderer(books: () => Array<t_appBook>) {
     return books().map((book, i) => {
       return (
         <AppBookItem
@@ -121,9 +118,8 @@ const App = () => {
           color={colors[Math.floor(Math.random() * colors.length)]}
           motionKey={i}
           link={`/${book.id}`}
-        >
-          <BookItemContents isAppData={false} book={book as t_recentBooks} />
-        </AppBookItem>
+          book={book}
+        />
       );
     });
   }
