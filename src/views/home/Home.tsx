@@ -15,17 +15,11 @@ import { Link, useNavigate } from "react-router-dom";
 import BookItemContents from "../../components/book-item/home-book-item/BookItemContents.tsx";
 import PlaceholderBookItem from "../../components/book-item/home-book-item/PlaceholderBookItem.tsx";
 
-type t_recentBooks = {
-  id: string;
-  title: string;
-  author: string;
-  pageIDs: Array<string>;
-  dateAdded: string;
-  lastUpdated: string;
+interface t_recentBooks extends t_book {
   color: string;
   note: t_note | undefined;
   page: t_page | undefined;
-};
+}
 
 const colors = ["#A3BC9F", "#ECCCCC", "#9FB5BC"];
 const placeHolderData: Array<{ quote: string; color: string; author: string }> =
@@ -97,6 +91,7 @@ function Home() {
                 key={book.id}
                 color={book.color}
                 motionKey={i}
+                favorite={book.favorite}
                 noteContents={
                   book.note
                     ? book.note.contents
@@ -119,7 +114,7 @@ function Home() {
 
   function addNewBook(bookData: t_bookFormData) {
     const bookDate = new Date().toString();
-    const newBook: t_book = {
+    const newBook: any = {
       ...bookData,
       id: uid(16),
       lastUpdated: bookDate,

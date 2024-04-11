@@ -263,7 +263,7 @@ nav {
   }
 } */
 
-.app-book-item.favorite-book {
+.book-item-favorites.favorite-book {
   position: relative;
   &::after {
     top: -5%;

@@ -24,14 +24,14 @@ const BookItemContentsLayout = ({ children }: { children: ReactNode }) => {
 };
 
 const NotePreview = ({
-  deps: { link, children, noteContents },
+  deps: { link, children, noteContents, favorite },
 }: {
   deps: { [key: string]: any };
 }) => {
   return (
     <motion.a
       href={link}
-      className="
+      className={`
        hover:cursor-pointer
        hover:shadow-book-item-active
        hover:transition-shadow
@@ -45,7 +45,11 @@ const NotePreview = ({
        max-[1200px]:px-6
        max-[1200px]:py-4
        bg-white rounded-md
-       box-content"
+       box-content
+
+        ${favorite !== "" ? "" : "favorite-book"} book-item-favorites
+
+      `}
       key="contents"
       initial={{ opacity: 0, scale: 0, display: "none" }}
       animate={{
@@ -82,6 +86,7 @@ const HomeBookItem = ({
   link,
   animate = false,
   hide = false,
+  favorite,
 }: {
   animate?: boolean;
   color: string;
@@ -90,6 +95,7 @@ const HomeBookItem = ({
   noteContents?: string;
   link: string;
   hide?: boolean;
+  favorite: string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
@@ -101,9 +107,8 @@ const HomeBookItem = ({
       onMouseLeave={() => setIsHovered(false)}
       key={motionKey}
       style={{ backgroundColor: color }}
-      className={`max-lg:hidden px-10 home-book-item flex justify-center items-center  ${
-        !animate && "cursor-pointer"
-      }`}
+      className={` max-lg:hidden px-10 home-book-item flex justify-center items-center  
+      ${!animate && "cursor-pointer"}`}
     >
       <AnimatePresence custom="popLayout">
         {!isHovered ? (
@@ -111,7 +116,7 @@ const HomeBookItem = ({
             {children}
           </BookItemContentsLayout>
         ) : (
-          <NotePreview deps={{ children, noteContents, link }} />
+          <NotePreview deps={{ children, noteContents, link, favorite }} />
         )}
       </AnimatePresence>
     </motion.div>
