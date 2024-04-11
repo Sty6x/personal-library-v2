@@ -103,7 +103,11 @@ const BookItem = ({
           className={`${
             hide ? "hidden" : ""
           } flex items-center justify-center cursor-pointer max-sm:h-[200px] 
-           border-[2px] rounded-md shadow-book-item bg-white border-solid 
+           ${
+             location.pathname.startsWith("/app/")
+               ? "border-[2px] rounded-md shadow-book-item bg-white border-solid"
+               : ""
+           } 
           `}
           // I dont really get it
           style={{
@@ -116,6 +120,14 @@ const BookItem = ({
           to={link}
         >
           <BookItemContentsLayout>{children}</BookItemContentsLayout>
+          {location.pathname.startsWith("/app/") && (
+            <div>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta
+              minus vel accusamus incidunt quasi nobis optio voluptatem?
+              Exercitationem ratione quasi, sint incidunt ipsam perferendis nemo
+              veniam iste, unde officia necessitatibus!
+            </div>
+          )}
         </Link>
       ) : (
         <motion.div

@@ -1,7 +1,7 @@
 import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
 import libImage from "../../assets/images/libimage.png";
 import { AnimatePresence, motion } from "framer-motion";
-import { t_book, t_bookFormData } from "../../types/t_library";
+import { t_page, t_note, t_book, t_bookFormData } from "../../types/t_library";
 import { KeyboardEvent, useEffect, useRef, useState } from "react";
 import BookItem from "../../components/book-item/BookItem";
 import BookForm from "../../components/modal/BookForm";
@@ -10,6 +10,18 @@ import { uid } from "uid";
 import Sidebar from "../../components/Sidebar";
 import BookItemList from "../../components/BookItemList";
 import BookItemContents from "../../components/book-item/BookItemContents";
+
+type t_recentBooks = {
+  id: string;
+  title: string;
+  author: string;
+  pageIDs: Array<string>;
+  dateAdded: string;
+  lastUpdated: string;
+  color: string;
+  note: t_note | undefined;
+  page: t_page | undefined;
+};
 
 const colors = [
   "#ECE1C4",
@@ -110,7 +122,7 @@ const App = () => {
           motionKey={i}
           link={`/${book.id}`}
         >
-          <BookItemContents book={book} />
+          <BookItemContents isAppData={false} book={book as t_recentBooks} />
         </BookItem>
       );
     });
