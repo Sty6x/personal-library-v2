@@ -1,27 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode, useEffect, useState } from "react";
-
-const BookItemContentsLayout = ({ children }: { children: ReactNode }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0, display: "none" }}
-      animate={{
-        opacity: 1,
-        scale: 1,
-        display: "flex",
-        transition: { delay: 0.3 },
-      }}
-      exit={{
-        opacity: 0,
-        scale: 0,
-        transition: { duration: 0.1 },
-      }}
-      className="flex flex-col max-w-[70%] w-[350px] "
-    >
-      {children}
-    </motion.div>
-  );
-};
+import { Link } from "react-router-dom";
 
 const NotePreview = ({
   deps: { link, children, noteContents },
@@ -76,7 +55,7 @@ const NotePreview = ({
   );
 };
 
-const HomeBookItem = ({
+const AppBookItem = ({
   color,
   motionKey,
   children,
@@ -95,29 +74,16 @@ const HomeBookItem = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <motion.div
-      onMouseEnter={() => {
-        console.log("Entered");
-        setIsHovered(true);
-      }}
-      onMouseLeave={() => setIsHovered(false)}
-      key={motionKey}
+    <Link
+      to={link}
       style={{ backgroundColor: color }}
-      className={`max-lg:hidden px-10 home-book-item flex justify-center items-center  ${
+      className={`max-lg:hidden app-book-item flex justify-center items-center  ${
         !animate && "cursor-pointer"
       }`}
     >
-      <AnimatePresence custom="popLayout">
-        {!isHovered ? (
-          <BookItemContentsLayout key={"book"}>
-            {children}
-          </BookItemContentsLayout>
-        ) : (
-          <NotePreview deps={{ children, noteContents, link }} />
-        )}
-      </AnimatePresence>
-    </motion.div>
+      {children}
+    </Link>
   );
 };
 
-export default HomeBookItem;
+export default AppBookItem;
