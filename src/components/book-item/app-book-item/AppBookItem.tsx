@@ -30,10 +30,10 @@ const AppBookLayout = ({
       style={{ borderColor: color, background: color }}
       className={`${
         favorite !== "" ? "favorite-book" : ""
-      } app-book-item border-[2px] px-4 rounded-lg hover:drop-shadow-md hover:transition transition ease-in drop-shadow-sm
-      bg-white border-solid flex justify-center items-center`}
+      } app-book-item border-[2px] px-10  rounded-lg hover:drop-shadow-md hover:transition transition ease-in drop-shadow-sm
+      bg-white h-full border-solid relative text-left`}
     >
-      {children}
+      <div className="h-full flex-col flex justify-center">{children}</div>
     </Link>
   );
 };
@@ -51,6 +51,11 @@ const AppBookItem = ({
     <>
       {book.notes.length !== 0 ? (
         <AppBookLayout favorite={book.favorite} link={link} color={color}>
+          <div className="grid place-content-center rounded-full bg-[#1d1d1d10] p-2 size-14 mb-2 box-border">
+            <div className="grid place-content-center rounded-full bg-[#1d1d1d10] p-2 size-10 ">
+              <span className="font-bold text-2xl">{book.title[0]}</span>
+            </div>
+          </div>
           <div className="max-w-[30em] min-w-[10em] w-[20em] flex flex-col gap-2">
             <span>
               <h2 className=" font-bold leading-[1] text-xl text-ellipsis overflow-hidden text-nowrap ">
@@ -59,7 +64,7 @@ const AppBookItem = ({
 
               <span className="text-sm font-semibold"> by {book.author}</span>
             </span>
-            <p className=" line-clamp-5 text-pretty">
+            <p className=" line-clamp-2 text-pretty">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
               modi perferendis. Perferendis totam exercitationem voluptatibus
               libero dolor in placeat necessitatibus vitae non atque, voluptatum
@@ -69,7 +74,12 @@ const AppBookItem = ({
         </AppBookLayout>
       ) : (
         <AppBookLayout favorite={book.favorite} link={link} color={color}>
-          <div className="max-w-[30em] min-w-[10em] w-[20em] flex flex-col gap-2">
+          <div className="max-w-[30em] min-w-[10em] w-[20em] flex flex-col ">
+            <div className="grid place-content-center rounded-full bg-[#1d1d1d20] p-2 size-14 mb-2 box-border">
+              <div className="grid place-content-center  rounded-full bg-[#1d1d1d10] p-2 size-10 ">
+                <span className="font-bold text-2xl">{book.title[0]}</span>
+              </div>
+            </div>
             <span>
               <h2 className=" font-bold leading-[1] text-xl text-ellipsis overflow-hidden text-nowrap ">
                 {book.title}
