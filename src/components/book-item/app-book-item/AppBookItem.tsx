@@ -36,7 +36,15 @@ const AppBookItem = ({
             !animate && "cursor-pointer"
           }`}
         >
-          {book.notes[0].contents}
+          <div className="max-w-[30em] flex flex-col gap-2">
+            <h2 className=" font-bold leading-[1] text-xl">{book.title}</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
+              modi perferendis. Perferendis totam exercitationem voluptatibus
+              libero dolor in placeat necessitatibus vitae non atque, voluptatum
+              beatae quod, deleniti mollitia nam alias?
+            </p>
+          </div>
         </Link>
       ) : (
         <Link
@@ -46,7 +54,15 @@ const AppBookItem = ({
             !animate && "cursor-pointer"
           }`}
         >
-          Do Something
+          <div className="max-w-[30em] flex flex-col gap-2">
+            <h2 className=" font-bold leading-[1] text-xl">{book.title}</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
+              modi perferendis. Perferendis totam exercitationem voluptatibus
+              libero dolor in placeat necessitatibus vitae non atque, voluptatum
+              beatae quod, deleniti mollitia nam alias?
+            </p>
+          </div>
         </Link>
       )}
     </>
