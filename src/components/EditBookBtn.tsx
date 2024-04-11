@@ -14,7 +14,7 @@ const EditBookBtn = ({
       <div className="flex gap-1 items-center">
         <span
           id="edit-book-icon"
-          className="edit-icon flex place-items-center  justify-center"
+          className="edit-icon flex place-items-center justify-center"
         />
       </div>
     </button>

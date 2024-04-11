@@ -82,6 +82,7 @@ button {
 }
 .edit-icon::before {
   background-image: url("./assets/icons/edit-icon.svg");
+  margin: 0;
 }
 .trash-icon::before {
   background-image: url("./assets/icons/trash.svg");
@@ -99,8 +100,8 @@ button {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: auto;
-  width: 40px;
+  height: 30px;
+  width: 30px;
 }
 
 .note-contents-preview {
