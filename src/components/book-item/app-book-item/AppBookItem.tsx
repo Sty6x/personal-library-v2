@@ -61,12 +61,12 @@ const AppBookItem = ({
               </h2>
               <span className="text-sm font-semibold"> by {book.author}</span>
             </span>
-            <p className=" line-clamp-3 box-border ">
+            {/* <p className=" line-clamp-3 box-border ">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
               modi perferendis. Perferendis totam exercitationem voluptatibus
               libero dolor in placeat necessitatibus vitae non atque, voluptatum
               beatae quod, deleniti mollitia nam alias?
-            </p>
+            </p> */}
           </div>
         </AppBookLayout>
       ) : (
