@@ -91,29 +91,23 @@ function Home() {
         <>
           {book ? (
             <>
-              {book.note && book.page ? (
-                <HomeBookItem
-                  hide={isSmallScreen}
-                  animate={true}
-                  key={book.id}
-                  color={book.color}
-                  motionKey={i}
-                  noteContents={book.note.contents}
-                  link={`/${book.id}/${book.page.id}`}
-                >
-                  <BookItemContents key={book.id} book={book} />
-                </HomeBookItem>
-              ) : (
-                <HomeBookItem
-                  hide={isSmallScreen}
-                  key={book.id}
-                  color={book.color}
-                  motionKey={i}
-                  link={`/${book.id}`}
-                >
-                  <BookItemContents book={book} />
-                </HomeBookItem>
-              )}
+              <HomeBookItem
+                hide={isSmallScreen}
+                animate={true}
+                key={book.id}
+                color={book.color}
+                motionKey={i}
+                noteContents={
+                  book.note
+                    ? book.note.contents
+                    : "This is what your note would look like"
+                }
+                link={`${
+                  book.page ? `/${book.id}/${book.page.id}` : `/${book.id}`
+                }`}
+              >
+                <BookItemContents key={book.id} book={book} />
+              </HomeBookItem>
             </>
           ) : (
             <PlaceholderBookItem key={uid(16)} data={placeHolderData[i]} />

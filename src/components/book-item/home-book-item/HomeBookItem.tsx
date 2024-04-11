@@ -66,9 +66,7 @@ const NotePreview = ({
         <div className="flex flex-col">{children}</div>
         <div className=" h-full bg-black rounded p-3">
           <p className="max-[1200px]:text-[.8rem] max-[1200px]:leading-4 max-[1280px]:line-clamp-5  max-[1280px]:text-[1rem] text-white text-pretty note-contents-preview">
-            {!noteContents
-              ? "This is what your note would look like."
-              : noteContents}
+            {noteContents}
           </p>
         </div>
       </div>
