@@ -30,7 +30,7 @@ const AppBookLayout = ({
       style={{ borderColor: color, background: "white" }}
       className={`${
         favorite !== "" ? "favorite-book" : ""
-      } book-item-favorites grid place-items-center border-[2px] px-10 rounded-lg hover:drop-shadow-lg hover:transition transition ease-in drop-shadow-md
+      } book-item-favorites grid place-items-start items-center border-[2px] px-10 rounded-lg hover:drop-shadow-lg hover:transition transition ease-in drop-shadow-md
       bg-white h-full max-[800px]:h-44 max-[800px]:px-6 max-[800px]:py-4 border-solid relative text-left`}
     >
       <div className="">{children}</div>
@@ -97,10 +97,7 @@ const AppBookItem = ({
             />
           </div>
           <p className=" line-clamp-4 text-sm leading-4 box-border">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-            modi perferendis. Perferendis totam exercitationem voluptatibus
-            libero dolor in placeat necessitatibus vitae non atque, voluptatum
-            beatae quod, deleniti mollitia nam alias?
+            {book.note ? `${'"' + book.note.contents + '"'}` : ""}
           </p>
         </AppBookLayout>
       ) : (
