@@ -30,8 +30,8 @@ const AppBookLayout = ({
       style={{ borderColor: color, background: "white" }}
       className={`${
         favorite !== "" ? "favorite-book" : ""
-      } book-item-favorites grid place-items-center border-[2px] px-6 rounded-lg hover:drop-shadow-lg hover:transition transition ease-in drop-shadow-md
-      bg-white h-full max-[800px]:h-40 border-solid relative text-left`}
+      } book-item-favorites grid place-items-center border-[2px] px-10 rounded-lg hover:drop-shadow-lg hover:transition transition ease-in drop-shadow-md
+      bg-white h-full max-[800px]:h-44 max-[800px]:px-6 max-[800px]:py-4 border-solid relative text-left`}
     >
       <div className="">{children}</div>
     </Link>
@@ -66,7 +66,7 @@ const BookData = ({
     <div className="flex flex-col gap-2">
       <span>
         {/* w-[250px] overflow-hidden whitespace-nowrap text-ellipsis text-nowrap */}
-        <h2 className="line-clamp-2 font-bold leading-[1] text-2xl max-w-[14em]  ">
+        <h2 className="line-clamp-2 font-bold leading-[1] text-2xl max-[800px]:text-xl max-[800px]:leading-[1.2] max-w-[14em]  ">
           {title}
         </h2>
         <span className="text-sm font-semibold"> by {author}</span>

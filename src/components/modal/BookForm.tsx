@@ -27,7 +27,7 @@ const BookForm = ({
       ? editCurrentBook.favorite === "favorite"
         ? true
         : false
-      : false
+      : false,
   );
   useEffect(() => {
     if (isOpened) {
@@ -65,7 +65,7 @@ const BookForm = ({
               const form = e.currentTarget;
               const formData = new FormData(form as HTMLFormElement);
               const entries = Object.fromEntries(
-                formData.entries()
+                formData.entries(),
               ) as t_bookFormData;
 
               submitHandler({
@@ -86,6 +86,7 @@ const BookForm = ({
                 type="text"
                 name="title"
                 id="title"
+                maxLength={100}
                 className="rounded w-full px-2 py-1 outline-none border-separator-100 border border-solid"
               />
             </div>
@@ -111,13 +112,13 @@ const BookForm = ({
                   if (isFavorite) {
                     currentTarget.classList.replace(
                       "checked-favorite",
-                      "unchecked-favorite"
+                      "unchecked-favorite",
                     );
                     return;
                   }
                   currentTarget.classList.replace(
                     "unchecked-favorite",
-                    "checked-favorite"
+                    "checked-favorite",
                   );
                 }}
                 id="favorite-label"
