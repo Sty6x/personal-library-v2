@@ -81,14 +81,14 @@ const App = () => {
   function handleBookSearch(input: string) {
     if (input === "") return setQueriedBookList([]);
     const filterBooks = bookList.filter((book) =>
-      book.title.toLowerCase().includes(input.toLowerCase())
+      book.title.toLowerCase().includes(input.toLowerCase()),
     );
     setQueriedBookList([...filterBooks]);
   }
 
   function getFavorites(): t_appBook[] {
     const favorites: Array<t_appBook> = bookList.filter(
-      (book) => book.favorite === "favorite"
+      (book) => book.favorite === "favorite",
     );
     return favorites;
   }
@@ -97,7 +97,7 @@ const App = () => {
     if (bookList.length < 3) return [bookList[0]];
     const [first, second, third]: Array<t_appBook> = bookList.sort(
       (a, b) =>
-        (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
+        (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any),
     );
     if (isSmallScreen) {
       return [first, second];
@@ -109,7 +109,9 @@ const App = () => {
     if (bookList.length < 1) return [];
     const filter = bookList.filter(
       (book) =>
-        book.id !== getRecentBooks()[0].id && book.id !== getRecentBooks()[1].id
+        book.id !== getRecentBooks()[0].id &&
+        book.id !== getRecentBooks()[1].id &&
+        book.id !== getRecentBooks()[2].id,
     );
     return filter;
   }
@@ -195,7 +197,7 @@ const App = () => {
                   onSubmit={(e) => {
                     e.preventDefault();
                     handleBookSearch(
-                      inputRef.current ? inputRef.current.value : " "
+                      inputRef.current ? inputRef.current.value : " ",
                     );
                   }}
                   id="search-bar"
