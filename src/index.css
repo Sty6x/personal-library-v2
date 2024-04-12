@@ -267,7 +267,7 @@ nav {
   position: relative;
   &::after {
     top: -5%;
-    right: 6%;
+    right: 0%;
     content: "";
     position: absolute;
     display: inline-block;

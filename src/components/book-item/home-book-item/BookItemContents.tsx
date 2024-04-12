@@ -32,8 +32,10 @@ const BookItemContents = ({ book }: { book: t_recentBooks }) => {
         ago.
       </span>
       <span className="my-1 max-md:my-0">
-        <div className="text-[1.7rem] max-lg:text-2xl lg:text-[1.4rem] max-lg:leading-6 max-md:text-[1.2rem] max-md:leading-5 w-full leading-[1.4rem] font-bold">
-          <h1 className="line-clamp-2">{book.title}</h1>
+        <div className="">
+          <h1 className="line-clamp-2 lg:text-[1.6rem] max-lg:leading-6 max-md:text-[1.2rem] max-md:leading-5 w-full leading-[1.7rem] font-bold">
+            {book.title}
+          </h1>
         </div>
         <span className="text-md font-semibold max-md:text-sm max-md:leading-5">
           by {book.author}
