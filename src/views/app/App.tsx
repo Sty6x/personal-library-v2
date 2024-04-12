@@ -107,12 +107,17 @@ const App = () => {
 
   function getNotRecentBooks(): t_appBook[] {
     if (bookList.length < 1) return [];
-    const filter = bookList.filter(
-      (book) =>
+    const filter = bookList.filter((book) => {
+      if (
         book.id !== getRecentBooks()[0].id &&
-        book.id !== getRecentBooks()[1].id &&
-        book.id !== getRecentBooks()[2].id,
-    );
+        book.id !== getRecentBooks()[1].id
+      ) {
+        if (!isSmallScreen) {
+          return getRecentBooks()[2];
+        }
+        return book;
+      }
+    });
     return filter;
   }
 
