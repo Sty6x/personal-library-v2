@@ -25,7 +25,7 @@ const PageHeader = ({
   const { bookID } = useParams();
   const [isPageEditing, setIsPageEditing] = useState(false);
   const [pageNumberInput, setPageNumberInput] = useState<number>(
-    pageData.currentPage.pageNum
+    pageData.currentPage.pageNum,
   );
 
   return (
@@ -37,7 +37,10 @@ const PageHeader = ({
           : "bg-transparent"
       } py-6`}
     >
-      <Link to={"/app/library"} className="underline text-lg w-fit">
+      <Link
+        to={"/app/library"}
+        className="underline max-[500px]:text-md max-[320px]:text-sm text-lg w-fit"
+      >
         Go back to library
       </Link>
       <Link to={`/${bookID}`} className="inline-block w-fit hover:underline">
@@ -47,7 +50,7 @@ const PageHeader = ({
               className={`
               line-clamp-3
               ${isScrolling ? "text-3xl" : "text-7xl"} font-bold 
-              text-pretty max-sm:text-4xl max-md:text-5xl max-[320px]:text-3xl`}
+              text-pretty max-sm:text-4xl max-md:text-5xl max-[320px]:text-2xl max-[320px]:leading-7`}
             >
               {bookTitle}
             </h1>
@@ -100,6 +103,7 @@ const PageHeader = ({
               <span
                 className={`
                 ${isScrolling ? "text-md" : "text-xl"}
+                 max-[320px]:leading
                 `}
               >
                 Page{" "}
@@ -123,6 +127,7 @@ const PageHeader = ({
               setIsPageEditing(true);
             }}
             className={` 
+              max-[380px]:text-[1rem]
               ${isScrolling ? "text-md" : "text-xl"} w-[fit-content]`}
           >
             Page {pageData?.currentPage.pageNum}
@@ -138,7 +143,7 @@ const PageHeader = ({
             type="button"
             className={`
             ${isScrolling ? "text-md" : "text-xl"}
-            max-md:text-base max-sm:text-sm max-[350px]:text-
+            max-md:text-base max-sm:text-sm max-[380px]:text-[.7rem] max-[380px]:px-2
              add-icon w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center 
             py-1 px-3 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow
             transition-shadow duration-20
@@ -152,7 +157,7 @@ const PageHeader = ({
           <button
             className={`
             ${isScrolling ? "text-md" : "text-xl"}
-            max-md:text-base max-sm:text-sm  
+            max-md:text-base max-sm:text-sm max-[380px]:text-[.7rem] max-[380px]:px-2
             add-icon-black w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center
             py-1 px-3 bg-accent-one text-black rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow
             transition-shadow duration-20
@@ -169,7 +174,7 @@ const PageHeader = ({
           <button
             className={`
             ${isScrolling ? "text-md" : "text-xl"}
-            max-md:text-base max-sm:text-sm
+            max-md:text-base max-sm:text-sm max-[380px]:text-[.7rem] 
             trash-icon self-start box-border text-accent-danger font-bold
             w-full before:mr-[.3em] items-center before:h-[20px] relative flex content-center py-1`}
             onClick={() => {
