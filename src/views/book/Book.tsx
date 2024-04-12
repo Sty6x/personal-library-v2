@@ -30,7 +30,7 @@ const Book = () => {
   const [redirect, setRedirect] = useState(false);
   const [isBookFormOpen, setIsBookFormOpen] = useState(false);
   const [isFavorite, setIsFavorite] = useState(
-    currentBook.favorite === "favorite" ? true : false
+    currentBook.favorite === "favorite" ? true : false,
   );
 
   function handlePageAdd() {
@@ -39,7 +39,7 @@ const Book = () => {
       LibraryStorage.pages,
       (pages) => {
         return pages.sort((a, b) => a.pageNum - b.pageNum);
-      }
+      },
     );
 
     const getNewPageNum = (): number => {
@@ -49,7 +49,7 @@ const Book = () => {
           : 1;
       }
       const currentPageIndex = sortedPages.findIndex(
-        (page) => page.id === params.pageID
+        (page) => page.id === params.pageID,
       );
       return sortedPages[currentPageIndex].pageNum + 1;
     };
@@ -65,7 +65,7 @@ const Book = () => {
     };
     setCurrentbook(
       (prev) =>
-        ({ ...prev, pageIDs: [...prev.pageIDs, newPage.id] } as t_currentBook)
+        ({ ...prev, pageIDs: [...prev.pageIDs, newPage.id] }) as t_currentBook,
     );
     LibraryStorage.addPage(newPage);
     navigate(`/${currentBook.id}/${newPage.id}`);
@@ -74,11 +74,11 @@ const Book = () => {
   function handlePageDelete() {
     const getPages = getRelatedItems<t_page>(
       currentBook.pageIDs,
-      LibraryStorage.pages
+      LibraryStorage.pages,
     );
     const currentPage = getPages.find((page) => page.id === params.pageID);
     const filterCurrentPageID = currentBook.pageIDs.filter(
-      (pageID) => pageID !== params.pageID
+      (pageID) => pageID !== params.pageID,
     );
 
     navigate(safePageRedirection());
@@ -89,10 +89,10 @@ const Book = () => {
   function safePageRedirection(): string {
     const getPages = getRelatedItems<t_page>(
       currentBook.pageIDs,
-      LibraryStorage.pages
+      LibraryStorage.pages,
     );
     const currentDeletedPageIndex = getPages.findIndex(
-      (page) => page.id === params.pageID
+      (page) => page.id === params.pageID,
     );
     if (currentDeletedPageIndex > 0) {
       return `/${currentBook.id}/${
@@ -162,7 +162,7 @@ const Book = () => {
       )}
       {!redirect ? (
         <section id="book-page-contents" className="grid place-items-center">
-          <div className=" mx-10 max-md:mx-4 ">
+          <div className={`mx-10 max-[450px]:mx-4`}>
             <div className="">
               <span className="text-lg max-md:text-sm">
                 Last updated{" "}
@@ -173,7 +173,7 @@ const Book = () => {
                 title={currentBook.title}
                 author={currentBook.author}
               />
-              <span className="text-lg ">
+              <span className="text-lg max-[350px]:text-sm">
                 Pages Written {currentBook?.pageIDs.length} • Notes Added{" "}
                 {currentBook?.numOfNotes}
               </span>
