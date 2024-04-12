@@ -58,7 +58,7 @@ const BookData = ({
   return (
     <div className="max-w-[30em] min-w-[10em] w-[20em] flex flex-col gap-2">
       <span>
-        <h2 className="max-[1240px]:text-xl font-bold leading-[1] text-2xl text-ellipsis overflow-hidden text-nowrap ">
+        <h2 className=" font-bold leading-[1] text-2xl text-ellipsis overflow-hidden text-nowrap ">
           {title}
         </h2>
         <span className="text-sm font-semibold"> by {author}</span>

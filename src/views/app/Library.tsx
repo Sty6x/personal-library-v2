@@ -7,7 +7,10 @@ const Library = () => {
     renderItems: { renderNotRecent, renderRecentBooks },
   } = useOutletContext<t_appItems<React.ReactNode>>();
   return (
-    <section id="library-page" className="flex flex-col gap-16 max-sm:gap-8">
+    <section
+      id="library-page"
+      className="flex flex-col gap-10 mb-10 max-sm:gap-8"
+    >
       <BookItemList
         link="app/recent"
         linkName="Go to recent books"

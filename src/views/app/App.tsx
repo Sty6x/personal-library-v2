@@ -179,7 +179,7 @@ const App = () => {
         />
       )}
       <Sidebar />
-      <div className="max-sm:flex-1 max-sm:mx-6 max-[400px]:mx-4 max-sm:w-[inherit] max-sm:mt-2 relative outline-none w-full max-w-[1440px] flex flex-col justify-start mx-16 max-lg:mx-10  my-5">
+      <div className="max-sm:flex-1 max-sm:mx-6 max-[400px]:mx-4 max-sm:w-[inherit] max-sm:mt-2 relative outline-none w-full max-w-[1440px] flex flex-col justify-start mx-16 max-lg:mx-10 my-5">
         <header className="py-4">
           <div id="library-header-contents" className="flex items-center">
             <span className=" inline-block max-[850px]:w-full ">
