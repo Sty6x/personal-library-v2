@@ -31,7 +31,7 @@ const AppBookLayout = ({
       className={`${
         favorite !== "" ? "favorite-book" : ""
       } book-item-favorites border-[2px] px-14 rounded-lg hover:drop-shadow-md hover:transition transition ease-in drop-shadow-sm
-      bg-white h-full border-solid relative text-left`}
+      bg-white h-full max-[800px]:h-40 border-solid relative text-left`}
     >
       <div className="h-full flex items-center box-border gap-4 justify-center">
         {children}

@@ -17,19 +17,26 @@ const BookItemList = ({
   link,
   onEmptyText,
 }: t_BookItemList) => {
-  const [removeText, setRemoveText] = useState(innerWidth < 500 ? true : false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
+  function handleSmallScreenSizeCheck(): void {
+    if (innerWidth <= 1280) {
+      setIsSmallScreen(true);
+      return;
+    }
+    setIsSmallScreen(false);
+  }
   useEffect(() => {
-    window.addEventListener("resize", (e) => {
-      if (innerWidth < 500) return setRemoveText(true);
-      setRemoveText(false);
+    handleSmallScreenSizeCheck();
+    window.addEventListener("resize", () => {
+      handleSmallScreenSizeCheck();
     });
   }, []);
 
   return (
     <section>
       <div id="book-list-header" className="flex mb-4">
-        <h3 className="text-2xl max-[850px]:text-2xl max-md:text-xl text-black">
+        <h3 className="text-2xl max-[850px]:text-2xl max-md:text-xl font-semibold text-black">
           {headerTitle}
         </h3>
 
@@ -37,14 +44,18 @@ const BookItemList = ({
           <Link
             to={`/${link}`}
             className={`${
-              removeText && "hidden"
+              isSmallScreen && "hidden"
             } max-[850px]:text-sm max-sm:text-[.8rem] flex items-center ml-auto py-1 px-4 font-bold bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200`}
           >
             {linkName}
           </Link>
         )}
       </div>
-      <div className="grid grid-cols-3 max-sm:flex flex-col auto-rows-[minmax(200px,1fr)] gap-4">
+      <div
+        className={`${
+          isSmallScreen ? "grid-cols-2" : "grid-cols-3"
+        } grid max-[800px]:flex flex-col auto-rows-[minmax(200px,1fr)] gap-4`}
+      >
         {bookItems && bookItems.length > 0 ? bookItems : onEmptyText}
       </div>
     </section>

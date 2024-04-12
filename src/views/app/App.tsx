@@ -53,12 +53,13 @@ const App = () => {
   const [bookList, setBookList] = useState<Array<t_appBook>>([...books]);
   const [queriedBookList, setQueriedBookList] = useState<Array<t_appBook>>([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
 
   function addNewBook(bookData: t_bookFormData) {
     const bookDate = new Date().toString();
-    const newBook: t_book = {
+    const newBook: any = {
       ...bookData,
       id: uid(16),
       lastUpdated: bookDate,
@@ -98,6 +99,9 @@ const App = () => {
       (a, b) =>
         (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any)
     );
+    if (isSmallScreen) {
+      return [first, second];
+    }
     return [first, second, third];
   }
 
@@ -116,13 +120,29 @@ const App = () => {
         <AppBookItem
           key={book.id}
           color={colors[Math.floor(Math.random() * colors.length)]}
-          motionKey={i}
           link={`/${book.id}`}
           book={book}
         />
       );
     });
   }
+
+  function handleSmallScreenSizeCheck(): void {
+    if (innerWidth <= 1280) {
+      console.log("Hide");
+      setIsSmallScreen(true);
+      return;
+    }
+    console.log("Show");
+    setIsSmallScreen(false);
+  }
+
+  useEffect(() => {
+    handleSmallScreenSizeCheck();
+    window.addEventListener("resize", () => {
+      handleSmallScreenSizeCheck();
+    });
+  }, []);
 
   useEffect(() => {
     setQueriedBookList([]);
