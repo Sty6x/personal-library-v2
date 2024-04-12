@@ -266,7 +266,7 @@ nav {
 .book-item-favorites.favorite-book {
   position: relative;
   &::after {
-    top: -6%;
+    top: -7%;
     right: 5%;
     content: "";
     position: absolute;
