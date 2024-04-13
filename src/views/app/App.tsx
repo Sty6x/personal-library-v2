@@ -10,14 +10,9 @@ import { uid } from "uid";
 import Sidebar from "../../components/Sidebar";
 import BookItemList from "../../components/BookItemList";
 
-interface t_recentBooks extends t_book {
-  color: string;
-  note: t_note | undefined;
-  page: t_page | undefined;
-}
-
-interface t_appBook extends t_recentBooks {
+interface t_appBook extends t_book {
   notes: Array<t_note> | [];
+  color?: string;
 }
 
 const colors = [
@@ -65,8 +60,10 @@ const App = () => {
       lastUpdated: bookDate,
       dateAdded: bookDate,
       pageIDs: [],
+      notes: [],
     };
     LibraryStorage.addBook(newBook);
+    console.log(newBook);
     setBookList((prev) => [...prev, newBook as t_appBook]);
   }
 

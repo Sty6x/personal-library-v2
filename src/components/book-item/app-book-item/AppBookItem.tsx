@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { t_book, t_note, t_page } from "../../../types/t_library";
 
 interface t_appBook extends t_book {
-  color: string;
   notes: Array<t_note> | [];
+  color?: string;
+  favorite: "favorite" | "";
 }
 
 const AppBookLayout = ({
@@ -71,10 +71,10 @@ const AppBookItem = ({
   color: string;
   link: string;
 }) => {
-  console.log(book);
+  // console.log(book);
   return (
     <>
-      {book.notes[0] !== undefined ? (
+      {book.notes.length !== 0 ? (
         <AppBookLayout favorite={book.favorite} link={link} color={color}>
           <div className="mb-2 flex items-center box-border gap-4 justify-start">
             <BookInitial color={color} initial={book.title[0]} />
