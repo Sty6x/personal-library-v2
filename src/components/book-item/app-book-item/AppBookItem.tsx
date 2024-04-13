@@ -3,13 +3,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { t_book, t_note, t_page } from "../../../types/t_library";
 
-interface t_recentBooks extends t_book {
+interface t_appBook extends t_book {
   color: string;
-  note: t_note | undefined;
-  page: t_page | undefined;
-}
-
-interface t_appBook extends t_recentBooks {
   notes: Array<t_note> | [];
 }
 
@@ -53,15 +48,7 @@ const BookInitial = ({
     </div>
   );
 };
-const BookData = ({
-  title,
-  author,
-  noteContents,
-}: {
-  author: string;
-  title: string;
-  noteContents: string;
-}) => {
+const BookData = ({ title, author }: { author: string; title: string }) => {
   return (
     <div className="flex flex-col gap-2">
       <span>
@@ -84,31 +71,24 @@ const AppBookItem = ({
   color: string;
   link: string;
 }) => {
+  console.log(book);
   return (
     <>
-      {book.note !== undefined ? (
+      {book.notes[0] !== undefined ? (
         <AppBookLayout favorite={book.favorite} link={link} color={color}>
           <div className="mb-2 flex items-center box-border gap-4 justify-start">
             <BookInitial color={color} initial={book.title[0]} />
-            <BookData
-              title={book.title}
-              author={book.author}
-              noteContents={book.note ? book.note?.contents : ""}
-            />
+            <BookData title={book.title} author={book.author} />
           </div>
           <p className=" line-clamp-4 text-sm leading-4 box-border">
-            {book.note ? `${'"' + book.note.contents + '"'}` : ""}
+            {book.notes[0].contents}
           </p>
         </AppBookLayout>
       ) : (
         <AppBookLayout favorite={book.favorite} link={link} color={color}>
           <div className="mb-2 flex items-center box-border gap-4 justify-start">
             <BookInitial color={color} initial={book.title[0]} />
-            <BookData
-              title={book.title}
-              author={book.author}
-              noteContents={""}
-            />
+            <BookData title={book.title} author={book.author} />
           </div>
         </AppBookLayout>
       )}
