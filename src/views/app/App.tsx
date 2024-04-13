@@ -180,99 +180,104 @@ const App = () => {
         />
       )}
       <Sidebar />
-      <div className="max-sm:flex-1 max-sm:mx-6 max-[400px]:mx-4 max-sm:w-[inherit] max-sm:mt-2 relative outline-none w-full max-w-[1440px] flex flex-col justify-start mx-16 max-lg:mx-10 my-5">
-        <header className="py-4">
-          <div id="library-header-contents" className="flex items-center">
-            <span className=" inline-block max-[850px]:w-full ">
-              <h2 className="text-5xl max-[350px]:text-5xl ">Your Library</h2>
-              <div
-                className={`mt-4 items-center flex ${
-                  isSearchFocused
-                    ? "border-pallete-test shadow-focus-border"
-                    : "border-gray-100"
-                } transition-all duration-150 ease-in-out border-2 border-solid rounded px-2 py-1 bg-white`}
-              >
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleBookSearch(
-                      inputRef.current ? inputRef.current.value : " ",
-                    );
-                  }}
-                  id="search-bar"
-                  className="items-center flex"
+      <div
+        id="main-app-contents"
+        className="flex flex-1 items-start justify-center"
+      >
+        <div className="max-sm:flex-1 max-sm:mx-6 max-[400px]:mx-4 max-sm:w-[inherit] max-sm:mt-2 relative outline-none w-full max-w-[1440px] flex flex-col justify-start mx-16 max-lg:mx-10 my-5">
+          <header className="py-4">
+            <div id="library-header-contents" className="flex items-center">
+              <span className=" inline-block max-[850px]:w-full ">
+                <h2 className="text-5xl max-[350px]:text-5xl ">Your Library</h2>
+                <div
+                  className={`mt-4 items-center flex ${
+                    isSearchFocused
+                      ? "border-pallete-test shadow-focus-border"
+                      : "border-gray-100"
+                  } transition-all duration-150 ease-in-out border-2 border-solid rounded px-2 py-1 bg-white`}
                 >
-                  <label id="search-label" htmlFor="search" />
-                  <input
-                    ref={inputRef}
-                    onFocus={() => setIsSearchFocused(true)}
-                    className="py-2 max-[500px]:w-full px-3 placeholder:font-bold placeholder:text-gray-200 font-bold text-md outline-none min-[500px]:min-w-[300px] bg-transparent"
-                    type="search"
-                    name="search"
-                    id="search"
-                    placeholder="Search book titles..."
-                    autoComplete="off"
-                  />
-                </form>
-                <button
-                  id="submit"
-                  className="ml-auto py-2 px-5 font-semibold bg-primary-main text-white rounded-sm max-sm:text-sm "
-                >
-                  Search
-                </button>
-              </div>
-              <button
-                onClick={() => setIsModalOpened(true)}
-                className="max-md:text-base mt-4 flex items-center add-icon w-[max-content] text-xl font-regular py-1 px-4 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
-              >
-                Add Book
-              </button>
-            </span>
-            <span className="inline-block ml-auto max-[850px]:hidden">
-              <img id="library-image" alt="library" src={libImage} />
-            </span>
-          </div>
-        </header>
-        <div>
-          <AnimatePresence>
-            {isSearchFocused ? (
-              <motion.div
-                key={"searched-items"}
-                initial={{ y: 0, opacity: 0 }}
-                animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
-                exit={{ y: 10, opacity: 0, transition: { duration: 0.2 } }}
-              >
-                <BookItemList
-                  bookItems={bookRenderer(() => queriedBookList)}
-                  headerTitle={`Search results for: ${
-                    inputRef.current ? inputRef.current.value : " "
-                  }`}
-                  addLink={false}
-                />
-              </motion.div>
-            ) : (
-              <motion.div
-                key={"outlet-items"}
-                initial={{ y: 0, opacity: 0 }}
-                animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
-                exit={{ y: 10, opacity: 0, transition: { duration: 0.2 } }}
-              >
-                {bookList.length > 0 ? (
-                  <Outlet
-                    context={{
-                      renderItems: {
-                        renderNotRecent: bookRenderer(getNotRecentBooks),
-                        renderRecentBooks: bookRenderer(getRecentBooks),
-                        renderFavoriteBooks: bookRenderer(getFavorites),
-                      },
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleBookSearch(
+                        inputRef.current ? inputRef.current.value : " ",
+                      );
                     }}
+                    id="search-bar"
+                    className="items-center flex"
+                  >
+                    <label id="search-label" htmlFor="search" />
+                    <input
+                      ref={inputRef}
+                      onFocus={() => setIsSearchFocused(true)}
+                      className="py-2 max-[500px]:w-full px-3 placeholder:font-bold placeholder:text-gray-200 font-bold text-md outline-none min-[500px]:min-w-[300px] bg-transparent"
+                      type="search"
+                      name="search"
+                      id="search"
+                      placeholder="Search book titles..."
+                      autoComplete="off"
+                    />
+                  </form>
+                  <button
+                    id="submit"
+                    className="ml-auto py-2 px-5 font-semibold bg-primary-main text-white rounded-sm max-sm:text-sm "
+                  >
+                    Search
+                  </button>
+                </div>
+                <button
+                  onClick={() => setIsModalOpened(true)}
+                  className="max-md:text-base mt-4 flex items-center add-icon w-[max-content] text-xl font-regular py-1 px-4 bg-accent-three text-white rounded-sm hover:shadow-btn-hover-active shadow-btn-hover hover:transition-shadow transition-shadow duration-200"
+                >
+                  Add Book
+                </button>
+              </span>
+              <span className="inline-block ml-auto max-[850px]:hidden">
+                <img id="library-image" alt="library" src={libImage} />
+              </span>
+            </div>
+          </header>
+          <div>
+            <AnimatePresence>
+              {isSearchFocused ? (
+                <motion.div
+                  key={"searched-items"}
+                  initial={{ y: 0, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
+                  exit={{ y: 10, opacity: 0, transition: { duration: 0.2 } }}
+                >
+                  <BookItemList
+                    bookItems={bookRenderer(() => queriedBookList)}
+                    headerTitle={`Search results for: ${
+                      inputRef.current ? inputRef.current.value : " "
+                    }`}
+                    addLink={false}
                   />
-                ) : (
-                  <p>Looks like your library is empty {":("}</p>
-                )}
-              </motion.div>
-            )}
-          </AnimatePresence>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key={"outlet-items"}
+                  initial={{ y: 0, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
+                  exit={{ y: 10, opacity: 0, transition: { duration: 0.2 } }}
+                >
+                  {bookList.length > 0 ? (
+                    <Outlet
+                      context={{
+                        renderItems: {
+                          renderNotRecent: bookRenderer(getNotRecentBooks),
+                          renderRecentBooks: bookRenderer(getRecentBooks),
+                          renderFavoriteBooks: bookRenderer(getFavorites),
+                        },
+                      }}
+                    />
+                  ) : (
+                    <p>Looks like your library is empty {":("}</p>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </main>
