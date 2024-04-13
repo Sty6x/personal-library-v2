@@ -86,7 +86,7 @@ const AppBookItem = ({
 }) => {
   return (
     <>
-      {book.notes.length !== 0 ? (
+      {book.note !== undefined ? (
         <AppBookLayout favorite={book.favorite} link={link} color={color}>
           <div className="mb-2 flex items-center box-border gap-4 justify-start">
             <BookInitial color={color} initial={book.title[0]} />
@@ -107,7 +107,7 @@ const AppBookItem = ({
             <BookData
               title={book.title}
               author={book.author}
-              noteContents={book.note ? book.note?.contents : ""}
+              noteContents={""}
             />
           </div>
         </AppBookLayout>

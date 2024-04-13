@@ -19,30 +19,30 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
   const sortPagesByNum = pages.sort((a, b) => a.pageNum - b.pageNum);
   const currentPage = sortPagesByNum.findIndex((page) => page.id === pageID);
   const [isPageInputClicked, setIsPageInputClicked] = useState<boolean>(false);
-  const [pageSearch, setPageSearch] = useState<number>(
-    sortPagesByNum[currentPage].pageNum,
-  );
+  // const [pageSearch, setPageSearch] = useState<number>(
+  //   sortPagesByNum[currentPage].pageNum,
+  // );
   const navigate = useNavigate();
 
-  function handlePageIndexSearch(): void {
-    const getSearchedPage = pages.find(
-      (page) => page.pageNum === Number(pageSearch),
-    );
-    console.log(getSearchedPage);
-    if (getSearchedPage !== undefined) {
-      navigate(`/${bookID}/${getSearchedPage.id}`, { relative: "path" });
-      return;
-    }
-    console.log("Page not found.");
-  }
+  // function handlePageIndexSearch(): void {
+  //   const getSearchedPage = pages.find(
+  //     (page) => page.pageNum === Number(pageSearch),
+  //   );
+  //   console.log(getSearchedPage);
+  //   if (getSearchedPage !== undefined) {
+  //     navigate(`/${bookID}/${getSearchedPage.id}`, { relative: "path" });
+  //     return;
+  //   }
+  //   console.log("Page not found.");
+  // }
 
-  useEffect(() => {
-    setPageSearch(sortPagesByNum[currentPage].pageNum);
-  }, [location.pathname]);
+  // useEffect(() => {
+  //   setPageSearch(sortPagesByNum[currentPage].pageNum);
+  // }, [location.pathname]);
 
-  useEffect(() => {
-    console.log(pageSearch);
-  }, [pageSearch]);
+  // useEffect(() => {
+  //   console.log(pageSearch);
+  // }, [pageSearch]);
 
   return (
     <div
@@ -76,7 +76,7 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
           <input
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                handlePageIndexSearch();
+                // handlePageIndexSearch();
               }
 
               if (e.key === "Escape") {
@@ -84,8 +84,8 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
                 console.log("Removed focus");
               }
             }}
-            onChange={(e) => setPageSearch(Number(e.currentTarget.value))}
-            value={pageSearch}
+            // onChange={(e) => setPageSearch(Number(e.currentTarget.value))}
+            // value={pageSearch}
             type="number"
             max={20}
             autoFocus={isPageInputClicked}

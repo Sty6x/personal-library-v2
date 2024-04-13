@@ -44,7 +44,7 @@ const Page = () => {
       };
       setPageData(
         (prev) =>
-          ({ ...prev, notes: [...pageData.notes, newNote] } as t_currentPage)
+          ({ ...prev, notes: [...pageData.notes, newNote] }) as t_currentPage,
       );
       LibraryStorage.addNote(newNote);
       window.scrollTo(0, 1000000);
@@ -56,7 +56,7 @@ const Page = () => {
       const currentNote = pageData.notes.find((note) => note.id === noteID);
       const filterNotes = pageData.notes.filter((note) => note.id !== noteID);
       setPageData(
-        (prev) => ({ ...prev, notes: [...filterNotes] } as t_currentPage)
+        (prev) => ({ ...prev, notes: [...filterNotes] }) as t_currentPage,
       );
       LibraryStorage.removeNote(currentNote as t_note);
     }
@@ -66,7 +66,7 @@ const Page = () => {
     if (pageData) {
       const updateDate = new Date().toString();
       const currentNote = pageData.notes.find(
-        (note) => note.id === noteID
+        (note) => note.id === noteID,
       ) as t_extendedNote;
 
       const currentUpdatedNote = {
@@ -101,7 +101,7 @@ const Page = () => {
         ({
           ...prev,
           currentPage: { ...updateCurrentPage },
-        } as t_currentPage)
+        }) as t_currentPage,
     );
     LibraryStorage.updatePage(updateCurrentPage);
   }
@@ -129,7 +129,7 @@ const Page = () => {
   function updateNotePosition(transferedData: string, id: string) {
     if (pageData) {
       const [currentTarget, dropTarget]: Array<t_note> = pageData?.notes.filter(
-        (note) => note.id === transferedData || note.id === id
+        (note) => note.id === transferedData || note.id === id,
       );
 
       // when saving im rearranging the position of the objects in the notes array
@@ -156,7 +156,8 @@ const Page = () => {
         return note;
       });
       setPageData(
-        (prev) => ({ ...prev, notes: [...updateNotePosition] } as t_currentPage)
+        (prev) =>
+          ({ ...prev, notes: [...updateNotePosition] }) as t_currentPage,
       );
     }
   }
@@ -173,7 +174,7 @@ const Page = () => {
       LibraryStorage.notes,
       (notes) => {
         return notes.map((note) => ({ ...note, isEditing: false }));
-      }
+      },
     );
     const currentPageData: t_currentPage = {
       book: {
@@ -182,7 +183,7 @@ const Page = () => {
       },
       currentPage,
       notes: getPageNotes.sort(
-        (a, b) => a.noteNum - b.noteNum
+        (a, b) => a.noteNum - b.noteNum,
       ) as Array<t_extendedNote>,
     };
     setPageData({ ...currentPageData });
@@ -224,7 +225,7 @@ const Page = () => {
 
   function isCurrentlyEditing(noteID: string) {
     const [editingNote]: any = pageData?.notes.filter(
-      (note) => note.id === noteID
+      (note) => note.id === noteID,
     );
     return editingNote.isEditing ? true : false;
   }
@@ -242,7 +243,7 @@ const Page = () => {
 
   function disableEditNote(): void {
     const checkIfEditing = pageData?.notes.some(
-      (note) => note.isEditing === true
+      (note) => note.isEditing === true,
     );
     console.log(checkIfEditing);
     if (!checkIfEditing) return;

@@ -112,9 +112,6 @@ const App = () => {
         book.id !== getRecentBooks()[0].id &&
         book.id !== getRecentBooks()[1].id
       ) {
-        if (!isSmallScreen) {
-          return getRecentBooks()[2];
-        }
         return book;
       }
     });
