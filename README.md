@@ -18,6 +18,6 @@ Reading is a hobby of mine and I love to jot down notes on my books whenever the
 - [ ] Fix Page Header Jerking when users scroll down on the page.
 
 #### Preview
-![Screenshot from 2024-02-28 01-20-54](https://github.com/Sty6x/re-read/assets/53662191/5062405d-20e9-4ed1-8f14-88b5ae955e61)
-![Screenshot from 2024-02-28 01-21-16](https://github.com/Sty6x/re-read/assets/53662191/1cb199a0-d660-4c10-a850-5bf1cae02d29)
+![Screenshot 2024-04-13 110805](https://github.com/Sty6x/re-read/assets/53662191/027bcf9e-eeb8-40e6-869e-bbc6836b2927)
+![Screenshot 2024-04-13 110402](https://github.com/Sty6x/re-read/assets/53662191/64aaee52-de71-437d-be1c-72c199192eb2)
 ![Screenshot from 2024-02-28 01-23-21](https://github.com/Sty6x/re-read/assets/53662191/e395972d-b820-4184-b82e-4df9f2c858fb)
