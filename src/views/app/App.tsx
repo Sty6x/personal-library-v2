@@ -91,7 +91,7 @@ const App = () => {
   }
 
   function getRecentBooks(): t_appBook[] {
-    if (bookList.length < 3) return [bookList[0]];
+    if (bookList.length <= 3) return [...bookList];
     const [first, second, third]: Array<t_appBook> = bookList.sort(
       (a, b) =>
         (new Date(b.lastUpdated) as any) - (new Date(a.lastUpdated) as any),
@@ -103,16 +103,9 @@ const App = () => {
   }
 
   function getNotRecentBooks(): t_appBook[] {
-    if (bookList.length < 1) return [];
-    const filter = bookList.filter((book) => {
-      if (
-        book.id !== getRecentBooks()[0].id &&
-        book.id !== getRecentBooks()[1].id
-      ) {
-        return book;
-      }
-    });
-    return filter;
+    if (bookList.length < 3) return [];
+    const [one, two, three, ...books] = bookList;
+    return [...books];
   }
 
   function bookRenderer(books: () => Array<t_appBook>) {
