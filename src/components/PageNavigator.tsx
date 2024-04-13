@@ -47,7 +47,7 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
   return (
     <div
       id="page-nav-container"
-      className="fixed top-[90%] left-[50%] translate-x-[-50%] bg-black rounded-md z-10"
+      className="fixed drop-shadow-md top-[90%] left-[50%] translate-x-[-50%] bg-black rounded-md z-10"
       onClick={(e) => {
         const target = e.target as any;
         setIsPageInputClicked(false);
@@ -76,7 +76,7 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
           <input
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                // handlePageIndexSearch();
+                handlePageIndexSearch();
               }
 
               if (e.key === "Escape") {
@@ -84,8 +84,8 @@ const PageNavigator = ({ currentPageNum }: { currentPageNum: number }) => {
                 console.log("Removed focus");
               }
             }}
-            // onChange={(e) => setPageSearch(Number(e.currentTarget.value))}
-            // value={pageSearch}
+            onChange={(e) => setPageSearch(Number(e.currentTarget.value))}
+            value={pageSearch}
             type="number"
             max={20}
             autoFocus={isPageInputClicked}

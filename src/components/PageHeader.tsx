@@ -30,7 +30,7 @@ const PageHeader = ({
 
   return (
     <header
-      className={`flex flex-col z-20  top-0 border-b-gray-100 border-solid
+      className={`flex drop-shadow-md flex-col z-20  top-0 border-b-gray-100 border-solid
       ${
         isScrolling
           ? "fixed px-[10%] max-[1280px]: w-full left-[0%] bg-white border-b-[2px]"
