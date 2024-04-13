@@ -39,13 +39,15 @@ class Library {
       };
     }
 
-    const [pages, notes, books] = arr.map((item: any) => {
-      return [...JSON.parse(item[1])];
+    const storage = new Map();
+    arr.forEach((item: any) => {
+      storage.set(item[0], [...JSON.parse(item[1])]);
     });
+
     return {
-      books,
-      pages,
-      notes,
+      books: storage.get("books"),
+      pages: storage.get("pages"),
+      notes: storage.get("notes"),
     };
   }
 

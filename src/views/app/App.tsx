@@ -52,6 +52,10 @@ const App = () => {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    setBookList([...books]);
+  }, []);
+
   function addNewBook(bookData: t_bookFormData) {
     const bookDate = new Date().toString();
     const newBook: any = {
