@@ -13,10 +13,6 @@ Reading is a hobby of mine and I love to jot down notes on my books whenever the
 
 - I learned how to use TypeScript's Generics for reusabilty of a function that can have an arbitrary type defined by the user.
 
-##### TODOs
-
-- [ ] Fix Page Header Jerking when users scroll down on the page.
-
 #### Preview
 ![Screenshot 2024-04-13 110805](https://github.com/Sty6x/re-read/assets/53662191/027bcf9e-eeb8-40e6-869e-bbc6836b2927)
 ![Screenshot 2024-04-13 110402](https://github.com/Sty6x/re-read/assets/53662191/64aaee52-de71-437d-be1c-72c199192eb2)
