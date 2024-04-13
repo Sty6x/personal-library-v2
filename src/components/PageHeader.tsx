@@ -48,7 +48,7 @@ const PageHeader = ({
           <span>
             <h1
               className={`
-              line-clamp-3
+              line-clamp-2 max-w-[16em]
               ${isScrolling ? "text-3xl" : "text-7xl"} font-bold 
               text-pretty max-sm:text-4xl max-md:text-5xl max-[320px]:text-2xl max-[320px]:leading-7`}
             >
